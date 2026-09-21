@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>骨架屏 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   骨架屏（Skeleton Loading）— 演示样式
+   ============================================================ */
+:root {
+    --sk-bg: #F4F8FC; --sk-surface: #FFFFFF;
+    --sk-ink: #15324C; --sk-ink-2: #51677C; --sk-ink-3: #8395A6;
+    --sk-shimmer: #E8ECF0; --sk-shimmer-2: #F0F3F6;
+    --sk-line: rgba(20,58,92,0.06);
+}
+body { background: var(--sk-bg) !important; color: var(--sk-ink); }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.sk-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--sk-line); }
+.sk-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.sk-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.sk-logo-icon { width: 34px; height: 34px; background: #73B9E6; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.sk-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 7px; }
+.sk-logo-text strong { font-size: 0.9375rem; font-weight: 700; }
+.sk-logo-text em { display: none; }
+.sk-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; font-weight: 500; color: var(--sk-ink-2); text-decoration: none; transition: all 0.15s ease; }
+.sk-hero { padding: 48px 24px 32px; max-width: 1200px; margin: 0 auto; }
+.sk-hero h1 { font-size: 1.75rem; font-weight: 700; color: var(--sk-ink); margin: 0 0 8px; }
+.sk-hero p { font-size: 0.9375rem; color: var(--sk-ink-3); margin: 0; }
+.sk-toolbar { display: flex; gap: 8px; max-width: 1200px; margin: 0 auto 32px; padding: 0 24px; }
+.sk-toggle-btn { padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: var(--sk-ink-2); background: #fff; border: 1px solid var(--sk-line); border-radius: 8px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+.sk-toggle-btn.active { background: #73B9E6; color: #fff; border-color: #73B9E6; }
+.sk-components { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+.sk-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.sk-component { padding: 24px; background: var(--sk-surface); border: 1px solid var(--sk-line); border-radius: 12px; }
+.sk-component h3 { font-size: 0.875rem; font-weight: 600; color: var(--sk-ink); margin: 0 0 4px; }
+.sk-component > p { font-size: 0.75rem; color: var(--sk-ink-3); margin: 0 0 16px; }
+.sk-component .sk-real { display: block; }
+.sk-component .sk-skeleton { display: none; }
+.sk-component.loading .sk-real { display: none; }
+.sk-component.loading .sk-skeleton { display: block; }
+.sk-slot { margin-top: 14px; }
+.sk-slot.loading { display: flex; flex-direction: column; gap: 8px; }
+.sk-shimmer { background: linear-gradient(90deg, var(--sk-shimmer) 25%, var(--sk-shimmer-2) 50%, var(--sk-shimmer) 75%); background-size: 200% 100%; animation: sk-shimmer 1.5s ease-in-out infinite; border-radius: 6px; }
+@keyframes sk-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.sk-shimmer-text { height: 14px; width: 100%; }
+.sk-shimmer-text-short { height: 14px; width: 60%; }
+.sk-shimmer-btn { height: 36px; width: 80px; border-radius: 8px; }
+.sk-shimmer-input { height: 36px; width: 100%; }
+.sk-shimmer-avatar { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.sk-shimmer-card { height: 60px; width: 100%; }
+.sk-shimmer-tag { height: 24px; width: 56px; border-radius: 999px; display: inline-block; margin-right: 4px; }
+.sk-shimmer-nav { height: 32px; width: 100%; }
+.sk-shimmer-alert { height: 40px; width: 100%; }
+.sk-btn { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: #fff; background: #73B9E6; border: 0; border-radius: 8px; cursor: pointer; font-family: inherit; }
+.sk-input { width: 100%; padding: 8px 12px; font-size: 0.8125rem; color: var(--sk-ink); border: 1px solid var(--sk-line); border-radius: 8px; outline: none; font-family: inherit; box-sizing: border-box; }
+.sk-mini-card { padding: 14px; background: var(--sk-bg); border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+.sk-mini-card strong { font-size: 0.8125rem; display: block; }
+.sk-mini-card p { font-size: 0.75rem; color: var(--sk-ink-3); margin: 4px 0 0; }
+.sk-tag { display: inline-flex; align-items: center; padding: 4px 10px; font-size: 0.6875rem; font-weight: 600; color: var(--sk-ink-2); background: var(--sk-bg); border-radius: 999px; margin-right: 6px; margin-bottom: 6px; }
+.sk-nav { display: flex; gap: 2px; padding: 3px; background: var(--sk-bg); border-radius: 8px; }
+.sk-nav-item { padding: 6px 14px; font-size: 0.8125rem; color: var(--sk-ink-3); border-radius: 6px; cursor: pointer; }
+.sk-nav-item.active { background: #fff; color: #73B9E6; font-weight: 600; }
+.sk-alert { padding: 10px 14px; background: rgba(115,185,230,0.08); border: 1px solid rgba(115,185,230,0.2); border-radius: 8px; color: var(--sk-ink-2); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--sk-ink); border-radius: 8px; color: #fff; font-size: 0.8125rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.15s ease; font-family: inherit; }
+.prompt-floater:hover { background: #73B9E6; }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: #fff; border: 1px solid var(--sk-line); border-radius: 12px; box-shadow: 0 12px 40px rgba(20,58,92,0.1); z-index: 1001; color: var(--sk-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: #73B9E6; }
+.prompt-modal-close { background: transparent; border: 0; color: var(--sk-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--sk-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--sk-bg); padding: 14px; border-radius: 8px; }
+.prompt-modal-copy { padding: 10px 16px; background: #73B9E6; color: #fff; border: 0; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: #4A90C8; }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; border-top: 1px solid var(--sk-line) !important; padding: 24px 0 !important; margin: 0 !important; text-align: center; color: var(--sk-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+footer p { font-size: 0.75rem; color: var(--sk-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: var(--sk-ink-3); }
+.friend-links span { margin-right: 6px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 3px; font-size: 0.6875rem; color: var(--sk-ink-3); text-decoration: none; }
+.friend-links a:hover { color: #73B9E6; }
+@media (max-width: 960px) { .sk-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .sk-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .sk-header-actions { justify-content: center; } .sk-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="sk-header">
+        <div class="sk-header-inner">
+            <a class="sk-logo" href="../example.php" aria-label="StyleCool">
+                <span class="sk-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="sk-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>骨架屏示例</em>
+                </span>
+            </a>
+            <div class="sk-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sk-hero">
+            <h1>骨架屏</h1>
+            <p>形状匹配的加载占位 — 点击下方按钮切换真实/骨架状态</p>
+        </section>
+
+        <div class="sk-toolbar">
+            <button class="sk-toggle-btn active" id="sk-show-real" onclick="toggleSkeleton(false)">真实内容</button>
+            <button class="sk-toggle-btn" id="sk-show-skeleton" onclick="toggleSkeleton(true)">骨架屏</button>
+        </div>
+
+        <section class="sk-components">
+            <div class="sk-grid">
+                <!-- 按钮 -->
+                <div class="sk-component" id="comp-btn">
+                    <h3>按钮骨架</h3>
+                    <p>形状匹配：80px × 36px</p>
+                    <div class="sk-slot sk-real">
+                        <button class="sk-btn">确认</button>
+                    </div>
+                    <div class="sk-slot sk-skeleton" style="display:none;">
+                        <div class="sk-shimmer sk-shimmer-btn"></div>
+                    </div>
+                </div>
+
+                <!-- 输入框 -->
+                <div class="sk-component" id="comp-input">
+                    <h3>输入框骨架</h3>
+                    <p>形状匹配：100% × 36px</p>
+                    <div class="sk-slot sk-real">
+                        <input class="sk-input" placeholder="输入内容...">
+                    </div>
+                    <div class="sk-slot sk-skeleton" style="display:none;">
+                        <div class="sk-shimmer sk-shimmer-input"></div>
+                    </div>
+                </div>
+
+                <!-- 卡片 -->
+                <div class="sk-component" id="comp-card">
+                    <h3>卡片骨架</h3>
+                    <p>形状匹配：头像+文字</p>
+                    <div class="sk-slot sk-real">
+                        <div class="sk-mini-card">
+                            <div style="width:40px;height:40px;background:#73B9E6;border-radius:50%;flex:none;"></div>
+                            <div><strong>标题</strong><p>描述文字</p></div>
+                        </div>
+                    </div>
+                    <div class="sk-slot sk-skeleton" style="display:none;display:flex;align-items:center;gap:10px;">
+                        <div class="sk-shimmer sk-shimmer-avatar"></div>
+                        <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+                            <div class="sk-shimmer sk-shimmer-text-short"></div>
+                            <div class="sk-shimmer sk-shimmer-text"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 标签 -->
+                <div class="sk-component" id="comp-tag">
+                    <h3>标签骨架</h3>
+                    <p>形状匹配：56px × 24px</p>
+                    <div class="sk-slot sk-real">
+                        <span class="sk-tag">前端</span>
+                        <span class="sk-tag" style="background:#73B9E6;color:#fff;">骨架</span>
+                    </div>
+                    <div class="sk-slot sk-skeleton" style="display:none;">
+                        <div class="sk-shimmer sk-shimmer-tag"></div>
+                        <div class="sk-shimmer sk-shimmer-tag"></div>
+                    </div>
+                </div>
+
+                <!-- 导航 -->
+                <div class="sk-component" id="comp-nav">
+                    <h3>导航骨架</h3>
+                    <p>形状匹配：100% × 32px</p>
+                    <div class="sk-slot sk-real">
+                        <nav class="sk-nav">
+                            <span class="sk-nav-item active">首页</span>
+                            <span class="sk-nav-item">作品</span>
+                            <span class="sk-nav-item">关于</span>
+                        </nav>
+                    </div>
+                    <div class="sk-slot sk-skeleton" style="display:none;">
+                        <div class="sk-shimmer sk-shimmer-nav"></div>
+                    </div>
+                </div>
+
+                <!-- 警告 -->
+                <div class="sk-component" id="comp-alert">
+                    <h3>提示骨架</h3>
+                    <p>形状匹配：100% × 40px</p>
+                    <div class="sk-slot sk-real">
+                        <div class="sk-alert">⚠ 操作不可撤销，请确认</div>
+                    </div>
+                    <div class="sk-slot sk-skeleton" style="display:none;">
+                        <div class="sk-shimmer sk-shimmer-alert"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">骨架屏 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用骨架屏（Skeleton Loading）设计风格。加载占位使用形状匹配的 shimmer 动画（linear-gradient 90deg, 背景色 #E8ECF0 → #F0F3F6 → #E8ECF0，1.5s 循环）。按钮骨架 80x36px，输入框 100%x36px，卡片头像 40px 圆形 + 文字条，标签 56x24px，导航 100%x32px，提示 100%x40px。所有骨架形状与真实内容一一对应，避免布局跳动。整体流畅、专业、减少感知等待。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+
+    function toggleSkeleton(show) {
+        document.querySelectorAll('.sk-component').forEach(function(c) {
+            if (show) { c.classList.add('loading'); } else { c.classList.remove('loading'); }
+        });
+        document.getElementById('sk-show-real').classList.toggle('active', !show);
+        document.getElementById('sk-show-skeleton').classList.toggle('active', show);
+    }
+    </script>
+</body>
+</html>

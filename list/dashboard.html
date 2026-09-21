@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表盘 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   仪表盘（Dashboard）— 演示样式
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&display=swap');
+:root {
+    --db-bg: #0F2438; --db-surface: #15324C; --db-surface-2: #1B3E5C;
+    --db-ink: #FFFFFF; --db-ink-2: rgba(255,255,255,0.7); --db-ink-3: rgba(255,255,255,0.45);
+    --db-accent: #73B9E6; --db-green: #6BCB77; --db-red: #FF6B6B; --db-yellow: #F2B53C;
+    --db-border: rgba(255,255,255,0.1); --db-gap: 16px;
+}
+body { background: var(--db-bg) !important; color: var(--db-ink); font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.db-header { position: sticky; top: 0; z-index: 100; background: var(--db-surface); border-bottom: 1px solid var(--db-border); }
+.db-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.db-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.db-logo-icon { width: 32px; height: 32px; background: var(--db-accent); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.db-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 5px; }
+.db-logo-text { display: inline-flex; flex-direction: column; line-height: 1.2; }
+.db-logo-text strong { font-size: 0.9375rem; font-weight: 700; color: var(--db-ink); }
+.db-logo-text em { font-style: normal; font-size: 0.6875rem; color: var(--db-ink-3); margin-top: 2px; }
+.db-header-actions { display: inline-flex; align-items: center; gap: 8px; }
+.db-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.75rem; font-weight: 500; color: var(--db-ink-2); border: 1px solid var(--db-border); border-radius: 4px; text-decoration: none; transition: all 0.2s ease; }
+.db-header-actions a:hover { color: var(--db-ink); border-color: var(--db-accent); }
+.db-hero { padding: 40px 24px 32px; max-width: 1200px; margin: 0 auto; }
+.db-hero h1 { font-size: 1.5rem; font-weight: 700; color: var(--db-ink); margin: 0 0 4px; }
+.db-hero p { font-size: 0.875rem; color: var(--db-ink-3); margin: 0; }
+.db-kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--db-gap); max-width: 1200px; margin: 0 auto 32px; padding: 0 24px; }
+.db-kpi { padding: 20px; background: var(--db-surface); border: 1px solid var(--db-border); border-radius: 8px; }
+.db-kpi-label { font-size: 0.6875rem; color: var(--db-ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 6px; }
+.db-kpi-value { font-size: 1.75rem; font-weight: 800; font-family: 'JetBrains Mono', ui-monospace, monospace; margin: 0 0 4px; }
+.db-kpi-change { font-size: 0.75rem; font-weight: 600; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.db-kpi-change.up { color: var(--db-green); }
+.db-kpi-change.down { color: var(--db-red); }
+.db-components { position: relative; width: 100%; margin: 0; padding: 0 0 80px; background: transparent; }
+.db-components-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.db-components-header { margin-bottom: 32px; }
+.db-components-header h2 { font-size: 1.125rem; font-weight: 600; color: var(--db-ink); margin: 0 0 4px; }
+.db-components-header p { color: var(--db-ink-3); margin: 0; font-size: 0.8125rem; }
+.db-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--db-gap); }
+.db-component { padding: 20px; background: var(--db-surface); border: 1px solid var(--db-border); border-radius: 8px; transition: border-color 0.2s ease; }
+.db-component:hover { border-color: var(--db-accent); }
+.db-component h3 { font-size: 0.8125rem; font-weight: 600; color: var(--db-ink); margin: 0 0 4px; }
+.db-component > p { font-size: 0.6875rem; color: var(--db-ink-3); margin: 0 0 14px; }
+.db-slot { margin-top: 12px; }
+.db-btn { display: inline-flex; align-items: center; padding: 7px 14px; font-size: 0.75rem; font-weight: 600; color: var(--db-ink-2); border: 1px solid var(--db-border); border-radius: 4px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; background: transparent; }
+.db-btn:hover { border-color: var(--db-accent); color: var(--db-ink); }
+.db-btn-primary { background: var(--db-accent); border-color: var(--db-accent); color: var(--db-bg); }
+.db-btn-primary:hover { background: #5BA3FF; color: var(--db-bg); }
+.db-btn-success { background: var(--db-green); border-color: var(--db-green); color: var(--db-bg); }
+.db-btn-danger { background: transparent; border-color: var(--db-red); color: var(--db-red); }
+.db-btn-danger:hover { background: var(--db-red); color: #fff; }
+.db-input { width: 100%; padding: 7px 10px; font-size: 0.75rem; font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--db-ink); background: var(--db-bg); border: 1px solid var(--db-border); border-radius: 4px; outline: none; transition: all 0.2s ease; box-sizing: border-box; }
+.db-input:focus { border-color: var(--db-accent); box-shadow: 0 0 0 3px rgba(115,185,230,0.12); }
+.db-mini-card { padding: 14px; background: var(--db-bg); border: 1px solid var(--db-border); border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+.db-mini-card strong { font-size: 0.8125rem; color: var(--db-ink); font-weight: 600; }
+.db-mini-card .db-metric { font-size: 1.25rem; font-weight: 800; font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--db-accent); }
+.db-tag { display: inline-flex; align-items: center; padding: 3px 8px; font-size: 0.625rem; font-weight: 600; border-radius: 3px; margin-right: 4px; margin-bottom: 4px; }
+.db-tag-default { background: rgba(255,255,255,0.08); color: var(--db-ink-2); }
+.db-tag-success { background: rgba(107,203,119,0.15); color: var(--db-green); }
+.db-tag-warning { background: rgba(242,181,60,0.15); color: var(--db-yellow); }
+.db-tag-danger { background: rgba(255,107,107,0.15); color: var(--db-red); }
+.db-nav { display: flex; gap: 0; }
+.db-nav-item { padding: 7px 14px; font-size: 0.75rem; font-weight: 500; color: var(--db-ink-3); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s ease; }
+.db-nav-item.active { color: var(--db-accent); border-bottom-color: var(--db-accent); }
+.db-alert { padding: 10px 14px; background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.25); border-radius: 4px; color: var(--db-red); font-size: 0.75rem; font-weight: 500; }
+.db-alert-success { background: rgba(107,203,119,0.1); border-color: rgba(107,203,119,0.25); color: var(--db-green); }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--db-surface); border: 1px solid var(--db-border); border-radius: 6px; color: var(--db-ink-2); font-size: 0.75rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { border-color: var(--db-accent); color: var(--db-ink); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--db-surface); border: 1px solid var(--db-border); border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); z-index: 1001; color: var(--db-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--db-accent); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--db-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-close:hover { color: var(--db-ink); }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--db-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: 'JetBrains Mono', ui-monospace, monospace; background: var(--db-bg); padding: 14px; border-radius: 4px; }
+.prompt-modal-copy { padding: 8px 14px; background: var(--db-accent); color: var(--db-bg); border: 0; border-radius: 4px; font-size: 0.8125rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: #5BA3FF; }
+.prompt-modal-copy.done { background: var(--db-green); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--db-surface) !important; border: none !important; border-top: 1px solid var(--db-border) !important; padding: 24px 0 !important; margin: 0 !important; text-align: center; color: var(--db-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+footer p { font-size: 0.75rem; color: var(--db-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: var(--db-ink-3); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 5px 12px; margin: 0 4px; font-size: 0.6875rem; color: var(--db-ink-3); border: 1px solid var(--db-border); border-radius: 4px; text-decoration: none; transition: all 0.2s ease; }
+.friend-links a:hover { color: var(--db-accent); border-color: var(--db-accent); }
+@media (max-width: 960px) { .db-kpi-grid { grid-template-columns: repeat(2,1fr); } .db-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .db-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .db-header-actions { justify-content: center; } .db-logo-text em { display: none; } .db-kpi-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .db-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="db-header">
+        <div class="db-header-inner">
+            <a class="db-logo" href="../example.php" aria-label="StyleCool">
+                <span class="db-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="db-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>仪表盘示例</em>
+                </span>
+            </a>
+            <div class="db-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="db-hero" aria-label="仪表盘概览">
+            <h1>仪表盘</h1>
+            <p>数据密集型控制台，深色高效，数字即信息</p>
+        </section>
+
+        <div class="db-kpi-grid">
+            <div class="db-kpi">
+                <p class="db-kpi-label">总用户数</p>
+                <p class="db-kpi-value" style="color:var(--db-accent);">12,847</p>
+                <p class="db-kpi-change up">+12.5%</p>
+            </div>
+            <div class="db-kpi">
+                <p class="db-kpi-label">活跃会话</p>
+                <p class="db-kpi-value" style="color:var(--db-green);">3,421</p>
+                <p class="db-kpi-change up">+8.2%</p>
+            </div>
+            <div class="db-kpi">
+                <p class="db-kpi-label">平均延迟</p>
+                <p class="db-kpi-value" style="color:var(--db-yellow);">42ms</p>
+                <p class="db-kpi-change down">-3.1%</p>
+            </div>
+            <div class="db-kpi">
+                <p class="db-kpi-label">错误率</p>
+                <p class="db-kpi-value" style="color:var(--db-red);">0.12%</p>
+                <p class="db-kpi-change up">+0.03%</p>
+            </div>
+        </div>
+
+        <section class="db-components" aria-label="组件展示">
+            <div class="db-components-inner">
+                <div class="db-components-header">
+                    <h2>模块化组件</h2>
+                    <p>数据密集型设计语言贯穿每一个组件</p>
+                </div>
+
+                <div class="db-grid">
+                    <div class="db-component">
+                        <h3>仪表盘按钮</h3>
+                        <p>主要/成功/危险 三级</p>
+                        <div class="db-slot" style="display:flex;gap:6px;flex-wrap:wrap;">
+                            <button class="db-btn db-btn-primary">确认</button>
+                            <button class="db-btn db-btn-success">通过</button>
+                            <button class="db-btn db-btn-danger">拒绝</button>
+                        </div>
+                    </div>
+
+                    <div class="db-component">
+                        <h3>等宽输入框</h3>
+                        <p>专注时蓝色边框 + 光环</p>
+                        <div class="db-slot">
+                            <input type="text" class="db-input" placeholder="输入数值...">
+                        </div>
+                    </div>
+
+                    <div class="db-component">
+                        <h3>指标卡片</h3>
+                        <p>标签 + 数值 + 等宽字体</p>
+                        <div class="db-slot">
+                            <div class="db-mini-card">
+                                <strong>在线用户</strong>
+                                <span class="db-metric">847</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="db-component">
+                        <h3>状态标签</h3>
+                        <p>成功/警告/危险/默认</p>
+                        <div class="db-slot">
+                            <span class="db-tag db-tag-default">默认</span>
+                            <span class="db-tag db-tag-success">成功</span>
+                            <span class="db-tag db-tag-warning">警告</span>
+                            <span class="db-tag db-tag-danger">危险</span>
+                        </div>
+                    </div>
+
+                    <div class="db-component">
+                        <h3>仪表盘导航</h3>
+                        <p>底部蓝色下划线</p>
+                        <div class="db-slot">
+                            <nav class="db-nav">
+                                <span class="db-nav-item active">概览</span>
+                                <span class="db-nav-item">分析</span>
+                                <span class="db-nav-item">日志</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="db-component">
+                        <h3>状态警告</h3>
+                        <p>红色/绿色 两种语义</p>
+                        <div class="db-slot" style="display:flex;flex-direction:column;gap:6px;">
+                            <div class="db-alert">⚠ 磁盘空间不足</div>
+                            <div class="db-alert db-alert-success">✓ 备份完成</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">仪表盘 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用仪表盘（Dashboard）设计风格。背景深色 #0F2438。顶部 KPI 区 4 列网格（等宽数字 JetBrains Mono 800 字重），正增长绿色 #6BCB77 / 负增长红色 #FF6B6B。卡片背景 #15324C + 1px 边框 rgba(255,255,255,0.1)，圆角 8px。主色天蓝 #73B9E6。按钮主要蓝 / 成功绿 / 危险红描边三级。输入框等宽字体 + 深底。状态标签 4 种语义色（默认/成功/警告/危险）。导航选中态底部蓝色下划线。数字使用等宽字体 JetBrains Mono。所有图表克制、留白适度。整体数据密集、高效、专业。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

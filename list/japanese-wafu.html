@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日式和风 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   日式和风（Japanese Wafu）— 演示样式
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&display=swap');
+:root {
+    --jp-bg: #F5EDE0; --jp-surface: #FFFFFF;
+    --jp-ink: #1F1F1F; --jp-ink-2: #5C5C5C; --jp-ink-3: #999999;
+    --jp-red: #B23A2F; --jp-red-2: #8B2A20;
+    --jp-gold: #C4A35A; --jp-line: rgba(31,31,31,0.08); --jp-line-2: rgba(31,31,31,0.15);
+}
+body { background: var(--jp-bg) !important; color: var(--jp-ink); font-family: 'Noto Serif JP', Georgia, 'Hiragino Mincho Pro', serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.jp-header { position: sticky; top: 0; z-index: 100; background: rgba(245,237,224,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--jp-line); }
+.jp-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.jp-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.jp-logo-icon { width: 34px; height: 34px; background: var(--jp-red); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.jp-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 3px; }
+.jp-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--jp-ink); }
+.jp-logo-text em { font-style: normal; font-size: 0.75rem; color: var(--jp-ink-3); margin-top: 2px; font-family: 'Noto Serif JP', serif; }
+.jp-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; color: var(--jp-ink-2); border: 1px solid var(--jp-line-2); text-decoration: none; transition: all 0.2s ease; }
+.jp-header-actions a:hover { color: var(--jp-red); border-color: var(--jp-red); }
+.jp-hero { position: relative; min-height: 560px; padding: 80px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+.jp-hero::before { content: "印"; position: absolute; top: 40px; right: 40px; width: 56px; height: 56px; border: 2px solid var(--jp-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: var(--jp-red); font-family: 'Noto Serif JP', serif; opacity: 0.6; }
+.jp-hero-inner { max-width: 720px; }
+.jp-hero-inner h1 { font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; letter-spacing: 0.04em; line-height: 1.3; margin: 0 0 20px; color: var(--jp-ink); }
+.jp-hero-inner h1 .accent { color: var(--jp-red); }
+.jp-hero-inner p { font-size: 1.0625rem; line-height: 2; color: var(--jp-ink-2); margin: 0 0 32px; }
+.jp-kigo { display: inline-block; width: 40px; height: 1px; background: var(--jp-red); margin: 0 16px; vertical-align: middle; }
+.jp-components { position: relative; width: 100%; margin: 0; padding: 64px 0 96px; background: transparent; }
+.jp-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.jp-components-header { text-align: center; margin-bottom: 48px; }
+.jp-components-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--jp-ink); margin: 0 0 8px; letter-spacing: 0.06em; }
+.jp-components-header p { color: var(--jp-ink-2); margin: 0; font-size: 0.875rem; }
+.jp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.jp-component { padding: 28px; background: var(--jp-surface); border: 1px solid var(--jp-line); transition: border-color 0.2s ease; }
+.jp-component:hover { border-color: var(--jp-red); }
+.jp-component h3 { font-size: 0.9375rem; font-weight: 700; color: var(--jp-ink); margin: 0 0 4px; letter-spacing: 0.04em; }
+.jp-component > p { font-size: 0.8125rem; color: var(--jp-ink-3); margin: 0 0 16px; }
+.jp-slot { margin-top: 14px; }
+.jp-btn { display: inline-flex; align-items: center; padding: 10px 24px; font-size: 0.8125rem; font-weight: 600; color: var(--jp-ink); background: transparent; border: 1px solid var(--jp-ink); cursor: pointer; transition: all 0.2s ease; font-family: 'Noto Serif JP', serif; }
+.jp-btn:hover { background: var(--jp-ink); color: var(--jp-bg); }
+.jp-btn-primary { background: var(--jp-red); border-color: var(--jp-red); color: #fff; }
+.jp-btn-primary:hover { background: var(--jp-red-2); border-color: var(--jp-red-2); color: #fff; }
+.jp-btn-ghost { border: none; color: var(--jp-ink-2); }
+.jp-btn-ghost:hover { background: transparent; color: var(--jp-red); }
+.jp-input { width: 100%; padding: 10px 14px; font-size: 0.875rem; color: var(--jp-ink); background: transparent; border: 0; border-bottom: 1px solid var(--jp-line-2); outline: none; transition: all 0.2s ease; font-family: 'Noto Serif JP', serif; box-sizing: border-box; }
+.jp-input:focus { border-bottom-color: var(--jp-red); }
+.jp-mini-card { padding: 16px; background: var(--jp-bg); border-left: 2px solid var(--jp-red); }
+.jp-mini-card strong { font-size: 0.875rem; color: var(--jp-ink); display: block; font-weight: 700; }
+.jp-mini-card p { font-size: 0.8125rem; color: var(--jp-ink-2); margin: 4px 0 0; }
+.jp-tag { display: inline-flex; align-items: center; padding: 3px 10px; font-size: 0.6875rem; font-weight: 600; color: var(--jp-ink-2); border: 1px solid var(--jp-line-2); margin-right: 6px; margin-bottom: 6px; }
+.jp-tag-red { color: var(--jp-red); border-color: var(--jp-red); }
+.jp-nav { display: flex; gap: 0; }
+.jp-nav-item { padding: 10px 20px; font-size: 0.875rem; color: var(--jp-ink-2); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s ease; font-family: 'Noto Serif JP', serif; }
+.jp-nav-item.active { color: var(--jp-red); border-bottom-color: var(--jp-red); font-weight: 600; }
+.jp-alert { padding: 14px 18px; background: rgba(178,58,47,0.04); border-left: 3px solid var(--jp-red); color: var(--jp-ink-2); font-size: 0.875rem; }
+.jp-alert strong { color: var(--jp-red); }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--jp-ink); color: var(--jp-bg); font-size: 0.8125rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: 'Noto Serif JP', serif; }
+.prompt-floater:hover { background: var(--jp-red); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--jp-surface); border: 1px solid var(--jp-line); box-shadow: 0 12px 40px rgba(0,0,0,0.08); z-index: 1001; color: var(--jp-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 700; color: var(--jp-red); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--jp-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.875rem; line-height: 1.8; color: var(--jp-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: 'Noto Serif JP', serif; background: var(--jp-bg); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--jp-red); color: #fff; border: 0; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: 'Noto Serif JP', serif; }
+.prompt-modal-copy:hover { background: var(--jp-red-2); }
+.prompt-modal-copy.done { background: var(--jp-gold); color: var(--jp-ink); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--jp-ink) !important; border: none !important; padding: 40px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.6); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin: 0; font-family: 'Noto Serif JP', serif; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: rgba(255,255,255,0.4); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 4px 12px; margin: 0 4px; font-size: 0.6875rem; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); text-decoration: none; transition: all 0.2s ease; }
+.friend-links a:hover { color: var(--jp-gold); border-color: var(--jp-gold); }
+@media (max-width: 960px) { .jp-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .jp-header-inner { height: auto; padding: 12px 18px; flex-direction: column; } .jp-header-actions { justify-content: center; } .jp-logo-text em { display: none; } .jp-hero { min-height: 440px; padding: 60px 16px; } .jp-hero::before { top: 20px; right: 20px; width: 40px; height: 40px; font-size: 1.2rem; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .jp-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="jp-header">
+        <div class="jp-header-inner">
+            <a class="jp-logo" href="../example.php" aria-label="StyleCool">
+                <span class="jp-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="jp-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>日式和风示例</em>
+                </span>
+            </a>
+            <div class="jp-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 戻る</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="jp-hero" aria-label="日式和风英雄区">
+            <div class="jp-hero-inner">
+                <h1>日式<span class="accent">和風</span></h1>
+                <p>米白 + 朱红 + 侘寂留白 <span class="jp-kigo"></span> 墨黑 + 衬线 + 静寂<br>和の美意識をデザインに — 不均斉、簡素、枯高</p>
+            </div>
+        </section>
+
+        <section class="jp-components" aria-label="组件展示">
+            <div class="jp-components-inner">
+                <div class="jp-components-header">
+                    <h2>構成要素</h2>
+                    <p>米白 + 朱红 + 侘寂，日式和风语言贯穿每一个组件</p>
+                </div>
+
+                <div class="jp-grid">
+                    <div class="jp-component">
+                        <h3>和風按钮</h3>
+                        <p>线框/实心/幽灵 三级</p>
+                        <div class="jp-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="jp-btn">線框</button>
+                            <button class="jp-btn jp-btn-primary">実心</button>
+                            <button class="jp-btn jp-btn-ghost">幽霊</button>
+                        </div>
+                    </div>
+
+                    <div class="jp-component">
+                        <h3>底线输入框</h3>
+                        <p>仅底线 + 聚焦朱红</p>
+                        <div class="jp-slot">
+                            <input type="text" class="jp-input" placeholder="入力...">
+                        </div>
+                    </div>
+
+                    <div class="jp-component">
+                        <h3>嵌套卡片</h3>
+                        <p>左侧朱红条 + 浅米底</p>
+                        <div class="jp-slot">
+                            <div class="jp-mini-card">
+                                <strong>入れ子</strong>
+                                <p>左朱紅 · 浅米底</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="jp-component">
+                        <h3>和風标签</h3>
+                        <p>线框 + 朱红</p>
+                        <div class="jp-slot">
+                            <span class="jp-tag">表</span>
+                            <span class="jp-tag jp-tag-red">和</span>
+                        </div>
+                    </div>
+
+                    <div class="jp-component">
+                        <h3>和風导航</h3>
+                        <p>底部朱红下划线</p>
+                        <div class="jp-slot">
+                            <nav class="jp-nav">
+                                <span class="jp-nav-item active">表紙</span>
+                                <span class="jp-nav-item">作品</span>
+                                <span class="jp-nav-item">概要</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="jp-component">
+                        <h3>和風提示</h3>
+                        <p>左侧朱红条 + 浅红底</p>
+                        <div class="jp-slot">
+                            <div class="jp-alert"><strong>⚠ 注意：</strong>操作は取消できません</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">日式和风 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用日式和风（Japanese Wafu）设计风格。背景米白 #F5EDE0，侘寂留白。主色朱红 #B23A2F + 墨黑 #1F1F1F。字体衬线 Noto Serif JP，标题字重 900，字距 0.04em。Hero 右上角朱红圆形印章（"印"字）。卡片白底 + 1px 浅灰边框，hover 朱红边框。按钮线框/实心朱红/幽灵 三级。输入框仅底线，聚焦朱红。导航底部朱红下划线。左侧朱红条 + 浅红底提示。整体不均斉、簡素、枯高，和の美意識。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '完了';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

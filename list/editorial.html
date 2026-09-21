@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>杂志编辑 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   杂志编辑（Editorial）— 演示样式
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+:root {
+    --ed-bg: #FBFDFF; --ed-surface: #FFFFFF;
+    --ed-ink: #15324C; --ed-ink-2: #51677C; --ed-ink-3: #8395A6;
+    --ed-gold: #F2B53C; --ed-gold-2: #D4A020;
+    --ed-line: rgba(20,58,92,0.1); --ed-line-2: rgba(20,58,92,0.18);
+}
+body { background: var(--ed-bg) !important; color: var(--ed-ink); font-family: 'Noto Serif SC', Georgia, 'Times New Roman', serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.ed-header { position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
+.ed-header-inner { position: relative; margin: 16px clamp(20px,4vw,32px) 0; padding: 14px 28px; background: var(--ed-surface); border-bottom: 2px solid var(--ed-ink); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.ed-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.ed-logo-icon { width: 36px; height: 36px; background: var(--ed-ink); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.ed-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 3px; }
+.ed-logo-text { display: inline-flex; flex-direction: column; line-height: 1.2; }
+.ed-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--ed-ink); font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif; }
+.ed-logo-text em { font-style: italic; font-size: 0.75rem; color: var(--ed-ink-3); margin-top: 2px; font-family: 'Noto Serif SC', Georgia, serif; }
+.ed-header-actions { display: inline-flex; align-items: center; gap: 8px; }
+.ed-header-actions a { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: var(--ed-ink-2); border: 1px solid var(--ed-line-2); text-decoration: none; transition: all 0.2s ease; font-family: -apple-system, sans-serif; }
+.ed-header-actions a:hover { color: var(--ed-ink); border-color: var(--ed-ink); }
+.ed-hero { position: relative; min-height: 620px; margin-top: 0; padding: calc(92px + 80px) 24px 80px; background: transparent; display: flex; align-items: center; justify-content: center; }
+.ed-hero-inner { position: relative; z-index: 1; max-width: 860px; width: 100%; text-align: center; }
+.ed-kicker { display: inline-flex; align-items: center; gap: 12px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ed-gold); margin-bottom: 24px; font-family: -apple-system, sans-serif; }
+.ed-kicker::before, .ed-kicker::after { content: ""; width: 24px; height: 1px; background: var(--ed-gold); }
+.ed-hero-inner h1 { font-size: clamp(2.5rem,6vw,4.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 20px; color: var(--ed-ink); font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif; }
+.ed-hero-inner h1 .accent { color: var(--ed-gold); font-style: italic; }
+.ed-dek { font-size: 1.1875rem; line-height: 1.7; color: var(--ed-ink-2); max-width: 620px; margin: 0 auto 32px; font-family: 'Noto Serif SC', Georgia, serif; }
+.ed-byline { display: inline-flex; align-items: center; gap: 16px; font-size: 0.8125rem; color: var(--ed-ink-3); font-family: -apple-system, sans-serif; }
+.ed-byline span { font-weight: 600; color: var(--ed-ink); }
+.ed-divider { width: 60px; height: 2px; background: var(--ed-gold); margin: 0 auto; }
+.ed-components { position: relative; width: 100%; margin: 0; padding: 80px 0 96px; background: transparent; }
+.ed-components-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.ed-components-header { text-align: center; margin-bottom: 56px; }
+.ed-components-header h2 { font-size: 2rem; font-weight: 900; color: var(--ed-ink); margin: 0 0 12px; font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif; }
+.ed-components-header p { color: var(--ed-ink-2); max-width: 560px; margin: 0 auto; font-family: 'Noto Serif SC', Georgia, serif; }
+.ed-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.ed-component { position: relative; padding: 28px; background: var(--ed-surface); border: 1px solid var(--ed-line); }
+.ed-component::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 32px; background: var(--ed-gold); }
+.ed-component:hover { border-color: var(--ed-line-2); }
+.ed-component h3 { font-size: 1.0625rem; font-weight: 700; color: var(--ed-ink); margin: 0 0 4px; font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif; }
+.ed-component > p { font-size: 0.8125rem; color: var(--ed-ink-3); margin: 0 0 16px; font-family: 'Noto Serif SC', Georgia, serif; font-style: italic; }
+.ed-slot { margin-top: 14px; }
+.ed-btn { display: inline-flex; align-items: center; padding: 10px 20px; font-size: 0.8125rem; font-weight: 600; color: var(--ed-ink); background: transparent; border: 1px solid var(--ed-ink); cursor: pointer; transition: all 0.2s ease; font-family: -apple-system, sans-serif; }
+.ed-btn:hover { background: var(--ed-ink); color: #fff; }
+.ed-btn-primary { background: var(--ed-ink); color: #fff; }
+.ed-btn-primary:hover { background: var(--ed-gold); border-color: var(--ed-gold); color: var(--ed-ink); }
+.ed-btn-gold { border-color: var(--ed-gold); color: var(--ed-gold); }
+.ed-btn-gold:hover { background: var(--ed-gold); color: var(--ed-ink); }
+.ed-input { width: 100%; padding: 10px 14px; font-size: 0.875rem; color: var(--ed-ink); background: transparent; border: 0; border-bottom: 2px solid var(--ed-line-2); outline: none; transition: all 0.2s ease; font-family: 'Noto Serif SC', Georgia, serif; box-sizing: border-box; }
+.ed-input:focus { border-bottom-color: var(--ed-gold); }
+.ed-mini-card { padding: 16px; background: var(--ed-bg); border-left: 3px solid var(--ed-gold); }
+.ed-mini-card strong { font-size: 0.875rem; color: var(--ed-ink); display: block; font-weight: 700; font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif; }
+.ed-mini-card p { font-size: 0.8125rem; color: var(--ed-ink-2); margin: 4px 0 0; font-family: 'Noto Serif SC', Georgia, serif; }
+.ed-tag { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 0.6875rem; font-weight: 600; color: var(--ed-ink-2); border: 1px solid var(--ed-line-2); margin-right: 6px; margin-bottom: 6px; font-family: -apple-system, sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
+.ed-tag-gold { color: var(--ed-gold); border-color: var(--ed-gold); }
+.ed-nav { display: flex; gap: 0; }
+.ed-nav-item { padding: 8px 20px; font-size: 0.8125rem; font-weight: 600; color: var(--ed-ink-3); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s ease; font-family: -apple-system, sans-serif; }
+.ed-nav-item.active { color: var(--ed-ink); border-bottom-color: var(--ed-gold); }
+.ed-alert { padding: 14px 18px; background: var(--ed-bg); border-left: 4px solid var(--ed-gold); color: var(--ed-ink-2); font-size: 0.875rem; font-family: 'Noto Serif SC', Georgia, serif; }
+.ed-alert strong { color: var(--ed-ink); }
+.ed-blockquote { padding: 16px 24px; border-left: 4px solid var(--ed-gold); font-style: italic; color: var(--ed-ink-2); font-size: 0.9375rem; line-height: 1.7; font-family: 'Noto Serif SC', Georgia, serif; margin: 0; }
+.ed-blockquote::before { content: '"'; font-size: 2rem; color: var(--ed-gold); font-family: 'Playfair Display', Georgia, serif; line-height: 0; vertical-align: -0.4em; margin-right: 4px; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--ed-ink); color: #fff; font-size: 0.8125rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: -apple-system, sans-serif; }
+.prompt-floater:hover { background: var(--ed-gold); color: var(--ed-ink); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--ed-ink); box-shadow: 0 12px 40px rgba(0,0,0,0.2); z-index: 1001; color: #fff; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 700; color: var(--ed-gold); font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif; }
+.prompt-modal-close { background: transparent; border: 0; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-close:hover { color: #fff; }
+.prompt-modal-content { font-size: 0.875rem; line-height: 1.7; color: rgba(255,255,255,0.9); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: rgba(255,255,255,0.06); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--ed-gold); color: var(--ed-ink); border: 0; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: -apple-system, sans-serif; }
+.prompt-modal-copy:hover { background: #FFD93D; }
+.prompt-modal-copy.done { background: #6BCB77; color: #fff; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--ed-ink) !important; border: none !important; padding: 40px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.6); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin: 0; font-family: 'Noto Serif SC', Georgia, serif; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: rgba(255,255,255,0.4); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 6px 14px; margin: 0 4px; font-size: 0.6875rem; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); text-decoration: none; transition: all 0.2s ease; font-family: -apple-system, sans-serif; }
+.friend-links a:hover { color: var(--ed-gold); border-color: var(--ed-gold); }
+@media (max-width: 960px) { .ed-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .ed-header-inner { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 18px; } .ed-header-actions { justify-content: center; } .ed-logo-text em { display: none; } .ed-hero { min-height: 520px; padding: calc(92px + 48px) 16px 48px; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .ed-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="ed-header">
+        <div class="ed-header-inner">
+            <a class="ed-logo" href="../example.php" aria-label="StyleCool">
+                <span class="ed-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="ed-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>杂志编辑示例</em>
+                </span>
+            </a>
+            <div class="ed-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="ed-hero" aria-label="杂志编辑英雄区">
+            <div class="ed-hero-inner">
+                <div class="ed-kicker">设计风格特辑</div>
+                <h1>杂志<span class="accent">编辑</span></h1>
+                <p class="ed-dek">衬线大字标题 + 多栏文本编排 + 金色点缀 + 引用块与题花<br>致敬印刷时代的优雅与克制，让文字成为主角</p>
+                <div class="ed-byline">
+                    <span>StyleCool 编辑部</span>
+                    <div class="ed-divider"></div>
+                    <span>2026</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="ed-components" aria-label="组件展示">
+            <div class="ed-components-inner">
+                <div class="ed-components-header">
+                    <h2>模块化组件</h2>
+                    <p>衬线字体 + 金色点缀，杂志编辑语言贯穿每一个组件</p>
+                </div>
+
+                <div class="ed-grid">
+                    <div class="ed-component">
+                        <h3>杂志按钮</h3>
+                        <p>经典边框 + 反色悬停</p>
+                        <div class="ed-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="ed-btn">默认</button>
+                            <button class="ed-btn ed-btn-primary">主要</button>
+                            <button class="ed-btn ed-btn-gold">金色</button>
+                        </div>
+                    </div>
+
+                    <div class="ed-component">
+                        <h3>底线输入框</h3>
+                        <p>仅底线 + 聚焦金色</p>
+                        <div class="ed-slot">
+                            <input type="text" class="ed-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="ed-component">
+                        <h3>引用块</h3>
+                        <p>左侧金色条 + 斜体引文</p>
+                        <div class="ed-slot">
+                            <blockquote class="ed-blockquote">设计不只是它看起来的样子，设计是它如何工作。</blockquote>
+                        </div>
+                    </div>
+
+                    <div class="ed-component">
+                        <h3>杂志标签</h3>
+                        <p>大写 + 宽字距</p>
+                        <div class="ed-slot">
+                            <span class="ed-tag">前端</span>
+                            <span class="ed-tag ed-tag-gold">设计</span>
+                            <span class="ed-tag">编辑</span>
+                        </div>
+                    </div>
+
+                    <div class="ed-component">
+                        <h3>底线导航</h3>
+                        <p>底部金色下划线</p>
+                        <div class="ed-slot">
+                            <nav class="ed-nav">
+                                <span class="ed-nav-item active">首页</span>
+                                <span class="ed-nav-item">作品</span>
+                                <span class="ed-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="ed-component">
+                        <h3>编辑提示</h3>
+                        <p>左侧金色条 + 衬线体</p>
+                        <div class="ed-slot">
+                            <div class="ed-alert"><strong>⚠ 注意：</strong>操作不可撤销，请确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">杂志编辑 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用杂志编辑（Editorial）设计风格。背景 #FBFDFF 浅白。字体：标题使用衬线 Playfair Display（700-900），正文使用 Noto Serif SC / Georgia（400-600），UI 文字使用系统无衬线。主色 #15324C 深黑 + 金色点缀 #F2B53C。标题极大（clamp 2.5-4.5rem），字距 -0.02em。引入 Kicker（大写宽字距金色标签）、Dek（副标题）、Byline（作者行）等编辑元素。卡片左侧 3px 金色竖条 + 1px 浅灰边框。输入框仅底线，聚焦时金色。按钮经典边框 + 反色悬停。引用块左侧金色条 + 斜体。整体优雅、克制，致敬印刷时代。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

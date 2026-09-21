@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动卡片 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   移动卡片（Mobile Card）— 演示样式
+   ============================================================ */
+:root {
+    --mc-bg: #F4F8FC; --mc-surface: #FFFFFF;
+    --mc-ink: #15324C; --mc-ink-2: #51677C; --mc-ink-3: #8395A6;
+    --mc-accent: #73B9E6; --mc-accent-2: #4A90C8;
+    --mc-line: rgba(20,58,92,0.08); --mc-shadow: 0 2px 8px rgba(20,58,92,0.06);
+    --mc-radius: 12px; --mc-gap: 12px;
+}
+body { background: var(--mc-bg) !important; color: var(--mc-ink); max-width: 480px; margin: 0 auto !important; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.mc-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--mc-line); }
+.mc-header-inner { max-width: 480px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 48px; gap: 12px; }
+.mc-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.mc-logo-icon { width: 30px; height: 30px; background: var(--mc-accent); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.mc-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 7px; }
+.mc-logo-text strong { font-size: 0.9375rem; font-weight: 700; color: var(--mc-ink); }
+.mc-logo-text em { display: none; }
+.mc-header-actions a { display: inline-flex; align-items: center; padding: 6px 12px; font-size: 0.8125rem; font-weight: 500; color: var(--mc-ink-2); text-decoration: none; transition: all 0.2s ease; }
+.mc-hero { padding: 24px 16px 8px; }
+.mc-hero h1 { font-size: 1.5rem; font-weight: 700; color: var(--mc-ink); margin: 0 0 4px; }
+.mc-hero p { font-size: 0.875rem; color: var(--mc-ink-3); margin: 0; }
+.mc-feed { padding: 0 16px 16px; display: flex; flex-direction: column; gap: var(--mc-gap); }
+.mc-card { background: var(--mc-surface); border-radius: var(--mc-radius); box-shadow: var(--mc-shadow); overflow: hidden; transition: transform 0.1s ease; }
+.mc-card:active { transform: scale(0.96); }
+.mc-card-thumb { height: 160px; background: linear-gradient(135deg, var(--mc-accent), var(--mc-accent-2)); display: flex; align-items: center; justify-content: center; }
+.mc-card-thumb span { font-size: 2rem; opacity: 0.5; }
+.mc-card-body { padding: 14px; }
+.mc-card-body h3 { font-size: 0.9375rem; font-weight: 600; color: var(--mc-ink); margin: 0 0 4px; }
+.mc-card-body p { font-size: 0.8125rem; color: var(--mc-ink-3); margin: 0 0 8px; line-height: 1.5; }
+.mc-card-meta { display: flex; gap: 12px; font-size: 0.6875rem; color: var(--mc-ink-3); }
+.mc-components { padding: 0 16px 24px; }
+.mc-components-header { margin-bottom: 16px; }
+.mc-components-header h2 { font-size: 1.125rem; font-weight: 700; color: var(--mc-ink); margin: 0 0 4px; }
+.mc-components-header p { font-size: 0.8125rem; color: var(--mc-ink-3); margin: 0; }
+.mc-grid { display: flex; flex-direction: column; gap: var(--mc-gap); }
+.mc-component { padding: 16px; background: var(--mc-surface); border-radius: var(--mc-radius); box-shadow: var(--mc-shadow); }
+.mc-component h3 { font-size: 0.875rem; font-weight: 600; color: var(--mc-ink); margin: 0 0 4px; }
+.mc-component > p { font-size: 0.75rem; color: var(--mc-ink-3); margin: 0 0 12px; }
+.mc-slot { margin-top: 10px; }
+.mc-btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 0.875rem; font-weight: 600; color: #fff; background: var(--mc-accent); border: 0; border-radius: 10px; cursor: pointer; transition: all 0.1s ease; font-family: inherit; min-width: 80px; }
+.mc-btn:active { transform: scale(0.96); background: var(--mc-accent-2); }
+.mc-btn-outline { background: transparent; color: var(--mc-accent); border: 1px solid var(--mc-accent); }
+.mc-btn-outline:active { background: rgba(115,185,230,0.1); }
+.mc-input { width: 100%; padding: 10px 14px; font-size: 0.875rem; color: var(--mc-ink); background: var(--mc-bg); border: 0; border-radius: 10px; outline: none; transition: all 0.2s ease; font-family: inherit; box-sizing: border-box; }
+.mc-input:focus { background: #fff; box-shadow: 0 0 0 3px rgba(115,185,230,0.15); }
+.mc-mini-card { padding: 12px; background: var(--mc-bg); border-radius: 10px; }
+.mc-mini-card strong { font-size: 0.8125rem; color: var(--mc-ink); display: block; font-weight: 600; }
+.mc-mini-card p { font-size: 0.75rem; color: var(--mc-ink-3); margin: 4px 0 0; }
+.mc-tag { display: inline-flex; align-items: center; padding: 4px 10px; font-size: 0.6875rem; font-weight: 600; color: var(--mc-ink-2); background: var(--mc-bg); border-radius: 999px; margin-right: 6px; margin-bottom: 6px; }
+.mc-tag-accent { background: rgba(115,185,230,0.12); color: var(--mc-accent-2); }
+.mc-nav { display: flex; gap: 4px; padding: 4px; background: var(--mc-bg); border-radius: 10px; }
+.mc-nav-item { flex: 1; text-align: center; padding: 8px 4px; font-size: 0.75rem; font-weight: 500; color: var(--mc-ink-3); border-radius: 8px; cursor: pointer; transition: all 0.1s ease; }
+.mc-nav-item.active { background: #fff; color: var(--mc-accent-2); font-weight: 600; box-shadow: 0 1px 3px rgba(20,58,92,0.08); }
+.mc-alert { padding: 12px 14px; background: rgba(255,107,107,0.08); border-radius: 10px; color: #D44; font-size: 0.8125rem; font-weight: 500; }
+.mc-tabbar { position: sticky; bottom: 0; display: flex; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--mc-line); padding: 4px 0 env(safe-area-inset-bottom, 8px); }
+.mc-tabbar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; font-size: 0.625rem; color: var(--mc-ink-3); cursor: pointer; transition: all 0.1s ease; }
+.mc-tabbar-item.active { color: var(--mc-accent-2); }
+.mc-tabbar-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--mc-ink-3); }
+.mc-tabbar-item.active .mc-tabbar-icon { background: var(--mc-accent); }
+.prompt-floater { position: fixed; bottom: 80px; left: 16px; padding: 10px 16px; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border: 1px solid var(--mc-line); border-radius: 999px; color: var(--mc-ink); font-size: 0.8125rem; font-weight: 600; cursor: pointer; box-shadow: var(--mc-shadow); z-index: 1000; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { color: var(--mc-accent-2); }
+.prompt-modal { position: fixed; bottom: 140px; left: 16px; right: 16px; width: auto; max-height: 60vh; padding: 16px; background: var(--mc-surface); border-radius: 16px; box-shadow: 0 8px 32px rgba(20,58,92,0.15); z-index: 1001; color: var(--mc-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--mc-accent-2); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--mc-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--mc-ink-2); overflow-y: auto; flex: 1; margin-bottom: 10px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--mc-bg); padding: 12px; border-radius: 10px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--mc-accent); color: #fff; border: 0; border-radius: 10px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.1s ease; font-family: inherit; }
+.prompt-modal-copy:active { transform: scale(0.96); }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; padding: 16px 0 80px !important; margin: 0 !important; text-align: center; color: var(--mc-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 480px; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+footer p { font-size: 0.75rem; color: var(--mc-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: var(--mc-ink-3); }
+.friend-links span { margin-right: 6px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 3px; font-size: 0.6875rem; color: var(--mc-ink-3); text-decoration: none; }
+.name-en,.desc-en { display: none; }
+@media (min-width: 481px) { body { border-left: 1px solid var(--mc-line); border-right: 1px solid var(--mc-line); box-shadow: 0 0 40px rgba(20,58,92,0.05); } }
+    </style>
+</head>
+<body>
+<header class="mc-header">
+        <div class="mc-header-inner">
+            <a class="mc-logo" href="../example.php" aria-label="StyleCool">
+                <span class="mc-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="mc-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>移动卡片示例</em>
+                </span>
+            </a>
+            <div class="mc-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="mc-hero" aria-label="移动卡片标题">
+            <h1>移动卡片</h1>
+            <p>竖屏卡片流，便于一指操作</p>
+        </section>
+
+        <div class="mc-feed">
+            <div class="mc-card">
+                <div class="mc-card-thumb"><span>📱</span></div>
+                <div class="mc-card-body">
+                    <h3>卡片标题</h3>
+                    <p>卡片描述文字，便于一指操作，间距偏宽适合触摸。</p>
+                    <div class="mc-card-meta"><span>2 小时前</span><span>·</span><span>阅读 1.2k</span></div>
+                </div>
+            </div>
+            <div class="mc-card">
+                <div class="mc-card-thumb" style="background:linear-gradient(135deg,#FF6B6B,#FF8FAB);"><span>🎨</span></div>
+                <div class="mc-card-body">
+                    <h3>另一张卡片</h3>
+                    <p>点击时 0.96 缩放 100ms 反馈，触感优先。</p>
+                    <div class="mc-card-meta"><span>5 小时前</span><span>·</span><span>阅读 856</span></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mc-components" aria-label="组件展示">
+            <div class="mc-components-header">
+                <h2>模块化组件</h2>
+                <p>移动端触感优先，间距偏宽适合触摸</p>
+            </div>
+
+            <div class="mc-grid">
+                <div class="mc-component">
+                    <h3>移动按钮</h3>
+                    <p>按压缩放 0.96 反馈</p>
+                    <div class="mc-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="mc-btn">主要</button>
+                        <button class="mc-btn mc-btn-outline">描边</button>
+                    </div>
+                </div>
+
+                <div class="mc-component">
+                    <h3>移动输入框</h3>
+                    <p>无边框 + 聚焦放大</p>
+                    <div class="mc-slot">
+                        <input type="text" class="mc-input" placeholder="输入内容...">
+                    </div>
+                </div>
+
+                <div class="mc-component">
+                    <h3>嵌套卡片</h3>
+                    <p>浅底 + 圆角</p>
+                    <div class="mc-slot">
+                        <div class="mc-mini-card">
+                            <strong>嵌套卡片</strong>
+                            <p>浅底 · 圆角 · 轻盈</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mc-component">
+                    <h3>移动标签</h3>
+                    <p>胶囊形 + 浅底</p>
+                    <div class="mc-slot">
+                        <span class="mc-tag">前端</span>
+                        <span class="mc-tag mc-tag-accent">移动</span>
+                    </div>
+                </div>
+
+                <div class="mc-component">
+                    <h3>分段导航</h3>
+                    <p>iOS 风格分段控件</p>
+                    <div class="mc-slot">
+                        <nav class="mc-nav">
+                            <span class="mc-nav-item active">首页</span>
+                            <span class="mc-nav-item">作品</span>
+                            <span class="mc-nav-item">关于</span>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="mc-component">
+                    <h3>移动提示</h3>
+                    <p>浅红底 + 圆角</p>
+                    <div class="mc-slot">
+                        <div class="mc-alert">⚠ 操作不可撤销，请确认</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mc-tabbar" aria-label="底部导航">
+        <div class="mc-tabbar-item active"><div class="mc-tabbar-icon"></div>首页</div>
+        <div class="mc-tabbar-item"><div class="mc-tabbar-icon"></div>发现</div>
+        <div class="mc-tabbar-item"><div class="mc-tabbar-icon"></div>消息</div>
+        <div class="mc-tabbar-item"><div class="mc-tabbar-icon"></div>我的</div>
+    </div>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">移动卡片 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用移动卡片（Mobile Card）设计风格。背景 #F4F8FC 浅灰蓝。卡片白底 + 圆角 12px + 垂直间距 12px + 微弱投影。底部 Tab Bar 高 56px，图标为主、文字为辅。点击态 0.96 缩放 100ms 反馈。间距偏宽，适合触摸。按钮无边框 + 按压缩放。输入框无边框 + 浅灰底 + 聚焦放大。导航 iOS 风格分段控件。整体竖屏卡片流，便于一指操作。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

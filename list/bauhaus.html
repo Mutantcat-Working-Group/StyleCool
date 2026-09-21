@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>包豪斯 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   Bauhaus 包豪斯 — 演示样式
+   ============================================================ */
+:root{--bh-bg:#FFFFFF;--bh-red:#E63946;--bh-blue:#0051A8;--bh-yellow:#FFD93D;--bh-black:#1A1A1A;--bh-ink:#1A1A1A;--bh-ink2:#666}body{background:var(--bh-bg)!important;color:var(--bh-ink);font-family:'Inter',-apple-system,sans-serif}header{background:transparent!important;border-bottom:none!important;padding:0!important}header::after{display:none!important}
+.bh-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(20px)}.bh-header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}.bh-logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.bh-logo-icon{width:36px;height:36px;background:var(--bh-blue);display:inline-flex;align-items:center;justify-content:center;overflow:hidden}.bh-logo-icon img{width:100%;height:100%;object-fit:cover;display:block}.bh-logo-text strong{font-size:1rem;font-weight:700;color:var(--bh-black);text-transform:uppercase;letter-spacing:.12em}.bh-logo-text em{display:none}.bh-header-actions a{display:inline-flex;align-items:center;padding:6px 14px;font-size:.8125rem;font-weight:600;color:var(--bh-ink2);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}.bh-header-actions a:hover{color:var(--bh-red)}
+.bh-hero{padding:80px 24px;text-align:center;max-width:640px;margin:0 auto}.bh-hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:-.03em;text-transform:uppercase;color:var(--bh-black);margin:0 0 16px;border:4px solid var(--bh-black);display:inline-block;padding:16px 32px}.bh-hero h1 .accent{color:var(--bh-red)}.bh-hero p{font-size:1rem;line-height:1.6;color:var(--bh-ink2);margin:0}
+.bh-components{max-width:1200px;margin:0 auto;padding:0 24px 80px}.bh-components-header{text-align:center;margin-bottom:48px}.bh-components-header h2{font-size:1.25rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--bh-black);margin:0 0 4px}.bh-components-header p{font-size:.8125rem;color:var(--bh-ink2);margin:0}
+.bh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.bh-component{padding:24px;background:#fff;border:3px solid var(--bh-black)}.bh-component:hover{background:var(--bh-yellow)}.bh-component h3{font-size:.875rem;font-weight:800;text-transform:uppercase;color:var(--bh-black);margin:0 0 4px}.bh-component>p{font-size:.75rem;color:var(--bh-ink2);margin:0 0 14px}.bh-slot{margin-top:14px}
+.bh-btn{display:inline-flex;align-items:center;padding:10px 24px;font-size:.8125rem;font-weight:700;color:var(--bh-black);background:#fff;border:2px solid var(--bh-black);cursor:pointer;text-transform:uppercase;letter-spacing:.06em}.bh-btn:hover{background:var(--bh-yellow)}.bh-btn-primary{background:var(--bh-red);color:#fff;border-color:var(--bh-red)}.bh-btn-primary:hover{background:var(--bh-blue)}.bh-input{width:100%;padding:10px 14px;font-size:.875rem;color:var(--bh-black);background:#fff;border:2px solid var(--bh-black);outline:none;box-sizing:border-box}.bh-input:focus{background:var(--bh-yellow)}
+.bh-mini-card{padding:14px;background:var(--bh-blue);border:2px solid var(--bh-black)}.bh-mini-card strong{font-size:.8125rem;color:#fff;display:block;font-weight:800;text-transform:uppercase}.bh-mini-card p{font-size:.75rem;color:rgba(255,255,255,.7);margin:4px 0 0}
+.bh-tag{display:inline-flex;padding:4px 10px;font-size:.6875rem;font-weight:700;border:2px solid var(--bh-black);margin-right:6px;margin-bottom:6px;text-transform:uppercase}.bh-tag-red{background:var(--bh-red);color:#fff}.bh-tag-blue{background:var(--bh-blue);color:#fff}
+.bh-nav{display:flex;gap:0}.bh-nav-item{padding:8px 18px;font-size:.8125rem;font-weight:600;color:var(--bh-ink2);border-bottom:3px solid transparent;cursor:pointer;text-transform:uppercase;letter-spacing:.06em}.bh-nav-item.active{color:var(--bh-black);border-bottom-color:var(--bh-red)}
+.bh-alert{padding:12px 16px;background:var(--bh-yellow);border:2px solid var(--bh-black);color:var(--bh-black);font-size:.8125rem;font-weight:600}
+.prompt-floater{position:fixed;bottom:24px;left:24px;padding:10px 18px;background:var(--bh-black);color:#fff;font-weight:700;cursor:pointer;z-index:1000}.prompt-floater:hover{background:var(--bh-red)}
+.prompt-modal{position:fixed;bottom:88px;left:24px;width:min(440px,calc(100vw-48px));max-height:70vh;padding:20px;background:#fff;border:3px solid var(--bh-black);z-index:1001;display:none;flex-direction:column}.prompt-modal.visible{display:flex}.prompt-modal-title{font-size:.8125rem;font-weight:800;color:var(--bh-red);text-transform:uppercase}.prompt-modal-close{background:transparent;border:0;color:var(--bh-ink2);cursor:pointer;font-size:1.2rem}.prompt-modal-content{font-size:.8125rem;line-height:1.7;color:var(--bh-ink2);overflow-y:auto;flex:1;margin-bottom:12px;white-space:pre-wrap;background:var(--bh-yellow);padding:14px;font-weight:500}.prompt-modal-copy{padding:10px 16px;background:var(--bh-red);color:#fff;border:0;font-weight:700;cursor:pointer}.prompt-modal-copy.done{background:#6BCB77}
+main{padding:0;background:transparent}footer,body>footer{background:var(--bh-black)!important;border:none!important;padding:24px 0!important;margin:0!important;text-align:center;color:rgba(255,255,255,.5)}footer::after{display:none!important}footer>.container{max-width:1200px;margin:0 auto;padding:0 24px}footer p{font-size:.75rem;color:rgba(255,255,255,.4);margin:0}.friend-links{margin:0;font-size:.65rem}.friend-links a{display:inline-block;padding:4px 10px;margin:0 4px;font-size:.65rem;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);text-decoration:none}.friend-links a:hover{color:var(--bh-yellow)}
+@media(max-width:960px){.bh-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:768px){.bh-header-inner{height:auto;padding:10px 18px;flex-direction:column}.bh-grid{grid-template-columns:1fr}.prompt-floater{bottom:16px;left:16px}.prompt-modal{left:16px;bottom:76px}}.name-en,.desc-en{display:none}
+    </style>
+</head>
+<body>
+<header class="bh-header"><div class="bh-header-inner"><a class="bh-logo" href="../example.php"><span class="bh-logo-icon"><img src="https:../assets/logo.png" alt="F"></span><span class="bh-logo-text"><strong>StyleCool</strong></span></a><div class="bh-header-actions"><a href="../example.php">← 返回</a></div></div></header>
+<main><section class="bh-hero"><h1>BAU<span class="accent">HAUS</span></h1><p>几何构成 + 红黄蓝三原色 + 无衬线大写 + 硬边<br>形式服从功能 — 百年包豪斯设计精神</p></section>
+<section class="bh-components"><div class="bh-components-header"><h2>ELEMENTS</h2><p>3px 硬边 + 三原色，包豪斯语言贯穿每一个组件</p></div>
+<div class="bh-grid">
+<div class="bh-component"><h3>包豪斯按钮</h3><p>红/黄/蓝 三原色</p><div class="bh-slot" style="display:flex;gap:8px;"><button class="bh-btn">线框</button><button class="bh-btn bh-btn-primary">红</button></div></div>
+<div class="bh-component"><h3>包豪斯输入框</h3><p>2px 硬边 + 聚焦黄色</p><div class="bh-slot"><input class="bh-input" placeholder="INPUT..."></div></div>
+<div class="bh-component"><h3>构成卡片</h3><p>蓝底 + 黑边</p><div class="bh-slot"><div class="bh-mini-card"><strong>KONSTRUKT</strong><p>蓝底 · 黑边</p></div></div></div>
+<div class="bh-component"><h3>三原色标签</h3><p>红/蓝 双色</p><div class="bh-slot"><span class="bh-tag bh-tag-red">ROT</span><span class="bh-tag bh-tag-blue">BLAU</span></div></div>
+<div class="bh-component"><h3>包豪斯导航</h3><p>红线下划线</p><div class="bh-slot"><nav class="bh-nav"><span class="bh-nav-item active">HOME</span><span class="bh-nav-item">WORK</span><span class="bh-nav-item">ABOUT</span></nav></div></div>
+<div class="bh-component"><h3>包豪斯提示</h3><p>黄底 + 黑边</p><div class="bh-slot"><div class="bh-alert">⚠ 形式服从功能</div></div></div>
+</div></section></main>
+<footer><div class="container"><p>© 2025-2026 函数库 | Powered by Mutantcat</p><div class="friend-links"><span>友情链接：</span><a href="https://www.mutantcat.org/">异猫工作群</a><a href="https://www.fcnesyouxi.top/">FC/NES</a><a href="https://www.jqshengtian.top/">学习资料</a></div></div></footer>
+<button class="prompt-floater" id="prompt-floater">复制提示词</button>
+<div class="prompt-modal" id="prompt-modal"><div class="prompt-modal-header"><span class="prompt-modal-title">包豪斯 — 完整提示词</span><button class="prompt-modal-close" id="prompt-close">×</button></div><div class="prompt-modal-content" id="prompt-content"></div><button class="prompt-modal-copy" id="prompt-copy">复制</button></div>
+<script>
+var PROMPT_TEXT = "采用包豪斯（Bauhaus）设计风格。背景纯白 #FFFFFF。三原色红 #E63946 + 蓝 #0051A8 + 黄 #FFD93D + 黑 #1A1A1A。标题大号黑框 + 4px 边框。所有元素 2-3px 硬边黑边框。卡片 hover 变黄底。按钮线框黑边或红色实心。输入框 2px 硬边，聚焦黄底。导航红色下划线。整体几何构成、形式服从功能。";
+document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+var btn=document.getElementById('prompt-floater'),modal=document.getElementById('prompt-modal'),close=document.getElementById('prompt-close'),copy=document.getElementById('prompt-copy');
+btn.addEventListener('click',function(){modal.classList.toggle('visible')});close.addEventListener('click',function(){modal.classList.remove('visible')});
+document.addEventListener('click',function(e){if(!modal.contains(e.target)&&!btn.contains(e.target))modal.classList.remove('visible')});
+copy.addEventListener('click',function(){function s(){copy.textContent='已复制';copy.classList.add('done');setTimeout(function(){copy.textContent='复制';copy.classList.remove('done')},1500)}
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PROMPT_TEXT).then(s).catch(function(){f()});else f();function f(){var ta=document.createElement('textarea');ta.value=PROMPT_TEXT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');s()}catch(e){}document.body.removeChild(ta)}});
+</script>
+</body>
+</html>

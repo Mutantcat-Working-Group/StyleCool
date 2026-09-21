@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动吸附 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   滚动吸附（Scroll Snap）— 演示样式
+   ============================================================ */
+:root {
+    --sn-colors: #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #A18CD1;
+    --sn-ink: #1A1A2E; --sn-ink-2: #4A4A5E; --sn-white: #FFFFFF;
+}
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body { background: var(--sn-ink) !important; color: var(--sn-ink); margin: 0 !important; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.sn-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,46,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.sn-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.sn-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+.sn-logo-icon { width: 34px; height: 34px; background: #fff; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.sn-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 7px; }
+.sn-logo-text strong { font-size: 0.9375rem; font-weight: 700; }
+.sn-logo-text em { display: none; }
+.sn-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; font-weight: 500; color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.15s ease; }
+.sn-header-actions a:hover { color: #fff; }
+.sn-dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.sn-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s ease; }
+.sn-dot.active { background: #fff; border-color: #fff; transform: scale(1.3); }
+.sn-section { min-height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; padding: 80px 24px; position: relative; overflow: hidden; }
+.sn-section:nth-child(1) { background: #FF6B6B; }
+.sn-section:nth-child(2) { background: #FFD93D; }
+.sn-section:nth-child(3) { background: #6BCB77; }
+.sn-section:nth-child(4) { background: #4D96FF; }
+.sn-section:nth-child(5) { background: #A18CD1; }
+.sn-section-inner { text-align: center; max-width: 640px; }
+.sn-section-num { font-size: clamp(4rem,8vw,8rem); font-weight: 900; color: rgba(0,0,0,0.1); line-height: 1; margin: 0 0 -20px; font-family: 'SF Mono','JetBrains Mono',ui-monospace,monospace; }
+.sn-section h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 800; color: var(--sn-ink); margin: 0 0 12px; }
+.sn-section p { font-size: 1.0625rem; line-height: 1.7; color: rgba(0,0,0,0.6); margin: 0; }
+.sn-section:nth-child(1) h2,
+.sn-section:nth-child(4) h2,
+.sn-section:nth-child(5) h2 { color: #fff; }
+.sn-section:nth-child(1) p,
+.sn-section:nth-child(4) p,
+.sn-section:nth-child(5) p { color: rgba(255,255,255,0.7); }
+.sn-components { min-height: 100vh; scroll-snap-align: start; background: var(--sn-ink); display: flex; align-items: center; padding: 80px 24px; }
+.sn-components-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+.sn-components-header { text-align: center; margin-bottom: 40px; }
+.sn-components-header h2 { font-size: 2rem; font-weight: 800; color: #fff; margin: 0 0 8px; }
+.sn-components-header p { font-size: 0.9375rem; color: rgba(255,255,255,0.5); margin: 0; }
+.sn-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.sn-component { padding: 24px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; transition: all 0.3s ease; }
+.sn-component:hover { background: rgba(255,255,255,0.1); }
+.sn-component h3 { font-size: 0.875rem; font-weight: 700; color: #fff; margin: 0 0 4px; }
+.sn-component > p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0 0 14px; }
+.sn-slot { margin-top: 12px; }
+.sn-btn { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; background: transparent; }
+.sn-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.sn-btn-primary { background: #fff; border-color: #fff; color: var(--sn-ink); }
+.sn-btn-primary:hover { background: rgba(255,255,255,0.8); }
+.sn-input { width: 100%; padding: 8px 12px; font-size: 0.8125rem; color: #fff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; outline: none; transition: all 0.2s ease; font-family: inherit; box-sizing: border-box; }
+.sn-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.12); }
+.sn-mini-card { padding: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; }
+.sn-mini-card strong { font-size: 0.8125rem; color: #fff; display: block; font-weight: 600; }
+.sn-mini-card p { font-size: 0.6875rem; color: rgba(255,255,255,0.4); margin: 4px 0 0; }
+.sn-tag { display: inline-flex; align-items: center; padding: 3px 8px; font-size: 0.6875rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; margin-right: 6px; margin-bottom: 6px; color: rgba(255,255,255,0.7); }
+.sn-tag-accent { background: #fff; border-color: #fff; color: var(--sn-ink); }
+.sn-nav { display: flex; gap: 2px; padding: 3px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; }
+.sn-nav-item { padding: 6px 14px; font-size: 0.8125rem; color: rgba(255,255,255,0.5); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; }
+.sn-nav-item.active { background: #fff; color: var(--sn-ink); font-weight: 600; }
+.sn-alert { padding: 10px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: rgba(255,255,255,0.7); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; color: #fff; font-size: 0.8125rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { background: rgba(255,255,255,0.25); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--sn-ink); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); z-index: 1001; color: #fff; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.8); }
+.prompt-modal-close { background: transparent; border: 0; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: rgba(255,255,255,0.8); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: rgba(255,255,255,0.06); padding: 14px; border-radius: 8px; }
+.prompt-modal-copy { padding: 10px 16px; background: #fff; color: var(--sn-ink); border: 0; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: rgba(255,255,255,0.8); }
+.prompt-modal-copy.done { background: #6BCB77; color: #fff; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--sn-ink) !important; border: none !important; padding: 24px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.4); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+footer p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0; }
+.friend-links { margin-top: 8px; font-size: 0.6875rem; }
+.friend-links span { margin-right: 6px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 3px; font-size: 0.6875rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: all 0.15s ease; }
+.friend-links a:hover { color: #fff; }
+@media (max-width: 768px) { .sn-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .sn-header-actions { justify-content: center; } .sn-dots { right: 10px; gap: 8px; } .sn-dot { width: 8px; height: 8px; } .sn-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="sn-header">
+        <div class="sn-header-inner">
+            <a class="sn-logo" href="../example.php" aria-label="StyleCool">
+                <span class="sn-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="sn-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>滚动吸附示例</em>
+                </span>
+            </a>
+            <div class="sn-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="sn-dots" aria-label="页面导航">
+        <div class="sn-dot active" data-section="1"></div>
+        <div class="sn-dot" data-section="2"></div>
+        <div class="sn-dot" data-section="3"></div>
+        <div class="sn-dot" data-section="4"></div>
+        <div class="sn-dot" data-section="5"></div>
+        <div class="sn-dot" data-section="6"></div>
+    </div>
+
+    <main>
+        <section class="sn-section" aria-label="第一节">
+            <div class="sn-section-inner">
+                <div class="sn-section-num">01</div>
+                <h2>滚动吸附</h2>
+                <p>Scroll Snap — 逐页故事叙述。<br>每个全屏区块独立成章，滚动时自动吸附对齐。</p>
+            </div>
+        </section>
+
+        <section class="sn-section" aria-label="第二节">
+            <div class="sn-section-inner">
+                <div class="sn-section-num">02</div>
+                <h2>全屏沉浸</h2>
+                <p>每节 100vh 占满整个视口，<br>高饱和色块依次切换，视觉节奏明快。</p>
+            </div>
+        </section>
+
+        <section class="sn-section" aria-label="第三节">
+            <div class="sn-section-inner">
+                <div class="sn-section-num">03</div>
+                <h2>叙事节奏</h2>
+                <p>五色逐章推进——红、黄、绿、蓝、紫。<br>每页一个核心观点，不堆砌、不分散。</p>
+            </div>
+        </section>
+
+        <section class="sn-section" aria-label="第四节">
+            <div class="sn-section-inner">
+                <div class="sn-section-num">04</div>
+                <h2>右侧导航</h2>
+                <p>固定右侧圆点指示器，<br>随时知晓当前位置，点击可跳转。</p>
+            </div>
+        </section>
+
+        <section class="sn-section" aria-label="第五节">
+            <div class="sn-section-inner">
+                <div class="sn-section-num">05</div>
+                <h2>CSS 原生</h2>
+                <p>scroll-snap-type: y mandatory<br>无需 JavaScript，纯 CSS 实现。</p>
+            </div>
+        </section>
+
+        <section class="sn-components" aria-label="组件展示">
+            <div class="sn-components-inner">
+                <div class="sn-components-header">
+                    <h2>模块化组件</h2>
+                    <p>深色底 + 1px 亮边，滚动吸附语言贯穿每一个组件</p>
+                </div>
+
+                <div class="sn-grid">
+                    <div class="sn-component">
+                        <h3>吸附按钮</h3>
+                        <p>亮边框 + 悬停反色</p>
+                        <div class="sn-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="sn-btn">默认</button>
+                            <button class="sn-btn sn-btn-primary">主要</button>
+                        </div>
+                    </div>
+
+                    <div class="sn-component">
+                        <h3>暗色输入框</h3>
+                        <p>深底 + 聚焦亮边</p>
+                        <div class="sn-slot">
+                            <input type="text" class="sn-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="sn-component">
+                        <h3>嵌套卡片</h3>
+                        <p>深底 + 1px 亮边</p>
+                        <div class="sn-slot">
+                            <div class="sn-mini-card">
+                                <strong>嵌套卡片</strong>
+                                <p>深底 · 1px 亮边</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sn-component">
+                        <h3>亮色标签</h3>
+                        <p>亮边框 + 白实心</p>
+                        <div class="sn-slot">
+                            <span class="sn-tag">默认</span>
+                            <span class="sn-tag sn-tag-accent">吸附</span>
+                        </div>
+                    </div>
+
+                    <div class="sn-component">
+                        <h3>暗色导航</h3>
+                        <p>白实心选中</p>
+                        <div class="sn-slot">
+                            <nav class="sn-nav">
+                                <span class="sn-nav-item active">首页</span>
+                                <span class="sn-nav-item">作品</span>
+                                <span class="sn-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="sn-component">
+                        <h3>暗色提示</h3>
+                        <p>深底 + 1px 亮边</p>
+                        <div class="sn-slot">
+                            <div class="sn-alert">⚠ 操作不可撤销，请确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">滚动吸附 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用滚动吸附（Scroll Snap）设计风格。html 设置 scroll-snap-type: y mandatory。每个 section 占满 100vh（scroll-snap-align: start）。五色依次推进：红 #FF6B6B、黄 #FFD93D、绿 #6BCB77、蓝 #4D96FF、紫 #A18CD1。每节大号数字（01-05）+ 标题 + 描述。右侧固定圆点指示器。组件区深色底 + 1px 亮边。整体逐页故事叙述，视觉节奏明快。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+
+    // 右侧圆点点击跳转
+    document.querySelectorAll('.sn-dot').forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            var idx = parseInt(this.getAttribute('data-section'));
+            var sections = document.querySelectorAll('.sn-section, .sn-components');
+            if (sections[idx - 1]) sections[idx - 1].scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    </script>
+</body>
+</html>

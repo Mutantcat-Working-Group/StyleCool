@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复古中国风 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   复古中国风（Retro Chinese）— 演示样式
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+:root {
+    --ch-bg: #F8F0E1; --ch-surface: #FFFDF8;
+    --ch-red: #A62C2C; --ch-gold: #B8860B; --ch-ink: #2A1A0A;
+    --ch-ink-2: #5C4A32; --ch-line: rgba(166,44,44,0.15);
+}
+body { background: var(--ch-bg) !important; color: var(--ch-ink); font-family: 'Noto Serif SC', serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.ch-header { position: sticky; top: 0; z-index: 100; background: rgba(248,240,225,0.95); backdrop-filter: blur(20px); border-bottom: 2px solid var(--ch-red); }
+.ch-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.ch-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.ch-logo-icon { width: 36px; height: 36px; background: var(--ch-red); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.ch-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+.ch-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--ch-red); font-family: 'Ma Shan Zheng', cursive; }
+.ch-logo-text em { display: none; }
+.ch-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; color: var(--ch-ink-2); text-decoration: none; transition: all 0.15s ease; }
+.ch-header-actions a:hover { color: var(--ch-red); }
+.ch-hero { position: relative; min-height: 560px; display: flex; align-items: center; justify-content: center; padding: 80px 24px; text-align: center; overflow: hidden; }
+.ch-hero::before { content: "福"; position: absolute; top: 20px; right: 40px; font-size: 8rem; color: rgba(166,44,44,0.06); font-family: 'Ma Shan Zheng', cursive; transform: rotate(15deg); }
+.ch-hero-inner { max-width: 640px; }
+.ch-hero-inner h1 { font-size: clamp(2.5rem,5vw,4rem); font-weight: 700; letter-spacing: 0.1em; margin: 0 0 20px; color: var(--ch-red); font-family: 'Ma Shan Zheng', cursive; }
+.ch-hero-inner p { font-size: 1rem; line-height: 2; color: var(--ch-ink-2); margin: 0; }
+.ch-components { position: relative; width: 100%; margin: 0; padding: 64px 0 96px; background: transparent; }
+.ch-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.ch-components-header { text-align: center; margin-bottom: 48px; }
+.ch-components-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--ch-red); margin: 0 0 8px; font-family: 'Ma Shan Zheng', cursive; }
+.ch-components-header p { font-size: 0.8125rem; color: var(--ch-ink-2); margin: 0; }
+.ch-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.ch-component { padding: 24px; background: var(--ch-surface); border: 1px solid var(--ch-line); transition: all 0.3s ease; }
+.ch-component:hover { border-color: var(--ch-gold); }
+.ch-component h3 { font-size: 0.875rem; font-weight: 700; color: var(--ch-ink); margin: 0 0 4px; }
+.ch-component > p { font-size: 0.75rem; color: var(--ch-ink-2); margin: 0 0 14px; }
+.ch-slot { margin-top: 14px; }
+.ch-btn { display: inline-flex; align-items: center; padding: 9px 22px; font-size: 0.8125rem; color: var(--ch-red); background: transparent; border: 1px solid var(--ch-red); cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.ch-btn:hover { background: var(--ch-red); color: #fff; }
+.ch-btn-primary { background: var(--ch-red); color: #fff; }
+.ch-btn-primary:hover { background: #7E1F1F; }
+.ch-input { width: 100%; padding: 9px 12px; font-size: 0.8125rem; color: var(--ch-ink); background: transparent; border: 0; border-bottom: 1px solid var(--ch-line); outline: none; font-family: inherit; box-sizing: border-box; transition: all 0.3s ease; }
+.ch-input:focus { border-bottom-color: var(--ch-red); }
+.ch-mini-card { padding: 14px; background: var(--ch-bg); border-left: 3px solid var(--ch-gold); }
+.ch-mini-card strong { font-size: 0.8125rem; color: var(--ch-ink); display: block; font-weight: 700; }
+.ch-mini-card p { font-size: 0.75rem; color: var(--ch-ink-2); margin: 4px 0 0; }
+.ch-tag { display: inline-flex; align-items: center; padding: 3px 12px; font-size: 0.6875rem; font-weight: 600; border: 1px solid; margin-right: 6px; margin-bottom: 6px; }
+.ch-tag-red { border-color: var(--ch-red); color: var(--ch-red); }
+.ch-tag-gold { border-color: var(--ch-gold); color: var(--ch-gold); }
+.ch-nav { display: flex; gap: 0; }
+.ch-nav-item { padding: 8px 20px; font-size: 0.8125rem; color: var(--ch-ink-2); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; }
+.ch-nav-item.active { color: var(--ch-red); border-bottom-color: var(--ch-red); font-weight: 600; }
+.ch-alert { padding: 12px 16px; background: rgba(166,44,44,0.05); border-left: 3px solid var(--ch-red); color: var(--ch-ink-2); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--ch-red); color: #fff; font-size: 0.8125rem; cursor: pointer; z-index: 1000; font-family: inherit; transition: all 0.3s ease; }
+.prompt-floater:hover { background: #7E1F1F; }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--ch-surface); border: 1px solid var(--ch-line); z-index: 1001; color: var(--ch-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 700; color: var(--ch-red); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--ch-ink-2); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.8; color: var(--ch-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: 'Noto Serif SC', serif; background: var(--ch-bg); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--ch-red); color: #fff; border: 0; font-size: 0.8125rem; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: #7E1F1F; }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--ch-ink) !important; border: none !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.5); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0; }
+.friend-links { margin: 0; font-size: 0.65rem; color: rgba(255,255,255,0.35); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 4px; font-size: 0.65rem; color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; }
+.friend-links a:hover { color: #fff; }
+@media (max-width: 960px) { .ch-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .ch-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .ch-hero { min-height: 440px; padding: 60px 16px; } .ch-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="ch-header">
+        <div class="ch-header-inner">
+            <a class="ch-logo" href="../example.php" aria-label="StyleCool">
+                <span class="ch-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="ch-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>复古中国风示例</em>
+                </span>
+            </a>
+            <div class="ch-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="ch-hero" aria-label="复古中国风英雄区">
+            <div class="ch-hero-inner">
+                <h1>水墨·中國风</h1>
+                <p>宣纸米白 + 朱砂红 + 描金点缀 + 书法字体<br>千年文人气韵，东方美学新演绎</p>
+            </div>
+        </section>
+
+        <section class="ch-components" aria-label="组件展示">
+            <div class="ch-components-inner">
+                <div class="ch-components-header">
+                    <h2>风骨元素</h2>
+                    <p>朱砂红 + 描金 + 宣纸底，中国风语言贯穿每一个组件</p>
+                </div>
+
+                <div class="ch-grid">
+                    <div class="ch-component">
+                        <h3>朱砂按钮</h3>
+                        <p>线框/实心</p>
+                        <div class="ch-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="ch-btn">线框</button>
+                            <button class="ch-btn ch-btn-primary">朱砂</button>
+                        </div>
+                    </div>
+
+                    <div class="ch-component">
+                        <h3>宣纸输入框</h3>
+                        <p>底线 + 聚焦朱砂</p>
+                        <div class="ch-slot">
+                            <input type="text" class="ch-input" placeholder="提筆落墨...">
+                        </div>
+                    </div>
+
+                    <div class="ch-component">
+                        <h3>描金卡片</h3>
+                        <p>左侧金色条</p>
+                        <div class="ch-slot">
+                            <div class="ch-mini-card">
+                                <strong>描金卡片</strong>
+                                <p>金线 · 宣纸底</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ch-component">
+                        <h3>印章标签</h3>
+                        <p>朱砂/描金</p>
+                        <div class="ch-slot">
+                            <span class="ch-tag ch-tag-red">盖章</span>
+                            <span class="ch-tag ch-tag-gold">鎏金</span>
+                        </div>
+                    </div>
+
+                    <div class="ch-component">
+                        <h3>印章导航</h3>
+                        <p>朱砂底部线</p>
+                        <div class="ch-slot">
+                            <nav class="ch-nav">
+                                <span class="ch-nav-item active">首页</span>
+                                <span class="ch-nav-item">丹青</span>
+                                <span class="ch-nav-item">书道</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="ch-component">
+                        <h3>风骨提示</h3>
+                        <p>朱砂左侧条</p>
+                        <div class="ch-slot">
+                            <div class="ch-alert">⚠ 墨迹未干，请稍候</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">复制提示词</button>
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">复古中国风 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用复古中国风（Retro Chinese）设计风格。背景宣纸米白 #F8F0E1。主色朱砂红 #A62C2C + 描金 #B8860B。标题使用毛笔字体 Ma Shan Zheng（4rem + 字距 0.1em）。Hero 背景大号福字水印。卡片米白 #FFFDF8 + 1px 朱砂边框，hover 金色边框。按钮线框或朱砂实心。输入框仅底线聚焦朱砂。导航朱砂底部线。整体东方气韵、文人墨客。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn=document.getElementById('prompt-floater'),modal=document.getElementById('prompt-modal'),close=document.getElementById('prompt-close'),copy=document.getElementById('prompt-copy');
+    btn.addEventListener('click',function(){modal.classList.toggle('visible')});
+    close.addEventListener('click',function(){modal.classList.remove('visible')});
+    document.addEventListener('click',function(e){if(!modal.contains(e.target)&&!btn.contains(e.target))modal.classList.remove('visible')});
+    copy.addEventListener('click',function(){function onSuccess(){copy.textContent='已复制';copy.classList.add('done');setTimeout(function(){copy.textContent='复制';copy.classList.remove('done')},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function(){fallback()});else fallback();function fallback(){var ta=document.createElement('textarea');ta.value=PROMPT_TEXT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');onSuccess()}catch(e){console.error('Copy failed:',e)}document.body.removeChild(ta)}});
+    </script>
+</body>
+</html>

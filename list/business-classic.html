@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典商务 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   经典商务（Classic Business）— 演示样式
+   ============================================================ */
+:root {
+    --cb-blue: #1B4E7A; --cb-blue-2: #3A6A9E; --cb-dark: #0E2E4A;
+    --cb-bg: #F4F8FC; --cb-surface: #FFFFFF;
+    --cb-ink: #15324C; --cb-ink-2: #51677C; --cb-ink-3: #8395A6;
+    --cb-accent: #73B9E6; --cb-line: rgba(20,58,92,0.1); --cb-line-2: rgba(20,58,92,0.18);
+}
+body { background: var(--cb-bg) !important; color: var(--cb-ink); }
+header { background: var(--cb-blue) !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.cb-header { position: sticky; top: 0; z-index: 100; }
+.cb-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.cb-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.cb-logo-icon { width: 34px; height: 34px; background: #fff; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.cb-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 5px; }
+.cb-logo-text { display: inline-flex; flex-direction: column; line-height: 1.2; }
+.cb-logo-text strong { font-size: 1rem; font-weight: 700; color: #fff; }
+.cb-logo-text em { font-style: normal; font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.cb-header-actions { display: inline-flex; align-items: center; gap: 8px; }
+.cb-header-actions a { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.8125rem; font-weight: 500; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.25); border-radius: 4px; text-decoration: none; transition: all 0.2s ease; }
+.cb-header-actions a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.cb-hero { position: relative; min-height: 520px; padding: 80px 24px; background: linear-gradient(180deg, var(--cb-blue) 0%, var(--cb-blue-2) 100%); display: flex; align-items: center; justify-content: center; }
+.cb-hero-inner { max-width: 800px; width: 100%; text-align: center; }
+.cb-hero-inner h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 16px; color: #fff; }
+.cb-hero-inner h1 .accent { color: var(--cb-accent); }
+.cb-hero-inner p { font-size: 1.0625rem; line-height: 1.7; color: rgba(255,255,255,0.8); margin: 0 0 32px; }
+.cb-hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cb-hero-btn { padding: 12px 28px; font-size: 0.9375rem; font-weight: 600; border: 0; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.cb-hero-btn-primary { background: #fff; color: var(--cb-blue); }
+.cb-hero-btn-primary:hover { background: var(--cb-accent); color: var(--cb-dark); }
+.cb-hero-btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+.cb-hero-btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.cb-components { position: relative; width: 100%; margin: 0; padding: 80px 0 96px; background: transparent; }
+.cb-components-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.cb-components-header { margin-bottom: 48px; }
+.cb-components-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--cb-ink); margin: 0 0 8px; }
+.cb-components-header p { color: var(--cb-ink-3); margin: 0; }
+.cb-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.cb-component { padding: 28px; background: var(--cb-surface); border: 1px solid var(--cb-line); border-radius: 6px; transition: box-shadow 0.2s ease; }
+.cb-component:hover { box-shadow: 0 4px 16px rgba(20,58,92,0.08); }
+.cb-component h3 { font-size: 0.9375rem; font-weight: 600; color: var(--cb-ink); margin: 0 0 4px; }
+.cb-component > p { font-size: 0.8125rem; color: var(--cb-ink-3); margin: 0 0 16px; }
+.cb-slot { margin-top: 14px; }
+.cb-btn { display: inline-flex; align-items: center; padding: 9px 18px; font-size: 0.8125rem; font-weight: 600; color: var(--cb-blue); border: 1px solid var(--cb-blue); border-radius: 4px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; background: transparent; }
+.cb-btn:hover { background: var(--cb-blue); color: #fff; }
+.cb-btn-primary { background: var(--cb-blue); color: #fff; }
+.cb-btn-primary:hover { background: var(--cb-dark); border-color: var(--cb-dark); }
+.cb-btn-outline { border-color: var(--cb-line-2); color: var(--cb-ink-2); }
+.cb-btn-outline:hover { border-color: var(--cb-blue); color: var(--cb-blue); background: transparent; }
+.cb-input { width: 100%; padding: 9px 12px; font-size: 0.8125rem; color: var(--cb-ink); background: var(--cb-surface); border: 1px solid var(--cb-line-2); border-radius: 4px; outline: none; transition: all 0.2s ease; font-family: inherit; box-sizing: border-box; }
+.cb-input:focus { border-color: var(--cb-blue); box-shadow: 0 0 0 3px rgba(27,78,122,0.1); }
+.cb-mini-card { padding: 14px; background: var(--cb-bg); border: 1px solid var(--cb-line); border-radius: 4px; }
+.cb-mini-card strong { font-size: 0.8125rem; color: var(--cb-ink); display: block; font-weight: 600; }
+.cb-mini-card p { font-size: 0.75rem; color: var(--cb-ink-3); margin: 4px 0 0; }
+.cb-tag { display: inline-flex; align-items: center; padding: 3px 10px; font-size: 0.6875rem; font-weight: 600; color: var(--cb-ink-2); background: var(--cb-bg); border-radius: 4px; margin-right: 6px; margin-bottom: 6px; }
+.cb-tag-blue { background: var(--cb-blue); color: #fff; }
+.cb-tag-outline { background: transparent; border: 1px solid var(--cb-line-2); }
+.cb-nav { display: flex; gap: 0; }
+.cb-nav-item { padding: 10px 20px; font-size: 0.8125rem; font-weight: 500; color: var(--cb-ink-2); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s ease; }
+.cb-nav-item.active { color: var(--cb-blue); border-bottom-color: var(--cb-blue); font-weight: 600; }
+.cb-alert { padding: 12px 16px; background: var(--cb-bg); border: 1px solid var(--cb-line); border-radius: 4px; color: var(--cb-ink-2); font-size: 0.8125rem; }
+.cb-alert-warn { border-left: 3px solid #F2B53C; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--cb-blue); border-radius: 4px; color: #fff; font-size: 0.8125rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(27,78,122,0.3); z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { background: var(--cb-dark); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--cb-surface); border: 1px solid var(--cb-line); border-radius: 6px; box-shadow: 0 12px 40px rgba(20,58,92,0.15); z-index: 1001; color: var(--cb-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 600; color: var(--cb-blue); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--cb-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-close:hover { color: var(--cb-ink); }
+.prompt-modal-content { font-size: 0.875rem; line-height: 1.7; color: var(--cb-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--cb-bg); padding: 14px; border-radius: 4px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--cb-blue); color: #fff; border: 0; border-radius: 4px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: var(--cb-dark); }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--cb-dark) !important; border: none !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.6); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: rgba(255,255,255,0.4); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 6px 14px; margin: 0 4px; font-size: 0.6875rem; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; text-decoration: none; transition: all 0.2s ease; }
+.friend-links a:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+@media (max-width: 960px) { .cb-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .cb-header-inner { height: auto; padding: 12px 18px; flex-direction: column; } .cb-header-actions { justify-content: center; } .cb-logo-text em { display: none; } .cb-hero { min-height: 440px; padding: 60px 16px; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .cb-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="cb-header">
+        <div class="cb-header-inner">
+            <a class="cb-logo" href="../example.php" aria-label="StyleCool">
+                <span class="cb-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="cb-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>经典商务示例</em>
+                </span>
+            </a>
+            <div class="cb-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="cb-hero" aria-label="经典商务英雄区">
+            <div class="cb-hero-inner">
+                <h1>经典<span class="accent">商务</span></h1>
+                <p>深蓝主调 + 等级分明 + 稳重可靠 + 克制的圆角<br>企业级设计语言，让品牌信任感贯穿每一处细节</p>
+                <div class="cb-hero-actions">
+                    <button class="cb-hero-btn cb-hero-btn-primary">开始使用</button>
+                    <button class="cb-hero-btn cb-hero-btn-secondary">了解更多</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="cb-components" aria-label="组件展示">
+            <div class="cb-components-inner">
+                <div class="cb-components-header">
+                    <h2>模块化组件</h2>
+                    <p>深蓝主调 + 等级分明，经典商务语言贯穿每一个组件</p>
+                </div>
+
+                <div class="cb-grid">
+                    <div class="cb-component">
+                        <h3>商务按钮</h3>
+                        <p>实心/描边/边框 三级</p>
+                        <div class="cb-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="cb-btn cb-btn-primary">主要</button>
+                            <button class="cb-btn">描边</button>
+                            <button class="cb-btn cb-btn-outline">边框</button>
+                        </div>
+                    </div>
+
+                    <div class="cb-component">
+                        <h3>商务输入框</h3>
+                        <p>聚焦时深蓝描边 + 光环</p>
+                        <div class="cb-slot">
+                            <input type="text" class="cb-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="cb-component">
+                        <h3>嵌套卡片</h3>
+                        <p>浅灰底 + 1px 边框</p>
+                        <div class="cb-slot">
+                            <div class="cb-mini-card">
+                                <strong>嵌套卡片</strong>
+                                <p>浅灰底 · 层次分明</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cb-component">
+                        <h3>商务标签</h3>
+                        <p>实心/浅底/描边 三种</p>
+                        <div class="cb-slot">
+                            <span class="cb-tag">默认</span>
+                            <span class="cb-tag cb-tag-blue">商务</span>
+                            <span class="cb-tag cb-tag-outline">描边</span>
+                        </div>
+                    </div>
+
+                    <div class="cb-component">
+                        <h3>商务导航</h3>
+                        <p>底部深蓝下划线</p>
+                        <div class="cb-slot">
+                            <nav class="cb-nav">
+                                <span class="cb-nav-item active">首页</span>
+                                <span class="cb-nav-item">产品</span>
+                                <span class="cb-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="cb-component">
+                        <h3>商务提示</h3>
+                        <p>左侧金色警告条</p>
+                        <div class="cb-slot">
+                            <div class="cb-alert cb-alert-warn">⚠ 操作不可撤销，请确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">经典商务 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用经典商务（Classic Business）设计风格。背景浅冷灰 #F4F8FC。导航栏深蓝 #1B4E7A 横栏（sticky top），白色文字。Hero 区深蓝渐变（#1B4E7A → #3A6A9E），白色大标题 + 两个 CTA 按钮（白底 / 透明描边）。卡片白底 + 1px 边框 rgba(20,58,92,0.1)，圆角 4-6px。按钮实心深蓝 / 描边深蓝 / 边框浅灰 三级。输入框 1px 边框 + 聚焦深蓝光环。标签实心蓝 / 浅灰底 / 描边 三种。导航选中态底部深蓝下划线。整体稳重、可靠、克制，适合企业级产品。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

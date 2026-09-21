@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暗黑模式 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   暗黑模式（Dark Mode）— 演示样式
+   ============================================================ */
+:root {
+    --dk-bg: #121212; --dk-bg-2: #1E1E1E; --dk-surface: #2D2D2D;
+    --dk-ink: #E0E0E0; --dk-ink-2: #A0A0A0; --dk-ink-3: #707070;
+    --dk-accent: #BB86FC; --dk-accent-2: #9A67DF;
+    --dk-green: #03DAC6; --dk-line: rgba(255,255,255,0.08);
+}
+body { background: var(--dk-bg) !important; color: var(--dk-ink); }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.dk-header { position: sticky; top: 0; z-index: 100; background: rgba(18,18,18,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--dk-line); }
+.dk-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.dk-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.dk-logo-icon { width: 34px; height: 34px; background: var(--dk-accent); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.dk-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dk-logo-text strong { font-size: 0.9375rem; font-weight: 700; color: var(--dk-ink); }
+.dk-logo-text em { display: none; }
+.dk-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; color: var(--dk-ink-2); border: 1px solid var(--dk-line); text-decoration: none; }
+.dk-header-actions a:hover { color: var(--dk-accent); border-color: var(--dk-accent); }
+.dk-hero { padding: 80px 24px; text-align: center; max-width: 640px; margin: 0 auto; }
+.dk-hero h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; color: var(--dk-ink); margin: 0 0 12px; }
+.dk-hero h1 .accent { color: var(--dk-accent); }
+.dk-hero p { font-size: 0.9375rem; line-height: 1.7; color: var(--dk-ink-2); margin: 0; }
+.dk-components { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+.dk-components-header { margin-bottom: 32px; }
+.dk-components-header h2 { font-size: 1.25rem; font-weight: 700; color: var(--dk-ink); margin: 0 0 4px; }
+.dk-components-header p { font-size: 0.8125rem; color: var(--dk-ink-3); margin: 0; }
+.dk-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.dk-component { padding: 20px; background: var(--dk-surface); border: 1px solid var(--dk-line); border-radius: 8px; }
+.dk-component:hover { border-color: rgba(187,134,252,0.3); }
+.dk-component h3 { font-size: 0.875rem; font-weight: 700; color: var(--dk-ink); margin: 0 0 4px; }
+.dk-component > p { font-size: 0.75rem; color: var(--dk-ink-3); margin: 0 0 14px; }
+.dk-slot { margin-top: 12px; }
+.dk-btn { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: var(--dk-ink); background: var(--dk-bg-2); border: 1px solid var(--dk-line); border-radius: 6px; cursor: pointer; }
+.dk-btn:hover { border-color: var(--dk-accent); color: var(--dk-accent); }
+.dk-btn-primary { background: var(--dk-accent); border-color: var(--dk-accent); color: #fff; }
+.dk-btn-primary:hover { background: var(--dk-accent-2); }
+.dk-input { width: 100%; padding: 8px 12px; font-size: 0.8125rem; color: var(--dk-ink); background: var(--dk-bg-2); border: 1px solid var(--dk-line); border-radius: 6px; outline: none; box-sizing: border-box; }
+.dk-input:focus { border-color: var(--dk-accent); box-shadow: 0 0 0 3px rgba(187,134,252,0.15); }
+.dk-mini-card { padding: 12px; background: var(--dk-bg); border: 1px solid var(--dk-line); border-radius: 6px; }
+.dk-mini-card strong { font-size: 0.8125rem; color: var(--dk-ink); display: block; font-weight: 600; }
+.dk-mini-card p { font-size: 0.75rem; color: var(--dk-ink-3); margin: 4px 0 0; }
+.dk-tag { display: inline-flex; padding: 3px 8px; font-size: 0.6875rem; font-weight: 600; background: rgba(187,134,252,0.1); color: var(--dk-accent); border-radius: 4px; margin-right: 6px; margin-bottom: 6px; }
+.dk-nav { display: flex; gap: 0; }
+.dk-nav-item { padding: 8px 14px; font-size: 0.8125rem; color: var(--dk-ink-3); border-bottom: 2px solid transparent; cursor: pointer; }
+.dk-nav-item.active { color: var(--dk-accent); border-bottom-color: var(--dk-accent); }
+.dk-alert { padding: 10px 14px; background: rgba(187,134,252,0.08); border: 1px solid rgba(187,134,252,0.2); border-radius: 6px; color: var(--dk-ink-2); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--dk-accent); color: #fff; border-radius: 6px; cursor: pointer; z-index: 1000; }
+.prompt-floater:hover { background: var(--dk-accent-2); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw-48px)); max-height: 70vh; padding: 20px; background: var(--dk-surface); border: 1px solid var(--dk-line); border-radius: 8px; z-index: 1001; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--dk-accent); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--dk-ink-3); cursor: pointer; font-size: 1.2rem; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--dk-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; background: var(--dk-bg); padding: 14px; border-radius: 6px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--dk-accent); color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
+.prompt-modal-copy.done { background: var(--dk-green); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--dk-bg-2) !important; border: none !important; border-top: 1px solid var(--dk-line) !important; padding: 24px 0 !important; margin: 0 !important; text-align: center; color: var(--dk-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+footer p { font-size: 0.75rem; color: var(--dk-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.65rem; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 4px; font-size: 0.65rem; color: var(--dk-ink-3); text-decoration: none; }
+.friend-links a:hover { color: var(--dk-accent); }
+@media (max-width: 960px) { .dk-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .dk-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .dk-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw-32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="dk-header">
+        <div class="dk-header-inner">
+            <a class="dk-logo" href="../example.php" aria-label="StyleCool">
+                <span class="dk-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="dk-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>暗黑模式示例</em>
+                </span>
+            </a>
+            <div class="dk-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="dk-hero">
+            <h1>暗黑<span class="accent">模式</span></h1>
+            <p>Material Dark + 紫罗兰强调 + 深灰分层<br>夜间阅读友好，OLED 纯黑基底</p>
+        </section>
+
+        <section class="dk-components">
+            <div class="dk-components-header">
+                <h2>模块</h2>
+                <p>Material Dark 语言贯穿每一个组件</p>
+            </div>
+
+            <div class="dk-grid">
+                <div class="dk-component">
+                    <h3>暗色按钮</h3>
+                    <p>紫罗兰主按钮</p>
+                    <div class="dk-slot" style="display:flex;gap:8px;">
+                        <button class="dk-btn">默认</button>
+                        <button class="dk-btn dk-btn-primary">主要</button>
+                    </div>
+                </div>
+
+                <div class="dk-component">
+                    <h3>暗色输入框</h3>
+                    <p>聚焦紫罗兰光环</p>
+                    <div class="dk-slot">
+                        <input class="dk-input" placeholder="输入内容...">
+                    </div>
+                </div>
+
+                <div class="dk-component">
+                    <h3>暗色卡片</h3>
+                    <p>深灰分层</p>
+                    <div class="dk-slot">
+                        <div class="dk-mini-card">
+                            <strong>暗色卡片</strong>
+                            <p>深灰 · 分层</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dk-component">
+                    <h3>暗色标签</h3>
+                    <p>紫罗兰浅底</p>
+                    <div class="dk-slot">
+                        <span class="dk-tag">暗黑</span>
+                        <span class="dk-tag">Material</span>
+                    </div>
+                </div>
+
+                <div class="dk-component">
+                    <h3>暗色导航</h3>
+                    <p>紫罗兰下划线</p>
+                    <div class="dk-slot">
+                        <nav class="dk-nav">
+                            <span class="dk-nav-item active">首页</span>
+                            <span class="dk-nav-item">设置</span>
+                            <span class="dk-nav-item">关于</span>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="dk-component">
+                    <h3>暗色提示</h3>
+                    <p>紫罗兰浅底</p>
+                    <div class="dk-slot">
+                        <div class="dk-alert">⚠ 当前处于夜间模式</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater">复制提示词</button>
+    <div class="prompt-modal" id="prompt-modal">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">暗黑模式 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用暗黑模式（Dark Mode）设计风格。背景纯黑 #121212，分层 #1E1E1E / #2D2D2D。主色紫罗兰 #BB86FC + 青绿 #03DAC6。文字 #E0E0E0 / #A0A0A0 / #707070 三层。卡片深灰 + 1px rgba(255,255,255,0.08) 边框 + 圆角 8px。按钮默认深底紫边，主要紫罗兰实心。输入框深底 + 聚焦紫光环。导航紫罗兰下划线。整体 Material Dark、夜间友好。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+    var btn=document.getElementById('prompt-floater'),modal=document.getElementById('prompt-modal'),close=document.getElementById('prompt-close'),copy=document.getElementById('prompt-copy');
+    btn.addEventListener('click',function(){modal.classList.toggle('visible')});
+    close.addEventListener('click',function(){modal.classList.remove('visible')});
+    document.addEventListener('click',function(e){if(!modal.contains(e.target)&&!btn.contains(e.target))modal.classList.remove('visible')});
+    copy.addEventListener('click',function(){function onSuccess(){copy.textContent='已复制';copy.classList.add('done');setTimeout(function(){copy.textContent='复制';copy.classList.remove('done')},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function(){fallback()});else fallback();function fallback(){var ta=document.createElement('textarea');ta.value=PROMPT_TEXT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');onSuccess()}catch(e){console.error('Copy failed:',e)}document.body.removeChild(ta)}});
+    </script>
+</body>
+</html>

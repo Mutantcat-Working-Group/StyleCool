@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>波普艺术 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   波普艺术（Pop Art）— 演示样式
+   ============================================================ */
+:root {
+    --pa-bg: #FFF225; --pa-surface: #FFFFFF;
+    --pa-red: #ED1C24; --pa-blue: #0051A8; --pa-yellow: #FFF225;
+    --pa-black: #231F20; --pa-ink: #231F20; --pa-ink-2: #555555;
+    --pa-dot: rgba(0,0,0,0.06);
+}
+body { background: var(--pa-bg) !important; color: var(--pa-ink); font-family: 'Anton', 'Impact', -apple-system, sans-serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.pa-header { position: sticky; top: 0; z-index: 100; background: rgba(255,242,37,0.95); }
+.pa-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.pa-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.pa-logo-icon { width: 36px; height: 36px; background: var(--pa-red); border: 3px solid var(--pa-black); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.pa-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pa-logo-text strong { font-size: 1rem; font-weight: 900; color: var(--pa-black); text-transform: uppercase; }
+.pa-logo-text em { display: none; }
+.pa-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; font-weight: 700; color: var(--pa-black); border: 3px solid var(--pa-black); text-decoration: none; text-transform: uppercase; }
+.pa-header-actions a:hover { background: var(--pa-red); color: #fff; border-color: var(--pa-red); }
+.pa-hero { position: relative; padding: 80px 24px; text-align: center; background: var(--pa-yellow); overflow: hidden; }
+.pa-hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, var(--pa-dot) 1px, transparent 1px); background-size: 16px 16px; pointer-events: none; }
+.pa-hero h1 { font-size: clamp(3rem,8vw,6rem); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 16px; text-transform: uppercase; color: var(--pa-red); text-shadow: 6px 6px 0 var(--pa-blue), 12px 12px 0 var(--pa-black); -webkit-text-stroke: 2px var(--pa-black); }
+.pa-hero h1 .accent { color: var(--pa-blue); text-shadow: 6px 6px 0 var(--pa-red), 12px 12px 0 var(--pa-black); }
+.pa-hero p { font-size: 1.125rem; line-height: 1.6; color: var(--pa-black); margin: 0; font-weight: 400; font-family: -apple-system, sans-serif; }
+.pa-components { position: relative; width: 100%; margin: 0; padding: 64px 0 96px; background: #fff; }
+.pa-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.pa-components-header { text-align: center; margin-bottom: 48px; }
+.pa-components-header h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; color: var(--pa-black); margin: 0 0 8px; }
+.pa-components-header p { font-size: 0.875rem; color: var(--pa-ink-2); margin: 0; font-family: -apple-system, sans-serif; }
+.pa-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.pa-component { padding: 24px; background: #fff; border: 3px solid var(--pa-black); transition: all 0.15s ease; }
+.pa-component:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--pa-black); }
+.pa-component h3 { font-size: 0.9375rem; font-weight: 900; text-transform: uppercase; color: var(--pa-black); margin: 0 0 4px; }
+.pa-component > p { font-size: 0.75rem; color: var(--pa-ink-2); margin: 0 0 14px; font-family: -apple-system, sans-serif; }
+.pa-slot { margin-top: 14px; }
+.pa-btn { display: inline-flex; align-items: center; padding: 10px 20px; font-size: 0.875rem; font-weight: 900; color: #fff; background: var(--pa-red); border: 3px solid var(--pa-black); cursor: pointer; transition: all 0.1s ease; font-family: inherit; text-transform: uppercase; }
+.pa-btn:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--pa-black); }
+.pa-btn:active { transform: translate(2px,2px); box-shadow: none; }
+.pa-btn-secondary { background: var(--pa-blue); }
+.pa-btn-yellow { background: var(--pa-yellow); color: var(--pa-black); }
+.pa-input { width: 100%; padding: 10px 14px; font-size: 0.875rem; font-family: inherit; color: var(--pa-black); background: #fff; border: 3px solid var(--pa-black); outline: none; transition: all 0.1s ease; box-sizing: border-box; }
+.pa-input:focus { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--pa-black); }
+.pa-mini-card { padding: 14px; background: var(--pa-yellow); border: 3px solid var(--pa-black); }
+.pa-mini-card strong { font-size: 0.875rem; color: var(--pa-black); display: block; font-weight: 900; text-transform: uppercase; }
+.pa-mini-card p { font-size: 0.75rem; color: var(--pa-ink-2); margin: 4px 0 0; font-family: -apple-system, sans-serif; }
+.pa-tag { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 0.75rem; font-weight: 900; color: #fff; background: var(--pa-black); margin-right: 6px; margin-bottom: 6px; text-transform: uppercase; }
+.pa-tag-red { background: var(--pa-red); }
+.pa-tag-blue { background: var(--pa-blue); }
+.pa-nav { display: flex; gap: 4px; padding: 4px; background: #fff; border: 3px solid var(--pa-black); }
+.pa-nav-item { padding: 8px 16px; font-size: 0.875rem; font-weight: 700; color: var(--pa-ink-2); cursor: pointer; transition: all 0.1s ease; text-transform: uppercase; }
+.pa-nav-item.active { background: var(--pa-black); color: #fff; }
+.pa-alert { padding: 12px 16px; background: var(--pa-red); border: 3px solid var(--pa-black); color: #fff; font-size: 0.875rem; font-weight: 700; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--pa-black); color: #fff; font-size: 0.8125rem; font-weight: 900; cursor: pointer; z-index: 1000; text-transform: uppercase; font-family: inherit; }
+.prompt-floater:hover { background: var(--pa-red); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--pa-black); border: 3px solid var(--pa-yellow); z-index: 1001; color: #fff; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 900; color: var(--pa-yellow); text-transform: uppercase; }
+.prompt-modal-close { background: transparent; border: 0; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: rgba(255,255,255,0.85); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: rgba(255,255,255,0.06); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--pa-yellow); color: var(--pa-black); border: 0; font-size: 0.875rem; font-weight: 900; cursor: pointer; transition: all 0.1s ease; font-family: inherit; text-transform: uppercase; }
+.prompt-modal-copy:hover { background: var(--pa-red); color: #fff; }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--pa-black) !important; border: none !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.5); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin: 0; font-family: -apple-system, sans-serif; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: rgba(255,255,255,0.4); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 4px; font-size: 0.6875rem; color: rgba(255,255,255,0.4); border: 2px solid rgba(255,255,255,0.2); text-decoration: none; }
+.friend-links a:hover { color: var(--pa-yellow); border-color: var(--pa-yellow); }
+@media (max-width: 960px) { .pa-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .pa-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .pa-header-actions { justify-content: center; } .pa-hero h1 { font-size: 3rem; text-shadow: 4px 4px 0 var(--pa-blue), 8px 8px 0 var(--pa-black); } .pa-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="pa-header">
+        <div class="pa-header-inner">
+            <a class="pa-logo" href="../example.php" aria-label="StyleCool">
+                <span class="pa-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="pa-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>波普艺术示例</em>
+                </span>
+            </a>
+            <div class="pa-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="pa-hero" aria-label="波普艺术英雄区">
+            <h1>POP <span class="accent">ART</span></h1>
+            <p>明黄底 + 红蓝黑三色 + 硬边 + 圆点 + 粗体<br>安迪·沃霍尔式的大胆与重复，大众文化美学</p>
+        </section>
+
+        <section class="pa-components" aria-label="组件展示">
+            <div class="pa-components-inner">
+                <div class="pa-components-header">
+                    <h2>MODULES</h2>
+                    <p>3px 硬边 + 明黄撞色，波普艺术语言贯穿每一个组件</p>
+                </div>
+
+                <div class="pa-grid">
+                    <div class="pa-component">
+                        <h3>波普按钮</h3>
+                        <p>红/蓝/黄 三色 + 硬边</p>
+                        <div class="pa-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="pa-btn">RED</button>
+                            <button class="pa-btn pa-btn-secondary">BLUE</button>
+                            <button class="pa-btn pa-btn-yellow">YELLOW</button>
+                        </div>
+                    </div>
+
+                    <div class="pa-component">
+                        <h3>波普输入框</h3>
+                        <p>3px 硬边 + 聚焦偏移</p>
+                        <div class="pa-slot">
+                            <input type="text" class="pa-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="pa-component">
+                        <h3>嵌套卡片</h3>
+                        <p>明黄底 + 3px 硬边</p>
+                        <div class="pa-slot">
+                            <div class="pa-mini-card">
+                                <strong>POP CARD</strong>
+                                <p>明黄底 · 3px 硬边</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pa-component">
+                        <h3>波普标签</h3>
+                        <p>黑底/红底/蓝底</p>
+                        <div class="pa-slot">
+                            <span class="pa-tag">POP</span>
+                            <span class="pa-tag pa-tag-red">ART</span>
+                            <span class="pa-tag pa-tag-blue">WOW</span>
+                        </div>
+                    </div>
+
+                    <div class="pa-component">
+                        <h3>波普导航</h3>
+                        <p>黑底实心选中</p>
+                        <div class="pa-slot">
+                            <nav class="pa-nav">
+                                <span class="pa-nav-item active">HOME</span>
+                                <span class="pa-nav-item">WORK</span>
+                                <span class="pa-nav-item">ABOUT</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="pa-component">
+                        <h3>波普警告</h3>
+                        <p>红底 + 硬边 + 白字</p>
+                        <div class="pa-slot">
+                            <div class="pa-alert">⚠ BANG!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        COPY PROMPT
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">波普艺术 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">COPY</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用波普艺术（Pop Art）设计风格。背景明黄 #FFF225，叠加 16px 圆点图案（radial-gradient 1px 黑色半透明）。主色红 #ED1C24 + 蓝 #0051A8 + 黑 #231F20。标题 6vw 字重 900 红色 + 双层位移阴影（6px 蓝 + 12px 黑），-webkit-text-stroke 2px 黑。卡片白底 + 3px 黑硬边，hover 偏移 -3px + 6px 投影。按钮大写字母 + 3px 硬边 + 按下回弹。整体大胆、重复、沃霍尔式。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = 'COPIED';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = 'COPY'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

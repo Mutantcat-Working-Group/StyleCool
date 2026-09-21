@@ -1,0 +1,20 @@
+#############################################
+# StyleCool standalone rewrite rules
+# 独立部署于 stylecool.mutantcat.org
+#############################################
+
+RewriteEngine On
+DirectoryIndex index.php
+
+# 旧域迁移: style.functioncool.xyz → stylecool.mutantcat.org
+RewriteCond %{HTTP_HOST} ^style\.functioncool\.xyz$ [NC]
+RewriteRule ^(.*)$ https://stylecool.mutantcat.org/$1 [L,R=301]
+
+# 旧主站路径迁移: /stylecool、/stylecool/xxx → 本域
+RewriteRule ^stylecool/?(.*)$ /$1 [L,R=301]
+
+# /skillapi → index.php（带参时为 JSON，无参时为文档页）
+RewriteRule ^skillapi/?$ index.php [L,QSA]
+
+# /example → example.php（样式示例画廊）
+RewriteRule ^example/?$ example.php [L,QSA]

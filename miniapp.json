@@ -1,0 +1,294 @@
+[
+  {
+    "name-en": "Bottom Tab Bar",
+    "name-zh": "底部标签栏",
+    "description-en": "WeChat mini-program standard: 2-5 tabs, icon + label, fixed at bottom. Active tab: accent color icon + text. Inactive: gray. Tab bar height 50px + safe-area padding. Never use more than 5 tabs. Never mix text-only and icon-only tabs in the same bar.",
+    "description-zh": "微信小程序标准：2-5 个标签，图标+文字，底部固定。激活标签主色图标+文字，未激活灰色。标签栏高 50px + 安全区。禁止超过 5 个标签、禁止同一栏混用纯文字和纯图标。",
+    "tags": [
+      "tab-bar",
+      "bottom",
+      "navigation",
+      "wechat",
+      "mini-program"
+    ],
+    "css": ".tab-bar{position:fixed;bottom:0;left:0;right:0;height:calc(50px + env(safe-area-inset-bottom));display:flex;background:#fff;border-top:1px solid rgba(0,0,0,.06)}.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.65rem;color:#999}.tab-item.active{color:#3A8DD0}"
+  },
+  {
+    "name-en": "Card-Feed List",
+    "name-zh": "卡片信息流",
+    "description-en": "The primary content pattern for mini-programs: a vertical scroll of cards, each with an image (16:9 or 1:1), title, 1-line description, and metadata row. Cards have 12px border-radius and a fine separator. Gap between cards: 12px. Pull-down to refresh, pull-up to load more.",
+    "description-zh": "小程序核心内容模式：纵向卡片信息流，每张卡片含图（16:9 或 1:1）、标题、一行描述、元数据行。12px 圆角、细分割线。卡片间距 12px。下拉刷新、上拉加载更多。",
+    "tags": [
+      "card",
+      "feed",
+      "list",
+      "scroll",
+      "mini-program"
+    ],
+    "css": ".card-feed{padding:12px}.card{background:#fff;border-radius:12px;margin-bottom:12px;overflow:hidden}.card .thumb{width:100%;aspect-ratio:16/9;object-fit:cover}.card .body{padding:12px}.card .title{font-size:1rem;font-weight:600}.card .meta{font-size:.75rem;color:#999;margin-top:6px}"
+  },
+  {
+    "name-en": "Swiper Banner",
+    "name-zh": "轮播横幅",
+    "description-en": "A horizontal swiper/carousel at the top of the page. 2-5 panels, auto-play optional (3s interval). Dots indicator below, active dot in accent color. Aspect ratio 2:1 or 16:9. Never auto-play when the user has reduced-motion preference. Always show the dot indicator — never hide it.",
+    "description-zh": "页面顶部横向轮播，2-5 面板，可选自动播放（3s 间隔）。下方圆点指示器，激活点主色。宽高比 2:1 或 16:9。用户开启减少动效时禁止自动播放。始终显示圆点，不可隐藏。",
+    "tags": [
+      "swiper",
+      "banner",
+      "carousel",
+      "auto-play",
+      "mini-program"
+    ],
+    "css": ".swiper{width:100%;aspect-ratio:2/1;border-radius:8px;overflow:hidden}.swiper-dots{display:flex;justify-content:center;gap:6px;padding:8px 0}.swiper-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.2)}.swiper-dot.active{background:#3A8DD0}"
+  },
+  {
+    "name-en": "Form with Inline Validation",
+    "name-zh": "行内校验表单",
+    "description-en": "Each field: label on top, input below, error text below input in red #E53E3E. Validate on blur. Submit button at the bottom, full-width, 44px height, disabled until all fields pass. Required fields marked with a red asterisk. Phone number fields trigger the numeric keyboard.",
+    "description-zh": "每个字段：标签在上、输入框在下、错误提示红字 #E53E3E 在输入框下。失焦时校验。底部提交按钮全宽、44px 高、全部通过前禁用。必填项红色星号。手机号字段唤起数字键盘。",
+    "tags": [
+      "form",
+      "validation",
+      "input",
+      "submit",
+      "mini-program"
+    ],
+    "css": ".form-field{margin-bottom:16px}.form-field label{display:block;font-size:.85rem;margin-bottom:6px}.form-field input{width:100%;height:44px;border:1px solid rgba(0,0,0,.12);border-radius:8px;padding:0 12px}.form-field .error{font-size:.75rem;color:#E53E3E;margin-top:4px}"
+  },
+  {
+    "name-en": "Custom Navigation Bar",
+    "name-zh": "自定义导航栏",
+    "description-en": "Replace the default WeChat nav bar with a custom one. Height: capsule-button-safe (varies by device, ~44px on modern iPhones). Back button left (← arrow), title centered, optional action button right. Background: white with a bottom hairline. Set navigationStyle to 'custom' in app.json.",
+    "description-zh": "用自定义导航栏替换微信默认栏。高度适配胶囊按钮（因设备而异，新 iPhone ~44px）。左返回箭头、标题居中、右侧可选操作按钮。白底底部发丝线。app.json 设 navigationStyle 为 custom。",
+    "tags": [
+      "navigation-bar",
+      "custom",
+      "wechat",
+      "capsule",
+      "mini-program"
+    ],
+    "css": ".nav-bar{position:sticky;top:0;z-index:100;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;border-bottom:1px solid rgba(0,0,0,.06)}.nav-bar .back{position:absolute;left:12px}",
+    "config": "app.json: {\"window\":{\"navigationStyle\":\"custom\"}}"
+  },
+  {
+    "name-en": "Pull-Down Refresh + Load More",
+    "name-zh": "下拉刷新 + 上拉加载",
+    "description-en": "Enable pull-down refresh (enablePullDownRefresh: true) with a custom loading spinner in the accent color. On refresh, reset page to 1. Scroll to bottom triggers load-more (onReachBottom): append page+1 results, show a 'loading' footer. If no more data, show '— No more —' in tertiary text. Never show both spinners simultaneously.",
+    "description-zh": "开启下拉刷新（enablePullDownRefresh: true），自定义主色加载动画。刷新时重置页码为 1。滚到底触发加载更多（onReachBottom），追加下一页结果，底部显示'加载中'。无更多数据时显示'— 没有更多了 —'三级灰色。禁止两个加载动画同时出现。",
+    "tags": [
+      "pull-refresh",
+      "load-more",
+      "pagination",
+      "scroll",
+      "mini-program"
+    ],
+    "css": ".load-more{padding:16px;text-align:center;font-size:.8rem;color:#999}.no-more{color:#B5C2D0}"
+  },
+  {
+    "name-en": "Modal Action Sheet",
+    "name-zh": "模态操作面板",
+    "description-en": "A bottom sheet with a list of actions (e.g., Share, Report, Block). Title at top, action rows in the middle, Cancel button at the bottom separated by a 6px gap. Action rows: 48px height, centered text. Destructive actions in red. Cancel in bold. Backdrop: rgba(0,0,0,0.4). Slide-up animation 0.3s.",
+    "description-zh": "底部面板，含操作列表（如分享、举报、拉黑）。顶部标题，中部操作行，底部取消按钮以 6px 间距分隔。操作行高 48px，文字居中。破坏性操作红字。取消加粗。遮罩 rgba(0,0,0,0.4)。上滑动画 0.3s。",
+    "tags": [
+      "action-sheet",
+      "modal",
+      "bottom-sheet",
+      "mini-program"
+    ],
+    "css": ".action-sheet{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:12px 12px 0 0;transform:translateY(100%);transition:transform .3s}.action-sheet.show{transform:translateY(0)}.action-sheet .action{height:48px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(0,0,0,.06)}.action-sheet .cancel{margin-top:6px;font-weight:700}"
+  },
+  {
+    "name-en": "rpx Responsive Unit — Design Once, Fit All",
+    "name-zh": "rpx 响应单位 — 一次设计全适配",
+    "description-en": "WeChat mini programs use rpx (responsive pixel) where 750rpx always equals screen width. Design on a 750px canvas; all measurements in rpx automatically scale to any device width. Font sizes, spacing, and component dimensions should use rpx — never hardcode px for layout. This is the foundation of mini-program responsive design.",
+    "description-zh": "微信小程序使用 rpx（响应像素），750rpx 恒等于屏幕宽度。在 750px 画布上设计，所有 rpx 尺寸自动适配任意设备宽度。字体、间距、组件尺寸都应使用 rpx——绝不用 px 写死布局。这是小程序响应式设计的基础。",
+    "tags": [
+      "rpx",
+      "responsive",
+      "unit",
+      "wechat",
+      "sizing",
+      "mini-program"
+    ],
+    "css": "/* Design at 750px width; 1rpx = screenWidth / 750 */\n.card{padding:24rpx;font-size:28rpx;border-radius:12rpx}\n.icon{width:48rpx;height:48rpx}",
+    "anti": [
+      "hardcoded px in layout",
+      "mixing px and rpx inconsistently",
+      "using vw/vh instead of rpx",
+      "forgetting that rpx is relative to width only"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "WeUI First — Official Component Priority",
+    "name-zh": "WeUI 优先 — 官方组件首选",
+    "description-en": "Prefer WeUI components over custom-built ones for all standard interactions: navigation bars, tab bars, form elements, action sheets, and loading indicators. WeUI components are battle-tested across millions of devices and handle edge cases (notch, safe area, OS version differences) that custom components easily miss. Only go custom when WeUI cannot express the required design.",
+    "description-zh": "所有标准交互优先使用 WeUI 组件而非自定义：导航栏、标签栏、表单元素、操作面板、加载指示器。WeUI 组件在数亿设备上经过验证，处理了自定义组件容易遗漏的边界情况（刘海、安全区、系统版本差异）。仅在 WeUI 无法满足时才自定义。",
+    "tags": [
+      "weui",
+      "component",
+      "official",
+      "standard",
+      "library",
+      "mini-program"
+    ],
+    "css": "/* Use weui.wxss or import individual components */\n@import '/weui-miniprogram/weui-wxss/dist/style/weui.wxss';\n/* Custom only when WeUI lacks the pattern */",
+    "anti": [
+      "reinventing standard components",
+      "custom button when WeUI button exists",
+      "ignoring WeUI edge case handling",
+      "mixing WeUI and custom equivalents of same component"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "Deferred Authorization — Ask When Needed",
+    "name-zh": "后置授权 — 需要时才问",
+    "description-en": "Never ask for permissions on app launch. Wait until the user triggers an action that requires the permission (e.g., ask for location when tapping 'nearby stores', not on the home page). Explain why the permission is needed before the system dialog. If the user denies, provide a manual fallback and guide them to Settings to re-enable later.",
+    "description-zh": "绝不在启动时弹窗索取权限。等到用户触发需要权限的具体操作时再请求（如点击「附近门店」时才请求位置，而非首页就弹窗）。在系统对话框前解释为什么需要此权限。用户拒绝时提供手动回退方案，并引导到设置页重新开启。",
+    "tags": [
+      "authorization",
+      "permission",
+      "privacy",
+      "ux",
+      "onboarding",
+      "mini-program"
+    ],
+    "css": "",
+    "anti": [
+      "permission popup on launch",
+      "no explanation before system dialog",
+      "no fallback when denied",
+      "blocking app entry on permission denial"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "Feature Minimalism — One Core Task Per MP",
+    "name-zh": "功能做减法 — 一个小程序一个核心任务",
+    "description-en": "A mini program should focus on one core task. Strip secondary features mercilessly — if it's not directly supporting the primary use case, remove it or move it to a sub-page. Users open mini programs for quick, focused tasks; a cluttered interface drives abandonment. Think: 'What is the one thing this MP must do perfectly?'",
+    "description-zh": "一个小程序聚焦一个核心任务。果断删减次要功能——不直接支撑主使用场景的入口要么去掉，要么收到次级页面。用户打开小程序是为了快速完成具体任务，杂乱界面导致流失。思考：'这个小程序必须完美做好的那一件事是什么？'",
+    "tags": [
+      "minimalism",
+      "focus",
+      "ux",
+      "simplicity",
+      "mini-program"
+    ],
+    "css": "",
+    "anti": [
+      "full app features in MP",
+      "too many tab bar items (>4)",
+      "home page cluttered with entries",
+      "feature parity with native app"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "Loading Hierarchy — Local > Global > Modal",
+    "name-zh": "加载分级 — 局部 > 全局 > 模态",
+    "description-en": "Loading feedback follows a strict hierarchy: (1) Local/Inline loading — the best option, shows a spinner or skeleton within the content area being loaded, minimal layout shift. (2) Global loading — a thin bar at the top of the page (WeChat's wx:loading or a custom top bar). (3) Modal loading — use only as last resort; a full-screen spinner blocks interaction and creates anxiety. Never use modal loading for sub-second operations.",
+    "description-zh": "加载反馈遵循严格分级：(1) 局部加载——最优选择，在内容区内显示旋转或骨架，页面跳动最小。(2) 全局加载——页面顶部细条（微信原生或自定义顶栏）。(3) 模态加载——仅作最后手段；全屏旋转阻断交互，引起焦虑。亚秒操作禁止使用模态加载。",
+    "tags": [
+      "loading",
+      "feedback",
+      "hierarchy",
+      "performance",
+      "ux",
+      "mini-program"
+    ],
+    "css": "",
+    "anti": [
+      "modal spinner for every API call",
+      "no loading feedback at all",
+      "modal loading for <1s operations",
+      "global loading when local would suffice"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "Tab Bar — 2-5 Items, Active State Clear",
+    "name-zh": "标签栏 — 2-5 项，激活态清晰",
+    "description-en": "The bottom tab bar supports 2-5 items (recommend ≤4). Each item has an icon (24×24px base) and label (10-11px). The active item uses the brand accent color; inactive items use a neutral gray (#999). Icons should be filled versions when active, outlined when inactive. Tab text must be short — 2-3 Chinese characters or 1 English word. Never use long labels that wrap or truncate.",
+    "description-zh": "底部标签栏支持 2-5 项（建议 ≤4）。每项含图标（24×24px）和文字（10-11px）。激活项用品牌色，非激活项用灰色 (#999)。图标激活态用实心版本，非激活态用描边版本。文字需简短——2-3 个汉字或 1 个英文单词。禁止标签文字换行或截断。",
+    "tags": [
+      "tab-bar",
+      "navigation",
+      "bottom",
+      "icon",
+      "mini-program"
+    ],
+    "css": ".tab-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;font-size:10px;color:#999}.tab-item.active{color:#1B4E7A}.tab-item image{width:48rpx;height:48rpx}",
+    "anti": [
+      "more than 5 tabs",
+      "long label text",
+      "active/inactive color too similar",
+      "inconsistent icon styles",
+      "no label under icon"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "Share Button — Standard Top-Right Position",
+    "name-zh": "分享按钮 — 标准右上角位置",
+    "description-en": "Place the share button in the top-right corner of the navigation bar. Use WeChat's native share API — never build a custom share flow that bypasses the platform. The share button should open the native share panel, not a custom modal. For content that should always be shareable, enable the page's default share; for conditional sharing (e.g., paid content preview), use wx.hideShareMenu() / wx.showShareMenu() dynamically.",
+    "description-zh": "分享按钮放在导航栏右上角。使用微信原生分享 API——绝不自建绕过平台的分享流程。分享按钮应唤起原生分享面板，非自定义弹窗。始终可分享的内容启用页面默认分享；条件分享（如付费预览）动态使用 wx.hideShareMenu() / wx.showShareMenu()。",
+    "tags": [
+      "share",
+      "navigation",
+      "social",
+      "wechat",
+      "mini-program"
+    ],
+    "css": "",
+    "anti": [
+      "custom share modal instead of native",
+      "hiding share button entirely",
+      "share in bottom tab",
+      "no share for content that should be viral"
+    ],
+    "category": "miniapp"
+  },
+  {
+    "name-en": "Virtual List — Long List Performance",
+    "name-zh": "虚拟列表 — 长列表性能",
+    "description-en": "For lists with 100+ items, only render items visible in the viewport plus a small buffer (5 items above and below). Use wx.createIntersectionObserver or recycler-view component. Each item must have a fixed or estimated height. Show a placeholder for off-screen items. Performance: reduces initial render from 2s to <200ms for 1000 items. Never use virtual lists for lists under 50 items — the overhead isn't worth it. Never use without specifying item height.",
+    "description-zh": "100+ 条目的列表仅渲染视口内可见项+小缓冲（上下各 5 项）。用 wx.createIntersectionObserver 或 recycler-view 组件。每项必须有固定或预估高度。屏下项用占位符。性能：1000 项初次渲染从 2s 降至 <200ms。50 项以下不要用虚拟列表——开销不值得。禁止不指定项高度。",
+    "tags": [
+      "virtual-list",
+      "performance",
+      "scroll",
+      "long-list",
+      "mini-program"
+    ],
+    "guideline": "Use recycler-view or wx.createIntersectionObserver for lists > 100 items. Fixed item height required. Buffer: 5 items above/below viewport. Never for < 50 items."
+  },
+  {
+    "name-en": "Share Card — Social Sharing Preview",
+    "name-zh": "分享卡片 — 社交分享预览",
+    "description-en": "A pre-designed card that appears when the user shares the mini-program to friends or moments. Image: 5:4 aspect ratio, 500×400px. Content: title (max 2 lines), description (max 2 lines), mini-program name and icon. Use wx.showShareMenu with onShareAppMessage. The share image should be generated dynamically (canvas or server-side) to include personalized data. Never use a generic logo-only share image. Never exceed the 128KB image size limit.",
+    "description-zh": "用户将小程序分享给朋友或朋友圈时显示的预设卡片。图片 5:4 比例 500×400px。内容：标题（最多 2 行）、描述（最多 2 行）、小程序名称和图标。用 wx.showShareMenu 配合 onShareAppMessage。分享图应动态生成（canvas 或服务端）包含个性化数据。禁止纯 logo 的通用分享图。图片不超过 128KB。",
+    "tags": [
+      "share",
+      "card",
+      "social",
+      "wechat",
+      "mini-program"
+    ],
+    "guideline": "Share image: 500×400px, 5:4 ratio. Max 128KB. Title ≤ 2 lines, desc ≤ 2 lines. Use wx.showShareMenu + onShareAppMessage. Generate dynamically with personalized data."
+  },
+  {
+    "name-en": "Rich Text Display — Safe HTML Rendering",
+    "name-zh": "富文本展示 — 安全 HTML 渲染",
+    "description-en": "Use the <rich-text> component to render HTML content safely. Whitelist allowed tags: p, span, strong, em, img, a, br, ul, ol, li, h1-h6, blockquote. Strip all script, iframe, object, embed tags. Images: max-width 100%, lazy loading. Links: open with wx.navigateTo or wx.openEmbeddedMiniProgram. Line-height 1.8 for readability. Never render user-generated HTML without sanitization. Never allow inline styles that could break the layout.",
+    "description-zh": "用 <rich-text> 组件安全渲染 HTML 内容。白名单允许标签：p、span、strong、em、img、a、br、ul、ol、li、h1-h6、blockquote。剥离所有 script、iframe、object、embed 标签。图片 max-width 100%、懒加载。链接用 wx.navigateTo 或 wx.openEmbeddedMiniProgram 打开。行高 1.8 保证可读性。禁止不消毒渲染用户生成的 HTML。禁止允许破坏布局的内联样式。",
+    "tags": [
+      "rich-text",
+      "html",
+      "security",
+      "content",
+      "mini-program"
+    ],
+    "guideline": "Use <rich-text> with whitelist: p, span, strong, em, img, a, br, ul, ol, li, h1-h6, blockquote. Strip script/iframe/object/embed. Images max-width:100%. Line-height: 1.8."
+  }
+]

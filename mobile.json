@@ -1,0 +1,330 @@
+[
+  {
+    "name-en": "Thumb Zone Heatmap",
+    "name-zh": "拇指热区",
+    "description-en": "On a phone held one-handed, the bottom 60% of the screen is the 'easy reach' zone. Place primary actions (CTAs, tab bars, main navigation) in the bottom half. The top 20% is a 'stretch zone' — only put secondary info there. Never place a critical CTA in the top-right corner of a portrait phone.",
+    "description-zh": "单手持机时，屏幕底部 60% 为'舒适区'。主要操作（CTA、标签栏、主导航）放在下半部。顶部 20% 为'拉伸区'——仅放次要信息。禁止将关键 CTA 放在竖屏手机右上角。",
+    "tags": [
+      "thumb-zone",
+      "ergonomics",
+      "reachability",
+      "mobile",
+      "one-handed"
+    ],
+    "guideline": "Bottom 60% = primary actions; Top 20% = secondary info only; Never CTA in top-right corner"
+  },
+  {
+    "name-en": "Bottom Sheet",
+    "name-zh": "底部抽屉",
+    "description-en": "A surface that slides up from the bottom. Two sizes: half-sheet (50% height) for quick actions, full-sheet (90% height) for forms or detail views. Drag handle: a 4px × 36px gray rounded bar at the top center. Dismiss by swiping down or tapping the scrim. Animation: spring, 300ms, translateY only.",
+    "description-zh": "从底部滑出的面板。两种尺寸：半屏 50% 高用于快捷操作，全屏 90% 高用于表单或详情。拖拽手柄：顶部居中 4px×36px 灰色圆角条。下滑或点击遮罩关闭。动画：弹性 300ms，仅 translateY。",
+    "tags": [
+      "bottom-sheet",
+      "panel",
+      "mobile",
+      "gesture",
+      "modal"
+    ],
+    "css": ".sheet{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:16px 16px 0 0;max-height:90vh;transform:translateY(100%);transition:transform .3s cubic-bezier(.22,1,.36,1)}.sheet.open{transform:translateY(0)}.sheet .handle{width:36px;height:4px;background:rgba(0,0,0,.2);border-radius:2px;margin:8px auto 0}"
+  },
+  {
+    "name-en": "44px Minimum Touch Target",
+    "name-zh": "44px 最小触控区",
+    "description-en": "Every interactive element — buttons, links, icons, checkboxes — must have a minimum touch target of 44×44px. Use padding to expand the hit area of small icons. Never rely on the visual size of a 16px icon alone; it's physically impossible to tap accurately. This is both an Apple HIG and Material Design requirement.",
+    "description-zh": "每个可交互元素——按钮、链接、图标、复选框——最小触控区必须 44×44px。用 padding 扩大小图标的点击区。禁止依赖 16px 图标自身大小，物理上无法准确点击。这既是 Apple HIG 也是 Material Design 要求。",
+    "tags": [
+      "touch-target",
+      "accessibility",
+      "44px",
+      "mobile",
+      "tap"
+    ],
+    "css": ".icon-btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0}.icon-btn svg{width:20px;height:20px}",
+    "anti": [
+      "16px icon without padding",
+      "touch target < 44px"
+    ]
+  },
+  {
+    "name-en": "Safe Area Insets",
+    "name-zh": "安全区适配",
+    "description-en": "Use env(safe-area-inset-*) to avoid the notch, Dynamic Island, and home indicator. Pad the top with padding-top: env(safe-area-inset-top), bottom with padding-bottom: env(safe-area-inset-bottom). For fixed bottom bars, use calc(50px + env(safe-area-inset-bottom)). Always provide a fallback value for browsers that don't support the env() function.",
+    "description-zh": "用 env(safe-area-inset-*) 避开刘海、灵动岛和 Home 指示条。顶部用 padding-top: env(safe-area-inset-top)，底部用 padding-bottom: env(safe-area-inset-bottom)。固定底栏用 calc(50px + env(safe-area-inset-bottom))。始终提供不支持 env() 的浏览器的回退值。",
+    "tags": [
+      "safe-area",
+      "notch",
+      "dynamic-island",
+      "home-indicator",
+      "mobile"
+    ],
+    "css": ".fixed-bottom{padding-bottom:env(safe-area-inset-bottom,0);bottom:0}.page-top{padding-top:env(safe-area-inset-top,0)}",
+    "ios": "viewport-fit=cover in meta tag"
+  },
+  {
+    "name-en": "Single-Column List",
+    "name-zh": "单列列表",
+    "description-en": "Mobile content flows in a single column. No side-by-side cards, no multi-column grids below 768px. Each list row: 48-56px height, a leading element (avatar/icon), title + subtitle stack, and optionally a trailing accessory (chevron/badge). Hairline separator between rows. Pull-to-refresh at top.",
+    "description-zh": "移动端内容单列流动。768px 以下禁止并排卡片、禁止多列网格。每行 48-56px 高，前导元素（头像/图标）、标题+副标题堆叠，可选尾部配件（箭头/徽记）。行间发丝线分割。顶部下拉刷新。",
+    "tags": [
+      "list",
+      "single-column",
+      "mobile",
+      "scroll",
+      "row"
+    ],
+    "css": ".list-row{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 16px;border-bottom:1px solid rgba(0,0,0,.06)}.list-row .leading{width:40px;height:40px;border-radius:50%}.list-row .content{flex:1}.list-row .title{font-size:1rem}.list-row .subtitle{font-size:.8rem;color:#999}"
+  },
+  {
+    "name-en": "Keyboard Avoidance",
+    "name-zh": "键盘避让",
+    "description-en": "When the virtual keyboard appears, the focused input must remain visible. On iOS, use a KeyboardAvoidingView or scroll the form so the active field is above the keyboard. Never let the keyboard cover the submit button. On Android with 'adjustResize', the window shrinks — test both behaviors. Sticky bottom bars should hide or move above the keyboard.",
+    "description-zh": "虚拟键盘弹出时，聚焦的输入框必须保持可见。iOS 用 KeyboardAvoidingView 或上移表单使当前字段在键盘上方。禁止键盘遮住提交按钮。Android adjustResize 下窗口会收缩——两种行为都要测。粘性底栏应在键盘弹出时隐藏或上移。",
+    "tags": [
+      "keyboard",
+      "input",
+      "avoidance",
+      "form",
+      "mobile"
+    ],
+    "css": "input:focus{scroll-margin-bottom:300px}",
+    "note": "iOS: KeyboardAvoidingView; Android: windowSoftInputMode=adjustResize"
+  },
+  {
+    "name-en": "Swipe Gesture — Row Actions",
+    "name-zh": "滑动操作 — 行内动作",
+    "description-en": "Swipe a list row left to reveal 1-2 action buttons (e.g., Delete, Archive). Max two actions. Destructive action in red on the far right. Swipe threshold: 60px to snap open. Spring animation to return. Never make swipe the only way to access an action — always provide a long-press or edit-mode fallback.",
+    "description-zh": "左滑列表行显示 1-2 个操作按钮（如删除、归档）。最多两个。破坏性操作在最右红底。滑动阈值 60px 吸附打开。弹性动画回弹。禁止将滑动作为操作的唯一入口——始终提供长按或编辑模式的回退方式。",
+    "tags": [
+      "swipe",
+      "gesture",
+      "row-action",
+      "delete",
+      "mobile"
+    ],
+    "css": ".swipe-row{position:relative;overflow:hidden}.swipe-actions{position:absolute;right:0;top:0;bottom:0;display:flex;transform:translateX(100%);transition:transform .2s}.swipe-actions .delete{background:#E53E3E;color:#fff;width:72px;display:flex;align-items:center;justify-content:center}"
+  },
+  {
+    "name-en": "Full-Screen Modal on Mobile",
+    "name-zh": "移动端全屏模态",
+    "description-en": "On screens narrower than 480px, modals should go full-screen instead of centered. Slide up from the bottom, round only the top corners (16px), add a close button top-right or a swipe-down handle. Background: white. Never show a centered 400px dialog on a 375px screen — it feels claustrophobic and wastes space.",
+    "description-zh": "屏幕窄于 480px 时，模态应全屏而非居中弹窗。从底部滑入，仅顶部圆角 16px，右上角关闭按钮或下滑手柄。白底。禁止在 375px 屏上显示 400px 居中对话框——压抑且浪费空间。",
+    "tags": [
+      "modal",
+      "full-screen",
+      "mobile",
+      "responsive"
+    ],
+    "css": "@media(max-width:480px){.modal{position:fixed;inset:0;border-radius:16px 16px 0 0;top:10vh}}@media(min-width:481px){.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);max-width:480px;border-radius:12px}}"
+  },
+  {
+    "name-en": "Rage Tap Handling — Detect & Defuse",
+    "name-zh": "暴怒连点处理 — 检测并化解",
+    "description-en": "Detect rapid repeated taps (3+ taps within 800ms on the same element) — this signals user frustration. Debounce the action to prevent multiple submissions. If a button triggers a network request, disable it immediately after the first tap and show a loading state. For non-responsive buttons, ensure the tap target is at least 44px to prevent rage tapping caused by missed touches.",
+    "description-zh": "检测快速重复点击（同一元素 800ms 内 3+ 次点击）——这表示用户已经抓狂了。防抖处理防止重复提交。触发网络请求的按钮在首次点击后立即禁用并显示加载状态。对于不响应按钮，确保触控区域至少 44px 以避免因点不中导致的暴怒连击。",
+    "tags": [
+      "rage-tap",
+      "frustration",
+      "debounce",
+      "ux",
+      "mobile"
+    ],
+    "css": ".btn:disabled{opacity:.5;pointer-events:none}",
+    "anti": [
+      "no debounce on submit buttons",
+      "button stays active during request",
+      "tiny tap targets triggering rage taps",
+      "no loading state after tap"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Haptic Feedback — Touch Confirmation",
+    "name-zh": "触觉反馈 — 触摸确认",
+    "description-en": "Use short haptic vibration (10-15ms) to confirm critical irreversible actions: payment, delete, send, toggle on/off. A light tap on the screen is pure visual — haptics add a physical confirmation layer. Never use haptics on every tap (becomes annoying) or for scroll/swipe (conflicts with system). Use navigator.vibrate() on supported browsers. Always provide a visual equivalent for devices without haptics.",
+    "description-zh": "对不可逆关键操作使用短触觉振动（10-15ms）：支付、删除、发送、开关切换。屏幕轻触是纯视觉的——触觉增加了物理确认层。切忌每次点击都振（会烦死人），也不要在滚动/滑动时振动（与系统冲突）。使用 navigator.vibrate()。务必为无触觉设备提供视觉等效。",
+    "tags": [
+      "haptic",
+      "vibration",
+      "feedback",
+      "confirmation",
+      "touch",
+      "mobile"
+    ],
+    "css": "",
+    "anti": [
+      "haptic on every tap",
+      "haptic on scroll/swipe",
+      "long vibration >30ms",
+      "no visual fallback for haptics",
+      "critical action without any confirmation"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Progressive Onboarding — Reveal, Don't Overwhelm",
+    "name-zh": "渐进式引导 — 揭示而非轰炸",
+    "description-en": "Introduce features gradually as the user explores, not all at once on first launch. Use contextual tooltips pointing at specific UI elements when the user first encounters them. Maximum 3 onboarding tips per session. Always provide a 'Skip' or 'Got it' dismiss. The first screen should be functional immediately — not a tutorial overlay blocking the actual content.",
+    "description-zh": "功能在用户探索过程中逐步介绍，而非首次启动时全部倾泻。使用指向具体 UI 元素的情景提示，在用户首次遇到时出现。每次会话最多 3 个引导提示。始终提供「跳过」或「知道了」关闭方式。首屏应立即可用——而非一张教程遮罩盖住真正内容。",
+    "tags": [
+      "onboarding",
+      "progressive",
+      "tutorial",
+      "ux",
+      "mobile"
+    ],
+    "css": "",
+    "anti": [
+      "full-screen tutorial overlay on launch",
+      "more than 3 tips per session",
+      "no skip/dismiss option",
+      "first screen is tutorial, not functional",
+      "re-showing dismissed tips"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Floating Action Button — One Primary Action",
+    "name-zh": "悬浮操作按钮 — 一个主操作",
+    "description-en": "A single FAB positioned at the bottom-right (16px from edges), elevated with a subtle shadow. It represents the single most important action on the current screen. Material Design standard: 56×56px. Use the brand accent color. Only one FAB per screen — never stack multiple FABs. On scroll, the FAB can hide (scroll down) and reappear (scroll up). Never let the FAB cover critical content or a bottom tab bar.",
+    "description-zh": "单个 FAB 位于右下角（距边缘 16px），微妙阴影抬高。代表当前屏幕最重要的一个操作。Material Design 标准：56×56px。使用品牌主色。每屏仅一个 FAB——禁用多个堆叠。滚动时可隐藏（向下滚）和重现（向上滚）。绝不让 FAB 盖住关键内容或底部标签栏。",
+    "tags": [
+      "fab",
+      "button",
+      "primary-action",
+      "material",
+      "floating",
+      "mobile"
+    ],
+    "css": ".fab{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 16px);right:16px;width:56px;height:56px;border-radius:16px;background:#1B4E7A;color:#fff;border:0;box-shadow:0 4px 16px rgba(20,58,92,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:50;transition:transform .25s,box-shadow .25s}.fab:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(20,58,92,.4)}",
+    "anti": [
+      "multiple FABs on one screen",
+      "FAB covering bottom tab bar",
+      "FAB without safe-area-inset-bottom",
+      "FAB that never hides on scroll"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Infinite Scroll — Load More with End State",
+    "name-zh": "无限滚动 — 加载更多要有终点",
+    "description-en": "Auto-load more content as the user scrolls near the bottom (trigger at 200-300px before the end). Always show a loading indicator during fetch. When all content is loaded, show a definitive end state: '— End of content —' or 'No more items' — never just stop loading silently (the user will keep scrolling and wonder if it's broken). Provide a 'Back to top' button after 3+ pages of scroll.",
+    "description-zh": "用户滚动接近底部时（提前 200-300px）自动加载更多。加载过程中显示指示器。所有内容加载完毕后显示明确的终点提示：'— 已经到底了 —' 或 '没有更多了'——绝不能无声地停止加载（用户会继续滚动并怀疑是否坏了）。滚动超过 3 页后提供「回到顶部」按钮。",
+    "tags": [
+      "infinite-scroll",
+      "load-more",
+      "pagination",
+      "scroll",
+      "mobile"
+    ],
+    "css": ".end-state{padding:24px;text-align:center;color:#8395A6;font-size:.85rem}.back-to-top{position:fixed;bottom:80px;right:16px;width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.15);border:0;cursor:pointer}",
+    "anti": [
+      "silent load stop",
+      "no end state indicator",
+      "no loading indicator during fetch",
+      "trigger too close to end causing jank",
+      "no back-to-top after deep scroll"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Adaptive Typography — clamp() Fluid Scale",
+    "name-zh": "自适应排版 — clamp() 流体缩放",
+    "description-en": "Use CSS clamp() for font sizes that scale smoothly between a minimum and maximum based on viewport width. This replaces multiple media query breakpoints for typography. Body text: clamp(1rem, 0.9rem + 0.5vw, 1.125rem). Headlines: clamp(1.5rem, 1rem + 3vw, 3rem). Always test at 320px (small phone) and 428px (large phone) to ensure readability at both extremes.",
+    "description-zh": "使用 CSS clamp() 让字体在最小值和最大值之间根据视口宽度平滑缩放，取代多断点媒体查询。正文：clamp(1rem, 0.9rem + 0.5vw, 1.125rem)。标题：clamp(1.5rem, 1rem + 3vw, 3rem)。务必在 320px（小手机）和 428px（大手机）测试，确保两极都可读。",
+    "tags": [
+      "typography",
+      "clamp",
+      "fluid",
+      "responsive",
+      "font-size",
+      "mobile"
+    ],
+    "css": "body{font-size:clamp(1rem,0.9rem + 0.5vw,1.125rem)}h1{font-size:clamp(1.75rem,1.25rem + 3vw,3rem)}h2{font-size:clamp(1.25rem,1rem + 2vw,2rem)}",
+    "anti": [
+      "fixed font sizes on mobile",
+      "too many typography breakpoints",
+      "clamp values that break at 320px",
+      "same body size for phone and desktop"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Offline State — Meaningful Empty, Not Blank",
+    "name-zh": "离线状态 — 有意义的空白而非白屏",
+    "description-en": "When the device is offline, show a clear, helpful state — not a blank white screen. Include: a recognizable illustration or icon (cloud with slash), a concise message ('No internet connection'), and an actionable 'Retry' button. Cache last-known-good data and show it greyed out or with a subtle 'offline' badge. Never show a raw error code or stack trace. Detect online/offline via navigator.onLine and the online/offline events.",
+    "description-zh": "设备离线时显示清晰有帮助的状态——而非白屏。包含：可辨识的图标（云朵+斜杠）、简洁文案（'网络连接已断开'）、可操作的「重试」按钮。缓存上次成功数据，灰色显示或加 '离线' 徽记。绝不显示原始错误码或堆栈跟踪。用 navigator.onLine 和 online/offline 事件检测。",
+    "tags": [
+      "offline",
+      "network",
+      "error-state",
+      "resilience",
+      "mobile"
+    ],
+    "css": ".offline-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center}.offline-icon{font-size:48px;margin-bottom:16px;opacity:.6}.offline-retry{margin-top:20px;padding:12px 32px;background:#1B4E7A;color:#fff;border:0;border-radius:8px;font-size:1rem}",
+    "anti": [
+      "blank white screen when offline",
+      "raw error code display",
+      "no retry button",
+      "not caching last-known-good data",
+      "ignoring online/offline events"
+    ],
+    "category": "mobile"
+  },
+  {
+    "name-en": "Pull-to-Refresh Gesture",
+    "name-zh": "下拉刷新手势",
+    "description-en": "A gesture that triggers content refresh when the user pulls down from the top of a scrollable list. Threshold: 60px pull distance. Visual: a circular spinner or custom animation that appears above the content, then snaps back. Haptic: a light vibration at the threshold. Never trigger refresh on horizontal scroll. Never use pull-to-refresh on pages with a sticky header that already has a refresh button. Always show a brief 'Last updated' timestamp after refresh.",
+    "description-zh": "用户从可滚动列表顶部下拉触发内容刷新。阈值：下拉 60px。视觉：内容上方出现圆形旋转器或自定义动画，然后回弹。触觉：阈值处轻振。横向滚动不触发刷新。已有刷新按钮的粘性头部页面不要用下拉刷新。刷新后显示'最后更新'时间戳。",
+    "tags": [
+      "pull-refresh",
+      "gesture",
+      "mobile",
+      "scroll",
+      "ux"
+    ],
+    "css": ".pull-indicator{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:24px;height:24px;border:3px solid rgba(20,58,92,.1);border-top-color:#3A8DD0;border-radius:50%;transition:transform .3s}.pull-indicator.active{animation:spin .6s linear infinite}@keyframes spin{to{transform:translateX(-50%) rotate(360deg)}}",
+    "anti": [
+      "pull-to-refresh with sticky header refresh button",
+      "triggering on horizontal scroll",
+      "no haptic feedback at threshold"
+    ]
+  },
+  {
+    "name-en": "Dark Mode Adaptation for Mobile",
+    "name-zh": "移动端暗色模式适配",
+    "description-en": "Mobile dark mode is not just inverting colors. Rules: background #121212 (not pure #000), elevated surfaces #1E1E1E and #232323, text rgba(255,255,255,.87) for primary and rgba(255,255,255,.60) for secondary. Reduce image brightness by 10-15% with filter: brightness(.9). Use color-mix() to generate dark variants of the accent color. Test with OLED screens — true black saves battery. Never use pure white text on pure black background — the contrast is too harsh for extended reading.",
+    "description-zh": "移动端暗色模式不只是反色。规则：背景 #121212（非纯 #000）、抬升面 #1E1E1E 和 #232323、主文本 rgba(255,255,255,.87)、次文本 rgba(255,255,255,.60)。图片亮度降低 10-15%：filter: brightness(.9)。用 color-mix() 生成主色暗色变体。OLED 屏测试——真黑省电。禁止纯白字配纯黑背景——对比度对长时间阅读太刺眼。",
+    "tags": [
+      "dark-mode",
+      "mobile",
+      "color",
+      "theme",
+      "accessibility"
+    ],
+    "css": "@media(prefers-color-scheme:dark){:root{--bg:#121212;--surface:#1E1E1E;--text-primary:rgba(255,255,255,.87);--text-secondary:rgba(255,255,255,.6);--accent-dark:color-mix(in srgb,#3A8DD0 80%,white)}img{filter:brightness(.9)}}",
+    "anti": [
+      "pure #000 background",
+      "pure white text on black",
+      "just inverting colors with filter: invert(1)"
+    ]
+  },
+  {
+    "name-en": "Skeleton Loading — Mobile Pattern",
+    "name-zh": "骨架屏 — 移动端模式",
+    "description-en": "A placeholder UI that mimics the layout of the content being loaded. On mobile: use a subtle shimmer animation (a light gradient sliding left-to-right) on gray blocks that match the expected content shapes. List items: gray avatar circle + gray text lines. Cards: gray rectangle for image + gray title line. Animation: 1.5s infinite shimmer. Show skeleton immediately on navigation, not after a timeout. Never use spinners as the only loading indicator on mobile — skeletons feel faster.",
+    "description-zh": "模拟正在加载内容布局的占位 UI。移动端：在灰色块上用微光动画（浅渐变从左到右滑动），灰色块匹配预期内容形状。列表项：灰色圆形头像+灰色文本行。卡片：灰色图片矩形+灰色标题行。动画：1.5s 无限微光。导航时立即显示骨架屏，不要等超时。移动端不要只用旋转器——骨架屏感觉更快。",
+    "tags": [
+      "skeleton",
+      "loading",
+      "mobile",
+      "shimmer",
+      "ux"
+    ],
+    "css": ".skeleton{background:#e8e8e8;border-radius:6px;position:relative;overflow:hidden}.skeleton::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.4) 50%,transparent 100%);animation:shimmer 1.5s infinite}@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}.skeleton-avatar{width:40px;height:40px;border-radius:50%}.skeleton-text{height:14px;margin-bottom:8px}.skeleton-text:last-child{width:60%}",
+    "anti": [
+      "spinner-only loading on mobile",
+      "showing skeleton after timeout delay",
+      "skeleton that doesn't match content shape"
+    ]
+  }
+]

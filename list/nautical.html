@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>航海风格 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   航海风格（Nautical）— 演示样式
+   ============================================================ */
+:root{--na-bg:#F0F4F8;--na-ink:#1A2A3A;--na-navy:#1B3A5C;--na-red:#D32F2F;--na-gold:#C4A35A;--na-line:rgba(27,58,92,.1)}body{background:var(--na-bg)!important;color:var(--na-ink)}header{background:transparent!important;border-bottom:none!important;padding:0!important}header::after{display:none!important}
+.na-header{position:sticky;top:0;z-index:100;background:rgba(240,244,248,.95);backdrop-filter:blur(20px);border-bottom:2px solid var(--na-navy)}.na-header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}.na-logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.na-logo-icon{width:36px;height:36px;background:var(--na-navy);display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:50%}.na-logo-icon img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}.na-logo-text strong{font-size:1rem;font-weight:700;color:var(--na-navy)}.na-logo-text em{display:none}.na-header-actions a{display:inline-flex;align-items:center;padding:6px 14px;font-size:.8125rem;color:var(--na-navy);text-decoration:none}.na-header-actions a:hover{color:var(--na-red)}
+.na-hero{padding:80px 24px;text-align:center;max-width:640px;margin:0 auto}.na-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--na-navy);margin:0 0 12px;letter-spacing:.02em}.na-hero h1 .accent{color:var(--na-red)}.na-hero p{font-size:.9375rem;line-height:1.7;color:var(--na-ink);margin:0}
+.na-components{max-width:1200px;margin:0 auto;padding:0 24px 80px}.na-components-header{text-align:center;margin-bottom:48px}.na-components-header h2{font-size:1.25rem;font-weight:700;color:var(--na-navy);margin:0 0 4px}.na-components-header p{font-size:.8125rem;color:var(--na-ink);margin:0}
+.na-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.na-component{padding:24px;background:#fff;border:1px solid var(--na-line);border-top:3px solid var(--na-navy)}.na-component:hover{border-top-color:var(--na-red)}.na-component h3{font-size:.875rem;font-weight:700;color:var(--na-navy);margin:0 0 4px}.na-component>p{font-size:.75rem;color:var(--na-ink);margin:0 0 14px;opacity:.7}.na-slot{margin-top:14px}
+.na-btn{display:inline-flex;align-items:center;padding:10px 24px;font-size:.8125rem;font-weight:600;color:#fff;background:var(--na-navy);border:0;cursor:pointer}.na-btn:hover{background:var(--na-red)}.na-btn-outline{background:transparent;color:var(--na-navy);border:1px solid var(--na-navy)}.na-btn-outline:hover{background:var(--na-navy);color:#fff}.na-input{width:100%;padding:10px 14px;font-size:.8125rem;color:var(--na-ink);background:#fff;border:1px solid var(--na-line);outline:none;box-sizing:border-box}.na-input:focus{border-color:var(--na-navy);box-shadow:0 0 0 3px rgba(27,58,92,.1)}
+.na-mini-card{padding:14px;background:var(--na-bg);border-left:3px solid var(--na-red)}.na-mini-card strong{font-size:.8125rem;color:var(--na-navy);display:block;font-weight:600}.na-mini-card p{font-size:.75rem;color:var(--na-ink);margin:4px 0 0;opacity:.7}
+.na-tag{display:inline-flex;padding:3px 10px;font-size:.6875rem;font-weight:600;color:#fff;background:var(--na-navy);margin-right:6px;margin-bottom:6px}.na-tag-red{background:var(--na-red)}.na-nav{display:flex;gap:0}.na-nav-item{padding:8px 18px;font-size:.8125rem;font-weight:500;color:var(--na-ink);opacity:.6;border-bottom:2px solid transparent;cursor:pointer}.na-nav-item.active{color:var(--na-navy);opacity:1;border-bottom-color:var(--na-red)}.na-alert{padding:12px 16px;background:rgba(211,47,47,.05);border-left:3px solid var(--na-red);color:var(--na-ink);font-size:.8125rem}
+.prompt-floater{position:fixed;bottom:24px;left:24px;padding:10px 18px;background:var(--na-navy);color:#fff;font-weight:600;cursor:pointer;z-index:1000}.prompt-floater:hover{background:var(--na-red)}.prompt-modal{position:fixed;bottom:88px;left:24px;width:min(440px,calc(100vw-48px));max-height:70vh;padding:20px;background:#fff;border:1px solid var(--na-line);z-index:1001;display:none;flex-direction:column}.prompt-modal.visible{display:flex}.prompt-modal-title{font-size:.8125rem;font-weight:600;color:var(--na-red)}.prompt-modal-close{background:transparent;border:0;color:var(--na-ink);cursor:pointer;font-size:1.2rem}.prompt-modal-content{font-size:.8125rem;line-height:1.7;color:var(--na-ink);overflow-y:auto;flex:1;margin-bottom:12px;white-space:pre-wrap;background:var(--na-bg);padding:14px}.prompt-modal-copy{padding:10px 16px;background:var(--na-navy);color:#fff;border:0;cursor:pointer}.prompt-modal-copy.done{background:#6BCB77}
+main{padding:0;background:transparent}footer,body>footer{background:var(--na-navy)!important;border:none!important;padding:24px 0!important;margin:0!important;text-align:center;color:rgba(255,255,255,.5)}footer::after{display:none!important}footer>.container{max-width:1200px;margin:0 auto;padding:0 24px}footer p{font-size:.75rem;color:rgba(255,255,255,.4);margin:0}.friend-links{margin:0;font-size:.65rem}.friend-links a{display:inline-block;padding:4px 10px;margin:0 4px;font-size:.65rem;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);text-decoration:none}.friend-links a:hover{color:var(--na-gold)}
+@media(max-width:960px){.na-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:768px){.na-header-inner{height:auto;padding:10px 18px;flex-direction:column}.na-grid{grid-template-columns:1fr}.prompt-floater{bottom:16px;left:16px}.prompt-modal{left:16px;bottom:76px}}.name-en,.desc-en{display:none}
+    </style>
+</head>
+<body>
+<header class="na-header"><div class="na-header-inner"><a class="na-logo" href="../example.php"><span class="na-logo-icon"><img src="https:../assets/logo.png" alt="F"></span><span class="na-logo-text"><strong>StyleCool</strong></span></a><div class="na-header-actions"><a href="../example.php">← 返回</a></div></div></header>
+<main><section class="na-hero"><h1>NAUTICAL <span class="accent">STYLE</span></h1><p>海军蓝 + 朱红 + 绳缆金 + 米白底<br>航海传统美学，经典、可靠、永恒</p></section>
+<section class="na-components"><div class="na-components-header"><h2>MODULES</h2><p>海军蓝 + 朱红，航海风格贯穿每一个组件</p></div>
+<div class="na-grid">
+<div class="na-component"><h3>航海按钮</h3><p>实心/描边</p><div class="na-slot" style="display:flex;gap:8px;"><button class="na-btn">实心</button><button class="na-btn na-btn-outline">描边</button></div></div>
+<div class="na-component"><h3>航海输入框</h3><p>聚焦海军蓝</p><div class="na-slot"><input class="na-input" placeholder="输入内容..."></div></div>
+<div class="na-component"><h3>嵌套卡片</h3><p>左侧朱红条</p><div class="na-slot"><div class="na-mini-card"><strong>嵌套卡片</strong><p>朱红条 · 米白底</p></div></div></div>
+<div class="na-component"><h3>航海标签</h3><p>海军蓝/朱红</p><div class="na-slot"><span class="na-tag">海军</span><span class="na-tag na-tag-red">朱红</span></div></div>
+<div class="na-component"><h3>航海导航</h3><p>朱红下划线</p><div class="na-slot"><nav class="na-nav"><span class="na-nav-item active">HOME</span><span class="na-nav-item">WORK</span><span class="na-nav-item">ABOUT</span></nav></div></div>
+<div class="na-component"><h3>航海提示</h3><p>左侧朱红条</p><div class="na-slot"><div class="na-alert">⚠ 风浪预警，注意安全</div></div></div>
+</div></section></main>
+<footer><div class="container"><p>© 2025-2026 函数库 | Powered by Mutantcat</p><div class="friend-links"><span>友情链接：</span><a href="https://www.mutantcat.org/">异猫工作群</a><a href="https://www.fcnesyouxi.top/">FC/NES</a><a href="https://www.jqshengtian.top/">学习资料</a></div></div></footer>
+<button class="prompt-floater" id="prompt-floater">复制提示词</button>
+<div class="prompt-modal" id="prompt-modal"><div class="prompt-modal-header"><span class="prompt-modal-title">航海风格 — 完整提示词</span><button class="prompt-modal-close" id="prompt-close">×</button></div><div class="prompt-modal-content" id="prompt-content"></div><button class="prompt-modal-copy" id="prompt-copy">复制</button></div>
+<script>
+var PROMPT_TEXT = "采用航海风格（Nautical）设计。背景米白 #F0F4F8。主色海军蓝 #1B3A5C + 朱红 #D32F2F + 绳缆金 #C4A35A。卡片白底 + 顶部 3px 海军蓝条，hover 变朱红。按钮海军蓝实心或描边。输入框聚焦海军蓝。导航朱红下划线。卡片左侧朱红条。整体航海传统、经典可靠。";
+document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+var btn=document.getElementById('prompt-floater'),modal=document.getElementById('prompt-modal'),close=document.getElementById('prompt-close'),copy=document.getElementById('prompt-copy');
+btn.addEventListener('click',function(){modal.classList.toggle('visible')});close.addEventListener('click',function(){modal.classList.remove('visible')});
+document.addEventListener('click',function(e){if(!modal.contains(e.target)&&!btn.contains(e.target))modal.classList.remove('visible')});
+copy.addEventListener('click',function(){function s(){copy.textContent='已复制';copy.classList.add('done');setTimeout(function(){copy.textContent='复制';copy.classList.remove('done')},1500)}
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PROMPT_TEXT).then(s).catch(function(){f()});else f();function f(){var ta=document.createElement('textarea');ta.value=PROMPT_TEXT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');s()}catch(e){}document.body.removeChild(ta)}});
+</script>
+</body>
+</html>

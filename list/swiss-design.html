@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瑞士极简 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   瑞士极简（Swiss Design）— 演示样式
+   ============================================================ */
+:root {
+    --sw-bg: #FFFFFF; --sw-surface: #F8F8F8;
+    --sw-ink: #1A1A1A; --sw-ink-2: #555555; --sw-ink-3: #999999;
+    --sw-red: #E63946; --sw-red-2: #C62828;
+    --sw-line: #E0E0E0; --sw-line-2: #BBBBBB;
+}
+body { background: var(--sw-bg) !important; color: var(--sw-ink); font-family: 'Helvetica Neue', 'Inter', -apple-system, sans-serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.sw-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--sw-line); }
+.sw-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 24px; }
+.sw-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.sw-logo-icon { width: 36px; height: 36px; background: var(--sw-ink); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.sw-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sw-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--sw-ink); letter-spacing: -0.01em; }
+.sw-logo-text em { font-style: normal; font-size: 0.75rem; color: var(--sw-ink-3); margin-top: 2px; }
+.sw-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; font-weight: 500; color: var(--sw-ink-2); text-decoration: none; transition: all 0.15s ease; }
+.sw-header-actions a:hover { color: var(--sw-red); }
+.sw-hero { position: relative; min-height: 560px; padding: 100px 24px 80px; display: flex; align-items: center; max-width: 1200px; margin: 0 auto; }
+.sw-hero-inner { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: center; width: 100%; }
+.sw-hero-text h1 { font-size: clamp(2.5rem,6vw,5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; margin: 0 0 24px; color: var(--sw-ink); }
+.sw-hero-text h1 .accent { color: var(--sw-red); }
+.sw-hero-text p { font-size: 1.125rem; line-height: 1.6; color: var(--sw-ink-2); margin: 0; max-width: 480px; }
+.sw-hero-side { position: relative; }
+.sw-hero-block { width: 100%; aspect-ratio: 1; background: var(--sw-red); }
+.sw-hero-block-text { position: absolute; bottom: -16px; right: -16px; font-size: 0.6875rem; font-weight: 700; color: var(--sw-ink); text-transform: uppercase; letter-spacing: 0.1em; }
+.sw-components { position: relative; width: 100%; margin: 0; padding: 80px 0 96px; background: transparent; }
+.sw-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.sw-components-header { margin-bottom: 48px; text-align: left; }
+.sw-components-header h2 { font-size: 1.5rem; font-weight: 800; color: var(--sw-ink); margin: 0 0 8px; letter-spacing: -0.02em; }
+.sw-components-header p { color: var(--sw-ink-3); margin: 0; font-size: 0.875rem; }
+.sw-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.sw-component { padding: 28px; background: var(--sw-surface); border: 0; transition: background 0.15s ease; }
+.sw-component:hover { background: #EFEFEF; }
+.sw-component h3 { font-size: 0.9375rem; font-weight: 700; color: var(--sw-ink); margin: 0 0 4px; letter-spacing: -0.01em; }
+.sw-component > p { font-size: 0.75rem; color: var(--sw-ink-3); margin: 0 0 16px; }
+.sw-slot { margin-top: 14px; }
+.sw-btn { display: inline-flex; align-items: center; padding: 10px 20px; font-size: 0.8125rem; font-weight: 700; color: var(--sw-ink); background: transparent; border: 2px solid var(--sw-ink); cursor: pointer; transition: all 0.15s ease; font-family: inherit; text-transform: uppercase; letter-spacing: 0.04em; }
+.sw-btn:hover { background: var(--sw-ink); color: #fff; }
+.sw-btn-primary { background: var(--sw-red); border-color: var(--sw-red); color: #fff; }
+.sw-btn-primary:hover { background: var(--sw-red-2); border-color: var(--sw-red-2); }
+.sw-input { width: 100%; padding: 10px 14px; font-size: 0.8125rem; color: var(--sw-ink); background: #fff; border: 2px solid var(--sw-ink); outline: none; transition: all 0.15s ease; font-family: inherit; box-sizing: border-box; }
+.sw-input:focus { border-color: var(--sw-red); }
+.sw-mini-card { padding: 14px; background: #fff; border: 2px solid var(--sw-ink); }
+.sw-mini-card strong { font-size: 0.8125rem; color: var(--sw-ink); display: block; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.sw-mini-card p { font-size: 0.75rem; color: var(--sw-ink-2); margin: 4px 0 0; }
+.sw-tag { display: inline-flex; align-items: center; padding: 4px 10px; font-size: 0.6875rem; font-weight: 700; color: var(--sw-ink); border: 2px solid var(--sw-ink); margin-right: 6px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+.sw-tag-red { background: var(--sw-red); border-color: var(--sw-red); color: #fff; }
+.sw-nav { display: flex; gap: 0; }
+.sw-nav-item { padding: 10px 16px; font-size: 0.8125rem; font-weight: 700; color: var(--sw-ink-3); border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.15s ease; text-transform: uppercase; letter-spacing: 0.04em; }
+.sw-nav-item.active { color: var(--sw-ink); border-bottom-color: var(--sw-red); }
+.sw-alert { padding: 14px 18px; background: #fff; border: 2px solid var(--sw-red); color: var(--sw-ink); font-size: 0.8125rem; font-weight: 600; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--sw-ink); color: #fff; font-size: 0.8125rem; font-weight: 700; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.15s ease; font-family: inherit; text-transform: uppercase; letter-spacing: 0.04em; }
+.prompt-floater:hover { background: var(--sw-red); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: #fff; border: 2px solid var(--sw-ink); z-index: 1001; color: var(--sw-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 700; color: var(--sw-red); text-transform: uppercase; letter-spacing: 0.04em; }
+.prompt-modal-close { background: transparent; border: 0; color: var(--sw-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--sw-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--sw-surface); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--sw-red); color: #fff; border: 0; font-size: 0.8125rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease; font-family: inherit; text-transform: uppercase; letter-spacing: 0.04em; }
+.prompt-modal-copy:hover { background: var(--sw-red-2); }
+.prompt-modal-copy.done { background: var(--sw-ink); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--sw-ink) !important; border: none !important; padding: 40px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.5); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: rgba(255,255,255,0.35); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 4px 12px; margin: 0 4px; font-size: 0.6875rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: all 0.15s ease; }
+.friend-links a:hover { color: var(--sw-red); }
+@media (max-width: 768px) {
+    .sw-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .sw-hero-block { max-width: 200px; }
+    .sw-header-inner { height: auto; padding: 12px 18px; flex-direction: column; }
+    .sw-header-actions { justify-content: center; }
+    .sw-logo-text em { display: none; }
+    .sw-hero { min-height: 440px; padding: 60px 16px; }
+    .prompt-floater { bottom: 16px; left: 16px; }
+    .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); }
+}
+@media (max-width: 960px) { .sw-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 600px) { .sw-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="sw-header">
+        <div class="sw-header-inner">
+            <a class="sw-logo" href="../example.php" aria-label="StyleCool">
+                <span class="sw-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="sw-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>瑞士极简示例</em>
+                </span>
+            </a>
+            <div class="sw-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← Back</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sw-hero" aria-label="瑞士极简英雄区">
+            <div class="sw-hero-inner">
+                <div class="sw-hero-text">
+                    <h1>Swiss<br><span class="accent">Design</span></h1>
+                    <p>非对称网格 + 无衬线大字 + 朱红重音<br>极致克制、理性、几何 — 形式服从功能</p>
+                </div>
+                <div class="sw-hero-side">
+                    <div class="sw-hero-block"></div>
+                    <div class="sw-hero-block-text">Grid System</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sw-components" aria-label="组件展示">
+            <div class="sw-components-inner">
+                <div class="sw-components-header">
+                    <h2>MODULES</h2>
+                    <p>非对称网格 + 无衬线大字，瑞士极简语言贯穿每一个组件</p>
+                </div>
+
+                <div class="sw-grid">
+                    <div class="sw-component">
+                        <h3>SWISS BUTTON</h3>
+                        <p>2px 硬边框 + 反色悬停</p>
+                        <div class="sw-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="sw-btn">Default</button>
+                            <button class="sw-btn sw-btn-primary">Primary</button>
+                        </div>
+                    </div>
+
+                    <div class="sw-component">
+                        <h3>SWISS INPUT</h3>
+                        <p>2px 硬边框 + 聚焦朱红</p>
+                        <div class="sw-slot">
+                            <input type="text" class="sw-input" placeholder="Input...">
+                        </div>
+                    </div>
+
+                    <div class="sw-component">
+                        <h3>NESTED CARD</h3>
+                        <p>2px 硬边框 + 白底</p>
+                        <div class="sw-slot">
+                            <div class="sw-mini-card">
+                                <strong>NESTED</strong>
+                                <p>2px hard border</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sw-component">
+                        <h3>SWISS TAG</h3>
+                        <p>硬边框 + 朱红实心</p>
+                        <div class="sw-slot">
+                            <span class="sw-tag">Grid</span>
+                            <span class="sw-tag sw-tag-red">Swiss</span>
+                        </div>
+                    </div>
+
+                    <div class="sw-component">
+                        <h3>SWISS NAV</h3>
+                        <p>3px 朱红下划线</p>
+                        <div class="sw-slot">
+                            <nav class="sw-nav">
+                                <span class="sw-nav-item active">Home</span>
+                                <span class="sw-nav-item">Work</span>
+                                <span class="sw-nav-item">About</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="sw-component">
+                        <h3>SWISS ALERT</h3>
+                        <p>2px 朱红边框</p>
+                        <div class="sw-slot">
+                            <div class="sw-alert">⚠ Action cannot be undone</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 Function Library | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>Friends：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        COPY PROMPT
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">瑞士极简 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">COPY</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用瑞士极简（Swiss Design）设计风格。背景纯白 #FFFFFF。字体无衬线 Helvetica Neue / Inter，标题极大（clamp 2.5-6rem），字重 800，字距 -0.04em，行高 0.95。布局非对称网格（7:5 分栏），元素左对齐。强调色朱红 #E63946。圆角 0。边框 2px 硬实线。按钮大写 + 宽字距 0.04em + hover 反色。组件标题全大写。所有元素极致克制、理性、几何。形式服从功能。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = 'COPIED';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = 'COPY'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频流 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   视频流（Video Stream）— 演示样式
+   ============================================================ */
+:root {
+    --vs-bg: #0E2E4A; --vs-surface: #15324C; --vs-surface-2: #1B3E5C;
+    --vs-ink: #FFFFFF; --vs-ink-2: rgba(255,255,255,0.8); --vs-ink-3: rgba(255,255,255,0.5);
+    --vs-accent: #73B9E6; --vs-red: #FF6B6B;
+    --vs-radius: 8px; --vs-gap: 12px;
+}
+body { background: var(--vs-bg) !important; color: var(--vs-ink); max-width: 480px; margin: 0 auto !important; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.vs-header { position: sticky; top: 0; z-index: 100; background: rgba(14,46,74,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.vs-header-inner { max-width: 480px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 48px; gap: 12px; }
+.vs-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.vs-logo-icon { width: 30px; height: 30px; background: var(--vs-accent); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.vs-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 7px; }
+.vs-logo-text strong { font-size: 0.9375rem; font-weight: 700; color: var(--vs-ink); }
+.vs-logo-text em { display: none; }
+.vs-header-actions a { display: inline-flex; align-items: center; padding: 6px 12px; font-size: 0.8125rem; font-weight: 500; color: var(--vs-ink-2); text-decoration: none; transition: all 0.2s ease; }
+.vs-hero { padding: 24px 16px 8px; }
+.vs-hero h1 { font-size: 1.5rem; font-weight: 700; color: var(--vs-ink); margin: 0 0 4px; }
+.vs-hero p { font-size: 0.875rem; color: var(--vs-ink-3); margin: 0; }
+.vs-feed { padding: 0 16px; display: flex; flex-direction: column; gap: var(--vs-gap); }
+.vs-card { position: relative; border-radius: var(--vs-radius); overflow: hidden; transition: transform 0.1s ease; }
+.vs-card:active { transform: scale(0.97); }
+.vs-card-cover { position: relative; aspect-ratio: 16 / 9; display: flex; align-items: flex-end; }
+.vs-card-cover::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.7)); pointer-events: none; }
+.vs-card-cover-1 { background: linear-gradient(135deg, #1B4E7A, #0F2438); }
+.vs-card-cover-2 { background: linear-gradient(135deg, #6B46C1, #1e1b4b); }
+.vs-card-cover-3 { background: linear-gradient(135deg, #831843, #4c1d95); }
+.vs-card-cover-4 { background: linear-gradient(135deg, #1e3a8a, #0E2E4A); }
+.vs-card-info { position: relative; z-index: 1; padding: 12px; width: 100%; }
+.vs-card-info h3 { font-size: 0.9375rem; font-weight: 600; color: #fff; margin: 0 0 4px; line-height: 1.3; }
+.vs-card-meta { display: flex; gap: 10px; font-size: 0.6875rem; color: rgba(255,255,255,0.7); }
+.vs-card-duration { position: absolute; bottom: 8px; right: 8px; padding: 2px 6px; font-size: 0.6875rem; font-weight: 600; color: #fff; background: rgba(0,0,0,0.7); border-radius: 4px; z-index: 2; }
+.vs-card-avatar { position: absolute; top: 10px; left: 10px; width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; background: var(--vs-accent); color: #fff; font-weight: 700; }
+.vs-components { padding: 0 16px 24px; }
+.vs-components-header { margin: 24px 0 16px; padding-top: 8px; }
+.vs-components-header h2 { font-size: 1.125rem; font-weight: 700; color: var(--vs-ink); margin: 0 0 4px; }
+.vs-components-header p { font-size: 0.8125rem; color: var(--vs-ink-3); margin: 0; }
+.vs-grid { display: flex; flex-direction: column; gap: var(--vs-gap); }
+.vs-component { padding: 16px; background: var(--vs-surface); border-radius: var(--vs-radius); }
+.vs-component h3 { font-size: 0.875rem; font-weight: 600; color: var(--vs-ink); margin: 0 0 4px; }
+.vs-component > p { font-size: 0.75rem; color: var(--vs-ink-3); margin: 0 0 12px; }
+.vs-slot { margin-top: 10px; }
+.vs-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; font-size: 0.8125rem; font-weight: 600; color: #fff; background: var(--vs-accent); border: 0; border-radius: 6px; cursor: pointer; transition: all 0.1s ease; font-family: inherit; }
+.vs-btn:active { transform: scale(0.96); opacity: 0.8; }
+.vs-btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); }
+.vs-btn-danger { background: transparent; border: 1px solid var(--vs-red); color: var(--vs-red); }
+.vs-input { width: 100%; padding: 9px 12px; font-size: 0.8125rem; color: var(--vs-ink); background: var(--vs-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; outline: none; transition: all 0.2s ease; font-family: inherit; box-sizing: border-box; }
+.vs-input:focus { border-color: var(--vs-accent); }
+.vs-mini-card { padding: 12px; background: var(--vs-bg); border-radius: 6px; display: flex; align-items: center; gap: 10px; }
+.vs-mini-card .vs-thumb { width: 40px; height: 40px; border-radius: 6px; background: var(--vs-accent); flex: none; }
+.vs-mini-card div strong { font-size: 0.8125rem; color: var(--vs-ink); display: block; font-weight: 600; }
+.vs-mini-card div p { font-size: 0.6875rem; color: var(--vs-ink-3); margin: 2px 0 0; }
+.vs-tag { display: inline-flex; align-items: center; padding: 3px 8px; font-size: 0.625rem; font-weight: 600; border-radius: 3px; margin-right: 4px; margin-bottom: 4px; }
+.vs-tag-default { background: rgba(255,255,255,0.08); color: var(--vs-ink-2); }
+.vs-tag-accent { background: rgba(115,185,230,0.2); color: var(--vs-accent); }
+.vs-nav { display: flex; gap: 0; }
+.vs-nav-item { padding: 8px 14px; font-size: 0.8125rem; font-weight: 500; color: var(--vs-ink-3); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s ease; }
+.vs-nav-item.active { color: var(--vs-ink); border-bottom-color: var(--vs-accent); }
+.vs-alert { padding: 10px 14px; background: rgba(255,107,107,0.1); border-radius: 6px; color: var(--vs-red); font-size: 0.75rem; }
+.vs-tabbar { position: sticky; bottom: 0; display: flex; background: rgba(14,46,74,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.06); padding: 4px 0 env(safe-area-inset-bottom, 8px); }
+.vs-tabbar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; font-size: 0.625rem; color: var(--vs-ink-3); cursor: pointer; transition: all 0.1s ease; }
+.vs-tabbar-item.active { color: var(--vs-accent); }
+.vs-tabbar-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--vs-ink-3); }
+.vs-tabbar-item.active .vs-tabbar-icon { background: var(--vs-accent); }
+.prompt-floater { position: fixed; bottom: 80px; left: 16px; padding: 10px 16px; background: rgba(21,50,76,0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; color: var(--vs-ink-2); font-size: 0.8125rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { color: #fff; border-color: var(--vs-accent); }
+.prompt-modal { position: fixed; bottom: 140px; left: 16px; right: 16px; width: auto; max-height: 60vh; padding: 16px; background: var(--vs-surface); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); z-index: 1001; color: var(--vs-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--vs-accent); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--vs-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--vs-ink-2); overflow-y: auto; flex: 1; margin-bottom: 10px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--vs-bg); padding: 12px; border-radius: 6px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--vs-accent); color: #fff; border: 0; border-radius: 6px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.1s ease; font-family: inherit; }
+.prompt-modal-copy:active { transform: scale(0.96); }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; padding: 16px 0 80px !important; margin: 0 !important; text-align: center; color: var(--vs-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 480px; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+footer p { font-size: 0.75rem; color: var(--vs-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: var(--vs-ink-3); }
+.friend-links span { margin-right: 6px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 3px; font-size: 0.6875rem; color: var(--vs-ink-3); text-decoration: none; }
+.name-en,.desc-en { display: none; }
+@media (min-width: 481px) { body { border-left: 1px solid rgba(255,255,255,0.06); border-right: 1px solid rgba(255,255,255,0.06); } }
+    </style>
+</head>
+<body>
+<header class="vs-header">
+        <div class="vs-header-inner">
+            <a class="vs-logo" href="../example.php" aria-label="StyleCool">
+                <span class="vs-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="vs-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>视频流示例</em>
+                </span>
+            </a>
+            <div class="vs-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="vs-hero" aria-label="视频流标题">
+            <h1>视频流</h1>
+            <p>深色沉浸，封面 + 标题驱动</p>
+        </section>
+
+        <div class="vs-feed">
+            <div class="vs-card">
+                <div class="vs-card-cover vs-card-cover-1">
+                    <div class="vs-card-avatar">S</div>
+                    <span class="vs-card-duration">12:34</span>
+                    <div class="vs-card-info">
+                        <h3>视频标题 — 封面渐变 + 底部蒙层</h3>
+                        <div class="vs-card-meta"><span>StyleCool</span><span>·</span><span>1.2k 观看</span><span>·</span><span>2 天前</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="vs-card">
+                <div class="vs-card-cover vs-card-cover-2">
+                    <div class="vs-card-avatar">M</div>
+                    <span class="vs-card-duration">8:21</span>
+                    <div class="vs-card-info">
+                        <h3>另一视频 — 深色渐变封面</h3>
+                        <div class="vs-card-meta"><span>Mutantcat</span><span>·</span><span>856 观看</span><span>·</span><span>5 天前</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="vs-card">
+                <div class="vs-card-cover vs-card-cover-3">
+                    <div class="vs-card-avatar" style="background:#FF6B6B;">R</div>
+                    <span class="vs-card-duration">45:10</span>
+                    <div class="vs-card-info">
+                        <h3>长视频 — 玫红渐变封面</h3>
+                        <div class="vs-card-meta"><span>RedChannel</span><span>·</span><span>3.4k 观看</span><span>·</span><span>1 周前</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="vs-components" aria-label="组件展示">
+            <div class="vs-components-header">
+                <h2>模块化组件</h2>
+                <p>深色沉浸，视频流语言贯穿每一个组件</p>
+            </div>
+
+            <div class="vs-grid">
+                <div class="vs-component">
+                    <h3>视频流按钮</h3>
+                    <p>主要/描边/危险 三级</p>
+                    <div class="vs-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="vs-btn">关注</button>
+                        <button class="vs-btn vs-btn-outline">分享</button>
+                        <button class="vs-btn vs-btn-danger">举报</button>
+                    </div>
+                </div>
+
+                <div class="vs-component">
+                    <h3>暗色输入框</h3>
+                    <p>深底 + 1px 亮边</p>
+                    <div class="vs-slot">
+                        <input type="text" class="vs-input" placeholder="添加评论...">
+                    </div>
+                </div>
+
+                <div class="vs-component">
+                    <h3>缩略图卡片</h3>
+                    <p>左侧缩略图 + 标题</p>
+                    <div class="vs-slot">
+                        <div class="vs-mini-card">
+                            <div class="vs-thumb"></div>
+                            <div><strong>视频标题</strong><p>1.2k 观看 · 2 天前</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vs-component">
+                    <h3>状态标签</h3>
+                    <p>默认 + 强调</p>
+                    <div class="vs-slot">
+                        <span class="vs-tag vs-tag-default">默认</span>
+                        <span class="vs-tag vs-tag-accent">精选</span>
+                    </div>
+                </div>
+
+                <div class="vs-component">
+                    <h3>视频导航</h3>
+                    <p>底部蓝色下划线</p>
+                    <div class="vs-slot">
+                        <nav class="vs-nav">
+                            <span class="vs-nav-item active">推荐</span>
+                            <span class="vs-nav-item">热门</span>
+                            <span class="vs-nav-item">关注</span>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="vs-component">
+                    <h3>红色提示</h3>
+                    <p>浅红底 + 圆角</p>
+                    <div class="vs-slot">
+                        <div class="vs-alert">⚠ 此内容可能不适合所有观众</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="vs-tabbar" aria-label="底部导航">
+        <div class="vs-tabbar-item active"><div class="vs-tabbar-icon"></div>首页</div>
+        <div class="vs-tabbar-item"><div class="vs-tabbar-icon"></div>热门</div>
+        <div class="vs-tabbar-item"><div class="vs-tabbar-icon"></div>订阅</div>
+        <div class="vs-tabbar-item"><div class="vs-tabbar-icon"></div>我的</div>
+    </div>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">视频流 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用视频流（Video Stream）设计风格。背景深海军蓝 #0E2E4A 全屏沉浸。卡片无边框，封面占主（16:9 渐变），标题压于底部渐变蒙层（transparent → rgba(0,0,0,0.7)）。文字白色，标题字重 600。圆角 8px。头像 32px 圆角 + 边框。视频时长右下角半透明黑色标签。按钮主要蓝 / 描边 / 红色危险三级。整体低对比、不抢戏，让视频成为主角。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

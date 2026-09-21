@@ -1,0 +1,1991 @@
+[
+  {
+    "name-en": "Asymmetric Hero Section",
+    "name-zh": "不对称英雄区",
+    "description-en": "Split the hero into a 7:5 or 3:2 ratio instead of centering everything. Headline left, a subtle dot-grid or gradient bleed right. Never center the hero at Variance ≥ 4. No bouncing scroll arrows, no 'Scroll to explore' filler.",
+    "description-zh": "英雄区用 7:5 或 3:2 不对称切分，标题左置，右侧点缀淡网点或渐变色渗。Variance ≥ 4 时禁止居中。禁止弹跳滚动箭头、禁止'下滑探索'填充文字。",
+    "tags": [
+      "hero",
+      "layout",
+      "asymmetric",
+      "landing",
+      "split-screen"
+    ],
+    "css": ".hero{display:grid;grid-template-columns:7fr 5fr;align-items:center;min-height:80dvh}",
+    "anti": [
+      "centered hero",
+      "scroll-down arrow",
+      "Scroll to explore"
+    ]
+  },
+  {
+    "name-en": "Card Grid — No Three Equal Columns",
+    "name-zh": "卡片网格 — 禁止三等宽",
+    "description-en": "The generic 3-equal-card feature row is an AI cliché and is banned. Use a 12-column grid with 5+7, 4+8, or 8+4 Z-pattern spans. Cards get a 1px hairline border and no shadow by default; hover adds a 1px lift and darkens the border.",
+    "description-zh": "三等宽卡片行是 AI 陈词滥调，禁止。用 12 列网格，5+7、4+8 或 8+4 的 Z 形跨度。卡片默认仅 1px 发丝线边框，不放阴影；悬停时抬 1px 并加深边框色。",
+    "tags": [
+      "card",
+      "grid",
+      "asymmetric",
+      "feature",
+      "z-pattern"
+    ],
+    "css": ".features{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}.features .card:nth-child(1){grid-column:1/span 5}.features .card:nth-child(2){grid-column:6/span 7}",
+    "anti": [
+      "3 equal columns",
+      "equal-width card row"
+    ]
+  },
+  {
+    "name-en": "Hairline Border Cards",
+    "name-zh": "发丝线边框卡片",
+    "description-en": "Cards should use a 1px hairline border (rgba(20,58,92,0.10)) and no shadow by default. Hover: translateY(-1px) + border darkens to the accent's 300 tint. Shadow only appears as a hover subtraction — never additive. Never use heavy box-shadow as the default card treatment.",
+    "description-zh": "卡片默认 1px 发丝线边框 rgba(20,58,92,0.10)，不放阴影。悬停：translateY(-1px) + 边框加深至主色 300 级。阴影仅作为悬停减法效果——从不叠加。禁止默认粗阴影卡片。",
+    "tags": [
+      "card",
+      "border",
+      "hairline",
+      "hover",
+      "elevation"
+    ],
+    "css": ".card{border:1px solid rgba(20,58,92,.10);border-radius:10px;background:#fff;transition:transform .25s,border-color .25s}.card:hover{transform:translateY(-1px);border-color:rgba(115,185,230,.5);box-shadow:0 10px 30px -10px rgba(20,58,92,.15)}"
+  },
+  {
+    "name-en": "Search Bar — Focus Ring",
+    "name-zh": "搜索框 — 焦点环",
+    "description-en": "A hairline-bordered input with a 3px accent focus ring (box-shadow, not outline). Placeholder in tertiary ink. Rounded corners at 10px. Label above in uppercase 0.7rem tracking 0.12em. Never use floating labels.",
+    "description-zh": "发丝线边框输入框，聚焦时 3px 主色环（用 box-shadow 而非 outline）。placeholder 用三级墨色。10px 圆角。标签在上方，大写 0.7rem，字距 0.12em。禁止浮动标签。",
+    "tags": [
+      "input",
+      "search",
+      "focus",
+      "form",
+      "accessibility"
+    ],
+    "css": "input{border:1px solid rgba(20,58,92,.18);border-radius:10px;padding:12px 16px;font-size:1rem}input:focus{border-color:#3A8DD0;box-shadow:0 0 0 3px rgba(115,185,230,.25);outline:none}",
+    "anti": [
+      "floating labels",
+      "neon glow focus",
+      "outline focus ring"
+    ]
+  },
+  {
+    "name-en": "Type Scale with clamp()",
+    "name-zh": "clamp() 字体阶梯",
+    "description-en": "Build a fluid type scale using CSS clamp(). Display: clamp(2.25rem, 5.2vw, 3.75rem), heading: clamp(2rem, 3.6vw, 2.75rem), body: 1rem. Line-height 1.65 for body, 1.15 for headings. Max 65 characters per line. Never use pure px-only font-size without a clamp fallback for responsive.",
+    "description-zh": "用 CSS clamp() 做流体字体阶梯：Display clamp(2.25rem,5.2vw,3.75rem)、Heading clamp(2rem,3.6vw,2.75rem)、正文 1rem。正文行高 1.65，标题 1.15。每行最长 65 字符。禁止只用 px 定字号无 clamp 适配。",
+    "tags": [
+      "typography",
+      "clamp",
+      "scale",
+      "responsive",
+      "fluid"
+    ],
+    "css": "h1{font-size:clamp(2.25rem,5.2vw,3.75rem);letter-spacing:-0.035em;line-height:1.05}p{max-width:65ch;font-size:1rem;line-height:1.65}"
+  },
+  {
+    "name-en": "Single Accent Rule",
+    "name-zh": "单主色法则",
+    "description-en": "Use exactly one brand accent color. Saturation below 80%. Derive a light tint for backgrounds and a deep shade for text/active states. The accent appears only on: CTAs, focus rings, active nav states, and link underlines. Never add a second accent. Gold/orange/yellow are reserved for identity marks, not functional UI.",
+    "description-zh": "只用一个品牌主色，饱和度低于 80%。派生浅色背景和深色文字/激活态。主色仅用于：CTA 按钮、焦点环、导航激活态、链接下划线。禁止加第二个主色。金/橙/黄保留给身份标记，不能做功能色。",
+    "tags": [
+      "color",
+      "accent",
+      "brand",
+      "restraint"
+    ],
+    "tokens": {
+      "accent": "#73B9E6",
+      "accent-light": "#EAF5FC",
+      "accent-dark": "#1B4E7A"
+    },
+    "css": ":root{--accent:#73B9E6;--accent-light:#EAF5FC;--accent-dark:#1B4E7A}",
+    "anti": [
+      "purple accent",
+      "neon accent",
+      "dual accent",
+      "saturation > 80%"
+    ]
+  },
+  {
+    "name-en": "Staggered Reveal Animation",
+    "name-zh": "错落入场动画",
+    "description-en": "Cards and list items should reveal with a cascading stagger: 0.05s, 0.13s, 0.21s, 0.29s, 0.37s. Use a spring-out cubic-bezier(0.22,1,0.36,1) and animate only transform + opacity. Duration ~0.45s. Never animate width, height, top, or left.",
+    "description-zh": "卡片和列表项用级联错落入场：0.05s, 0.13s, 0.21s, 0.29s, 0.37s。用弹性出 cubic-bezier(0.22,1,0.36,1)，仅动画 transform + opacity，时长约 0.45s。禁止动画 width/height/top/left。",
+    "tags": [
+      "animation",
+      "stagger",
+      "reveal",
+      "performance",
+      "motion"
+    ],
+    "css": "@keyframes reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.reveal{animation:reveal .45s cubic-bezier(.22,1,.36,1) both}.reveal-1{animation-delay:.05s}.reveal-2{animation-delay:.13s}"
+  },
+  {
+    "name-en": "Navigation — Clean Top Bar",
+    "name-zh": "导航 — 干净顶栏",
+    "description-en": "A white surface header with a 1px bottom border. Logo left, nav links center or right. Mobile: stack to single column, logo centered. Active nav link underlined with the accent. No sticky header unless content height justifies it. No hamburger menu on desktop. No dropdown mega-menus.",
+    "description-zh": "白色顶栏，底部 1px 边框。Logo 左侧，导航链接居中或靠右。移动端竖排堆叠，Logo 居中。当前页用主色下划线标识。桌面端禁止汉堡菜单、禁止下拉巨型菜单。仅当内容高度合理时才用粘性定位。",
+    "tags": [
+      "navigation",
+      "header",
+      "top-bar",
+      "responsive"
+    ],
+    "css": "header{background:#fff;border-bottom:1px solid rgba(20,58,92,.1);padding:16px 0}header .container{display:flex;justify-content:space-between;align-items:center}",
+    "anti": [
+      "hamburger on desktop",
+      "mega-menu",
+      "sticky header always"
+    ]
+  },
+  {
+    "name-en": "Footer — Editorial Close",
+    "name-zh": "页脚 — 编辑式收束",
+    "description-en": "White surface, top hairline, centered. Row 1: copyright. Row 2: friend links in uppercase 0.75rem tracking 0.1em. No heavy dark background — the footer should feel like the end of a page, not a separate zone. A 1px gold rule at the very top of the footer adds a warm close.",
+    "description-zh": "白色面，顶发丝线，居中。第一行版权，第二行友链大写 0.75rem 字距 0.1em。不用深色厚重底——页脚应该像页面的自然结束，而非独立区域。页脚最顶加 1px 金色线做温暖收束。",
+    "tags": [
+      "footer",
+      "editorial",
+      "closing"
+    ],
+    "css": "footer{background:#fff;border-top:1px solid rgba(20,58,92,.1);text-align:center;padding:32px 0}footer::before{content:'';display:block;height:2px;background:linear-gradient(90deg,#F8CE6B,#EBA62B);margin-bottom:16px}"
+  },
+  {
+    "name-en": "Primary Button — Flat Solid",
+    "name-zh": "主按钮 — 扁平实心",
+    "description-en": "A single primary CTA per viewport. Flat fill (accent dark), no shadow at rest, hairline bottom 1px for tactile depth. Hover: darken, lift 1px. Disabled: 40% opacity + not-allowed cursor. Never use neon outer glows, never put two primary buttons side by side, never use gradient fill on a button that also has a shadow.",
+    "description-zh": "每视口最多一个主 CTA。扁平实心填充（主色深色），静止时不加阴影，底部 1px 细线提供触觉深度。悬停：加深、抬 1px。禁用：40% 透明度 + not-allowed 光标。禁止霓虹外发光、禁止并排两个主按钮、禁止渐变填充同时加阴影。",
+    "tags": [
+      "button",
+      "CTA",
+      "primary",
+      "interaction",
+      "accessibility"
+    ],
+    "css": ".btn-primary{display:inline-flex;align-items:center;padding:10px 24px;font-size:.9rem;font-weight:600;color:#fff;background:var(--brand,#1B4E7A);border:none;border-radius:999px;cursor:pointer;box-shadow:0 1px 0 var(--brand-dark,#0E2E4A);transition:transform .2s,background .2s}.btn-primary:hover{background:var(--brand-dark,#0E2E4A);transform:translateY(-1px)}.btn-primary:disabled{opacity:.4;cursor:not-allowed}",
+    "anti": [
+      "neon glow button",
+      "dual primary buttons",
+      "gradient + shadow button"
+    ]
+  },
+  {
+    "name-en": "Code Block — Terminal Style",
+    "name-zh": "代码块 — 终端风格",
+    "description-en": "A dark surface code block with macOS traffic-light dots (red/yellow/green) in the top-left. Background: deep ink-tinted dark #0F2438. Text: soft blue-tinted light #DCEBF8. Mono font, rounded corners, subtle sky border. The traffic lights are CSS ::before decorative only. Never use a light-background code block — it reads as a note, not code.",
+    "description-zh": "深色代码块，左上角 macOS 红绿灯装饰。底 #0F2438 墨蓝色，字 #DCEBF8 蓝调浅色。等宽字体，圆角，天蓝细边框。红绿灯纯 CSS ::before 装饰。禁止浅色代码块——读起来像注释。",
+    "tags": [
+      "code",
+      "terminal",
+      "dark",
+      "mono",
+      "syntax"
+    ],
+    "css": "pre{position:relative;background:#0F2438;color:#DCEBF8;padding:24px 20px 20px;border-radius:10px;font-family:ui-monospace,monospace;font-size:.88rem;line-height:1.65;border:1px solid rgba(115,185,230,.18);overflow-x:auto}pre::before{content:'';position:absolute;top:12px;left:16px;width:38px;height:8px;background:radial-gradient(circle 3px at 4px 4px,#ED6A5E 60%,transparent 62%)0 0/14px 8px no-repeat,radial-gradient(circle 3px at 4px 4px,#F4BF4F 60%,transparent 62%)14px 0/14px 8px no-repeat,radial-gradient(circle 3px at 4px 4px,#61C554 60%,transparent 62%)28px 0/14px 8px no-repeat}"
+  },
+  {
+    "name-en": "Skeleton Loading — Shape-Matched",
+    "name-zh": "骨架屏 — 形状匹配",
+    "description-en": "Instead of a generic spinner, use skeleton placeholders that match the final layout dimensions. Light gray background with a shimmer animation (linear gradient sweeping left to right, 1.5s). Never use a single circular spinner as the only loading indicator for a content-heavy page.",
+    "description-zh": "不要通用转圈，用与最终布局尺寸匹配的骨架占位。浅灰底色 + 微光动画 1.5s，与最终内容形状一致。禁止内容型页面仅用一个圆形转圈作加载指示。",
+    "tags": [
+      "loading",
+      "skeleton",
+      "shimmer",
+      "placeholder",
+      "UX"
+    ],
+    "css": ".skeleton{background:#EAF2F8;border-radius:8px;overflow:hidden}.skeleton::after{content:'';display:block;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:shimmer 1.5s infinite}@keyframes shimmer{100%{transform:translateX(100%)}}",
+    "anti": [
+      "single spinner for all content",
+      "mismatched skeleton shapes"
+    ]
+  },
+  {
+    "name-en": "Empty State — Composed Composition",
+    "name-zh": "空状态 — 完整构图",
+    "description-en": "An empty state needs: a small illustration or icon (48-64px, accent tint), a short heading, a 1-line description, and a single primary CTA. All centered with generous whitespace. Never show an empty-state heading without a CTA.",
+    "description-zh": "空状态需要：小插图/图标 48-64px 主色着色、简短标题、一行描述、一个主 CTA。全部居中宽裕留白。禁止有空状态标题却不跟 CTA。",
+    "tags": [
+      "empty-state",
+      "onboarding",
+      "zero-state",
+      "UX",
+      "illustration"
+    ],
+    "css": ".empty-state{text-align:center;padding:64px 24px}.empty-state svg{width:56px;height:56px;color:var(--sky,#73B9E6);opacity:.6;margin-bottom:20px}.empty-state h3{font-size:1.15rem;font-weight:600;margin-bottom:8px}.empty-state p{color:var(--ink-2);max-width:36ch;margin:0 auto 24px}",
+    "anti": [
+      "'No data' only",
+      "empty state without CTA"
+    ]
+  },
+  {
+    "name-en": "Container Query — Component-Driven Responsive",
+    "name-zh": "容器查询 — 组件驱动响应式",
+    "description-en": "Use @container queries to style a component based on its own width, not the viewport. This means a card placed in a 300px sidebar automatically switches to a vertical layout, while the same card in a 900px main area uses a horizontal layout — without media queries. Adopted by 40%+ of developers in 2023 State of CSS, now production-ready in Chrome and Firefox.",
+    "description-zh": "用 @container 查询让组件根据自身宽度决定样式，而非视口。同一张卡片，放在 300px 侧边栏里自动切竖排，放在 900px 主区域自动变横排——无需媒体查询。2023 年已有 40%+ 开发者使用，现已在 Chrome 和 Firefox 生产可用。",
+    "tags": [
+      "container-query",
+      "responsive",
+      "component",
+      "layout",
+      "modern-css"
+    ],
+    "css": ".card-container{container-type:inline-size}.card{display:grid;gap:1rem}@container(min-width:400px){.card{grid-template-columns:1fr 1fr}}",
+    "anti": [
+      "@media-only responsive",
+      "viewport-dependent component internals",
+      "hardcoded breakpoints inside components"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "CSS Cascade Layers (@layer) — Tame Specificity",
+    "name-zh": "CSS 级联层 — 驯服优先级",
+    "description-en": "Use @layer to organize stylesheets into explicit priority tiers: reset → base → components → utilities. This eliminates specificity wars and !important chains in large codebases. The browser resolves layers in declared order, making the cascade predictable regardless of selector complexity.",
+    "description-zh": "用 @layer 将样式表组织为明确的优先级层级：reset → base → components → utilities。这消除了大型项目中的优先级战争和 !important 链。浏览器按声明顺序解析层级，无论选择器多复杂，级联行为都可预测。",
+    "tags": [
+      "cascade",
+      "layer",
+      "specificity",
+      "architecture",
+      "modern-css"
+    ],
+    "css": "@layer reset,base,components,utilities;@layer reset{*,::before,::after{box-sizing:border-box;margin:0}}@layer utilities{.mt-0{margin-top:0}}",
+    "anti": [
+      "!important chains",
+      "specificity hacks",
+      "selector nesting for priority",
+      "no style architecture"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Minimalist Form — Underline-Only Fields",
+    "name-zh": "极简表单 — 仅底线输入框",
+    "description-en": "Form inputs with only a 1px bottom border, no box border, no inner shadow. This creates a clean, editorial feel. On focus, the bottom border thickens to 2px and changes to the accent color. Label floats up or stays above. The form stays scannable because visual noise (box borders) is removed.",
+    "description-zh": "表单输入框只有一条 1px 底部线，无边框、无内阴影。干净、有编辑质感。聚焦时底部线变粗为 2px 并变色为主色调。Label 浮动或保持在上方。因为没有边框噪音，表单整体更易扫读。",
+    "tags": [
+      "form",
+      "input",
+      "minimalist",
+      "editorial",
+      "underline"
+    ],
+    "css": ".field{border:0;border-bottom:1px solid rgba(20,58,92,.18);padding:8px 0;font-size:1rem;background:transparent;outline:0;transition:border .25s}.field:focus{border-bottom:2px solid #3A8DD0}",
+    "anti": [
+      "heavy box-border inputs",
+      "inner shadow on fields",
+      "border on all 4 sides for clean layouts",
+      "placeholder-only labels"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Focus Ring — Offset + Visible",
+    "name-zh": "焦点环 — 偏移可见",
+    "description-en": "Replace the browser default focus outline with a 3px ring offset 3px from the element, using the brand accent color. Always respect prefers-reduced-motion for the transition. Never remove :focus-visible entirely — it breaks keyboard navigation accessibility. The ring should be visible but subtle: a 2-3px solid ring with 3px offset.",
+    "description-zh": "替换浏览器默认焦点样式为 3px 环，距元素 3px 偏移，使用品牌色。永远不要完全移除 :focus-visible——这会破坏键盘导航无障碍。焦点环应可见但克制：2-3px 实线环，3px 偏移。",
+    "tags": [
+      "focus",
+      "accessibility",
+      "a11y",
+      "keyboard",
+      "focus-visible"
+    ],
+    "css": ":focus-visible{outline:3px solid #3A8DD0;outline-offset:3px;border-radius:4px}@media(prefers-reduced-motion:reduce){:focus-visible{transition:none}}",
+    "anti": [
+      "outline:none without replacement",
+      "browser default focus ring",
+      "focus ring that blends with background",
+      "same style for :focus and :focus-visible"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Gradient Text — Hero Headline Accent",
+    "name-zh": "渐变文字 — Hero 标题点缀",
+    "description-en": "Clip a linear gradient to text for hero headlines. Use only for 1-2 lines of large display text (≥ 2rem). The gradient should be subtle — 2-3 stops within the brand palette. Never apply to body text, long paragraphs, or functional labels. Always provide a solid fallback color for browsers that don't support background-clip: text.",
+    "description-zh": "将线性渐变剪切到文字上，仅用于 1-2 行大字号的展示级标题（≥ 2rem）。渐变应克制——2-3 个色标在品牌色板内。禁止用于正文、长段落或功能标签。务必提供不支持 background-clip: text 的浏览器的纯色回退。",
+    "tags": [
+      "typography",
+      "hero",
+      "gradient",
+      "headline",
+      "decorative"
+    ],
+    "css": "h1.gradient-text{background:linear-gradient(135deg,#1B4E7A,#3A8DD0,#73B9E6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:#1B4E7A}",
+    "anti": [
+      "gradient on body text",
+      "rainbow gradients",
+      "gradient text without solid fallback",
+      "gradient on functional labels"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Sticky Header — Backdrop Blur Glass",
+    "name-zh": "粘性头部 — 毛玻璃背景模糊",
+    "description-en": "A sticky navigation bar with backdrop-filter: blur() and a semi-transparent background. This creates a modern glass-morphism effect that lets content show through subtly while keeping the nav readable. The blur should be 8-12px — too much creates a foggy blob; too little fails to obscure underlying text. Always add a subtle bottom border to define the header edge when over complex backgrounds.",
+    "description-zh": "粘性导航栏使用 backdrop-filter: blur() 和半透明背景，创造现代毛玻璃效果。内容微透但不影响导航可读性。模糊值 8-12px——过重像雾气，过轻无法遮挡下方文字。务必在复杂背景上添加底部细线以定义 header 边界。",
+    "tags": [
+      "sticky",
+      "header",
+      "blur",
+      "glass",
+      "navigation"
+    ],
+    "css": ".nav-sticky{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,58,92,.08)}",
+    "anti": [
+      "solid opaque sticky header",
+      "excessive blur >16px",
+      "no border-bottom for edge definition",
+      "using backdrop-filter without transparent bg"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Scroll Snap — Section-by-Section Storytelling",
+    "name-zh": "滚动吸附 — 逐页故事叙述",
+    "description-en": "Use CSS scroll-snap for section-by-section vertical storytelling. The parent gets scroll-snap-type: y mandatory; children get scroll-snap-align: start. This creates a native, performant page-by-page experience without JavaScript scrolljacking. Always provide a way to skip (e.g., a dot nav) and respect prefers-reduced-motion to disable snapping.",
+    "description-zh": "用 CSS scroll-snap 实现逐页纵向叙述。父容器设 scroll-snap-type: y mandatory，子元素设 scroll-snap-align: start。无需 JavaScript 劫持滚动即实现原生的、高性能的翻页体验。务必提供跳过方式（如点导航），并尊重 prefers-reduced-motion 禁用吸附。",
+    "tags": [
+      "scroll-snap",
+      "landing",
+      "storytelling",
+      "full-page",
+      "performance"
+    ],
+    "css": ".snap-container{scroll-snap-type:y mandatory;overflow-y:scroll;height:100dvh}.snap-section{scroll-snap-align:start;height:100dvh}@media(prefers-reduced-motion:reduce){.snap-container{scroll-snap-type:none}}",
+    "anti": [
+      "JS scrolljacking",
+      "forced snap without escape",
+      "ignoring reduced-motion",
+      "snap on non-landing pages"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Accordion — Native <details>/<summary>",
+    "name-zh": "折叠面板 — 原生 <details>/<summary>",
+    "description-en": "Use the native HTML <details> and <summary> elements for accordions instead of building custom ones from divs. They are accessible by default (keyboard, screen readers), require zero JavaScript for toggle behavior, and can be styled with CSS. Add a custom marker via ::marker or a rotated chevron via ::after on summary.",
+    "description-zh": "用原生 HTML <details> 和 <summary> 元素做折叠面板，而非用 div 自行搭建。默认无障碍（键盘、屏幕阅读器）、零 JavaScript 切换、纯 CSS 可定制样式。通过 ::marker 或 summary::after 添加旋转箭头图标。",
+    "tags": [
+      "accordion",
+      "details",
+      "native-html",
+      "accessible",
+      "disclosure"
+    ],
+    "css": "details{border:1px solid rgba(20,58,92,.1);border-radius:8px;padding:0 16px}summary{padding:16px 0;cursor:pointer;font-weight:600;list-style:none}summary::after{content:'▾';float:right;transition:transform .25s}details[open] summary::after{transform:rotate(180deg)}",
+    "anti": [
+      "custom accordion from divs",
+      "JS-dependent toggle",
+      "missing keyboard support",
+      "summary without cursor:pointer"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Tooltip — CSS-Only on Hover/Focus",
+    "name-zh": "提示框 — 纯 CSS 悬停/聚焦",
+    "description-en": "A CSS-only tooltip using ::after pseudo-element positioned relative to the trigger element. Appears on hover and focus (keyboard accessible). The tooltip should never cover the trigger element itself. Use a small caret arrow and keep text to 1-2 lines max. For complex content, use a popover or dialog instead.",
+    "description-zh": "用 ::after 伪元素定位在触发元素旁边实现纯 CSS 提示框。悬停和聚焦时出现（键盘可访问）。提示框绝不能遮挡触发元素本身。用一个小三角箭头，文字最多 1-2 行。复杂内容请用 popover 或 dialog。",
+    "tags": [
+      "tooltip",
+      "css-only",
+      "hover",
+      "focus",
+      "pseudo-element"
+    ],
+    "css": ".tooltip{position:relative}.tooltip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);padding:4px 12px;background:#0F2438;color:#fff;border-radius:6px;font-size:.8rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}.tooltip:hover::after,.tooltip:focus-visible::after{opacity:1}",
+    "anti": [
+      "tooltip covering target",
+      "multiline tooltip text",
+      "JS-only tooltip",
+      "no focus support for keyboard users"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Class Naming — Meaningful, Hyphen-Delimited",
+    "name-zh": "类命名 — 有意义、连字符分隔",
+    "description-en": "Class names must reflect purpose, not appearance. Use .gallery, .login, .video — never .button-green or .yee-1901. Separate words with hyphens (.video-id), never underscores or camelCase. Keep names as short as possible but as long as necessary — .nav over .navigation, but never .atr for .author. Optionally prefix with an app-specific namespace in large projects (.adw-help). Source: Google HTML/CSS Style Guide.",
+    "description-zh": "类名必须反映用途而非外观。用 .gallery、.login、.video——禁用 .button-green 或 .yee-1901。连字符分隔单词 (.video-id)，禁用下划线或驼峰。尽量短但够清晰——用 .nav 而非 .navigation，但不能把 .author 缩成 .atr。大型项目可用应用前缀 (.adw-help)。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "naming",
+      "class",
+      "convention",
+      "maintainability",
+      "google-styleguide"
+    ],
+    "css": ".nav{}.video-id{}.ads-help{}",
+    "anti": [
+      ".button-green",
+      ".yee-1901",
+      ".error_status",
+      ".demoimage",
+      ".navigation (when .nav works)"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "No ID Selectors — Use Class Selectors",
+    "name-zh": "禁用 ID 选择器 — 用 class 替代",
+    "description-en": "ID selectors (#example) are banned for styling. IDs must be unique across the entire page — impossible to guarantee in a multi-component, multi-engineer codebase. Class selectors are preferred in all situations. If an id attribute is absolutely required, its value must contain a hyphen (user-profile, not userProfile) to avoid becoming a global JavaScript variable on window. Source: Google HTML/CSS Style Guide.",
+    "description-zh": "ID 选择器 (#example) 在样式中禁止使用。ID 必须在整个页面唯一——在多组件、多工程师的代码库中无法保证。所有场景优先使用 class 选择器。如果必须使用 id 属性，值必须含连字符 (user-profile 而非 userProfile)，以避免成为 window 上的全局 JavaScript 变量。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "selector",
+      "id",
+      "class",
+      "specificity",
+      "google-styleguide"
+    ],
+    "css": ".user-profile{font-weight:600}",
+    "anti": [
+      "#example for CSS",
+      "id=\"userProfile\"",
+      "using id for styling",
+      "id without hyphen"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "!important — Never Use, Fix Specificity Instead",
+    "name-zh": "!important — 禁用，修复优先级代替",
+    "description-en": "The !important declaration breaks the natural cascade and makes styles impossible to reason about. Once one !important appears, others follow in an escalating war that no one wins. Fix the root cause: restructure selectors, use cascade layers (@layer), or refactor the component hierarchy. The only acceptable use is overriding third-party inline styles when no other option exists. Source: Google HTML/CSS Style Guide.",
+    "description-zh": "!important 声明会破坏自然级联，让样式变得不可推理。一个 !important 出现后，其他人跟着加，形成一场无人获胜的升级战争。修复根本原因：重构选择器、使用级联层 (@layer)、或重构组件层级。唯一可接受的使用场景是别无选择时覆盖第三方内联样式。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "important",
+      "specificity",
+      "cascade",
+      "maintainability",
+      "google-styleguide"
+    ],
+    "css": "@layer components{.btn{font-weight:600}}.btn.special{font-weight:400}",
+    "anti": [
+      "font-weight:bold !important",
+      "escalating !important war",
+      "!important to fix specificity bugs",
+      "!important in library code"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Avoid Qualifying Class with Type Selector",
+    "name-zh": "避免用元素类型限定 class 选择器",
+    "description-en": "Writing ul.example or div.error ties the style to a specific HTML element for no benefit. If the element changes (div → section), the style silently breaks. Just write .example or .error — it's more reusable, more performant, and avoids unnecessary specificity. Only qualify when the class genuinely means different things on different elements (rare). Source: Google HTML/CSS Style Guide.",
+    "description-zh": "写 ul.example 或 div.error 把样式绑定到特定 HTML 元素上，毫无好处。如果元素变了（div → section），样式悄悄失效。只写 .example 或 .error——更可复用、性能更好、避免不必要优先级。仅当 class 在不同元素上确实有不同含义时才限定（罕见）。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "selector",
+      "specificity",
+      "performance",
+      "refactoring",
+      "google-styleguide"
+    ],
+    "css": ".error{color:#d32f2f}",
+    "anti": [
+      "div.error{}",
+      "ul.example{}",
+      "span.price{}",
+      "a.button{}"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Shorthand Properties — Prefer Compact over Longhand",
+    "name-zh": "简写属性 — 优先紧凑写法",
+    "description-en": "Use CSS shorthand properties whenever possible, even when only one value is explicitly set. margin: 0 0 1em is clearer and more maintainable than margin-bottom: 1em alone — it communicates intent that the other sides are deliberately zero. Shorthand is easier to scan and less prone to partial-override bugs. Exceptions: when only setting one value of a truly unrelated set (e.g., background-position alone is fine). Source: Google HTML/CSS Style Guide.",
+    "description-zh": "尽可能使用 CSS 简写属性，即使只显式设置了一个值。margin: 0 0 1em 比单独 margin-bottom: 1em 更清晰、更易维护——它传达了其他边故意设为零的意图。简写更易扫读，更少部分覆盖 bug。例外：只设置一组无关属性中的某一个（如单独 background-position 可以）。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "shorthand",
+      "css",
+      "maintainability",
+      "google-styleguide"
+    ],
+    "css": "padding:0 1em 2em;border-top:0;background:#fff url(a.png) no-repeat;font:italic 1em/1.5 sans-serif",
+    "anti": [
+      "padding-top:1em;padding-right:1em;padding-bottom:1em;padding-left:1em",
+      "margin-bottom:1em when margin:0 0 1em conveys intent"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Zero Without Units — Never 0px or 0em",
+    "name-zh": "零值不带单位 — 禁止 0px 或 0em",
+    "description-en": "Zero is zero regardless of unit. Write margin: 0 not margin: 0px. Cleaner, shorter, and the only universally agreed CSS convention. The sole exception is flex-basis (flex: 1 1 0px required in some browsers). Source: Google HTML/CSS Style Guide.",
+    "description-zh": "零就是零，无论什么单位。写 margin: 0 而非 margin: 0px。更干净、更短、CSS 社区唯一公认约定。唯一例外是 flex-basis（某些浏览器需要 flex: 1 1 0px）。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "zero",
+      "units",
+      "convention",
+      "google-styleguide"
+    ],
+    "css": "margin:0;padding:0;border:0;outline:0",
+    "anti": [
+      "margin:0px",
+      "padding:0em",
+      "border:0rem"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Hex Colors — Use 3-Char Shorthand When Possible",
+    "name-zh": "十六进制颜色 — 能用 3 位就用 3 位",
+    "description-en": "#eebbcc should be written as #ebc. Shorter hex codes are easier to scan, and the 3-char form communicates that the color is a 'clean' value from the 216-color web-safe-ish palette. Never use uppercase hex (#EBC). Only use 6-char when the color genuinely cannot be abbreviated. Source: Google HTML/CSS Style Guide.",
+    "description-zh": "#eebbcc 应写为 #ebc。更短的十六进制更易扫读，且 3 位形式传达了颜色来自 216 色干净色板的信号。禁止大写十六进制 (#EBC)。仅当颜色确实无法缩写时才用 6 位。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "hex",
+      "color",
+      "shorthand",
+      "google-styleguide"
+    ],
+    "css": "color:#ebc;background:#fff;border-color:#ddd",
+    "anti": [
+      "#EEBBCC",
+      "#eebbcc (when #ebc works)",
+      "uppercase hex #FFF"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "No Inline Styles — Separation of Concerns",
+    "name-zh": "禁止内联样式 — 结构表现分离",
+    "description-en": "HTML documents should contain only structural markup. All presentation goes in CSS stylesheets; all behavior goes in JavaScript files. Inline styles (<div style='...'>) blur this boundary and make the codebase unmaintainable. Every inline style is a style that cannot be cached, cannot be themed, and cannot be overridden without !important. Keep the contact surface between HTML and CSS as small as possible. Source: Google HTML/CSS Style Guide.",
+    "description-zh": "HTML 文档只应包含结构化标记。所有表现放在 CSS 样式表里，所有行为放在 JavaScript 文件里。内联样式 (<div style='...'>) 模糊了这个边界，让代码库不可维护。每个内联样式都是一个不能被缓存、不能被主题化、不能用 !important 之外方式覆盖的样式。保持 HTML 和 CSS 的接触面尽可能小。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "inline-style",
+      "separation",
+      "architecture",
+      "maintainability",
+      "google-styleguide"
+    ],
+    "css": "",
+    "anti": [
+      "<div style=\"font-size:1em\">",
+      "<p style=\"color:red\">",
+      "style attribute for layout",
+      "dynamic inline styles from JS"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Semantic HTML — Elements for Their Purpose",
+    "name-zh": "语义化 HTML — 元素各司其职",
+    "description-en": "Use HTML elements for their intended purpose: headings for headings, p for paragraphs, a for anchors, button for buttons. Never use <div onclick='...'> when <a> or <button> is the correct element — this breaks keyboard navigation, screen readers, and SEO. Semantic HTML is a measurable quality baseline that pays dividends in accessibility, code efficiency, and maintainability. Source: Google HTML/CSS Style Guide.",
+    "description-zh": "按预期用途使用 HTML 元素：标题用 heading、段落用 p、链接用 a、按钮用 button。禁止 <div onclick='...'> 替代 <a> 或 <button>——这会破坏键盘导航、屏幕阅读器和 SEO。语义化 HTML 是可衡量的质量基线，在无障碍、代码效率和可维护性方面持续产生红利。源自 Google HTML/CSS 风格指南。",
+    "tags": [
+      "semantic",
+      "html",
+      "accessibility",
+      "a11y",
+      "google-styleguide"
+    ],
+    "css": "",
+    "anti": [
+      "<div onclick=\"navigate()\"> for links",
+      "<div class=\"button\"> for buttons",
+      "<span class=\"h1\"> for headings"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Three AI Cliché Palettes — Actively Avoid",
+    "name-zh": "三种 AI 陈词滥调色板 — 主动避开",
+    "description-en": "Three color palettes appear so often in AI-generated UIs that they have become defaults rather than choices: (1) Warm cream background (#F4F1EA) + high-contrast serif display + terracotta accent; (2) Near-black background + single bright acid-green or vermilion accent; (3) Broadsheet layout with hairline rules and dense newspaper columns. Unless the brief explicitly requests one of these, choose something else. Derive your palette from the subject's world, not from statistical averages. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "三种色板在 AI 生成界面中出现频率极高，已成默认而非选择：(1) 暖奶油底色 (#F4F1EA) + 高对比衬线标题 + 赤陶点缀；(2) 近黑底色 + 单一亮酸绿或朱红点缀；(3) 报纸排版 + 发丝线分隔 + 密集列。除非需求明确要求，选择其他方案。从项目主题的世界中提取色板，而非从统计平均中获取。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "color",
+      "palette",
+      "anti-pattern",
+      "ai-cliche",
+      "originality",
+      "anthropic-design"
+    ],
+    "css": "",
+    "anti": [
+      "warm cream + serif + terracotta",
+      "near-black + acid green accent",
+      "broadsheet newspaper layout",
+      "any palette chosen because 'AI usually picks this'",
+      "design without a subject to derive from"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Hero Section — Thesis, Not Template",
+    "name-zh": "Hero 区域 — 论点而非模板",
+    "description-en": "A hero section should open with the most characteristic thing in the subject's world — it is a thesis statement, not a template. Avoid the 'big number with a small label, supporting stats, and gradient accent' pattern unless it is genuinely the best option. The hero sets the tone for the entire page; if it reads like every other landing page, the user has already formed their impression before scrolling. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "Hero 区域应该用主题世界中最有特征的东西开场——它是一个论点，不是一个模板。避免「大数字 + 小标签 + 支撑数据 + 渐变点缀」的套路，除非它确实是最佳选择。Hero 为整页定调；如果它读起来和其他着陆页一模一样，用户在滚动前就已经下了判断。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "hero",
+      "landing",
+      "thesis",
+      "originality",
+      "anthropic-design"
+    ],
+    "css": ".hero{display:grid;grid-template-columns:7fr 5fr;align-items:center;min-height:80dvh}",
+    "anti": [
+      "big number + small label + stats + gradient hero",
+      "generic hero from template",
+      "hero that doesn't reference the subject's world",
+      "hero that could belong to any company"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Typography as Identity — Deliberate Pairing",
+    "name-zh": "排版即身份 — 刻意的字体搭配",
+    "description-en": "Typography carries the personality of the page. Pair display and body faces deliberately — not the same generic sans-serif families you would reach for on any other project. Use at minimum 2+ roles: a characterful display face (used with restraint), a complementary body face, and optionally a utility face for captions and data. Define a clear type scale with intentional weights, widths, and spacing. The type treatment itself should be a memorable part of the design, not a neutral delivery vehicle. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "排版承载页面的个性。刻意搭配展示字体和正文字体——不是你给任何其他项目都会选的同一套通用无衬线字族。最少 2+ 个角色：有性格的展示字体（克制使用）、互补的正文字体，可选工具字体用于标注和数据。定义清晰的字体阶差，权重、宽度、间距都要有意图。字体处理本身就应该是设计中令人难忘的一部分，而非中性的传送工具。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "typography",
+      "font",
+      "pairing",
+      "identity",
+      "display",
+      "anthropic-design"
+    ],
+    "css": "h1{font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;letter-spacing:-0.02em}h2{font-family:'Fraunces',serif;font-size:1.75rem}p{font-family:'Inter',sans-serif;font-size:1rem;line-height:1.65}",
+    "anti": [
+      "same sans-serif for display and body",
+      "no font pairing strategy",
+      "generic system font stack with no character",
+      "type scale without intentional weights"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "One Signature Element — Spend Boldness Once",
+    "name-zh": "一个标志性元素 — 大胆只挥霍一次",
+    "description-en": "Spend your boldness in one place. Let the signature element be the single unique thing this page will be remembered by — keep everything else quiet and disciplined. This could be a distinctive type treatment, an unexpected layout move, a custom illustration style, or an interactive flourish. The key: it's ONE thing. If everything is special, nothing is. Cut any decoration that does not serve the brief. Not taking a risk can be a risk itself — but take only one. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "大胆只挥霍在一处。让标志性元素成为这个页面被记住的唯一独特之处——其余一切保持安静和克制。可能是有个性的字体处理、意外的布局动作、定制插画风格、或交互上的一个闪光点。关键是：就这一处。如果什么都是特别的，就什么都不特别了。删掉任何不服务于需求的装饰。不冒险本身可能就是最大的风险——但只冒一个。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "signature",
+      "boldness",
+      "focus",
+      "restraint",
+      "unique",
+      "anthropic-design"
+    ],
+    "css": "",
+    "anti": [
+      "decoration everywhere",
+      "everything is 'special'",
+      "no focal point",
+      "risk-averse design with zero distinctiveness",
+      "multiple competing signature elements"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Copy as Design Material — Specific > Clever",
+    "name-zh": "文案即设计材料 — 具体胜过聪明",
+    "description-en": "Words appear in a design for one reason: to make it easier to understand. They are design material, not decoration. Rules: (1) Write from the user's side — name things by what people control, not system architecture. (2) Be specific over clever — 'Save changes' not 'Submit'. (3) Active voice as default — the button says exactly what happens. (4) Maintain action-name consistency — 'Publish' button → 'Published' toast. (5) Errors explain what went wrong and how to fix it — never vague, never apologetic. (6) Empty screens are invitations to act. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "文字在设计中只有一个理由：让理解更容易。它是设计材料，不是装饰。规则：(1) 从用户侧写作——用人们控制的东西命名，不用系统架构。 (2) 具体胜过聪明——「保存更改」而非「提交」。 (3) 默认主动语态——按钮准确说出会发生什么。 (4) 保持一致——「发布」按钮 → 「已发布」提示。 (5) 错误说明出了什么问题以及如何修复——禁止含糊、禁止道歉。 (6) 空页面是行动的邀请函。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "copy",
+      "writing",
+      "ux-writing",
+      "label",
+      "specificity",
+      "anthropic-design"
+    ],
+    "css": "",
+    "anti": [
+      "vague 'Submit' button",
+      "error: 'Something went wrong'",
+      "empty state: 'No data' with no action",
+      "clever-but-unclear labels",
+      "system-architecture names in user-facing text"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Numbers as Information — Earn Every Marker",
+    "name-zh": "数字即信息 — 每个标记都要挣来",
+    "description-en": "Numbered markers (01 / 02 / 03) in UI are only appropriate when the content represents an actual sequence — a real process or a typed timeline where order carries genuine information. Never use numbered markers purely for decoration. The same principle applies to dividers, eyebrows, and labels: every structural device must encode something true about the content. 'Structure is information.' Source: Anthropic Frontend Design Skill.",
+    "description-zh": "界面中的数字标记 (01 / 02 / 03) 仅在内容代表真实序列时才适用——一个真实的流程或一条有信息含义的时间线。禁止仅为装饰使用数字标记。同样的原则适用于分割线、眉标和标签：每个结构装置都必须编码内容的真实信息。'结构即信息。' 源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "number",
+      "marker",
+      "structure",
+      "information",
+      "decoration",
+      "anthropic-design"
+    ],
+    "css": "",
+    "anti": [
+      "decorative 01/02/03 markers",
+      "numbered steps that aren't a real sequence",
+      "eyebrows and dividers with no semantic meaning"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Motion — One Orchestrated Moment > Scattered Effects",
+    "name-zh": "动效 — 一个编排时刻胜过分散特效",
+    "description-en": "Leverage motion deliberately. Consider page-load sequences, scroll-triggered reveals, hover micro-interactions, and ambient atmosphere — but don't use all of them. An orchestrated moment (e.g., a coordinated hero entrance with staggered reveals) usually lands harder than scattered effects sprinkled everywhere. Sometimes less animation is more — extra motion contributes to the feeling that the design is AI-generated. Always respect prefers-reduced-motion. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "刻意运用动效。考虑页面加载序列、滚动触发揭示、悬停微交互和氛围动画——但不要全用。一个精心编排的时刻（如协调的 Hero 入场 + 错落揭示）通常比到处散落的效果更有冲击力。有时更少动效反而更好——过多的动效贡献了'这像 AI 做的'的感觉。始终尊重 prefers-reduced-motion。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "motion",
+      "animation",
+      "orchestration",
+      "restraint",
+      "anthropic-design"
+    ],
+    "css": "@media(prefers-reduced-motion:no-preference){.reveal{animation:fade-up .45s cubic-bezier(.22,1,.36,1) both}.reveal-1{animation-delay:.05s}.reveal-2{animation-delay:.13s}}@keyframes fade-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}",
+    "anti": [
+      "scattered micro-interactions everywhere",
+      "animation on every element",
+      "ignoring prefers-reduced-motion",
+      "more than 2-3 animation types on one page"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Design Tokens — Named Values, Not Raw Hex",
+    "name-zh": "设计 Token — 命名值而非裸十六进制",
+    "description-en": "Define a compact token system of 4-6 named values before writing any CSS. Use CSS custom properties: --ink, --surface, --accent, --line, --shadow. Every color, spacing, and type decision references a token — never a raw hex or px value in a selector body. This makes the design system portable, themeable, and self-documenting. The token names themselves are design decisions: '--gold' tells a story; '#F2B53C' does not. Source: Google Style Guide (alphabetical declaration order) + Anthropic Design Skill (token system).",
+    "description-zh": "写 CSS 之前先定义一套 4-6 个命名值的紧凑 token 系统。用 CSS 自定义属性：--ink、--surface、--accent、--line、--shadow。每个颜色、间距、字体决策都引用 token——绝不在选择器体中裸写 hex 或 px 值。这让设计系统可移植、可主题化、自文档化。Token 名称本身就是设计决策：'--gold' 在讲一个故事；'#F2B53C' 没有。源自 Google Style Guide + Anthropic Design Skill。",
+    "tags": [
+      "tokens",
+      "custom-properties",
+      "design-system",
+      "naming",
+      "theme",
+      "anthropic-design"
+    ],
+    "css": ":root{--ink:#15324C;--surface:#FFF;--accent:#3A8DD0;--line:rgba(20,58,92,.1);--radius:8px}.card{color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}",
+    "anti": [
+      "raw hex in selector bodies",
+      "no :root token definition",
+      "inconsistent color values",
+      "magic numbers in CSS",
+      "using px for values that should be tokens"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Empty State — Invitation to Act, Not a Void",
+    "name-zh": "空状态 — 行动邀请而非空白",
+    "description-en": "An empty screen is an invitation to act — never just 'No data' or a blank space. Every empty state should: (1) name what would normally be here, (2) explain the benefit of filling it, and (3) provide a clear action to get started. A well-designed empty state converts a moment of absence into a moment of onboarding. The visual should be friendly but minimal — an illustration or icon, a headline, a sentence of explanation, and one primary CTA. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "空页面是行动的邀请——绝不只是'暂无数据'或一片空白。每个空状态应该：(1) 说明这里通常有什么，(2) 解释填满它的好处，(3) 提供明确的开始行动入口。一个精心设计的空状态把缺失时刻转化为引导时刻。视觉应友好但克制——一个插画或图标、一个标题、一句解释、一个主 CTA。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "empty-state",
+      "onboarding",
+      "ux-writing",
+      "action",
+      "anthropic-design"
+    ],
+    "css": ".empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center;min-height:300px}.empty-state img{width:120px;margin-bottom:24px;opacity:.8}.empty-state h3{font-size:1.25rem;font-weight:600;margin-bottom:8px}.empty-state p{color:var(--ink-2);margin-bottom:24px;max-width:36ch}.empty-state .btn-primary{padding:10px 24px}",
+    "anti": [
+      "'No data' with no action",
+      "blank empty screen",
+      "empty state without CTA",
+      "apologetic empty messaging",
+      "overly complex empty state illustration"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Responsive Down to Mobile — Quality Floor Without Announcement",
+    "name-zh": "响应式到移动端 — 默认品质基线，无需宣告",
+    "description-en": "Every web design must be responsive down to mobile (320px width) without the user having to ask for it. This is a quality floor, not a feature. Elements that work on desktop must adapt: multi-column grids become single-column, touch targets expand to ≥44px, font sizes remain readable without zoom, and hover-dependent interactions gain tap equivalents. Never hide this behind a 'mobile version' toggle — it should just work. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "每个网页设计必须响应式到移动端 (320px)，用户不需要专门要求。这是品质基线，不是功能。桌面端有效的元素必须适配：多列网格变单列、触摸目标扩展到 ≥44px、字号无需缩放即可读、依赖悬停的交互增加点击替代方案。禁止隐藏在'手机版'按钮后面——应该直接可用。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "responsive",
+      "mobile",
+      "quality",
+      "baseline",
+      "mobile-first",
+      "anthropic-design"
+    ],
+    "css": "@media(max-width:768px){.grid-2{grid-template-columns:1fr}.card{padding:16px}h1{font-size:clamp(1.5rem,6vw,2.5rem)}}@media(max-width:480px){.container{padding:0 16px}}",
+    "anti": [
+      "desktop-only design",
+      "'View mobile version' link",
+      "fixed-width layouts",
+      "touch targets <44px on mobile",
+      "hover-only interactions with no tap fallback"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Critique Before Building — Two-Pass Design Process",
+    "name-zh": "建造前批判 — 两次通过设计法",
+    "description-en": "Work in two passes: (1) First produce a design plan — a compact token system (color, type, layout, signature) — and critique it against the brief. Is it unique to this subject, or could this plan be for any similar page? (2) Only write code after confirming the plan is distinctive. During code: watch selector specificity — easily generated classes can cancel each other out. After building, critique again: cut one accessory you thought was essential. Revise generic defaults — if the plan reads like it could be for any similar page, state what you changed and why. Source: Anthropic Frontend Design Skill.",
+    "description-zh": "两次通过设计法：(1) 先产出设计计划——一套紧凑 token 系统（颜色、字体、布局、标志元素）——并对着需求批判它。它对这个主题是独特的，还是给任何类似页面都能用？ (2) 确认计划具有区分度后再写代码。编码时：留意选择器优先级——轻松生成的 class 可能相互抵消。建造后再次批判：删掉一个你原以为必要的装饰。修正通用默认值——如果计划读起来像给任何类似页面都能用的，说明你改了什么以及为什么。源自 Anthropic Frontend Design Skill。",
+    "tags": [
+      "process",
+      "critique",
+      "iteration",
+      "design-system",
+      "anthropic-design"
+    ],
+    "css": "",
+    "anti": [
+      "code-first design without a plan",
+      "plan that fits any generic page",
+      "no post-build critique",
+      "keeping every decoration",
+      "selectors that cancel each other out"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "BEM Naming — Block__Element--Modifier",
+    "name-zh": "BEM 命名法 — Block__Element--Modifier",
+    "description-en": "Use BEM (Block-Element-Modifier) to create clear, flat, low-specificity selectors. Block = the component (`.card`), Element = a part of the block (`.card__title`), Modifier = a variant (`.card--featured`). Double underscore separates elements, double dash separates modifiers. Use PascalCase blocks (`.ListingCard`) to mirror React/Vue component names. BEM keeps specificity flat and makes the relationship between HTML and CSS obvious at a glance. Source: Airbnb CSS/Sass Style Guide.",
+    "description-zh": "使用 BEM（Block-Element-Modifier）创建清晰、扁平、低优先级的类名。Block = 组件 (`.card`)，Element = 组件的部分 (`.card__title`)，Modifier = 变体 (`.card--featured`)。双下划线分隔元素，双中划线分隔修饰符。用 PascalCase 块名 (`.ListingCard`) 对应 React/Vue 组件名。BEM 保持优先级扁平，让 HTML 和 CSS 的关系一目了然。源自 Airbnb CSS/Sass Style Guide。",
+    "tags": [
+      "bem",
+      "naming",
+      "specificity",
+      "component",
+      "airbnb"
+    ],
+    "css": ".ListingCard{}.ListingCard__title{font-size:1.25rem}.ListingCard--featured{border-color:var(--gold)}",
+    "anti": [
+      "deeply nested selectors",
+      "ID-based naming",
+      ".card .body .title .highlight",
+      "high-specificity naming"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "JavaScript Hooks — .js- Prefix, Never Style with JS Classes",
+    "name-zh": "JavaScript 钩子 — .js- 前缀，绝不用样式类绑定 JS",
+    "description-en": "Use dedicated classes prefixed with `.js-` for JavaScript behavior hooks — never bind JS to CSS styling classes. This separates concerns: changing a component's appearance should never break its behavior, and vice versa. If a designer renames `.btn-primary` to `.btn-main`, the JS that depended on `.btn-primary` for click handling silently breaks. `.js-request-to-book` is immune to visual refactoring. Source: Airbnb CSS/Sass Style Guide.",
+    "description-zh": "用 `.js-` 前缀的专用类名作为 JavaScript 行为钩子——绝不在 CSS 样式类上绑定 JS。这分离了关注点：改外观不应破坏行为，反之亦然。如果设计师把 `.btn-primary` 改成 `.btn-main`，依赖 `.btn-primary` 做点击处理的 JS 就悄悄坏了。`.js-request-to-book` 对视觉重构免疫。源自 Airbnb CSS/Sass Style Guide。",
+    "tags": [
+      "javascript",
+      "hooks",
+      "separation",
+      "architecture",
+      "airbnb"
+    ],
+    "css": ".js-toggle-menu{}",
+    "anti": [
+      "binding JS to .btn-primary",
+      "querySelector('.card') for behavior",
+      "no separation between style and behavior"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "@extend — Never Use in Sass",
+    "name-zh": "@extend — Sass 中禁用",
+    "description-en": "In Sass/SCSS, never use @extend. It creates unpredictable, bloated CSS output by duplicating selectors in unexpected places and can generate selector chains thousands of lines long. The compiled output is often far larger than the input and nearly impossible to debug. Use @mixin for reusable patterns instead — mixins are explicit, predictable, and generate clean output. The one exception: @extend %placeholder-selector for truly shared base styles, but even then, prefer mixins. Source: Airbnb CSS/Sass Style Guide.",
+    "description-zh": "在 Sass/SCSS 中绝不用 @extend。它通过在不可预期的位置复制选择器来产生不可预测、臃肿的 CSS 输出，能生成数千行的选择器链。编译输出通常远大于输入，几乎无法调试。用 @mixin 替代——mixin 显式、可预测、输出干净。唯一例外：用 %placeholder 选择器做真正的共享基类，但即便如此也推荐用 mixin。源自 Airbnb CSS/Sass Style Guide。",
+    "tags": [
+      "sass",
+      "scss",
+      "extend",
+      "mixin",
+      "performance",
+      "airbnb"
+    ],
+    "css": "@mixin card-base{border:1px solid var(--line);border-radius:8px;padding:16px}.card{@include card-base}.featured-card{@include card-base;border-color:var(--gold)}",
+    "anti": [
+      "@extend .base-class",
+      "chained @extend",
+      "selector explosion from @extend",
+      "@extend in nested contexts"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Sass Nesting — Maximum 3 Levels Deep",
+    "name-zh": "Sass 嵌套 — 最多 3 层",
+    "description-en": "Limit Sass/SCSS nesting to a maximum of 3 levels. Deep nesting generates high-specificity selectors that are brittle, hard to override, and tightly coupled to DOM structure. If your nesting goes deeper than 3 levels, it's a signal to extract a new component or rethink the HTML structure. Never nest ID selectors. Flat, component-scoped selectors make overrides predictable and refactoring safe. Source: Airbnb CSS/Sass Style Guide.",
+    "description-zh": "Sass/SCSS 嵌套最多 3 层。深度嵌套生成高优先级选择器，脆弱、难覆盖、与 DOM 结构紧耦合。超过 3 层就是信号：该提取新组件或重新审视 HTML 结构了。禁止嵌套 ID 选择器。扁平的、组件作用域的选择器让覆盖可预测、重构安全。源自 Airbnb CSS/Sass Style Guide。",
+    "tags": [
+      "sass",
+      "nesting",
+      "specificity",
+      "maintainability",
+      "airbnb"
+    ],
+    "css": ".card{padding:16px;.title{font-weight:600}/* max depth: 2 */}",
+    "anti": [
+      ".page .content .card .body .title .highlight {}",
+      "4+ levels of nesting",
+      "nested ID selectors"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Component-Based File Organization — Not Pages",
+    "name-zh": "按组件组织文件 — 不按页面",
+    "description-en": "Structure stylesheets around components, not pages. A component's entire CSS lives in one place — layout, variants, states, and media queries all together. This mirrors modern component architecture (React, Vue, Web Components) and means when you delete a component, you delete exactly one CSS file. Page-based organization scatters styles across files and makes it impossible to know which styles are still in use. Source: Airbnb CSS/Sass Style Guide.",
+    "description-zh": "样式表按组件组织，不按页面。一个组件的全部 CSS 放在一起——布局、变体、状态、媒体查询全部归位。这与现代组件架构（React、Vue、Web Components）对应，删组件时刚好删一个 CSS 文件。按页面组织把样式散落各处，无法知道哪些样式还在使用。源自 Airbnb CSS/Sass Style Guide。",
+    "tags": [
+      "organization",
+      "component",
+      "architecture",
+      "maintainability",
+      "airbnb"
+    ],
+    "css": "/* card.css — everything about .card */\n.card{}.card:hover{}.card--featured{}\n@media(max-width:768px){.card{}}",
+    "anti": [
+      "page-based CSS files",
+      "homepage.css, about.css, contact.css",
+      "styles scattered across files by page"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Text Color Contrast — Minimum 4.5:1",
+    "name-zh": "文字颜色对比度 — 最低 4.5:1",
+    "description-en": "WCAG 2.1 Level AA requires text to have at least 4.5:1 contrast ratio against its background. Large text (18px+ bold or 24px+ regular) needs 3:1. UI components and icons need 3:1 against adjacent colors. Gray text on white (#ccc on #fff = 1.6:1) is one of the most common accessibility failures. Use a contrast checker tool. Don't rely on color alone to convey information — always combine with an icon, underline, or bold. Source: WCAG 2.2 — Success Criteria 1.4.3, 1.4.11.",
+    "description-zh": "WCAG 2.1 AA 级要求文字对背景至少有 4.5:1 的对比度。大号文字（18px+ 加粗或 24px+ 常规）需要 3:1。UI 组件和图标对相邻颜色需要 3:1。灰色文字在白底上（#ccc 对 #fff = 1.6:1）是最常见的无障碍失败。使用对比度检查工具。不要仅依赖颜色传达信息——始终组合图标、下划线或加粗。源自 WCAG 2.2 — SC 1.4.3、1.4.11。",
+    "tags": [
+      "contrast",
+      "wcag",
+      "accessibility",
+      "a11y",
+      "color"
+    ],
+    "css": "body{color:#15324C;background:#FFF}/* ≈ 12.5:1 */\n.text-secondary{color:#51677C}/* ≈ 5.5:1 on white */",
+    "anti": [
+      "#CCC text on #FFF (1.6:1)",
+      "#999 text on white (2.8:1)",
+      "color-only error indicators",
+      "assuming 'it looks fine' without checking"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Focus Indicator — 2px Thick + 3:1 Contrast",
+    "name-zh": "焦点指示器 — 2px 厚度 + 3:1 对比",
+    "description-en": "WCAG 2.2 requires a visible focus indicator on all interactive elements. The indicator must be at least 2 CSS pixels thick and have at least 3:1 contrast between focused and unfocused states. Use :focus-visible (not :focus) to avoid showing focus rings on mouse clicks. Use a two-color technique (white ring + colored ring) to guarantee contrast on any background. Never use outline:none without providing a better alternative — it breaks keyboard navigation. Source: WCAG 2.2 — SC 2.4.7, 2.4.11, 2.4.13.",
+    "description-zh": "WCAG 2.2 要求所有可交互元素有可见的焦点指示器。指示器至少 2 CSS 像素厚，聚焦与非聚焦状态之间至少有 3:1 对比度。使用 :focus-visible（而非 :focus）避免鼠标点击也出现焦点环。使用双色技巧（白色环 + 彩色环）确保在任何背景上都有对比度。禁止 outline:none 而不提供更好的替代方案——这会破坏键盘导航。源自 WCAG 2.2 — SC 2.4.7、2.4.11、2.4.13。",
+    "tags": [
+      "focus",
+      "accessibility",
+      "wcag",
+      "keyboard",
+      "a11y"
+    ],
+    "css": ":focus-visible{outline:2px solid #3A8DD0;outline-offset:2px;box-shadow:0 0 0 4px #FFF,0 0 0 6px #3A8DD0}",
+    "anti": [
+      "outline:none",
+      "1px focus ring",
+      "focus ring same color as background",
+      "using :focus instead of :focus-visible"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Focus Not Obscured — Sticky Elements Must Not Cover Focus",
+    "name-zh": "焦点不被遮挡 — 粘性元素不能盖住焦点",
+    "description-en": "WCAG 2.2's new Focus Not Obscured criterion (2.4.11 AA) requires that when an element receives keyboard focus, it must not be entirely hidden by sticky headers, fixed footers, cookie banners, or other author-created overlays. Use scroll-margin-top equal to sticky header height on all focusable sections. Test by tabbing through the page — if a focused element disappears behind a sticky bar, the page fails this criterion. Source: WCAG 2.2 — SC 2.4.11.",
+    "description-zh": "WCAG 2.2 新增的「焦点不被遮挡」标准 (2.4.11 AA) 要求元素获得键盘焦点时，不能被 sticky 头部、固定底部、cookie 横幅或其他作者创建的覆盖层完全隐藏。在所有可聚焦区域上设置 scroll-margin-top 等于 sticky 头部高度。用 Tab 遍历页面测试——如果聚焦元素消失在粘性栏后面，页面就不符合此标准。源自 WCAG 2.2 — SC 2.4.11。",
+    "tags": [
+      "focus",
+      "sticky",
+      "wcag",
+      "accessibility",
+      "scroll"
+    ],
+    "css": "header{position:sticky;top:0;height:64px}h2:focus-visible{scroll-margin-top:80px}",
+    "anti": [
+      "sticky header covering focused element",
+      "no scroll-margin-top on sections",
+      "cookie banner over keyboard focus",
+      "modals that trap focus behind overlay"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Touch Target Size — Minimum 24×24px (AA)",
+    "name-zh": "触摸目标尺寸 — 最小 24×24px (AA)",
+    "description-en": "WCAG 2.2 Target Size (2.5.8 AA) requires interactive elements to be at least 24×24 CSS pixels. You can keep a sleek 16px icon if you expand the tappable area to 48px using padding or a transparent pseudo-element. Apple recommends 44×44pt; Google Material Design recommends 48×48dp. Small touch targets cause 'rage taps' — multiple frustrated quick taps — especially on mobile. Use @media (any-pointer: coarse) to enlarge targets specifically for touch devices. Source: WCAG 2.2 — SC 2.5.8.",
+    "description-zh": "WCAG 2.2 目标尺寸 (2.5.8 AA) 要求交互元素至少 24×24 CSS 像素。你可以保留精致的 16px 图标，用 padding 或透明伪元素把可点击区域扩展到 48px。Apple 建议 44×44pt，Google Material Design 建议 48×48dp。小触摸目标导致「暴怒连点」——尤其手机上多次快速挫败点击。用 @media (any-pointer: coarse) 为触摸设备放大目标。源自 WCAG 2.2 — SC 2.5.8。",
+    "tags": [
+      "touch",
+      "target-size",
+      "wcag",
+      "mobile",
+      "accessibility"
+    ],
+    "css": ".icon-btn{width:16px;height:16px;padding:16px}.icon-btn::after{content:'';position:absolute;inset:-16px}@media(any-pointer:coarse){.btn{padding:12px 24px}}",
+    "anti": [
+      "16x16px clickable icon with no padding",
+      "tiny 'x' close button",
+      "dense table rows with small interactive cells",
+      "mobile touch targets below 44px"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Prefers Reduced Motion — Kill All Animation",
+    "name-zh": "尊重减少动效偏好 — 彻底关闭动画",
+    "description-en": "Always respect prefers-reduced-motion: reduce. Set animation-duration and transition-duration to 0.01ms (!important) for all elements, disable scroll-behavior: smooth, and remove parallax/scroll-triggered transforms entirely. Some users experience vertigo, nausea, or distraction from motion. This is not a 'nice to have' — it's a WCAG requirement. Wrap all animation code in @media (prefers-reduced-motion: no-preference) so it only activates for users who haven't opted out. Source: WCAG 2.2.",
+    "description-zh": "始终尊重 prefers-reduced-motion: reduce。所有元素设 animation-duration 和 transition-duration 为 0.01ms (!important)，禁用 scroll-behavior: smooth，完全移除视差/滚动触发变换。部分用户会因动效产生眩晕、恶心或分心。这不是'锦上添花'——是 WCAG 的要求。用 @media (prefers-reduced-motion: no-preference) 包裹所有动画代码，仅对未关闭动效的用户激活。源自 WCAG 2.2。",
+    "tags": [
+      "motion",
+      "reduced-motion",
+      "accessibility",
+      "wcag",
+      "animation"
+    ],
+    "css": "@media(prefers-reduced-motion:no-preference){.reveal{animation:fade-up .45s ease both}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}",
+    "anti": [
+      "animations without reduced-motion check",
+      "scroll-behavior:smooth without override",
+      "parallax without disable option",
+      "ignoring user motion preferences"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Animate Only transform & opacity — GPU-Composited",
+    "name-zh": "仅动画 transform 和 opacity — GPU 合成",
+    "description-en": "Only animate transform and opacity. These are the only CSS properties that trigger compositing — the browser offloads them to the GPU without recalculating layout or repainting. Animating width, height, top, left, or margin triggers expensive layout recalculations (reflow) on every frame. Use transform: translate() instead of top/left, transform: scale() instead of width/height, and opacity for fade effects. The performance difference is often 60fps vs 15fps on mobile. Source: CSS Performance Best Practices 2025.",
+    "description-zh": "仅动画 transform 和 opacity。这是仅有的触发合成的 CSS 属性——浏览器将它们卸载到 GPU 而不重新计算布局或重绘。动画 width、height、top、left 或 margin 在每一帧触发昂贵的布局重计算（reflow）。用 transform: translate() 替代 top/left，用 transform: scale() 替代 width/height，用 opacity 做淡入淡出。性能差距在移动端常达 60fps vs 15fps。源自 CSS 性能最佳实践 2025。",
+    "tags": [
+      "animation",
+      "performance",
+      "gpu",
+      "transform",
+      "opacity"
+    ],
+    "css": ".card:hover{transform:scale(1.02)}.toast{opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s}@keyframes slide-in{from{transform:translateX(32px);opacity:0}to{transform:translateX(0);opacity:1}}",
+    "anti": [
+      "animating width from 0 to 100%",
+      "transition:left .3s",
+      "animating height:auto",
+      "margin-based animation",
+      "top/left animation"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Logical Properties — Inline/Block Over Left/Right",
+    "name-zh": "逻辑属性 — inline/block 替代 left/right",
+    "description-en": "Use logical (flow-relative) CSS properties instead of physical ones. margin-inline-start instead of margin-left, padding-block instead of padding-top/padding-bottom, border-inline-end instead of border-right. Logical properties automatically flip for RTL languages (Arabic, Hebrew) without writing a single additional rule. They also work correctly in flexbox and grid when direction changes. A site that uses logical properties gains RTL support for free. Source: CSS Best Practices 2025.",
+    "description-zh": "使用逻辑（流相对）CSS 属性代替物理属性。margin-inline-start 代替 margin-left，padding-block 代替 padding-top/padding-bottom，border-inline-end 代替 border-right。逻辑属性在 RTL 语言（阿拉伯语、希伯来语）下自动翻转，无需额外写一行规则。在 flexbox 和 grid 方向变化时也能正确工作。使用逻辑属性的网站免费获得 RTL 支持。源自 CSS 最佳实践 2025。",
+    "tags": [
+      "logical-properties",
+      "rtl",
+      "i18n",
+      "layout",
+      "modern-css"
+    ],
+    "css": ".card{margin-inline-start:16px;padding-block:24px;border-inline-end:1px solid var(--line);text-align:start}",
+    "anti": [
+      "hardcoded margin-left",
+      "padding-right for spacing",
+      "text-align:left on RTL pages",
+      "duplicate CSS for RTL direction"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "CSS contain — Isolate Component Recalculations",
+    "name-zh": "CSS contain — 隔离组件重计算",
+    "description-en": "Use the contain property to tell the browser a component's layout, style, and paint are independent of the rest of the page. contain: content prevents internal changes from triggering full-page reflows. contain: strict is a stronger isolation guarantee. For a card list where each card is independent, adding contain: content to each card can dramatically improve scroll performance. Pair with content-visibility: auto for off-screen elements — the browser skips rendering them entirely until they scroll into view. Source: CSS Performance Best Practices 2025.",
+    "description-zh": "使用 contain 属性告诉浏览器一个组件的布局、样式和绘制独立于页面其余部分。contain: content 阻止内部变化触发全页面 reflow。contain: strict 提供更强的隔离保证。对于每张卡片都独立的卡片列表，给每张卡片加 contain: content 可大幅提升滚动性能。配合 content-visibility: auto 用于屏幕外元素——浏览器完全跳过渲染直到滚动到可见范围。源自 CSS 性能最佳实践 2025。",
+    "tags": [
+      "contain",
+      "performance",
+      "isolation",
+      "reflow",
+      "modern-css"
+    ],
+    "css": ".card{contain:content;content-visibility:auto;contain-intrinsic-size:200px}",
+    "anti": [
+      "full-page reflow from component changes",
+      "no contain on independent list items",
+      "measuring all content upfront",
+      "ignoring content-visibility for long pages"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Flexbox + Grid gap — Never Manual Margin on Children",
+    "name-zh": "Flexbox + Grid gap — 禁止在子元素上手写 margin",
+    "description-en": "Use the gap property on flex and grid containers instead of margin-right or margin-bottom on individual children. gap: 16px on the container is cleaner than margin-right: 16px on every child (and then needing to remove it from the last child). Gap works in both Flexbox and Grid since 2021 (all modern browsers). It's immune to wrapping issues — when items wrap, gap handles the row gap automatically. Source: CSS Best Practices 2025.",
+    "description-zh": "在 flex 和 grid 容器上用 gap 属性，而非在每个子元素上写 margin-right 或 margin-bottom。容器上 gap: 16px 比每个子元素 margin-right: 16px（然后还要去掉最后一个）干净得多。gap 自 2021 年起在所有现代浏览器的 Flexbox 和 Grid 中均可用。它天然免疫换行问题——元素换行时 gap 自动处理行间距。源自 CSS 最佳实践 2025。",
+    "tags": [
+      "gap",
+      "flexbox",
+      "grid",
+      "spacing",
+      "modern-css"
+    ],
+    "css": ".card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}.toolbar{display:flex;gap:12px;align-items:center}",
+    "anti": [
+      ".item{margin-right:16px}.item:last-child{margin-right:0}",
+      "manual margin on every flex child",
+      "margin-bottom on every list item"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "4dp Spacing Grid — All Spacing in Multiples of 4",
+    "name-zh": "4dp 间距网格 — 所有间距为 4 的倍数",
+    "description-en": "Material Design 3 uses a 4dp baseline grid: all spacing values are multiples of 4 (4, 8, 12, 16, 24, 32, 48, 64, 96, 128dp). Never use arbitrary values like 7px, 13px, or 23px. This constraint creates visual rhythm — elements snap to an invisible grid and feel intentionally placed rather than approximate. Translate to CSS using px or rem (4px = 0.25rem). All padding, margin, gap, and component dimensions should adhere to the 4px grid. Source: Material Design 3 Foundations.",
+    "description-zh": "Material Design 3 使用 4dp 基准网格：所有间距为 4 的倍数（4、8、12、16、24、32、48、64、96、128dp）。禁止使用任意值如 7px、13px 或 23px。这个约束创造了视觉节奏——元素吸附到隐形网格上，感觉是被有意放置而非近似摆放。转换到 CSS 用 px 或 rem（4px = 0.25rem）。所有 padding、margin、gap 和组件尺寸应遵守 4px 网格。源自 Material Design 3 基础规范。",
+    "tags": [
+      "spacing",
+      "grid",
+      "material-design",
+      "rhythm",
+      "layout"
+    ],
+    "css": ":root{--s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-6:24px;--s-8:32px;--s-12:48px}.card{padding:var(--s-4);gap:var(--s-2)}",
+    "anti": [
+      "padding:7px",
+      "margin:13px",
+      "gap:5px",
+      "random spacing values",
+      "inconsistent padding within same component"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Window Size Classes — Design for Width Categories",
+    "name-zh": "窗口尺寸分类 — 按宽度类别设计",
+    "description-en": "Material Design 3 defines 5 window size classes instead of arbitrary breakpoints: Compact (<600dp — phones), Medium (600-839dp — small tablets), Expanded (840-1199dp — large tablets), Large (1200-1599dp — desktops), Extra-large (1600dp+ — ultrawide). Design layouts that adapt to the size class, not the pixel value. A card grid might be 1 column on Compact, 2 on Medium, 3 on Expanded, and 4 on Large. This is more robust than targeting specific device widths. Source: Material Design 3 Layout.",
+    "description-zh": "Material Design 3 定义 5 个窗口尺寸分类代替任意断点：Compact (<600dp — 手机)、Medium (600-839dp — 小平板)、Expanded (840-1199dp — 大平板)、Large (1200-1599dp — 桌面)、Extra-large (1600dp+ — 超宽)。设计适配尺寸类别的布局，而非像素值。卡片网格可能是 Compact 1 列、Medium 2 列、Expanded 3 列、Large 4 列。这比针对特定设备宽度更健壮。源自 Material Design 3 布局规范。",
+    "tags": [
+      "responsive",
+      "breakpoint",
+      "material-design",
+      "layout",
+      "mobile-first"
+    ],
+    "css": ".grid{display:grid;gap:16px;grid-template-columns:1fr}@media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:840px){.grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:1200px){.grid{grid-template-columns:repeat(4,1fr)}}",
+    "anti": [
+      "breakpoints at arbitrary widths",
+      "only one breakpoint at 768px",
+      "designing for specific devices",
+      "ignoring 1600dp+ ultrawide"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Material Type Scale — 15 Tokenized Roles",
+    "name-zh": "Material 排版阶差 — 15 个 Token 化角色",
+    "description-en": "Material Design 3 defines a 15-role type scale organized from Display Large (57sp) to Label Small (11sp), using a Major Second ratio anchored at Body Medium (14sp). Each role is a design token (md.sys.typescale.*) with defined size, weight, line-height, and letter-spacing. Rules: Display for hero moments (≤2 per page), Headline for section titles, Title for component headers, Body for content, Label for buttons/captions. Never use more than 2 Display sizes on one page; never go below 12sp for body text. Source: Material Design 3 Typography.",
+    "description-zh": "Material Design 3 定义 15 个角色的排版阶差，从 Display Large (57sp) 到 Label Small (11sp)，使用大二度比例，以 Body Medium (14sp) 为锚点。每个角色是设计 token (md.sys.typescale.*)，含尺寸、字重、行高和字间距。规则：Display 用于 Hero（每页 ≤2）、Headline 用于区域标题、Title 用于组件标题、Body 用于正文、Label 用于按钮/标注。一页禁止超过 2 个 Display 尺寸；正文绝不低于 12sp。源自 Material Design 3 排版规范。",
+    "tags": [
+      "typography",
+      "type-scale",
+      "material-design",
+      "tokens",
+      "font"
+    ],
+    "css": "h1{font-size:clamp(2rem,5vw,3.5625rem);font-weight:400;line-height:1.12}h2{font-size:1.5rem;font-weight:400}p{font-size:.875rem;line-height:1.43}.label{font-size:.75rem;font-weight:500;letter-spacing:.5px}",
+    "anti": [
+      "more than 2 Display sizes on one page",
+      "body text below 12sp",
+      "mixing 7+ different font sizes",
+      "no line-height adjustment for larger text"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "M3 Dynamic Color — Adapt to User Preference",
+    "name-zh": "M3 动态颜色 — 适应用户偏好",
+    "description-en": "Material Design 3's Dynamic Color system generates a full tonal palette from a single source color (or the user's wallpaper on Android). Use CSS light-dark() for native light/dark mode: color: light-dark(#1B4E7A, #9CCBEC). The Accent color should have 13 tonal variants — a primary, on-primary, container, and on-container for both light and dark themes. Never define only light-theme colors. Every color token should have a light and dark variant. Source: Material Design 3 Color System.",
+    "description-zh": "Material Design 3 的动态颜色系统从单一源颜色（或 Android 用户壁纸）生成完整的色调色板。使用 CSS light-dark() 实现原生亮/暗模式：color: light-dark(#1B4E7A, #9CCBEC)。主色应有 13 个色调变体——primary、on-primary、container、on-container，亮暗各一套。绝不要只定义亮色主题的颜色。每个颜色 token 都应有亮暗变体。源自 Material Design 3 颜色系统。",
+    "tags": [
+      "color",
+      "dark-mode",
+      "material-design",
+      "dynamic-color",
+      "theme"
+    ],
+    "css": ":root{color-scheme:light dark;--primary:light-dark(#1B4E7A,#9CCBEC);--surface:light-dark(#FFF,#1A1C1E);--on-surface:light-dark(#15324C,#E1E3E5)}",
+    "anti": [
+      "light-only color scheme",
+      "hardcoded #FFF background",
+      "dark mode as an afterthought",
+      "using rgba() that doesn't work in dark mode"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": ":has() — Parent Selector",
+    "name-zh": ":has() — 父选择器",
+    "description-en": "The :has() pseudo-class selects an element based on what it contains. Example: .card:has(img) styles cards that contain images; form:has(:invalid) highlights invalid forms. It replaces dozens of JavaScript class-toggling patterns. Use it for conditional parent styling, sibling-aware layouts, and empty-state detection. Never nest :has() deeper than 2 levels — specificity explodes. Never use it as a JavaScript replacement for complex state management.",
+    "description-zh": ":has() 伪类根据子元素选择父元素。例：.card:has(img) 选择含图片的卡片；form:has(:invalid) 高亮无效表单。替代大量 JS class 切换。用于条件父样式、兄弟感知布局和空状态检测。:has() 嵌套禁止超过 2 层——优先级爆炸。禁止用它替代复杂状态管理。",
+    "tags": [
+      "selector",
+      "has",
+      "parent",
+      "modern-css",
+      "conditional"
+    ],
+    "css": ".card:has(img) .title{margin-top:12px}form:has(:invalid) .submit{opacity:.5;pointer-events:none}ul:has(li){padding-left:1.5em}ul:not(:has(li)){display:none}",
+    "anti": [
+      ":has(:has(:has(...)))",
+      "using :has() for state management",
+      "over-specificity chains"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "@starting-style — Entry Animation for Top-Layer Elements",
+    "name-zh": "@starting-style — 顶层元素入场动画",
+    "description-en": "@starting-style defines the initial styles for elements when they first appear in the DOM or transition from display:none. Combined with popover or <dialog>, it enables pure-CSS entry animations without JavaScript. The rule is evaluated once on insertion, then the element transitions to its normal styles. Pairs with transition-behavior: allow-discrete for display:none transitions. Source: CSS Transitions Level 2.",
+    "description-zh": "@starting-style 定义元素首次出现或从 display:none 过渡时的初始样式。结合 popover 或 <dialog> 可纯 CSS 实现入场动画，无需 JS。规则在插入时求值一次，然后元素过渡到正常样式。搭配 transition-behavior: allow-discrete 实现 display:none 过渡。源自 CSS Transitions Level 2。",
+    "tags": [
+      "animation",
+      "starting-style",
+      "popover",
+      "dialog",
+      "entry",
+      "modern-css"
+    ],
+    "css": "[popover]{opacity:0;transform:scale(.95);transition:opacity .2s,transform .2s,display .2s allow-discrete}@starting-style{[popover]:not(:popover-open){opacity:0;transform:scale(.95)}}[popover]:popover-open{opacity:1;transform:scale(1)}",
+    "anti": [
+      "JS class toggle for entry animation",
+      "visibility:hidden hack",
+      "animation keyframes for simple show/hide"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Native CSS Nesting — No Preprocessor Needed",
+    "name-zh": "原生 CSS 嵌套 — 无需预处理器",
+    "description-en": "CSS now supports native nesting with the & selector, just like Sass. No build step, no extra dependency. Rules: use & to reference the parent selector; nesting depth limit is 3 levels (same as the Sass rule). Direct nesting without & works for pseudo-classes and pseudo-elements. Browser support: all evergreen browsers since 2023. Never nest beyond 3 levels — specificity becomes unmanageable. Never use nesting to avoid writing meaningful class names.",
+    "description-zh": "CSS 原生支持 & 选择器嵌套，与 Sass 一样。无需构建步骤，零依赖。规则：用 & 引用父选择器；嵌套深度限制 3 层（同 Sass 规则）。伪类和伪元素可直接嵌套无需 &。浏览器支持：2023 年起所有现代浏览器。禁止嵌套超过 3 层——优先级不可控。禁止用嵌套逃避写有意义的类名。",
+    "tags": [
+      "nesting",
+      "css",
+      "native",
+      "modern-css",
+      "no-preprocessor"
+    ],
+    "css": ".card{border:1px solid #e0e0e0;& .title{font-size:1.25rem;font-weight:600}&:hover{border-color:#3A8DD0}&::before{content:'';display:block}}",
+    "anti": [
+      "nesting > 3 levels",
+      "replacing class names with nesting",
+      "using Sass just for nesting"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "@property — Typed Custom Properties",
+    "name-zh": "@property — 类型化自定义属性",
+    "description-en": "@property registers a custom property with a defined syntax, initial value, and inheritance. This enables CSS to interpolate custom properties in animations and transitions — previously impossible. Example: @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; } allows animating --angle with @keyframes. Essential for gradient animations, color transitions on custom properties, and progress indicators. Source: CSS Properties and Values API.",
+    "description-zh": "@property 注册自定义属性并定义语法、初始值和继承性，使 CSS 能在动画和过渡中插值自定义属性——以前不可能。例：@property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; } 允许用 @keyframes 动画 --angle。渐变动画、自定义属性颜色过渡和进度指示器必备。源自 CSS Properties and Values API。",
+    "tags": [
+      "property",
+      "custom-properties",
+      "animation",
+      "tokens",
+      "modern-css"
+    ],
+    "css": "@property --gradient-angle{syntax:'<angle>';initial-value:0deg;inherits:false}.gradient-box{background:conic-gradient(from var(--gradient-angle),#3A8DD0,#73B9E6,#3A8DD0);animation:spin 3s linear infinite}@keyframes spin{to{--gradient-angle:360deg}}",
+    "anti": [
+      "animating custom properties without @property",
+      "hardcoding values instead of using @property for type safety"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "light-dark() — Automatic Theme Function",
+    "name-zh": "light-dark() — 自动主题函数",
+    "description-en": "The light-dark() CSS function returns the first value in light color-scheme and the second in dark. Combined with color-scheme: light dark on :root, it eliminates the need for separate :root and [data-theme=dark] blocks. Example: background: light-dark(#fff, #1a1a1a). Requires color-scheme to be declared. Simpler than prefers-color-scheme media queries for basic theming. Never use light-dark() without declaring color-scheme first — it won't work.",
+    "description-zh": "light-dark() CSS 函数在亮色方案返回第一个值、暗色返回第二个。配合 :root 上的 color-scheme: light dark，消除分别写 :root 和 [data-theme=dark] 的需要。例：background: light-dark(#fff, #1a1a1a)。必须先声明 color-scheme。比 prefers-color-scheme 媒体查询更简洁。禁止在未声明 color-scheme 时使用 light-dark()——无效。",
+    "tags": [
+      "light-dark",
+      "color",
+      "theme",
+      "dark-mode",
+      "modern-css"
+    ],
+    "css": ":root{color-scheme:light dark;--bg:light-dark(#ffffff,#1a1a1a);--text:light-dark(#15324C,#E1E3E5);--surface:light-dark(#F4F8FC,#2a2a2a)}body{background:var(--bg);color:var(--text)}",
+    "anti": [
+      "light-dark() without color-scheme declaration",
+      "mixing light-dark() with prefers-color-scheme on the same property"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "color-mix() — Mix Colors in CSS",
+    "name-zh": "color-mix() — CSS 内混色",
+    "description-en": "color-mix() blends two colors in a given color space. Example: color-mix(in srgb, var(--primary) 80%, transparent) creates a translucent primary color. Use it for hover states, disabled overlays, border tints, and generating tonal variants from a single accent color. Eliminates the need for Sass color functions. Syntax: color-mix(in <color-space>, <color> <percentage>, <color> <percentage>). Always specify the color space — srgb for web, oklch for perceptual uniformity.",
+    "description-zh": "color-mix() 在指定颜色空间混合两色。例：color-mix(in srgb, var(--primary) 80%, transparent) 创建半透明主色。用于悬停态、禁用覆盖、边框色调和从单个主色生成色调变体。消除 Sass 颜色函数的需要。语法：color-mix(in <颜色空间>, <颜色> <百分比>, <颜色> <百分比>)。始终指定颜色空间——srgb 用于 web，oklch 用于感知均匀。",
+    "tags": [
+      "color-mix",
+      "color",
+      "theme",
+      "dynamic-color",
+      "modern-css"
+    ],
+    "css": ":root{--primary:#3A8DD0;--primary-hover:color-mix(in srgb,var(--primary) 85%,black);--primary-light:color-mix(in srgb,var(--primary) 12%,white);--primary-disabled:color-mix(in srgb,var(--primary) 40%,white)}.btn-primary{background:var(--primary)}.btn-primary:hover{background:var(--primary-hover)}.btn-primary:disabled{background:var(--primary-disabled)}",
+    "anti": [
+      "hardcoding hover color instead of mixing",
+      "using Sass color functions when color-mix() is available"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "text-wrap: balance / pretty — Better Text Flow",
+    "name-zh": "text-wrap: balance/pretty — 更好的文本流",
+    "description-en": "text-wrap: balance distributes text evenly across lines, preventing orphaned words on headings. text-wrap: pretty optimizes paragraph endings for readability. Use balance on headings and short text blocks (≤6 lines). Use pretty on body paragraphs. Both are now supported in all evergreen browsers. Never use balance on long body text — it causes layout recalculations on every resize. Never leave headings without balance — orphaned words look unprofessional.",
+    "description-zh": "text-wrap: balance 将文本均匀分布在各行，防止标题出现孤字。text-wrap: pretty 优化段落结尾以提高可读性。balance 用于标题和短文本（≤6 行）。pretty 用于正文段落。两者均在所有现代浏览器中支持。禁止在长正文中用 balance——每次重排都重新计算。标题不要不用 balance——孤字不专业。",
+    "tags": [
+      "text-wrap",
+      "balance",
+      "pretty",
+      "typography",
+      "modern-css"
+    ],
+    "css": "h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}.hero-title{text-wrap:balance;max-width:20ch}",
+    "anti": [
+      "text-wrap: balance on long paragraphs",
+      "no text-wrap on headings",
+      "manual <br> to control line breaks"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "CSS Subgrid — Nested Grid Alignment",
+    "name-zh": "CSS Subgrid — 嵌套网格对齐",
+    "description-en": "Subgrid allows a nested grid to inherit the track sizing of its parent grid. Use grid-template-columns: subgrid or grid-template-rows: subgrid on a child that is itself a grid item. This solves the classic card layout problem where titles, descriptions, and CTAs across cards need to align even when content lengths differ. Browser support: all evergreen browsers since late 2023. Never use subgrid when a simple grid or flexbox would suffice — it adds complexity.",
+    "description-zh": "Subgrid 允许嵌套网格继承父网格的轨道尺寸。在作为网格项的子元素上使用 grid-template-columns: subgrid 或 grid-template-rows: subgrid。解决经典卡片布局问题：标题、描述、CTA 在不同内容长度下仍需对齐。浏览器支持：2023 年末起所有现代浏览器。简单 grid 或 flexbox 能解决时不要用 subgrid——增加复杂度。",
+    "tags": [
+      "subgrid",
+      "grid",
+      "layout",
+      "alignment",
+      "modern-css"
+    ],
+    "css": ".card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{display:grid;grid-template-rows:subgrid;grid-row:span 3}",
+    "anti": [
+      "using subgrid for simple layouts",
+      "subgrid without meaningful alignment needs"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Scrollbar Styling — Consistent Cross-Browser",
+    "name-zh": "滚动条样式 — 跨浏览器一致",
+    "description-en": "Use scrollbar-color and scrollbar-width (standard) for Firefox/Evergreen, and ::-webkit-scrollbar-* pseudo-elements for WebKit/Blink. Rule: thin scrollbar in accent-muted color, no visible track on short content. scrollbar-gutter: stable prevents layout shift when content overflows. Never use a fully custom scrollbar that breaks native scroll physics. Never hide the scrollbar completely without an alternative scroll affordance.",
+    "description-zh": "用 scrollbar-color 和 scrollbar-width（标准）适配 Firefox/Evergreen，::-webkit-scrollbar-* 伪元素适配 WebKit/Blink。规则：细滚动条用主色淡色，短内容不显示轨道。scrollbar-gutter: stable 防止内容溢出时布局偏移。禁止破坏原生滚动物理的全自定义滚动条。禁止完全隐藏滚动条而无替代滚动提示。",
+    "tags": [
+      "scrollbar",
+      "styling",
+      "cross-browser",
+      "ux",
+      "modern-css"
+    ],
+    "css": ":root{scrollbar-width:thin;scrollbar-color:rgba(20,58,92,.25) transparent;scrollbar-gutter:stable}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(20,58,92,.25);border-radius:3px}::-webkit-scrollbar-track{background:transparent}",
+    "anti": [
+      "fully custom scrollbar breaking scroll physics",
+      "hiding scrollbar completely",
+      "scrollbar-width: none on scrollable content"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Dynamic Viewport Units — dvh, svh, lvh",
+    "name-zh": "动态视口单位 — dvh、svh、lvh",
+    "description-en": "vh is broken on mobile — it includes the address bar, causing content to be hidden behind it. Use dvh (dynamic viewport height) for elements that should fill the visible area, svh (small viewport height) for the minimum visible area, and lvh (large viewport height) for the maximum. Example: min-height: 100dvh for full-screen sections. Fallback: min-height: 100vh; min-height: 100dvh. Never use 100vh alone on mobile — it will cause overflow.",
+    "description-zh": "vh 在移动端有 bug——包含地址栏高度，导致内容被遮挡。用 dvh（动态视口高度）填充可见区域，svh（最小视口高度）用于最小可见区域，lvh（最大视口高度）用于最大区域。例：min-height: 100dvh 全屏区块。回退：min-height: 100vh; min-height: 100dvh。禁止移动端单独使用 100vh——会溢出。",
+    "tags": [
+      "viewport",
+      "dvh",
+      "svh",
+      "lvh",
+      "mobile",
+      "modern-css"
+    ],
+    "css": ".fullscreen{min-height:100vh;min-height:100dvh;display:grid;place-items:center}.above-fold{height:100svh}",
+    "anti": [
+      "100vh on mobile without dvh fallback",
+      "using dvh for fixed elements (use lvh instead)"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "content-visibility — Rendering Performance",
+    "name-zh": "content-visibility — 渲染性能优化",
+    "description-en": "content-visibility: auto skips rendering of off-screen elements, significantly reducing initial paint time for long pages. Combined with contain-intrinsic-size (or contain-intrinsic-block-size), it reserves space so the layout doesn't shift. Use on blog post lists, comment sections, and any below-fold content. Measured improvement: 50-90% reduction in rendering time for pages with 100+ off-screen elements. Never use without specifying intrinsic size — it collapses to 0 height.",
+    "description-zh": "content-visibility: auto 跳过屏幕外元素的渲染，大幅减少长页面的首次绘制时间。配合 contain-intrinsic-size（或 contain-intrinsic-block-size）预留空间防止布局偏移。用于博文列表、评论区和所有屏下内容。实测：100+ 屏外元素页面渲染时间减少 50-90%。禁止不指定 intrinsic size 就使用——高度塌缩为 0。",
+    "tags": [
+      "content-visibility",
+      "performance",
+      "rendering",
+      "optimization",
+      "modern-css"
+    ],
+    "css": ".below-fold{content-visibility:auto;contain-intrinsic-size:auto 500px}.blog-post+.blog-post{content-visibility:auto;contain-intrinsic-block-size:auto 300px}",
+    "anti": [
+      "content-visibility: auto without contain-intrinsic-size",
+      "using on above-fold critical content"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Anchor Positioning — CSS-Only Tooltip/Popover Placement",
+    "name-zh": "锚点定位 — 纯 CSS 提示框/弹出层定位",
+    "description-en": "CSS Anchor Positioning lets you position any element relative to an 'anchor' element using the anchor() function and position-area property. No JavaScript position calculations needed. Use for tooltips, popovers, dropdown menus, and context menus. Define an anchor with anchor-name: --my-anchor, reference it with position: fixed; left: anchor(--my-anchor center). Browser support: Chromium 125+, others following. Never use for complex multi-step positioning — that's still better handled by floating-ui.",
+    "description-zh": "CSS 锚点定位用 anchor() 函数和 position-area 属性将元素相对于'锚点'元素定位，无需 JS 计算。用于提示框、弹出层、下拉菜单和上下文菜单。定义锚点 anchor-name: --my-anchor，引用 position: fixed; left: anchor(--my-anchor center)。浏览器支持：Chromium 125+，其他跟进中。复杂多步定位仍推荐 floating-ui。",
+    "tags": [
+      "anchor",
+      "positioning",
+      "tooltip",
+      "popover",
+      "modern-css"
+    ],
+    "css": ".trigger{anchor-name:--trigger}.tooltip{position:fixed;position-anchor:--trigger;inset-area:top span-all;margin-bottom:8px}",
+    "anti": [
+      "JS getBoundingClientRect for simple tooltips",
+      "anchor positioning for complex multi-step menus"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Scroll-Driven Animations — Scroll-Linked Effects",
+    "name-zh": "滚动驱动动画 — 滚动关联效果",
+    "description-en": "animation-timeline: scroll() ties an animation's progress to scroll position. animation-timeline: view() triggers when an element enters the viewport. Use for parallax headers, reading progress bars, scroll-triggered reveals, and sticky element transitions. Replaces Intersection Observer + scroll event listener patterns. The animation plays forward as you scroll down and reverses as you scroll up. Never use scroll-driven animations on performance-sensitive mobile pages without testing.",
+    "description-zh": "animation-timeline: scroll() 将动画进度绑定到滚动位置。animation-timeline: view() 在元素进入视口时触发。用于视差头部、阅读进度条、滚动触发展现和粘性元素过渡。替代 Intersection Observer + scroll 事件监听模式。向下滚动动画正放，向上滚动倒放。性能敏感的移动端页面使用前必须测试。",
+    "tags": [
+      "scroll-driven",
+      "animation",
+      "parallax",
+      "performance",
+      "modern-css"
+    ],
+    "css": ".progress-bar{position:fixed;top:0;left:0;height:3px;background:#3A8DD0;transform-origin:left;animation:grow linear;animation-timeline:scroll()}.reveal{animation:fade-in ease-in both;animation-timeline:view();animation-range:entry 0% entry 100%}@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes fade-in{from{opacity:0;translate:0 40px}to{opacity:1;translate:0 0}}",
+    "anti": [
+      "scroll event listener for simple parallax",
+      "requestAnimationFrame scroll handlers",
+      "scroll-driven animations on low-end mobile"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "View Transitions API — Smooth Page Transitions",
+    "name-zh": "View Transitions API — 平滑页面过渡",
+    "description-en": "The View Transitions API enables animated transitions between page states (SPA) or page navigations (MPA). For SPA: document.startViewTransition(() => updateDOM()). For MPA: @view-transition { navigation: auto; } in CSS. Name elements with view-transition-name to animate them individually. The default cross-fade is a good starting point; customize with ::view-transition-old and ::view-transition-new pseudo-elements. Never use view transitions on reduced-motion preference without disabling them.",
+    "description-zh": "View Transitions API 实现页面状态（SPA）或导航（MPA）间的动画过渡。SPA：document.startViewTransition(() => updateDOM())。MPA：CSS 中 @view-transition { navigation: auto; }。用 view-transition-name 命名单独动画元素。默认交叉淡入是好的起点；用 ::view-transition-old 和 ::view-transition-new 伪元素自定义。用户开启减少动效时必须禁用。",
+    "tags": [
+      "view-transitions",
+      "page-transition",
+      "animation",
+      "spa",
+      "modern-css"
+    ],
+    "css": "@view-transition{navigation:auto}::view-transition-old(root){animation:fade-out .3s ease-in}::view-transition-new(root){animation:fade-in .3s ease-out}@keyframes fade-out{to{opacity:0}}@keyframes fade-in{from{opacity:0}}.hero-image{view-transition-name:hero}",
+    "anti": [
+      "view transitions without reduced-motion check",
+      "complex multi-element transitions on every page"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Popover API — Native Lightweight Popover",
+    "name-zh": "Popover API — 原生轻量弹出层",
+    "description-en": "The popover attribute creates auto-managing, light-dismissible popovers in the top layer. No z-index wars, no focus management code, no click-outside handlers. Trigger with popovertarget='my-popover' on a button. Two modes: popover (manual) and popover='auto' (auto-dismiss). Combine with anchor positioning for tooltip-like placement. Keyboard: Escape dismisses. Never use popover for critical modals — use <dialog> instead. Never fight the top-layer stacking with z-index.",
+    "description-zh": "popover 属性创建自动管理、轻触消除的顶层弹出层。无 z-index 战争、无焦点管理代码、无外部点击处理器。用按钮的 popovertarget='my-popover' 触发。两种模式：popover（手动）和 popover='auto'（自动消除）。结合锚点定位实现类提示框。键盘 Escape 关闭。关键模态框不要用 popover——用 <dialog>。禁止用 z-index 对抗顶层堆叠。",
+    "tags": [
+      "popover",
+      "api",
+      "top-layer",
+      "accessibility",
+      "modern-css"
+    ],
+    "css": "[popover]{border:1px solid rgba(20,58,92,.1);border-radius:8px;padding:16px;box-shadow:0 12px 30px rgba(20,58,92,.16)}[popover]:popover-open{opacity:1;transform:translateY(0)}",
+    "anti": [
+      "popover for critical modals",
+      "z-index on popover elements",
+      "manual click-outside handler with popover"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "<dialog> Styling — Native Modal Pattern",
+    "name-zh": "<dialog> 样式 — 原生模态框模式",
+    "description-en": "The <dialog> element provides native modal behavior with built-in focus trapping, Escape to close, and ::backdrop overlay. Use showModal() for modals, show() for non-modal. Style the dialog with border: none, border-radius: 16px, and padding: 24px. The ::backdrop gets a semi-transparent overlay. Combine with @starting-style for entry animation. Never build a custom focus trap when <dialog> provides one natively. Never use <dialog> without proper ARIA labeling.",
+    "description-zh": "<dialog> 元素提供原生模态行为：内置焦点捕获、Escape 关闭和 ::backdrop 遮罩。showModal() 打开模态，show() 打开非模态。样式：border: none、border-radius: 16px、padding: 24px。::backdrop 设半透明覆盖层。配合 @starting-style 做入场动画。禁止在 <dialog> 原生提供焦点捕获时自建。禁止使用 <dialog> 不加 ARIA 标签。",
+    "tags": [
+      "dialog",
+      "modal",
+      "native",
+      "accessibility",
+      "modern-css"
+    ],
+    "css": "dialog{border:none;border-radius:16px;padding:24px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(20,58,92,.2)}dialog::backdrop{background:rgba(0,0,0,.4);backdrop-filter:blur(4px)}@starting-style{dialog:popover-open,dialog[open]{opacity:0;transform:translateY(20px)}}",
+    "anti": [
+      "custom focus trap with dialog",
+      "dialog without aria-label",
+      "div with role=dialog instead of native dialog"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "field-sizing: content — Auto-Resize Inputs",
+    "name-zh": "field-sizing: content — 输入框自动尺寸",
+    "description-en": "field-sizing: content makes <textarea> and <input> auto-size to fit their content, replacing dozens of JavaScript auto-resize hacks. Set it on textareas that need to grow as the user types. Combined with min-height and max-height, it provides a controlled auto-expanding experience. Browser support: Chromium 123+, others following. Never use without setting a reasonable max-height — it could grow infinitely. Never use a JavaScript resize observer when field-sizing: content works.",
+    "description-zh": "field-sizing: content 让 <textarea> 和 <input> 根据内容自动调整尺寸，替代大量 JS 自动调整 hack。在需要随用户输入增长的 textarea 上设置。配合 min-height 和 max-height 提供受控自动扩展体验。浏览器支持：Chromium 123+，其他跟进中。禁止不设 max-height——可能无限增长。field-sizing: content 能用时禁止用 JS resize observer。",
+    "tags": [
+      "field-sizing",
+      "form",
+      "auto-resize",
+      "textarea",
+      "modern-css"
+    ],
+    "css": "textarea{field-sizing:content;min-height:80px;max-height:300px;border:1px solid rgba(20,58,92,.18);border-radius:8px;padding:12px;font-size:1rem;resize:none}",
+    "anti": [
+      "JS auto-resize textarea hack",
+      "field-sizing without max-height",
+      "rows attribute as only height control"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "min() and max() — Intrinsic Sizing",
+    "name-zh": "min() 和 max() — 内在尺寸",
+    "description-en": "min() returns the smaller of its arguments, max() returns the larger. Together with clamp() they form the intrinsic sizing trio. Use max() to ensure a minimum width: width: max(200px, 50vw). Use min() to cap a maximum: width: min(90%, 72ch). Unlike clamp(), they take only 2+ arguments. Essential for responsive layouts without media queries. The arguments can mix units freely: min(100%, 800px). Never use clamp() when min() or max() alone would suffice — it adds unnecessary complexity.",
+    "description-zh": "min() 返回参数中的较小值，max() 返回较大值。与 clamp() 组成内在尺寸三件套。用 max() 确保最小宽度：width: max(200px, 50vw)。用 min() 限制最大宽度：width: min(90%, 72ch)。不像 clamp() 只需 2+ 参数。无需媒体查询的响应式布局必备。参数可自由混用单位：min(100%, 800px)。min() 或 max() 单独能解决时不要用 clamp()。",
+    "tags": [
+      "min",
+      "max",
+      "clamp",
+      "responsive",
+      "intrinsic",
+      "modern-css"
+    ],
+    "css": ".container{width:min(90%,1200px);margin:0 auto}.sidebar{width:max(200px,20vw)}.card{width:clamp(280px,30vw,400px)}",
+    "anti": [
+      "clamp() when max() or min() alone suffices",
+      "fixed px widths in responsive layouts"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Toggle / Switch — Binary State Control",
+    "name-zh": "开关 — 二态控制",
+    "description-en": "A toggle switch for binary on/off states. 44px wide × 24px tall track, 18px circular thumb. Active: accent color track with white thumb. Inactive: gray track with white thumb. Transition: 200ms ease on thumb position and track color. Use role='switch' and aria-checked for accessibility. Never use a toggle for actions that require confirmation (like deleting) — use a checkbox with submit. Never use a toggle that takes effect only on save without indicating the pending state.",
+    "description-zh": "二态开关。轨道 44px 宽 × 24px 高，圆形滑块 18px。激活态主色轨道白色滑块，未激活灰色轨道白色滑块。过渡 200ms ease 滑块位置和轨道色。用 role='switch' 和 aria-checked 保证无障碍。需要确认的操作（如删除）不用开关——用复选框+提交。开关效果仅在保存时生效时必须标明待定状态。",
+    "tags": [
+      "toggle",
+      "switch",
+      "form",
+      "component",
+      "accessibility"
+    ],
+    "css": ".switch{width:44px;height:24px;background:rgba(20,58,92,.2);border-radius:12px;position:relative;cursor:pointer;transition:background .2s}.switch::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .2s}.switch[aria-checked=true]{background:#3A8DD0}.switch[aria-checked=true]::after{transform:translateX(20px)}",
+    "anti": [
+      "toggle for destructive actions",
+      "toggle without aria-checked",
+      "toggle that only applies on save without visual feedback"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Checkbox — Multi-Select with Indeterminate",
+    "name-zh": "复选框 — 多选与不确定态",
+    "description-en": "A custom checkbox with three visual states: unchecked (empty square), checked (accent fill + white checkmark), and indeterminate (accent fill + horizontal dash). Size: 18×18px with 44px touch target via padding. Use :has(:checked) for parent label styling. The indeterminate state is set via JavaScript (element.indeterminate = true) and cannot be set via HTML. Never use a checkbox where a toggle switch is more appropriate (binary settings). Never omit the visible label.",
+    "description-zh": "自定义复选框三种视觉状态：未选（空方框）、已选（主色填充+白色勾）、不确定（主色填充+横线）。尺寸 18×18px，用 padding 扩大到 44px 触控区。用 :has(:checked) 为父标签设样式。不确定态只能 JS 设置（element.indeterminate = true），HTML 无法设置。二态设置场景用开关更合适时不要用复选框。禁止省略可见标签。",
+    "tags": [
+      "checkbox",
+      "form",
+      "multi-select",
+      "indeterminate",
+      "accessibility"
+    ],
+    "css": ".checkbox{width:18px;height:18px;border:2px solid rgba(20,58,92,.3);border-radius:4px;cursor:pointer;display:grid;place-items:center;transition:all .15s}.checkbox:has(:checked){background:#3A8DD0;border-color:#3A8DD0}.checkbox:has(:checked)::after{content:'✓';color:#fff;font-size:12px}.checkbox:has(:indeterminate){background:#3A8DD0;border-color:#3A8DD0}",
+    "anti": [
+      "checkbox without visible label",
+      "checkbox for binary on/off (use toggle)",
+      "missing indeterminate state for parent checkboxes"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Radio Button — Single-Select Group",
+    "name-zh": "单选按钮 — 单选组",
+    "description-en": "A radio group for mutually exclusive choices. Custom circle: 18×18px outer ring, 8px inner accent dot on selection. Wrap in a fieldset with a legend for the group label. Keyboard: arrow keys navigate within the group. Use role='radiogroup' on the container. Minimum 44px touch target per option. Never leave a radio group without a pre-selected default unless the choice is truly optional. Never use radio buttons for binary choices — use a toggle or checkbox.",
+    "description-zh": "互斥选项的单选组。自定义圆圈：外环 18×18px，选中时 8px 主色内圆点。用 fieldset 包裹，legend 为组标签。键盘方向键在组内导航。容器用 role='radiogroup'。每个选项最小 44px 触控区。除非选择确实可选，否则不要留空不选默认值。二态选择不用单选——用开关或复选框。",
+    "tags": [
+      "radio",
+      "form",
+      "single-select",
+      "group",
+      "accessibility"
+    ],
+    "css": ".radio{width:18px;height:18px;border:2px solid rgba(20,58,92,.3);border-radius:50%;cursor:pointer;display:grid;place-items:center;transition:border-color .15s}.radio:has(:checked){border-color:#3A8DD0}.radio:has(:checked)::after{content:'';width:8px;height:8px;border-radius:50%;background:#3A8DD0}",
+    "anti": [
+      "radio for binary choices",
+      "radio group without legend",
+      "no default selected option"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Select / Dropdown — Custom Select Menu",
+    "name-zh": "下拉选择 — 自定义选择菜单",
+    "description-en": "A styled select dropdown. Trigger: hairline-bordered box with selected value + chevron icon. Menu: floating list with 36px row height, hover highlight, and selected state checkmark. Keyboard: Enter opens, Escape closes, arrow keys navigate, type-ahead search. Max visible items: 8, then scroll. Use appearance: none on native <select> for minimal styling. For complex selects with search/groups, use a custom ARIA listbox. Never use a custom select without keyboard support.",
+    "description-zh": "样式化下拉选择。触发器：发丝线边框框+选中值+箭头图标。菜单：浮动列表，行高 36px，悬停高亮，选中态打勾。键盘：Enter 打开、Escape 关闭、方向键导航、输入搜索。可见项上限 8，超出滚动。原生 <select> 用 appearance: none 做最小样式。复杂搜索/分组用自定义 ARIA listbox。禁止自定义下拉无键盘支持。",
+    "tags": [
+      "select",
+      "dropdown",
+      "form",
+      "component",
+      "accessibility"
+    ],
+    "css": ".select{position:relative;display:inline-block}.select-trigger{border:1px solid rgba(20,58,92,.18);border-radius:8px;padding:10px 36px 10px 14px;font-size:.9rem;cursor:pointer;background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3'/%3E%3C/svg%3E\") no-repeat right 12px center}.select-menu{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid rgba(20,58,92,.1);border-radius:8px;box-shadow:0 8px 24px rgba(20,58,92,.12);max-height:288px;overflow-y:auto}.select-option{padding:8px 14px;font-size:.9rem;cursor:pointer}.select-option:hover{background:#EAF5FC}",
+    "anti": [
+      "custom select without keyboard support",
+      "select with < 2 options",
+      "native select styled with only color changes"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Tabs — Content Switcher",
+    "name-zh": "标签页 — 内容切换器",
+    "description-en": "Tabs organize content into panels that share the same space. Tab list: horizontal row with 40px height. Active tab: 3px bottom accent bar + bold text. Inactive: regular weight, muted color. Keyboard: Left/Right arrows move focus, Enter/Space activates. Use role='tablist', role='tab', role='tabpanel', and aria-selected. Never put tabs inside tabs. Never use tabs for sequential content — use a stepper. Never use tabs without aria-controls linking each tab to its panel.",
+    "description-zh": "标签页将内容组织到共享空间的面板中。标签栏：水平行高 40px。激活标签 3px 底部主色条+粗体。未激活常规字重、淡色。键盘左右箭头移动焦点，Enter/Space 激活。用 role='tablist'、role='tab'、role='tabpanel' 和 aria-selected。禁止标签嵌套标签。顺序内容不用标签——用步骤条。每个标签必须有 aria-controls 关联面板。",
+    "tags": [
+      "tabs",
+      "navigation",
+      "component",
+      "content-switcher",
+      "accessibility"
+    ],
+    "css": ".tab-list{display:flex;border-bottom:2px solid rgba(20,58,92,.1);gap:4px}.tab{padding:10px 20px;font-size:.9rem;color:rgba(20,58,92,.5);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}.tab[aria-selected=true]{color:#3A8DD0;font-weight:600;border-bottom-color:#3A8DD0}.tab:hover{color:#3A8DD0}",
+    "anti": [
+      "tabs inside tabs",
+      "tabs for sequential content (use stepper)",
+      "tabs without aria-controls"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Modal / Dialog — Overlay Interaction",
+    "name-zh": "模态框 — 覆盖层交互",
+    "description-en": "A modal dialog that demands user attention. Centered on screen, max-width 480px (small), 640px (medium), 800px (large). Backdrop: 40% black with blur. Focus trapped inside. Escape closes. Title + body + action buttons (cancel left, confirm right). Animation: scale 0.95 → 1, opacity 0 → 1, 200ms. Use the native <dialog> element. Stack limit: max 2 modals at once — a third is an anti-pattern. Never use a modal for information-only content — use an inline expansion.",
+    "description-zh": "要求用户关注的模态对话框。屏幕居中，最大宽 480px（小）、640px（中）、800px（大）。遮罩 40% 黑色+模糊。焦点捕获在内。Escape 关闭。标题+正文+操作按钮（取消左、确认右）。动画：scale 0.95→1、opacity 0→1、200ms。使用原生 <dialog> 元素。堆叠上限：最多同时 2 个模态——第三个是反模式。纯信息内容不用模态——用行内展开。",
+    "tags": [
+      "modal",
+      "dialog",
+      "overlay",
+      "interaction",
+      "accessibility"
+    ],
+    "css": ".modal{border:none;border-radius:16px;padding:24px;max-width:480px;width:90%}.modal::backdrop{background:rgba(0,0,0,.4);backdrop-filter:blur(4px)}.modal-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}",
+    "anti": [
+      "modal for information-only content",
+      "3+ stacked modals",
+      "modal without close button",
+      "modal that doesn't trap focus"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Drawer — Slide-In Side Panel",
+    "name-zh": "抽屉 — 侧滑面板",
+    "description-en": "A panel that slides in from the edge of the screen. Right drawer (default): for details, settings, forms. Left drawer: for navigation, filters. Width: 320-400px. Backdrop on mobile, optional on desktop. Dismiss: close button, Escape key, clicking backdrop. Animation: translateX(100%) → translateX(0), 300ms cubic-bezier(.22,1,.36,1). Use <dialog> with position: fixed for native focus management. Never use a drawer for content that should be on the main page.",
+    "description-zh": "从屏幕边缘滑入的面板。右侧抽屉（默认）：详情、设置、表单。左侧抽屉：导航、筛选。宽 320-400px。移动端有遮罩，桌面端可选。关闭：关闭按钮、Escape、点击遮罩。动画：translateX(100%)→translateX(0)，300ms cubic-bezier(.22,1,.36,1)。用 <dialog> 配合 position: fixed 实现原生焦点管理。主要内容不要用抽屉。",
+    "tags": [
+      "drawer",
+      "side-panel",
+      "slide-in",
+      "navigation",
+      "component"
+    ],
+    "css": "dialog.drawer{position:fixed;top:0;right:0;height:100dvh;width:min(400px,90vw);border:none;margin:0;padding:24px;transform:translateX(100%);transition:transform .3s cubic-bezier(.22,1,.36,1)}dialog.drawer[open]{transform:translateX(0)}dialog.drawer::backdrop{background:rgba(0,0,0,.3)}",
+    "anti": [
+      "drawer for main page content",
+      "drawer without close button",
+      "drawer wider than 400px on desktop"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Badge / Tag — Status Label",
+    "name-zh": "徽章/标签 — 状态标识",
+    "description-en": "Badges are small status indicators: 8px dot (notification), numeric count (1-999+), or text label. Tags are removable chips with an × button. Badge: 16-20px height, accent background, white text. Tag: 28px height, light accent background, accent text, 16×16px close button. Badge is informational only (no click). Tag is interactive (clickable, removable). Never use a badge for more than 3 digits — show '999+'. Never make a badge clickable — it should be purely informational.",
+    "description-zh": "徽章是小型状态指示器：8px 圆点（通知）、数字计数（1-999+）或文本标签。标签是可移除的芯片带 × 按钮。徽章 16-20px 高、主色背景、白字。标签 28px 高、淡主色背景、主色字、16×16px 关闭按钮。徽章纯信息（不可点击）。标签可交互（可点击、可移除）。徽章不要超过 3 位数字——显示 '999+'。徽章不可点击——纯信息。",
+    "tags": [
+      "badge",
+      "tag",
+      "status",
+      "label",
+      "component"
+    ],
+    "css": ".badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#3A8DD0;color:#fff;font-size:.75rem;font-weight:600}.tag{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 12px;border-radius:14px;background:color-mix(in srgb,#3A8DD0 12%,white);color:#3A8DD0;font-size:.8rem}.tag .close{width:16px;height:16px;border-radius:50%;cursor:pointer}",
+    "anti": [
+      "clickable badge",
+      "badge with more than 3 digits",
+      "tag without close button for removable tags"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Avatar — User Representation",
+    "name-zh": "头像 — 用户代表",
+    "description-en": "An avatar represents a user or entity. Sizes: 24px (small), 32px (medium), 40px (default), 56px (large), 80px (extra-large). Image fills the circle. Fallback: initials on accent background, or generic person icon. Stack: overlapping circles with -8px margin. Status dot: 10px circle at bottom-right, colored by status (green=online, gray=offline, yellow=away). Always provide alt text for images and aria-label for icon fallbacks.",
+    "description-zh": "头像代表用户或实体。尺寸：24px（小）、32px（中）、40px（默认）、56px（大）、80px（超大）。图片填满圆形。回退：主色背景上的首字母，或通用人形图标。堆叠：重叠圆形 margin -8px。状态点：右下 10px 圆，按状态着色（绿=在线、灰=离线、黄=离开）。图片必须有 alt，图标回退必须有 aria-label。",
+    "tags": [
+      "avatar",
+      "user",
+      "profile",
+      "component",
+      "accessibility"
+    ],
+    "css": ".avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#3A8DD0;color:#fff;display:grid;place-items:center;font-size:.9rem;font-weight:600}.avatar-sm{width:24px;height:24px;font-size:.65rem}.avatar-lg{width:56px;height:56px;font-size:1.2rem}.avatar-stack .avatar{border:2px solid #fff;margin-left:-8px}",
+    "anti": [
+      "avatar without alt text",
+      "square avatar (always round)",
+      "stack without border to separate"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Pagination — Page Navigation",
+    "name-zh": "分页 — 翻页导航",
+    "description-en": "A pagination control for multi-page content. Current page: accent background, white text. Other pages: transparent with hover. Previous/Next arrows at ends. Show first page, last page, current ± 2, and ellipsis for gaps. Total items count above or below. Keyboard: Tab to navigate, Enter to select. Use aria-label='Pagination' on the nav. Use aria-current='page' on the active page. Never show more than 7 page numbers at once — use ellipsis.",
+    "description-zh": "多页内容的分页控件。当前页主色背景白字。其他页透明+悬停。首尾显示上一页/下一页箭头。显示首页、末页、当前±2 和省略号。总条目数在上方或下方。键盘 Tab 导航、Enter 选择。导航用 aria-label='Pagination'。当前页用 aria-current='page'。一次不要显示超过 7 个页码——用省略号。",
+    "tags": [
+      "pagination",
+      "navigation",
+      "component",
+      "accessibility",
+      "paging"
+    ],
+    "css": ".pagination{display:flex;align-items:center;gap:4px}.pagination a,.pagination span{min-width:36px;height:36px;display:grid;place-items:center;border-radius:8px;font-size:.85rem;text-decoration:none;color:#15324C}.pagination a:hover{background:rgba(20,58,92,.06)}.pagination .active{background:#3A8DD0;color:#fff}.pagination .ellipsis{pointer-events:none}",
+    "anti": [
+      "more than 7 visible page numbers",
+      "pagination without aria-label",
+      "no current page indicator"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Steps / Stepper — Sequential Progress",
+    "name-zh": "步骤条 — 顺序进度",
+    "description-en": "A horizontal stepper showing progress through a multi-step process. Each step: circle (24px) with number or checkmark, label below, connector line between steps. States: completed (accent fill + check), current (accent outline), upcoming (gray outline). Vertical variant for mobile. Use aria-current='step' on the active step. Never allow skipping steps unless the process explicitly supports it. Never show more than 7 steps — if needed, use a progress bar instead.",
+    "description-zh": "水平步骤条展示多步流程进度。每步：圆圈（24px）带数字或勾号、下方标签、步间连接线。状态：已完成（主色填充+勾）、当前（主色描边）、未到（灰色描边）。移动端用垂直变体。当前步用 aria-current='step'。流程不明确支持时禁止跳步。超过 7 步时用进度条代替。",
+    "tags": [
+      "steps",
+      "stepper",
+      "progress",
+      "wizard",
+      "component"
+    ],
+    "css": ".steps{display:flex;align-items:flex-start}.step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}.step .circle{width:24px;height:24px;border-radius:50%;border:2px solid rgba(20,58,92,.2);display:grid;place-items:center;font-size:.7rem;font-weight:600}.step.completed .circle{background:#3A8DD0;border-color:#3A8DD0;color:#fff}.step.current .circle{border-color:#3A8DD0;color:#3A8DD0}.step .label{font-size:.75rem;margin-top:6px;color:rgba(20,58,92,.5)}.step .connector{position:absolute;top:12px;left:50%;right:-50%;height:2px;background:rgba(20,58,92,.15)}",
+    "anti": [
+      "skipping steps without explicit support",
+      "more than 7 steps in a stepper",
+      "no visual distinction between completed and current"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Timeline — Chronological Events",
+    "name-zh": "时间线 — 时间顺序事件",
+    "description-en": "A vertical timeline showing a sequence of events. Each item: a dot (8px accent circle) on a vertical line (2px gray), with content to the right. Timestamp on the left or above the content. Types: default (gray dot), current (accent pulsing dot), completed (accent solid dot). Content can include title, description, and metadata. Use <time> element for timestamps. Never use a timeline for non-sequential data — use a list or card grid.",
+    "description-zh": "垂直时间线展示事件序列。每项：竖线（2px 灰色）上的圆点（8px 主色），内容在右侧。时间戳在左侧或内容上方。类型：默认（灰点）、当前（主色脉动点）、已完成（主色实心点）。内容可含标题、描述和元数据。时间戳用 <time> 元素。非顺序数据不用时间线——用列表或卡片网格。",
+    "tags": [
+      "timeline",
+      "chronological",
+      "events",
+      "component",
+      "vertical"
+    ],
+    "css": ".timeline{position:relative;padding-left:24px}.timeline-item{position:relative;padding-bottom:24px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:8px;height:8px;border-radius:50%;background:rgba(20,58,92,.25)}.timeline-item.current::before{background:#3A8DD0;box-shadow:0 0 0 4px rgba(115,185,230,.2)}.timeline-item::after{content:'';position:absolute;left:-17px;top:12px;bottom:0;width:2px;background:rgba(20,58,92,.1)}.timeline-item:last-child::after{display:none}",
+    "anti": [
+      "timeline for non-sequential data",
+      "timeline without timestamps",
+      "horizontal timeline with too many items"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Dark Mode Toggle — Theme Switcher",
+    "name-zh": "暗色模式切换 — 主题切换器",
+    "description-en": "A three-state toggle: Light / System / Dark. Store preference in localStorage. Apply color-scheme and swap CSS custom properties. On first visit, default to System (follows OS preference). Transition: add a 300ms transition on background-color and color to <body> for smooth switching. Show a sun/moon/auto icon. Respect prefers-reduced-motion by disabling the transition. Never force dark mode without a toggle. Never use only prefers-color-scheme without a manual override.",
+    "description-zh": "三态切换：亮色 / 跟随系统 / 暗色。偏好存 localStorage。应用 color-scheme 并交换 CSS 自定义属性。首次访问默认跟随系统。过渡：在 <body> 上加 300ms background-color 和 color 过渡平滑切换。显示太阳/月亮/自动图标。尊重 prefers-reduced-motion 禁用过渡。禁止无切换强制暗色。禁止只有 prefers-color-scheme 而无手动覆盖。",
+    "tags": [
+      "dark-mode",
+      "toggle",
+      "theme",
+      "switcher",
+      "accessibility"
+    ],
+    "css": ":root{color-scheme:light dark;--bg:light-dark(#fff,#1a1a1a);--text:light-dark(#15324C,#E1E3E5)}body{background:var(--bg);color:var(--text);transition:background-color .3s,color .3s}@media(prefers-reduced-motion:reduce){body{transition:none}}",
+    "anti": [
+      "dark mode without user toggle",
+      "only prefers-color-scheme without override",
+      "no transition animation on theme switch"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Form Validation Visual — Error & Success States",
+    "name-zh": "表单校验视觉 — 错误与成功态",
+    "description-en": "Three field states: default (gray border), error (red border + red message below), success (green border + checkmark icon). Validate on blur, not on every keystroke. Error message: 12px, red #E53E3E, below the input, prefixed with an error icon. Success: green #38A169 border with a subtle checkmark. The submit button stays disabled until all fields pass. Use aria-invalid='true' and aria-describedby linking to the error message. Never show errors before the user has interacted with the field.",
+    "description-zh": "三种字段状态：默认（灰边框）、错误（红边框+下方红字）、成功（绿边框+勾图标）。失焦时校验，非每次按键。错误信息 12px、红色 #E53E3E、在输入框下方、前缀错误图标。成功：绿色 #38A169 边框+细微勾号。所有字段通过前提交按钮禁用。用 aria-invalid='true' 和 aria-describedby 关联错误信息。用户未交互的字段不要显示错误。",
+    "tags": [
+      "form",
+      "validation",
+      "error",
+      "success",
+      "accessibility"
+    ],
+    "css": ".field input{border:1px solid rgba(20,58,92,.18);border-radius:8px;padding:10px 14px;transition:border-color .2s,box-shadow .2s}.field.error input{border-color:#E53E3E;box-shadow:0 0 0 3px rgba(229,62,62,.15)}.field.error .msg{color:#E53E3E;font-size:.75rem;margin-top:4px}.field.success input{border-color:#38A169}",
+    "anti": [
+      "showing errors before interaction",
+      "validation only on submit",
+      "no aria-invalid on error fields"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "404 Page — Meaningful Error State",
+    "name-zh": "404 页面 — 有意义的错误状态",
+    "description-en": "A 404 page that helps users recover, not just displays an error code. Structure: large illustration or icon, clear 'Page Not Found' title, a brief explanation, a search bar, and 3-4 suggested links. Tone: helpful, not humorous (humor ages poorly). The 404 page should maintain the site's navigation so users can find their way. Include a 'Go Home' button and a search field. Never use a blank page with just '404'. Never use technical jargon like 'The requested URL was not found on this server'.",
+    "description-zh": "帮助用户恢复的 404 页面，而非仅显示错误码。结构：大插图或图标、清晰的'页面未找到'标题、简短说明、搜索框和 3-4 个推荐链接。语气：有帮助，不幽默（幽默保质期短）。404 页面应保留网站导航。包含'返回首页'按钮和搜索框。禁止只有 '404' 的空白页。禁止技术术语如'请求的 URL 在此服务器上未找到'。",
+    "tags": [
+      "404",
+      "error",
+      "empty-state",
+      "navigation",
+      "ux"
+    ],
+    "css": ".page-404{min-height:80dvh;display:grid;place-items:center;text-align:center;padding:24px}.page-404 h1{font-size:clamp(3rem,8vw,6rem);color:rgba(20,58,92,.08)}.page-404 h2{font-size:1.5rem;margin:8px 0}.page-404 .search{max-width:400px;margin:24px auto}",
+    "anti": [
+      "blank 404 page",
+      "technical error jargon",
+      "humor that ages poorly",
+      "404 without navigation"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Error Boundary — Graceful Failure",
+    "name-zh": "错误边界 — 优雅降级",
+    "description-en": "An error boundary catches rendering failures and shows a fallback UI instead of a white screen. Structure: a contained card with an error icon, 'Something went wrong' title, a brief non-technical message, and a 'Try Again' button that resets the component state. Log the error to monitoring. Never show the stack trace to users. Never auto-retry without a limit — max 3 retries with exponential backoff. The fallback should look intentional, not like a broken page.",
+    "description-zh": "错误边界捕获渲染失败并显示回退 UI，而非白屏。结构：容器卡片内错误图标、'出了点问题'标题、简短非技术说明和'重试'按钮重置组件状态。将错误记录到监控。禁止向用户显示堆栈跟踪。禁止无限制自动重试——最多 3 次指数退避。回退 UI 应看起来是有意的，而非页面损坏。",
+    "tags": [
+      "error-boundary",
+      "fallback",
+      "resilience",
+      "ux",
+      "graceful-degradation"
+    ],
+    "css": ".error-boundary{border:1px solid rgba(229,62,62,.2);border-radius:12px;padding:32px;text-align:center;background:rgba(229,62,62,.03)}.error-boundary .icon{font-size:2rem;margin-bottom:12px}.error-boundary h3{font-size:1.1rem;margin-bottom:8px}.error-boundary p{color:rgba(20,58,92,.6);font-size:.9rem;margin-bottom:16px}",
+    "anti": [
+      "showing stack trace to users",
+      "infinite auto-retry",
+      "white screen on error",
+      "error boundary that itself crashes"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Reading Progress Bar — Scroll Indicator",
+    "name-zh": "阅读进度条 — 滚动指示器",
+    "description-en": "A thin progress bar at the very top of the page showing how far the user has scrolled through an article. Height: 3px, accent color, fixed position. Width: 0% at top, 100% at bottom. Implementation: pure CSS with animation-timeline: scroll() (no JavaScript needed). The bar should not interfere with the sticky header — place it above or below. Never make it thicker than 4px — it becomes distracting. Never hide it on mobile — it's even more useful there.",
+    "description-zh": "页面最顶部的细进度条，显示用户在文章中的滚动进度。高度 3px、主色、固定定位。宽度：顶部 0%、底部 100%。实现：纯 CSS animation-timeline: scroll()（无需 JS）。不应干扰粘性头部——放在其上方或下方。不要超过 4px 厚——会分散注意力。移动端不要隐藏——更有用。",
+    "tags": [
+      "progress",
+      "reading",
+      "scroll",
+      "indicator",
+      "ux"
+    ],
+    "css": ".reading-progress{position:fixed;top:0;left:0;height:3px;background:#3A8DD0;z-index:1000;transform-origin:left;animation:grow linear;animation-timeline:scroll(root)}@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+    "anti": [
+      "thicker than 4px",
+      "hiding on mobile",
+      "JS scroll event listener for this"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Infinite Scroll — Endless Content Feed",
+    "name-zh": "无限滚动 — 无尽内容流",
+    "description-en": "Load more content automatically as the user scrolls near the bottom. Use Intersection Observer on a sentinel element at the bottom. Show a spinner while loading. When all content is loaded, show an 'End of content' message — never leave the user scrolling into void. Provide a 'Back to top' button that appears after 2 screen-heights of scrolling. Use virtual scrolling (windowing) for lists > 100 items. Never use infinite scroll without a 'load more' fallback for keyboard users.",
+    "description-zh": "用户滚动到底部附近时自动加载更多内容。用 Intersection Observer 观察底部哨兵元素。加载时显示旋转器。全部加载完显示'已到底部'——禁止让用户无限滚动空白。滚动 2 屏高度后显示'回到顶部'按钮。100+ 条目列表用虚拟滚动（窗口化）。禁止无限滚动无'加载更多'键盘回退。",
+    "tags": [
+      "infinite-scroll",
+      "loading",
+      "feed",
+      "performance",
+      "ux"
+    ],
+    "css": ".infinite-sentinel{height:1px}.loading-spinner{width:24px;height:24px;border:3px solid rgba(20,58,92,.1);border-top-color:#3A8DD0;border-radius:50%;animation:spin .6s linear infinite;margin:24px auto}@keyframes spin{to{transform:rotate(360deg)}}.end-message{text-align:center;padding:24px;color:rgba(20,58,92,.4);font-size:.85rem}",
+    "anti": [
+      "infinite scroll without end indicator",
+      "infinite scroll without keyboard fallback",
+      "no virtual scrolling for 100+ items"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "font-display — Font Loading Strategy",
+    "name-zh": "font-display — 字体加载策略",
+    "description-en": "The font-display CSS descriptor controls how fonts are rendered during loading. Use font-display: swap for body text (show fallback immediately, swap when loaded). Use font-display: optional for non-critical decorative fonts (use only if already cached). Never use font-display: block — it hides text for up to 3 seconds. Always specify a similar fallback font in the font-family stack to minimize layout shift when the web font loads.",
+    "description-zh": "font-display CSS 描述符控制字体加载期间的渲染方式。正文用 font-display: swap（立即显示回退字体，加载后替换）。非关键装饰字体用 font-display: optional（仅在已缓存时使用）。禁止 font-display: block——最多隐藏文字 3 秒。始终在 font-family 中指定相似的回退字体以减少 web 字体加载时的布局偏移。",
+    "tags": [
+      "font-display",
+      "performance",
+      "loading",
+      "typography",
+      "optimization"
+    ],
+    "css": "@font-face{font-family:'Body';src:url('/fonts/body.woff2') format('woff2');font-display:swap;font-weight:400}body{font-family:'Body',system-ui,-apple-system,sans-serif}",
+    "anti": [
+      "font-display: block",
+      "no fallback font in font-family",
+      "loading 5+ font weights"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Critical CSS — Above-the-Fold Inlining",
+    "name-zh": "关键 CSS — 首屏内联",
+    "description-en": "Inline the CSS needed for above-the-fold content in a <style> tag in <head>. Load the full CSS asynchronously with <link rel='preload' as='style' onload='this.rel=stylesheet'>. This eliminates render-blocking CSS and achieves < 1s First Contentful Paint. Critical CSS should include: typography, layout grid, hero section, navigation, and any above-fold components. Never inline the entire stylesheet — it defeats the purpose. Never defer loading the full stylesheet — it causes FOUC on scroll.",
+    "description-zh": "将首屏内容所需的 CSS 内联在 <head> 的 <style> 标签中。用 <link rel='preload' as='style' onload='this.rel=stylesheet'> 异步加载完整 CSS。消除渲染阻塞 CSS，实现 <1s 首次内容绘制。关键 CSS 应包含：排版、布局网格、英雄区、导航和首屏组件。禁止内联整个样式表——失去意义。禁止延迟加载完整样式表——滚动时 FOUC。",
+    "tags": [
+      "critical-css",
+      "performance",
+      "loading",
+      "optimization",
+      "fcp"
+    ],
+    "css": "/* In <head>: */\n<style>/* critical: above-fold only */.hero{display:grid;grid-template-columns:7fr 5fr;min-height:60dvh}h1{font-size:clamp(2rem,5vw,3.5rem)}nav{position:sticky;top:0}</style>\n<link rel=\"preload\" href=\"/styles/main.css\" as=\"style\" onload=\"this.rel='stylesheet'\">",
+    "anti": [
+      "inlining entire stylesheet",
+      "deferring full CSS (causes FOUC)",
+      "no critical CSS strategy at all"
+    ],
+    "category": "web"
+  },
+  {
+    "name-en": "Lazy Loading — Deferred Image & Component Loading",
+    "name-zh": "懒加载 — 延迟图片与组件加载",
+    "description-en": "Use loading='lazy' on images below the fold. Use Intersection Observer for components that should load on visibility. Provide a placeholder (solid color matching image dominant color, or a blurred tiny preview). Set explicit width and height on all images to prevent layout shift. Use decoding='async' for non-critical images. Never lazy-load above-the-fold images — it delays LCP. Never lazy-load without a placeholder — it causes layout shift.",
+    "description-zh": "屏下图片使用 loading='lazy'。需要可见时加载的组件用 Intersection Observer。提供占位符（匹配图片主色的纯色或模糊小预览）。所有图片设置明确宽高防止布局偏移。非关键图片用 decoding='async'。首屏图片禁止懒加载——延迟 LCP。禁止无占位符的懒加载——导致布局偏移。",
+    "tags": [
+      "lazy-loading",
+      "performance",
+      "images",
+      "optimization",
+      "loading"
+    ],
+    "css": "img[loading=lazy]{opacity:0;transition:opacity .3s}img[loading=lazy].loaded{opacity:1}.placeholder{background:#F4F8FC;aspect-ratio:16/9}",
+    "anti": [
+      "lazy loading above-fold images",
+      "lazy loading without placeholder",
+      "missing width/height on images"
+    ],
+    "category": "web"
+  }
+]

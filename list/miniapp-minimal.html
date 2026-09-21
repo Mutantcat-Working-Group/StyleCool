@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小程序简约 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   小程序简约（MiniApp Minimal）— 演示样式
+   ============================================================ */
+:root {
+    --ma-bg: #F4F8FC; --ma-surface: #FFFFFF;
+    --ma-ink: #1A1A1A; --ma-ink-2: #666666; --ma-ink-3: #999999;
+    --ma-green: #1AAD19; --ma-green-2: #179C16;
+    --ma-line: #EDEDED; --ma-line-2: #E0E0E0;
+    --ma-radius: 8px; --ma-gap: 12px;
+}
+body { background: var(--ma-bg) !important; color: var(--ma-ink); max-width: 480px; margin: 0 auto !important; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.ma-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.ma-header-inner { max-width: 480px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 44px; gap: 12px; position: relative; }
+.ma-header-capsule { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); display: flex; border: 1px solid rgba(0,0,0,0.15); border-radius: 999px; overflow: hidden; }
+.ma-header-capsule span { padding: 4px 10px; font-size: 0.625rem; color: var(--ma-ink); background: rgba(255,255,255,0.8); }
+.ma-header-capsule span + span { border-left: 1px solid rgba(0,0,0,0.1); }
+.ma-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.ma-logo-icon { width: 28px; height: 28px; background: var(--ma-green); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.ma-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 5px; }
+.ma-logo-text strong { font-size: 0.9375rem; font-weight: 700; color: var(--ma-ink); }
+.ma-logo-text em { display: none; }
+.ma-header-actions a { display: inline-flex; align-items: center; padding: 4px 10px; font-size: 0.75rem; font-weight: 500; color: var(--ma-ink-2); text-decoration: none; }
+.ma-hero { padding: 24px 16px 8px; }
+.ma-hero h1 { font-size: 1.5rem; font-weight: 700; color: var(--ma-ink); margin: 0 0 4px; }
+.ma-hero p { font-size: 0.875rem; color: var(--ma-ink-3); margin: 0; }
+.ma-feed { padding: 0 16px 16px; display: flex; flex-direction: column; gap: var(--ma-gap); }
+.ma-card { background: var(--ma-surface); border-radius: var(--ma-radius); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.ma-card-thumb { height: 120px; background: linear-gradient(135deg, #E8F5E9, #C8E6C9); display: flex; align-items: center; justify-content: center; }
+.ma-card-thumb span { font-size: 1.5rem; opacity: 0.4; }
+.ma-card-body { padding: 12px 14px; }
+.ma-card-body h3 { font-size: 0.9375rem; font-weight: 600; color: var(--ma-ink); margin: 0 0 4px; }
+.ma-card-body p { font-size: 0.8125rem; color: var(--ma-ink-3); margin: 0 0 8px; line-height: 1.5; }
+.ma-card-meta { font-size: 0.6875rem; color: var(--ma-ink-3); }
+.ma-components { padding: 0 16px 24px; }
+.ma-components-header { margin-bottom: 16px; }
+.ma-components-header h2 { font-size: 1.125rem; font-weight: 700; color: var(--ma-ink); margin: 0 0 4px; }
+.ma-components-header p { font-size: 0.8125rem; color: var(--ma-ink-3); margin: 0; }
+.ma-grid { display: flex; flex-direction: column; gap: var(--ma-gap); }
+.ma-component { padding: 16px; background: var(--ma-surface); border-radius: var(--ma-radius); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.ma-component h3 { font-size: 0.875rem; font-weight: 600; color: var(--ma-ink); margin: 0 0 4px; }
+.ma-component > p { font-size: 0.75rem; color: var(--ma-ink-3); margin: 0 0 12px; }
+.ma-slot { margin-top: 10px; }
+.ma-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 20px; font-size: 0.8125rem; font-weight: 600; color: #fff; background: var(--ma-green); border: 0; border-radius: 4px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+.ma-btn:active { background: var(--ma-green-2); }
+.ma-btn-outline { background: transparent; color: var(--ma-green); border: 1px solid var(--ma-green); }
+.ma-btn-outline:active { background: rgba(26,173,25,0.06); }
+.ma-btn-ghost { background: transparent; color: var(--ma-ink-2); border: 0; }
+.ma-btn-ghost:active { background: rgba(0,0,0,0.04); }
+.ma-input { width: 100%; padding: 10px 12px; font-size: 0.8125rem; color: var(--ma-ink); background: var(--ma-bg); border: 0; border-radius: 4px; outline: none; transition: all 0.2s ease; font-family: inherit; box-sizing: border-box; }
+.ma-input:focus { background: #fff; box-shadow: 0 0 0 2px rgba(26,173,25,0.15); }
+.ma-mini-card { padding: 12px; background: var(--ma-bg); border-radius: 4px; }
+.ma-mini-card strong { font-size: 0.8125rem; color: var(--ma-ink); display: block; font-weight: 600; }
+.ma-mini-card p { font-size: 0.75rem; color: var(--ma-ink-3); margin: 4px 0 0; }
+.ma-tag { display: inline-flex; align-items: center; padding: 3px 8px; font-size: 0.625rem; font-weight: 600; border-radius: 3px; margin-right: 4px; margin-bottom: 4px; }
+.ma-tag-default { background: var(--ma-bg); color: var(--ma-ink-2); }
+.ma-tag-green { background: rgba(26,173,25,0.08); color: var(--ma-green); }
+.ma-tag-red { background: rgba(255,0,0,0.06); color: #E74C3C; }
+.ma-nav { display: flex; gap: 0; }
+.ma-nav-item { padding: 8px 14px; font-size: 0.8125rem; font-weight: 500; color: var(--ma-ink-3); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s ease; }
+.ma-nav-item.active { color: var(--ma-green); border-bottom-color: var(--ma-green); font-weight: 600; }
+.ma-alert { padding: 10px 14px; background: rgba(255,0,0,0.04); border-radius: 4px; color: #E74C3C; font-size: 0.75rem; }
+.ma-alert-success { background: rgba(26,173,25,0.04); color: var(--ma-green); }
+.ma-tabbar { position: sticky; bottom: 0; display: flex; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--ma-line); padding: 4px 0 env(safe-area-inset-bottom, 8px); }
+.ma-tabbar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 0; font-size: 0.625rem; color: var(--ma-ink-3); cursor: pointer; transition: all 0.1s ease; }
+.ma-tabbar-item.active { color: var(--ma-green); }
+.ma-tabbar-icon { width: 20px; height: 20px; border-radius: 4px; background: var(--ma-ink-3); }
+.ma-tabbar-item.active .ma-tabbar-icon { background: var(--ma-green); }
+.prompt-floater { position: fixed; bottom: 80px; left: 16px; padding: 10px 16px; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; color: var(--ma-ink); font-size: 0.8125rem; font-weight: 500; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); z-index: 1000; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { color: var(--ma-green); }
+.prompt-modal { position: fixed; bottom: 140px; left: 16px; right: 16px; max-height: 60vh; padding: 16px; background: var(--ma-surface); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); z-index: 1001; color: var(--ma-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--ma-green); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--ma-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--ma-ink-2); overflow-y: auto; flex: 1; margin-bottom: 10px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--ma-bg); padding: 12px; border-radius: 4px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--ma-green); color: #fff; border: 0; border-radius: 4px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+.prompt-modal-copy:active { background: var(--ma-green-2); }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; padding: 16px 0 80px !important; margin: 0 !important; text-align: center; color: var(--ma-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 480px; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+footer p { font-size: 0.75rem; color: var(--ma-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: var(--ma-ink-3); }
+.friend-links span { margin-right: 6px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 3px; font-size: 0.6875rem; color: var(--ma-ink-3); text-decoration: none; }
+.name-en,.desc-en { display: none; }
+@media (min-width: 481px) { body { border-left: 1px solid var(--ma-line); border-right: 1px solid var(--ma-line); } }
+    </style>
+</head>
+<body>
+<header class="ma-header">
+        <div class="ma-header-inner">
+            <a class="ma-logo" href="../example.php" aria-label="StyleCool">
+                <span class="ma-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="ma-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>小程序简约示例</em>
+                </span>
+            </a>
+            <div class="ma-header-capsule" aria-hidden="true">
+                <span>···</span><span>○</span><span>×</span>
+            </div>
+            <div class="ma-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="ma-hero" aria-label="小程序简约标题">
+            <h1>小程序简约</h1>
+            <p>微信风绿色点缀，圆角统一，简洁克制</p>
+        </section>
+
+        <div class="ma-feed">
+            <div class="ma-card">
+                <div class="ma-card-thumb"><span>📋</span></div>
+                <div class="ma-card-body">
+                    <h3>卡片标题</h3>
+                    <p>微信风卡片，圆角统一 8px，浅灰底 + 绿色点缀。</p>
+                    <div class="ma-card-meta">2 小时前</div>
+                </div>
+            </div>
+            <div class="ma-card">
+                <div class="ma-card-thumb" style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);"><span>📦</span></div>
+                <div class="ma-card-body">
+                    <h3>另一张卡片</h3>
+                    <p>底部 Tab Bar + 胶囊菜单，微信小程序经典布局。</p>
+                    <div class="ma-card-meta">5 小时前</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="ma-components" aria-label="组件展示">
+            <div class="ma-components-header">
+                <h2>模块化组件</h2>
+                <p>微信风绿色点缀，小程序简约语言贯穿每一个组件</p>
+            </div>
+
+            <div class="ma-grid">
+                <div class="ma-component">
+                    <h3>小程序按钮</h3>
+                    <p>实心绿/描边绿/幽灵 三级</p>
+                    <div class="ma-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="ma-btn">确认</button>
+                        <button class="ma-btn ma-btn-outline">取消</button>
+                        <button class="ma-btn ma-btn-ghost">更多</button>
+                    </div>
+                </div>
+
+                <div class="ma-component">
+                    <h3>小程序输入框</h3>
+                    <p>浅灰底 + 聚焦绿色光环</p>
+                    <div class="ma-slot">
+                        <input type="text" class="ma-input" placeholder="输入内容...">
+                    </div>
+                </div>
+
+                <div class="ma-component">
+                    <h3>嵌套卡片</h3>
+                    <p>浅灰底 + 圆角</p>
+                    <div class="ma-slot">
+                        <div class="ma-mini-card">
+                            <strong>嵌套卡片</strong>
+                            <p>浅灰底 · 圆角 4px</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ma-component">
+                    <h3>小程序标签</h3>
+                    <p>默认/绿色/红色 三种</p>
+                    <div class="ma-slot">
+                        <span class="ma-tag ma-tag-default">默认</span>
+                        <span class="ma-tag ma-tag-green">已认证</span>
+                        <span class="ma-tag ma-tag-red">已过期</span>
+                    </div>
+                </div>
+
+                <div class="ma-component">
+                    <h3>小程序导航</h3>
+                    <p>底部绿色下划线</p>
+                    <div class="ma-slot">
+                        <nav class="ma-nav">
+                            <span class="ma-nav-item active">首页</span>
+                            <span class="ma-nav-item">服务</span>
+                            <span class="ma-nav-item">我的</span>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="ma-component">
+                    <h3>小程序提示</h3>
+                    <p>红色/绿色 两种语义</p>
+                    <div class="ma-slot" style="display:flex;flex-direction:column;gap:6px;">
+                        <div class="ma-alert">⚠ 操作不可撤销</div>
+                        <div class="ma-alert ma-alert-success">✓ 操作成功</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="ma-tabbar" aria-label="底部导航">
+        <div class="ma-tabbar-item active"><div class="ma-tabbar-icon"></div>首页</div>
+        <div class="ma-tabbar-item"><div class="ma-tabbar-icon"></div>服务</div>
+        <div class="ma-tabbar-item"><div class="ma-tabbar-icon"></div>消息</div>
+        <div class="ma-tabbar-item"><div class="ma-tabbar-icon"></div>我的</div>
+    </div>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">小程序简约 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用小程序简约（MiniApp Minimal）设计风格。背景 #F4F8FC 浅灰。卡片背景 #FFFFFF，圆角 8px，1px 边框 #EDEDED，微弱投影。主色微信绿 #1AAD19（点缀不要多，仅按钮、选中态、标签使用）。按钮实心绿 / 描边绿 / 幽灵 三级，圆角 4px。输入框浅灰底 + 聚焦绿色光环。顶部胶囊菜单距右。底部 Tab Bar 白色 + 绿色选中态。字体系统无衬线，标题字重 600。整体简洁、克制，微信小程序经典风格。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

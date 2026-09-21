@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复古像素 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   复古像素（Retro Pixel）— 演示样式
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+:root {
+    --px-bg: #1A1A2E; --px-surface: #2D2D44;
+    --px-red: #FF6B6B; --px-yellow: #FFD93D; --px-green: #6BCB77; --px-blue: #4D96FF;
+    --px-pink: #FF8FAB; --px-purple: #A18CD1;
+    --px-ink: #FFFFFF; --px-ink-2: #C4C4D4;
+    --px-border: 3px solid #FFFFFF;
+}
+body { background: var(--px-bg) !important; color: var(--px-ink); font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 1.8; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.px-header { position: sticky; top: 0; z-index: 100; background: var(--px-bg); border-bottom: 3px solid var(--px-yellow); }
+.px-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 48px; gap: 12px; }
+.px-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.px-logo-icon { width: 32px; height: 32px; background: var(--px-yellow); border: 2px solid var(--px-ink); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; image-rendering: pixelated; }
+.px-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.px-logo-text strong { font-size: 8px; font-weight: 400; color: var(--px-yellow); text-transform: uppercase; }
+.px-logo-text em { display: none; }
+.px-header-actions a { display: inline-flex; align-items: center; padding: 6px 10px; font-size: 7px; color: var(--px-ink); border: 2px solid var(--px-ink); text-decoration: none; transition: all 0.1s ease; }
+.px-header-actions a:hover { background: var(--px-yellow); color: var(--px-bg); border-color: var(--px-yellow); }
+.px-hero { padding: 48px 16px; text-align: center; max-width: 800px; margin: 0 auto; }
+.px-hero h1 { font-size: 16px; font-weight: 400; color: var(--px-yellow); margin: 0 0 16px; text-shadow: 4px 4px 0 var(--px-red); text-transform: uppercase; }
+.px-hero h1 .accent { color: var(--px-green); }
+.px-hero p { font-size: 7px; color: var(--px-ink-2); margin: 0 0 24px; line-height: 2.2; }
+.px-hero-sprite { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; }
+.px-sprite { width: 24px; height: 24px; border: 2px solid var(--px-ink); image-rendering: pixelated; }
+.px-sprite-red { background: var(--px-red); }
+.px-sprite-yellow { background: var(--px-yellow); }
+.px-sprite-green { background: var(--px-green); }
+.px-sprite-blue { background: var(--px-blue); }
+.px-components { position: relative; width: 100%; margin: 0; padding: 48px 0 80px; background: transparent; }
+.px-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+.px-components-header { text-align: center; margin-bottom: 32px; }
+.px-components-header h2 { font-size: 12px; font-weight: 400; color: var(--px-ink); margin: 0 0 8px; text-transform: uppercase; }
+.px-components-header p { font-size: 7px; color: var(--px-ink-2); margin: 0; }
+.px-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.px-component { padding: 20px; background: var(--px-surface); border: var(--px-border); transition: background 0.1s ease; }
+.px-component:hover { background: #3D3D54; }
+.px-component h3 { font-size: 8px; font-weight: 400; color: var(--px-yellow); margin: 0 0 8px; text-transform: uppercase; }
+.px-component > p { font-size: 7px; color: var(--px-ink-2); margin: 0 0 14px; }
+.px-slot { margin-top: 12px; }
+.px-btn { display: inline-flex; align-items: center; padding: 8px 14px; font-size: 7px; font-family: 'Press Start 2P', monospace; color: var(--px-ink); background: var(--px-surface); border: 2px solid var(--px-ink); cursor: pointer; transition: all 0.1s ease; text-transform: uppercase; }
+.px-btn:hover { background: var(--px-ink); color: var(--px-bg); }
+.px-btn:active { transform: translate(2px, 2px); }
+.px-btn-primary { background: var(--px-red); border-color: var(--px-red); }
+.px-btn-primary:hover { background: var(--px-yellow); border-color: var(--px-yellow); color: var(--px-bg); }
+.px-btn-secondary { background: var(--px-blue); border-color: var(--px-blue); }
+.px-btn-success { background: var(--px-green); border-color: var(--px-green); }
+.px-input { width: 100%; padding: 8px 10px; font-size: 7px; font-family: 'Press Start 2P', monospace; color: var(--px-ink); background: var(--px-bg); border: 2px solid var(--px-ink); outline: none; transition: all 0.1s ease; box-sizing: border-box; }
+.px-input:focus { border-color: var(--px-yellow); background: #0A0A1E; }
+.px-mini-card { padding: 12px; background: var(--px-bg); border: 2px solid var(--px-yellow); }
+.px-mini-card strong { font-size: 7px; color: var(--px-yellow); display: block; font-weight: 400; text-transform: uppercase; }
+.px-mini-card p { font-size: 6px; color: var(--px-ink-2); margin: 6px 0 0; }
+.px-tag { display: inline-flex; align-items: center; padding: 4px 8px; font-size: 6px; font-family: 'Press Start 2P', monospace; border: 2px solid var(--px-ink); margin-right: 4px; margin-bottom: 4px; text-transform: uppercase; }
+.px-tag-red { background: var(--px-red); border-color: var(--px-red); color: var(--px-bg); }
+.px-tag-yellow { background: var(--px-yellow); border-color: var(--px-yellow); color: var(--px-bg); }
+.px-tag-blue { background: var(--px-blue); border-color: var(--px-blue); }
+.px-nav { display: flex; gap: 4px; }
+.px-nav-item { padding: 8px 12px; font-size: 7px; font-family: 'Press Start 2P', monospace; color: var(--px-ink-2); border: 2px solid transparent; cursor: pointer; transition: all 0.1s ease; text-transform: uppercase; }
+.px-nav-item.active { color: var(--px-yellow); border-color: var(--px-yellow); background: rgba(255,217,61,0.1); }
+.px-alert { padding: 10px 12px; background: var(--px-red); border: 2px solid var(--px-ink); color: #fff; font-size: 7px; font-family: 'Press Start 2P', monospace; text-transform: uppercase; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 16px; font-family: 'Press Start 2P', monospace; font-size: 7px; background: var(--px-yellow); border: 2px solid var(--px-ink); color: var(--px-bg); cursor: pointer; z-index: 1000; text-transform: uppercase; transition: all 0.1s ease; }
+.prompt-floater:hover { background: var(--px-ink); color: var(--px-bg); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--px-surface); border: var(--px-border); z-index: 1001; color: var(--px-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 8px; font-family: 'Press Start 2P', monospace; color: var(--px-yellow); text-transform: uppercase; }
+.prompt-modal-close { background: transparent; border: 0; color: var(--px-ink-2); cursor: pointer; font-size: 14px; line-height: 1; padding: 0; font-family: 'Press Start 2P', monospace; }
+.prompt-modal-close:hover { color: var(--px-ink); }
+.prompt-modal-content { font-size: 7px; line-height: 2; font-family: 'Press Start 2P', monospace; color: var(--px-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; background: var(--px-bg); padding: 12px; border: 2px solid var(--px-ink-2); }
+.prompt-modal-copy { padding: 10px 16px; font-family: 'Press Start 2P', monospace; font-size: 7px; background: var(--px-green); border: 2px solid var(--px-ink); color: var(--px-bg); cursor: pointer; transition: all 0.1s ease; text-transform: uppercase; }
+.prompt-modal-copy:hover { background: var(--px-yellow); }
+.prompt-modal-copy:active { transform: translate(2px, 2px); }
+.prompt-modal-copy.done { background: var(--px-blue); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--px-bg) !important; border: none !important; border-top: 3px solid var(--px-yellow) !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: var(--px-ink-2); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 7px; font-family: 'Press Start 2P', monospace; color: var(--px-ink-2); margin: 0; }
+.friend-links { margin: 0; font-size: 6px; font-family: 'Press Start 2P', monospace; color: var(--px-ink-2); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 4px 8px; margin: 0 4px; font-size: 6px; font-family: 'Press Start 2P', monospace; color: var(--px-ink-2); border: 2px solid var(--px-ink-2); text-decoration: none; transition: all 0.1s ease; }
+.friend-links a:hover { color: var(--px-yellow); border-color: var(--px-yellow); }
+@media (max-width: 960px) { .px-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .px-header-inner { height: auto; padding: 10px 14px; flex-direction: column; } .px-header-actions { justify-content: center; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .px-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="px-header">
+        <div class="px-header-inner">
+            <a class="px-logo" href="../example.php" aria-label="StyleCool">
+                <span class="px-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="px-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>复古像素示例</em>
+                </span>
+            </a>
+            <div class="px-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="px-hero" aria-label="复古像素英雄区">
+            <div class="px-hero-sprite">
+                <div class="px-sprite px-sprite-red"></div>
+                <div class="px-sprite px-sprite-yellow"></div>
+                <div class="px-sprite px-sprite-green"></div>
+                <div class="px-sprite px-sprite-blue"></div>
+            </div>
+            <h1>复古<span class="accent">像素</span></h1>
+            <p>8-BIT 像素风 + 硬边框 + 无圆角 + 像素字体<br>童年怀旧的视觉语言，每个像素都在讲述故事</p>
+        </section>
+
+        <section class="px-components" aria-label="组件展示">
+            <div class="px-components-inner">
+                <div class="px-components-header">
+                    <h2>模块化组件</h2>
+                    <p>8-BIT 像素语言贯穿每一个组件</p>
+                </div>
+
+                <div class="px-grid">
+                    <div class="px-component">
+                        <h3>像素按钮</h3>
+                        <p>硬边框 + 按下偏移</p>
+                        <div class="px-slot" style="display:flex;gap:6px;flex-wrap:wrap;">
+                            <button class="px-btn">默认</button>
+                            <button class="px-btn px-btn-primary">红色</button>
+                            <button class="px-btn px-btn-secondary">蓝色</button>
+                        </div>
+                    </div>
+
+                    <div class="px-component">
+                        <h3>像素输入框</h3>
+                        <p>硬边框 + 聚焦黄色</p>
+                        <div class="px-slot">
+                            <input type="text" class="px-input" placeholder="输入...">
+                        </div>
+                    </div>
+
+                    <div class="px-component">
+                        <h3>像素嵌套</h3>
+                        <p>黄色边框 + 深底</p>
+                        <div class="px-slot">
+                            <div class="px-mini-card">
+                                <strong>像素嵌套</strong>
+                                <p>黄色边框 · 深底</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-component">
+                        <h3>像素标签</h3>
+                        <p>红/黄/蓝 三色</p>
+                        <div class="px-slot">
+                            <span class="px-tag px-tag-red">前端</span>
+                            <span class="px-tag px-tag-yellow">像素</span>
+                            <span class="px-tag px-tag-blue">8BIT</span>
+                        </div>
+                    </div>
+
+                    <div class="px-component">
+                        <h3>像素导航</h3>
+                        <p>黄色边框选中</p>
+                        <div class="px-slot">
+                            <nav class="px-nav">
+                                <span class="px-nav-item active">首页</span>
+                                <span class="px-nav-item">作品</span>
+                                <span class="px-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="px-component">
+                        <h3>像素警告</h3>
+                        <p>红色实心 + 白字</p>
+                        <div class="px-slot">
+                            <div class="px-alert">!! 操作不可撤销 !!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">复古像素 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">X</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用复古像素（Retro Pixel）设计风格。字体使用像素字体 Press Start 2P（8-16px），全大写。颜色 8-bit 调色板：红 #FF6B6B、黄 #FFD93D、蓝 #4D96FF、绿 #6BCB77。边框硬边 2-3px 实线，无圆角（border-radius: 0）。image-rendering: pixelated。背景深色 #1A1A2E。卡片 #2D2D44 + 3px 白色硬边框。阴影 text-shadow 4px 4px 0（无模糊）。按钮 hover 反色，按下 translate(2px,2px)。整体 8-bit 怀旧、像素化、童年感。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = 'OK!';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

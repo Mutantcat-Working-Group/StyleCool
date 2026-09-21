@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极简北欧风 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   极简北欧风（Scandinavian）— 演示样式
+   ============================================================ */
+:root {
+    --nb-bg: #FAF9F6; --nb-surface: #FFFFFF;
+    --nb-ink: #1E1E1E; --nb-ink-2: #6E6E6E; --nb-ink-3: #A0A0A0;
+    --nb-warm: #D9965A; --nb-warm-2: #C4854A;
+    --nb-green: #8FA88A; --nb-line: rgba(0,0,0,0.06);
+}
+body { background: var(--nb-bg) !important; color: var(--nb-ink); font-family: -apple-system, 'Inter', sans-serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.nb-header { position: sticky; top: 0; z-index: 100; background: rgba(250,249,246,0.9); backdrop-filter: blur(20px); }
+.nb-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.nb-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.nb-logo-icon { width: 36px; height: 36px; background: var(--nb-warm); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; }
+.nb-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nb-logo-text strong { font-size: 0.9375rem; font-weight: 700; color: var(--nb-ink); }
+.nb-logo-text em { display: none; }
+.nb-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; color: var(--nb-ink-2); text-decoration: none; }
+.nb-header-actions a:hover { color: var(--nb-warm); }
+.nb-hero { padding: 80px 24px; text-align: center; max-width: 640px; margin: 0 auto; }
+.nb-hero h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 300; letter-spacing: -0.01em; color: var(--nb-ink); margin: 0 0 12px; }
+.nb-hero h1 .accent { color: var(--nb-warm); font-weight: 400; }
+.nb-hero p { font-size: 0.9375rem; line-height: 1.8; color: var(--nb-ink-2); margin: 0; }
+.nb-components { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+.nb-components-header { text-align: center; margin-bottom: 48px; }
+.nb-components-header h2 { font-size: 1.25rem; font-weight: 300; letter-spacing: 0.02em; color: var(--nb-ink); margin: 0 0 4px; }
+.nb-components-header p { font-size: 0.8125rem; color: var(--nb-ink-3); margin: 0; }
+.nb-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.nb-component { padding: 24px; background: var(--nb-surface); transition: all 0.3s ease; }
+.nb-component:hover { background: #F5F4F0; }
+.nb-component h3 { font-size: 0.875rem; font-weight: 600; color: var(--nb-ink); margin: 0 0 4px; }
+.nb-component > p { font-size: 0.75rem; color: var(--nb-ink-3); margin: 0 0 14px; }
+.nb-slot { margin-top: 14px; }
+.nb-btn { display: inline-flex; align-items: center; padding: 10px 24px; font-size: 0.8125rem; font-weight: 400; color: var(--nb-ink-2); background: transparent; border: 1px solid var(--nb-line); cursor: pointer; }
+.nb-btn:hover { border-color: var(--nb-warm); color: var(--nb-warm); }
+.nb-btn-primary { background: var(--nb-warm); border-color: var(--nb-warm); color: #fff; }
+.nb-input { width: 100%; padding: 10px 14px; font-size: 0.8125rem; color: var(--nb-ink); background: transparent; border: 0; border-bottom: 1px solid var(--nb-line); outline: none; box-sizing: border-box; }
+.nb-input:focus { border-bottom-color: var(--nb-warm); }
+.nb-mini-card { padding: 14px; background: var(--nb-bg); }
+.nb-mini-card strong { font-size: 0.8125rem; color: var(--nb-ink); display: block; font-weight: 600; }
+.nb-mini-card p { font-size: 0.75rem; color: var(--nb-ink-3); margin: 4px 0 0; }
+.nb-tag { display: inline-flex; padding: 3px 10px; font-size: 0.6875rem; color: var(--nb-ink-3); border: 1px solid var(--nb-line); margin-right: 6px; margin-bottom: 6px; }
+.nb-tag-warm { color: var(--nb-warm); border-color: var(--nb-warm); }
+.nb-nav { display: flex; gap: 0; }
+.nb-nav-item { padding: 8px 18px; font-size: 0.8125rem; color: var(--nb-ink-3); border-bottom: 2px solid transparent; cursor: pointer; }
+.nb-nav-item.active { color: var(--nb-ink); border-bottom-color: var(--nb-warm); }
+.nb-alert { padding: 12px 16px; background: var(--nb-bg); border-left: 2px solid var(--nb-warm); color: var(--nb-ink-2); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--nb-ink); color: #fff; cursor: pointer; z-index: 1000; }
+.prompt-floater:hover { background: var(--nb-warm); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw-48px)); max-height: 70vh; padding: 20px; background: #fff; z-index: 1001; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--nb-warm); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--nb-ink-3); cursor: pointer; font-size: 1.2rem; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--nb-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; background: var(--nb-bg); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--nb-warm); color: #fff; border: 0; cursor: pointer; }
+.prompt-modal-copy.done { background: var(--nb-green); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; border-top: 1px solid var(--nb-line) !important; padding: 24px 0 !important; margin: 0 !important; text-align: center; color: var(--nb-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+footer p { font-size: 0.75rem; color: var(--nb-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.65rem; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 4px; font-size: 0.65rem; color: var(--nb-ink-3); text-decoration: none; }
+.friend-links a:hover { color: var(--nb-warm); }
+@media (max-width: 960px) { .nb-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .nb-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .nb-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="nb-header">
+        <div class="nb-header-inner">
+            <a class="nb-logo" href="../example.php" aria-label="StyleCool">
+                <span class="nb-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="nb-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>极简北欧风示例</em>
+                </span>
+            </a>
+            <div class="nb-header-actions">
+                <a href="../example.php">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="nb-hero">
+            <h1>Scandinavian <span class="accent">Style</span></h1>
+            <p>明亮中性色 + 天然木材点缀 + 温暖陶土色<br>Hygge 理念 — 舒适、简单、人性化</p>
+        </section>
+
+        <section class="nb-components">
+            <div class="nb-components-header">
+                <h2>Elements</h2>
+                <p>明亮 + 天然 + 温暖，北欧风语言贯穿每一个组件</p>
+            </div>
+
+            <div class="nb-grid">
+                <div class="nb-component">
+                    <h3>北欧按钮</h3>
+                    <p>线框/陶土实心</p>
+                    <div class="nb-slot" style="display:flex;gap:8px;">
+                        <button class="nb-btn">线框</button>
+                        <button class="nb-btn nb-btn-primary">陶土</button>
+                    </div>
+                </div>
+
+                <div class="nb-component">
+                    <h3>底线输入框</h3>
+                    <p>聚焦暖色底线</p>
+                    <div class="nb-slot">
+                        <input class="nb-input" placeholder="输入内容...">
+                    </div>
+                </div>
+
+                <div class="nb-component">
+                    <h3>嵌套卡片</h3>
+                    <p>米白底 + 宁静</p>
+                    <div class="nb-slot">
+                        <div class="nb-mini-card">
+                            <strong>嵌套卡片</strong>
+                            <p>米白底 · 温暖</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nb-component">
+                    <h3>北欧标签</h3>
+                    <p>线框 + 陶土</p>
+                    <div class="nb-slot">
+                        <span class="nb-tag">简约</span>
+                        <span class="nb-tag nb-tag-warm">Hygge</span>
+                    </div>
+                </div>
+
+                <div class="nb-component">
+                    <h3>北欧导航</h3>
+                    <p>陶土底线下</p>
+                    <div class="nb-slot">
+                        <nav class="nb-nav">
+                            <span class="nb-nav-item active">Home</span>
+                            <span class="nb-nav-item">Work</span>
+                            <span class="nb-nav-item">About</span>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="nb-component">
+                    <h3>北欧提示</h3>
+                    <p>左侧暖色条</p>
+                    <div class="nb-slot">
+                        <div class="nb-alert">⚠ 保持简单，感受温暖</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater">复制提示词</button>
+    <div class="prompt-modal" id="prompt-modal">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">极简北欧风 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用极简北欧风（Scandinavian）设计风格。背景米白 #FAF9F6。主色陶土 #D9965A + 深灰 #1E1E1E。标题字重 300。卡片白底，hover 浅米。按钮线框或陶土实心。输入框仅底线聚焦陶土。导航陶土底线。整体明亮、舒适、Hygge。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+    var btn=document.getElementById('prompt-floater'),modal=document.getElementById('prompt-modal'),close=document.getElementById('prompt-close'),copy=document.getElementById('prompt-copy');
+    btn.addEventListener('click',function(){modal.classList.toggle('visible')});
+    close.addEventListener('click',function(){modal.classList.remove('visible')});
+    document.addEventListener('click',function(e){if(!modal.contains(e.target)&&!btn.contains(e.target))modal.classList.remove('visible')});
+    copy.addEventListener('click',function(){function onSuccess(){copy.textContent='已复制';copy.classList.add('done');setTimeout(function(){copy.textContent='复制';copy.classList.remove('done')},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function(){fallback()});else fallback();function fallback(){var ta=document.createElement('textarea');ta.value=PROMPT_TEXT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');onSuccess()}catch(e){console.error('Copy failed:',e)}document.body.removeChild(ta)}});
+    </script>
+</body>
+</html>

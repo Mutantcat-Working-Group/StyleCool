@@ -1,0 +1,305 @@
+[
+  {
+    "name-en": "Sidebar + Master-Detail Layout",
+    "name-zh": "侧栏 + 主从布局",
+    "description-en": "The canonical desktop productivity layout: a fixed-width sidebar (220-280px) with navigation or list, and a flex-1 detail area on the right. On macOS, account for the traffic-light buttons (safe area ~72px from top-left). Sidebar items: 36-40px row height, icon + label, active state with a 3px left accent bar.",
+    "description-zh": "桌面生产力经典布局：固定宽侧栏 220-280px 放置导航或列表，右侧 flex-1 为详情区。macOS 需为红绿灯按钮留出顶部左侧约 72px 安全区。侧栏项行高 36-40px，图标 + 文本，激活态以 3px 左侧主色条标识。",
+    "tags": [
+      "sidebar",
+      "master-detail",
+      "desktop",
+      "navigation",
+      "split-pane"
+    ],
+    "css": ".layout{display:flex;height:100vh}.sidebar{width:260px;border-right:1px solid rgba(20,58,92,.1);padding:16px}.detail{flex:1;overflow-y:auto;padding:24px}"
+  },
+  {
+    "name-en": "Data Table — Striped & Sortable",
+    "name-zh": "数据表格 — 斑马纹可排序",
+    "description-en": "A dense data table for desktop. Header row: uppercase 0.7rem, tracking 0.1em, sticky. Body rows: 36-40px height, alternating background every 2 rows (not every row — too busy). Sortable columns get a subtle ▲▼ indicator. Numeric columns right-aligned, text columns left-aligned. Row hover: sky-50 tint.",
+    "description-zh": "桌面密集数据表。表头行大写 0.7rem 字距 0.1em 粘性定位。体行高 36-40px，每两行交替底色（非逐行交替——太花）。可排序列带细微 ▲▼ 指示器。数字列右对齐，文本列左对齐。行悬停：sky-50 浅蓝底色。",
+    "tags": [
+      "table",
+      "data",
+      "sortable",
+      "striped",
+      "dense"
+    ],
+    "css": "table{border-collapse:collapse;width:100%}thead th{position:sticky;top:0;background:#fff;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;padding:10px 14px;border-bottom:2px solid rgba(20,58,92,.18)}tbody td{padding:10px 14px;border-bottom:1px solid rgba(20,58,92,.1)}tbody tr:nth-child(4n+1),tbody tr:nth-child(4n+2){background:#F4F8FC}"
+  },
+  {
+    "name-en": "Window Title Bar — macOS Traffic Lights",
+    "name-zh": "窗口标题栏 — macOS 红绿灯",
+    "description-en": "When building Electron or native macOS windows, the top-left corner is occupied by the traffic-light buttons (close/minimize/fullscreen). Reserve a 72px × 22px safe zone. Title text should be centered in the title bar, not left-aligned. Draggable region: the entire title bar area. Use -webkit-app-region: drag on the bar and no-drag on interactive elements.",
+    "description-zh": "Electron 或原生 macOS 窗口中，左上角被红绿灯按钮占据。预留 72px×22px 安全区。标题文字居中而非靠左。整个标题栏为可拖拽区域。用 -webkit-app-region: drag 在栏上，交互元素用 no-drag。",
+    "tags": [
+      "titlebar",
+      "macOS",
+      "electron",
+      "window",
+      "traffic-lights"
+    ],
+    "css": ".titlebar{-webkit-app-region:drag;height:38px;display:flex;align-items:center;justify-content:center;padding-left:76px}.titlebar button{-webkit-app-region:no-drag}",
+    "platform": "macOS"
+  },
+  {
+    "name-en": "Context Menu — Right-Click Native",
+    "name-zh": "右键菜单 — 原生式",
+    "description-en": "A floating menu triggered by right-click or long-press. Items: icon + label, 32px row height, divider lines between groups. Keyboard shortcut hints right-aligned in mono. Max 8 items before scrolling. Never put a sub-menu deeper than 1 level — it's a usability cliff.",
+    "description-zh": "右键或长按触发的浮动菜单。项：图标 + 文本，行高 32px，组间用分隔线。快捷键提示右对齐用等宽字体。超过 8 项时可滚动。子菜单深度禁止超过 1 层——可用性断崖。",
+    "tags": [
+      "context-menu",
+      "right-click",
+      "menu",
+      "floating"
+    ],
+    "css": ".context-menu{position:fixed;min-width:180px;background:#fff;border:1px solid rgba(20,58,92,.1);border-radius:8px;box-shadow:0 12px 30px rgba(20,58,92,.16);padding:4px 0}.context-menu .item{display:flex;align-items:center;gap:8px;padding:6px 12px;font-size:.85rem;cursor:pointer}.context-menu .item:hover{background:#EAF5FC}"
+  },
+  {
+    "name-en": "Settings Panel — Categorized Form",
+    "name-zh": "设置面板 — 分类表单",
+    "description-en": "Settings organized into categories with a left nav (180-220px) and right form area. Each setting row: label left, control right, 44px min height. Use toggles for boolean settings, selects for 3-6 options, radio groups for 2-3 mutually exclusive. Group related settings under a section header with a hairline divider.",
+    "description-zh": "设置按分类组织：左侧导航 180-220px，右侧表单区。每行设置：标签左、控件右，最小行高 44px。布尔值用开关，3-6 选项用下拉，2-3 互斥项用单选组。相关设置归组，用节标题+发丝线分隔。",
+    "tags": [
+      "settings",
+      "preferences",
+      "form",
+      "panel",
+      "categorized"
+    ],
+    "css": ".settings{display:flex}.settings-nav{width:200px;border-right:1px solid rgba(20,58,92,.1);padding:16px}.settings-body{flex:1;padding:24px}.setting-row{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:8px 0;border-bottom:1px solid rgba(20,58,92,.06)}"
+  },
+  {
+    "name-en": "Keyboard Shortcuts Overlay",
+    "name-zh": "快捷键浮层",
+    "description-en": "Triggered by pressing '?' or Cmd+/. A modal overlay listing all keyboard shortcuts grouped by category. Each row: action name left, shortcut key combo right in a mono kbd badge. kbd styling: 1px border, 4px radius, mono font, 0.75rem. Esc or clicking outside dismisses.",
+    "description-zh": "按 '?' 或 Cmd+/ 触发。模态浮层列示所有快捷键，按类别分组。每行：操作名左、组合键右（mono kbd 徽章）。kbd 样式：1px 边框、4px 圆角、等宽字体、0.75rem。Esc 或点击浮层外关闭。",
+    "tags": [
+      "shortcuts",
+      "keyboard",
+      "overlay",
+      "kbd",
+      "modal"
+    ],
+    "css": "kbd{display:inline-block;padding:2px 6px;font-family:ui-monospace,monospace;font-size:.75rem;border:1px solid rgba(20,58,92,.18);border-radius:4px;background:#F4F8FC}"
+  },
+  {
+    "name-en": "Drag-and-Drop File Zone",
+    "name-zh": "拖放文件区",
+    "description-en": "A dashed-border drop zone (2px dash, accent color) with centered icon + 'Drop files here or click to browse'. Active state: solid border, sky-50 background, subtle pulse. Show file preview thumbnails below after drop. Always provide a fallback file input for accessibility.",
+    "description-zh": "虚线边框放置区（2px 虚线，主色），居中图标 + '拖放文件或点击浏览'。激活态：实线边框、sky-50 背景、微脉冲。放置后下方显示文件缩略图。始终提供后备文件输入保证无障碍。",
+    "tags": [
+      "drag-drop",
+      "file",
+      "upload",
+      "drop-zone",
+      "desktop"
+    ],
+    "css": ".drop-zone{border:2px dashed rgba(115,185,230,.5);border-radius:12px;padding:40px;text-align:center;transition:border-color .25s,background .25s}.drop-zone.drag-over{border-color:#3A8DD0;background:#EAF5FC}"
+  },
+  {
+    "name-en": "Command Palette — Instant Search & Execute",
+    "name-zh": "命令面板 — 即时搜索执行",
+    "description-en": "A macOS Spotlight / VS Code style command palette that appears centered on screen with a dark overlay. Shows a search input at top, fuzzy-matched results below. Activated by Cmd+K or Ctrl+K. Results are grouped by category (actions, files, navigation). Each result shows the command name and keyboard shortcut on the right. Press Escape or click overlay to dismiss.",
+    "description-zh": "macOS Spotlight / VS Code 风格的命令面板，居中显示，带暗色遮罩。顶部搜索输入框，下方模糊匹配结果。Cmd+K 或 Ctrl+K 激活。结果按类别分组（动作、文件、导航）。每条结果左侧命令名、右侧快捷键。Escape 或点击遮罩关闭。",
+    "tags": [
+      "command-palette",
+      "search",
+      "keyboard",
+      "productivity",
+      "desktop"
+    ],
+    "css": ".cmd-palette-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:9999;display:flex;justify-content:center;padding-top:15vh}.cmd-palette{width:560px;background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}.cmd-palette input{width:100%;padding:16px 20px;font-size:1.1rem;border:0;border-bottom:1px solid rgba(20,58,92,.1);outline:0}",
+    "anti": [
+      "nested menu for frequent actions",
+      "no keyboard shortcut activation",
+      "palette without fuzzy search",
+      "palette too wide on small screens"
+    ],
+    "category": "desktop"
+  },
+  {
+    "name-en": "Toast Notification — Bottom-Right Non-Intrusive",
+    "name-zh": "轻提示 — 右下角无侵入通知",
+    "description-en": "A small notification that slides in from the bottom-right corner, stays for 3-5 seconds, then auto-dismisses or can be clicked away. Use for non-critical confirmations (save succeeded, file copied). Never use for errors that need user action — use a dialog for those. Maximum 2 lines of text. Stack multiple toasts with 12px gap. Must have role='status' for screen readers.",
+    "description-zh": "从右下角滑入的小通知，停留 3-5 秒后自动消失或可点击关闭。用于非关键确认（保存成功、文件已复制）。需要用户操作的错误请用对话框。最多 2 行文字。多条叠加间距 12px。必须设 role='status' 供屏幕阅读器使用。",
+    "tags": [
+      "toast",
+      "notification",
+      "feedback",
+      "non-blocking",
+      "desktop"
+    ],
+    "css": ".toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;background:#0F2438;color:#fff;border-radius:8px;font-size:.875rem;max-width:360px;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:slide-in-right .3s cubic-bezier(.22,1,.36,1);z-index:9998}@keyframes slide-in-right{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}",
+    "anti": [
+      "modal alert for non-critical info",
+      "toast for error requiring action",
+      "more than 2 lines",
+      "toast without auto-dismiss",
+      "stacking >3 toasts"
+    ],
+    "category": "desktop"
+  },
+  {
+    "name-en": "Resizable Panes — Drag Handle Between Sections",
+    "name-zh": "可调分栏 — 拖动把手分割区域",
+    "description-en": "A vertical or horizontal divider between two content panes that the user can drag to resize. The handle shows a grip cursor and highlights on hover. Minimum widths prevent panels from collapsing entirely. Use CSS resize or a minimal JS implementation. The handle should be at least 4px wide (visible) with a 12px interactive zone.",
+    "description-zh": "两个内容面板之间的纵向或横向分割线，用户可拖拽调整大小。把手上显示 grip 光标，悬停时高亮。设置最小宽度防止面板完全折叠。使用 CSS resize 或最小化 JS 实现。把手至少 4px 宽（可见），交互区域 12px。",
+    "tags": [
+      "resize",
+      "pane",
+      "split",
+      "drag",
+      "layout",
+      "desktop"
+    ],
+    "css": ".resize-handle{width:4px;cursor:col-resize;background:rgba(20,58,92,.08);transition:background .2s;position:relative}.resize-handle::after{content:'';position:absolute;inset:-4px}.resize-handle:hover{background:#3A8DD0}",
+    "anti": [
+      "fixed-size panels",
+      "handle too thin to grab",
+      "no minimum panel width",
+      "resize without visual feedback"
+    ],
+    "category": "desktop"
+  },
+  {
+    "name-en": "Breadcrumb — Hierarchical Path Navigation",
+    "name-zh": "面包屑 — 层级路径导航",
+    "description-en": "A horizontal trail showing the current page's position in the site hierarchy. Each segment (except the last) is a clickable link. Use '>' or '/' as separator. The last item is the current page — rendered as plain text, not a link. Collapse deeply nested paths with a '...' expandable middle segment on narrow screens.",
+    "description-zh": "水平路径导航显示当前页面在站点层级中的位置。每段（除最后一个）都是可点击链接。用 '>' 或 '/' 作分隔符。最后一项是当前页面——纯文本，非链接。在窄屏幕上用 '...' 可展开中间段折叠深层路径。",
+    "tags": [
+      "breadcrumb",
+      "navigation",
+      "hierarchy",
+      "wayfinding",
+      "desktop"
+    ],
+    "css": ".breadcrumb{display:flex;align-items:center;gap:8px;font-size:.85rem;color:#8395A6}.breadcrumb a{color:#51677C;text-decoration:none}.breadcrumb a:hover{color:#1B4E7A}.breadcrumb span:last-child{color:#15324C;font-weight:500}.breadcrumb a::after{content:'/';margin-left:8px;color:#B5C2D0}",
+    "anti": [
+      "back button as only navigation",
+      "last item as a link",
+      "no separator between segments",
+      "long paths that overflow on narrow screens"
+    ],
+    "category": "desktop"
+  },
+  {
+    "name-en": "Tree View — Expandable Sidebar Navigation",
+    "name-zh": "树状视图 — 可展开侧边导航",
+    "description-en": "A hierarchical navigation where folders/items can be expanded and collapsed. Each level is indented 16-20px. Use a chevron (▸ / ▾) to indicate expandable items. Always support keyboard navigation: arrow keys to move, Enter/Space to toggle, Left to collapse, Right to expand. Selected item gets an accent background highlight.",
+    "description-zh": "层级式导航，文件夹/条目可展开折叠。每级缩进 16-20px。用箭头 (▸ / ▾) 表示可展开项。务必支持键盘导航：方向键移动、Enter/Space 切换、左键折叠、右键展开。选中项用主色背景高亮。",
+    "tags": [
+      "tree",
+      "sidebar",
+      "navigation",
+      "expandable",
+      "hierarchy",
+      "desktop"
+    ],
+    "css": ".tree-item{padding-left:calc(var(--level,0) * 20px)}.tree-toggle{cursor:pointer;user-select:none}.tree-toggle::before{content:'▸';display:inline-block;width:16px;transition:transform .2s}.tree-toggle.open::before{transform:rotate(90deg)}.tree-item.active{background:rgba(58,141,208,.1);border-radius:6px}",
+    "anti": [
+      "flat list for deep hierarchies",
+      "no keyboard navigation",
+      "no indent for nested levels",
+      "no selected state indicator"
+    ],
+    "category": "desktop"
+  },
+  {
+    "name-en": "Progress Bar — Determinate & Indeterminate",
+    "name-zh": "进度条 — 确定与不确定模式",
+    "description-en": "A progress indicator for operations lasting 2+ seconds. Determinate mode shows % complete with a filling bar and optional numeric label. Indeterminate mode shows a sliding shimmer for unknown duration operations. Never freeze the UI during long operations — always show progress. Use the accent color for the fill. Height: 4-6px for inline, 8-12px for standalone.",
+    "description-zh": "用于持续 2 秒以上操作的进度指示器。确定模式显示填充条 + 可选百分比。不确定模式显示滑动闪烁动画。长操作期间绝不能让 UI 冻结——务必显示进度。填充色用主色。高度：内联 4-6px，独立 8-12px。",
+    "tags": [
+      "progress",
+      "loading",
+      "feedback",
+      "indicator",
+      "desktop"
+    ],
+    "css": ".progress{height:6px;background:rgba(20,58,92,.08);border-radius:3px;overflow:hidden}.progress-fill{height:100%;background:#3A8DD0;border-radius:3px;transition:width .3s}.progress-indeterminate .progress-fill{width:30%;animation:slide 1.5s ease-in-out infinite}@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}",
+    "anti": [
+      "frozen UI during operations",
+      "no progress for >2s waits",
+      "too thin to see (<3px)",
+      "indeterminate when % is known"
+    ],
+    "category": "desktop"
+  },
+  {
+    "name-en": "Global Search — Command-F Replacement",
+    "name-zh": "全局搜索 — Command-F 替代",
+    "description-en": "A unified search that searches across all content types: files, settings, recent items, commands. Triggered by Cmd/Ctrl+K. Modal-style: centered overlay, large input field at top, results below grouped by category. Show results as-you-type with 200ms debounce. Arrow keys navigate results, Enter opens. Highlight matching text in results. Close with Escape. Show recent searches when input is empty. Never make the search field smaller than 400px wide.",
+    "description-zh": "跨所有内容类型的统一搜索：文件、设置、近期项、命令。Cmd/Ctrl+K 触发。模态样式：居中覆盖层、顶部大输入框、下方按分类分组的结果。输入即搜（200ms 防抖）。方向键导航结果、Enter 打开。高亮匹配文本。Escape 关闭。输入为空时显示最近搜索。搜索框宽度不要小于 400px。",
+    "tags": [
+      "search",
+      "global",
+      "command-palette",
+      "productivity",
+      "desktop"
+    ],
+    "css": ".global-search{position:fixed;top:20%;left:50%;transform:translateX(-50%);width:min(640px,90vw);background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(20,58,92,.2);overflow:hidden}.global-search input{width:100%;height:52px;border:none;border-bottom:1px solid rgba(20,58,92,.08);padding:0 20px;font-size:1rem}.global-search .results{max-height:400px;overflow-y:auto;padding:8px 0}",
+    "anti": [
+      "search field < 400px",
+      "search without keyboard navigation",
+      "no grouping by category"
+    ]
+  },
+  {
+    "name-en": "Multi-Tab — Browser-Style Tabs",
+    "name-zh": "多标签页 — 浏览器风格标签",
+    "description-en": "Multiple document tabs in a horizontal tab bar. Tab: 120-200px width, close button (×) on hover, drag-to-reorder. Active tab: white background, inactive: gray tint. Middle-click closes a tab. Double-click renames (if applicable). Tab overflow: horizontal scroll arrows or a dropdown. New tab button (+) at the end. Use dragstart/dragover for reordering. Never auto-close tabs without confirmation. Never hide the close button permanently.",
+    "description-zh": "水平标签栏中的多文档标签。标签宽 120-200px、悬停显示关闭按钮（×）、可拖拽排序。激活标签白底、未激活灰底。中键关闭标签。双击重命名（如适用）。标签溢出：横向滚动箭头或下拉。末尾新增标签按钮（+）。用 dragstart/dragover 排序。禁止无确认自动关闭标签。禁止永久隐藏关闭按钮。",
+    "tags": [
+      "tabs",
+      "multi-tab",
+      "desktop",
+      "document",
+      "navigation"
+    ],
+    "css": ".tab-bar{display:flex;background:#F0F0F0;border-bottom:1px solid rgba(20,58,92,.1);overflow-x:auto;scrollbar-width:none}.tab-bar::-webkit-scrollbar{display:none}.tab{min-width:120px;max-width:200px;height:36px;display:flex;align-items:center;padding:0 12px;font-size:.8rem;cursor:pointer;border-right:1px solid rgba(20,58,92,.06)}.tab.active{background:#fff}.tab .close{opacity:0;margin-left:auto;width:16px;height:16px;border-radius:4px;display:grid;place-items:center;font-size:.7rem}.tab:hover .close{opacity:.5}",
+    "anti": [
+      "auto-closing tabs without confirmation",
+      "permanently hidden close button",
+      "no drag-to-reorder"
+    ]
+  },
+  {
+    "name-en": "Notification Center — Consolidated Alerts",
+    "name-zh": "通知中心 — 统一告警",
+    "description-en": "A panel that aggregates all notifications in one place, triggered by a bell icon with an unread count badge. Grouped by time (Today, Yesterday, Earlier). Each notification: icon, title, description, timestamp, and action buttons. Unread: left accent bar. Swipe or × to dismiss. Mark all as read at the top. Pull to refresh for new notifications. Max 50 visible, then 'Load older'. Never show more than 3 unread toasts simultaneously — route them to the notification center instead.",
+    "description-zh": "在一处聚合所有通知的面板，铃铛图标带未读数角标触发。按时间分组（今天、昨天、更早）。每条通知：图标、标题、描述、时间戳、操作按钮。未读：左侧主色条。滑动或 × 关闭。顶部'全部标为已读'。下拉刷新新通知。可见上限 50，超出'加载更早'。不要同时显示超过 3 条未读 toast——路由到通知中心。",
+    "tags": [
+      "notification",
+      "center",
+      "alerts",
+      "desktop",
+      "panel"
+    ],
+    "css": ".notification-center{position:fixed;top:48px;right:16px;width:360px;max-height:80vh;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(20,58,92,.18);overflow-y:auto}.notification{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(20,58,92,.06)}.notification.unread{border-left:3px solid #3A8DD0}.notification .time{font-size:.7rem;color:rgba(20,58,92,.4)}",
+    "anti": [
+      "3+ simultaneous toast notifications",
+      "no group by time",
+      "no 'mark all as read'"
+    ]
+  },
+  {
+    "name-en": "Drag-and-Drop Reorder — Sortable List",
+    "name-zh": "拖拽排序 — 可排序列表",
+    "description-en": "A list where items can be reordered by dragging. Visual feedback: dragged item gets a subtle shadow and 1.02 scale, placeholder shows the drop position with a dashed outline. Use HTML5 Drag and Drop API or pointer events for touch support. Cursor: grab on hover, grabbing while dragging. Announce the reorder to screen readers via aria-live. Keyboard: focus + Enter to grab, arrow keys to move, Enter to drop. Never use drag-and-drop as the only reorder method — always provide arrow buttons as fallback.",
+    "description-zh": "可拖拽排序的列表。视觉反馈：拖拽项微阴影和 1.02 缩放、占位符虚线轮廓显示放置位置。用 HTML5 拖放 API 或 pointer 事件支持触控。光标：悬停 grab、拖动 grabbing。通过 aria-live 通知屏幕阅读器。键盘：焦点+Enter 抓取、方向键移动、Enter 放置。禁止拖拽作为唯一排序方式——必须提供方向按钮回退。",
+    "tags": [
+      "drag-drop",
+      "sortable",
+      "reorder",
+      "desktop",
+      "interaction"
+    ],
+    "css": ".sortable-item{cursor:grab;padding:12px 16px;border:1px solid rgba(20,58,92,.08);border-radius:8px;margin-bottom:4px;transition:transform .15s,box-shadow .15s}.sortable-item:active{cursor:grabbing}.sortable-item.dragging{opacity:.5;transform:scale(1.02);box-shadow:0 8px 24px rgba(20,58,92,.15)}.sortable-placeholder{border:2px dashed rgba(20,58,92,.2);border-radius:8px;height:48px;margin-bottom:4px}",
+    "anti": [
+      "drag-and-drop as only reorder method",
+      "no keyboard fallback",
+      "no screen reader announcement"
+    ]
+  }
+]

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 页面 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   404 页面（404 Page）— 演示样式
+   ============================================================ */
+:root {
+    --nf-bg: #F4F8FC; --nf-surface: #FFFFFF;
+    --nf-ink: #15324C; --nf-ink-2: #51677C; --nf-ink-3: #8395A6;
+    --nf-accent: #73B9E6; --nf-accent-2: #4A90C8;
+    --nf-line: rgba(20,58,92,0.08);
+}
+body { background: var(--nf-bg) !important; color: var(--nf-ink); display: flex; flex-direction: column; min-height: 100vh; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.nf-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--nf-line); }
+.nf-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.nf-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.nf-logo-icon { width: 34px; height: 34px; background: var(--nf-accent); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.nf-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 7px; }
+.nf-logo-text strong { font-size: 0.9375rem; font-weight: 700; }
+.nf-logo-text em { display: none; }
+.nf-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; font-weight: 500; color: var(--nf-ink-2); text-decoration: none; transition: all 0.15s ease; }
+.nf-header-actions a:hover { color: var(--nf-accent-2); }
+.nf-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+.nf-content { text-align: center; max-width: 560px; }
+.nf-code { font-size: clamp(6rem,12vw,10rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1; color: var(--nf-accent); margin: 0 0 8px; font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace; animation: nf-float 3s ease-in-out infinite; }
+@keyframes nf-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.nf-title { font-size: 1.5rem; font-weight: 700; color: var(--nf-ink); margin: 0 0 12px; }
+.nf-desc { font-size: 0.9375rem; line-height: 1.7; color: var(--nf-ink-2); margin: 0 0 32px; }
+.nf-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.nf-btn { display: inline-flex; align-items: center; padding: 10px 24px; font-size: 0.875rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; text-decoration: none; }
+.nf-btn-primary { background: var(--nf-accent); color: #fff; border: 0; }
+.nf-btn-primary:hover { background: var(--nf-accent-2); }
+.nf-btn-outline { background: transparent; color: var(--nf-ink-2); border: 1px solid var(--nf-line); }
+.nf-btn-outline:hover { border-color: var(--nf-accent); color: var(--nf-accent-2); }
+.nf-search { display: flex; gap: 8px; max-width: 400px; margin: 0 auto 24px; }
+.nf-search-input { flex: 1; padding: 10px 14px; font-size: 0.875rem; color: var(--nf-ink); background: #fff; border: 1px solid var(--nf-line); border-radius: 8px; outline: none; transition: all 0.2s ease; font-family: inherit; }
+.nf-search-input:focus { border-color: var(--nf-accent); box-shadow: 0 0 0 3px rgba(115,185,230,0.12); }
+.nf-search-btn { padding: 10px 18px; font-size: 0.875rem; font-weight: 600; background: var(--nf-accent); color: #fff; border: 0; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.nf-search-btn:hover { background: var(--nf-accent-2); }
+.nf-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--nf-line); }
+.nf-links a { font-size: 0.8125rem; color: var(--nf-ink-3); text-decoration: none; transition: all 0.15s ease; }
+.nf-links a:hover { color: var(--nf-accent-2); }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--nf-ink); border-radius: 8px; color: #fff; font-size: 0.8125rem; font-weight: 600; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { background: var(--nf-accent); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--nf-surface); border: 1px solid var(--nf-line); border-radius: 12px; box-shadow: 0 12px 40px rgba(20,58,92,0.1); z-index: 1001; color: var(--nf-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--nf-accent); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--nf-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.7; color: var(--nf-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: var(--nf-bg); padding: 14px; border-radius: 8px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--nf-accent); color: #fff; border: 0; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: var(--nf-accent-2); }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; border-top: 1px solid var(--nf-line) !important; padding: 24px 0 !important; margin: 0 !important; text-align: center; color: var(--nf-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+footer p { font-size: 0.75rem; color: var(--nf-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.6875rem; color: var(--nf-ink-3); }
+.friend-links span { margin-right: 6px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 3px; font-size: 0.6875rem; color: var(--nf-ink-3); text-decoration: none; transition: all 0.15s ease; }
+.friend-links a:hover { color: var(--nf-accent-2); }
+@media (max-width: 768px) { .nf-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .nf-header-actions { justify-content: center; } .nf-code { font-size: 4rem; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="nf-header">
+        <div class="nf-header-inner">
+            <a class="nf-logo" href="../example.php" aria-label="StyleCool">
+                <span class="nf-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="nf-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>404 示例</em>
+                </span>
+            </a>
+            <div class="nf-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="nf-main">
+            <div class="nf-content">
+                <h1 class="nf-code">404</h1>
+                <h2 class="nf-title">页面未找到</h2>
+                <p class="nf-desc">您访问的页面可能已被移动、删除或从未存在。<br>试试搜索或返回首页。</p>
+
+                <div class="nf-search">
+                    <input class="nf-search-input" type="text" placeholder="搜索文档、样式、函数...">
+                    <button class="nf-search-btn">搜索</button>
+                </div>
+
+                <div class="nf-actions">
+                    <a class="nf-btn nf-btn-primary" href="#">← 返回首页</a>
+                    <a class="nf-btn nf-btn-outline" href="#">查看帮助</a>
+                </div>
+
+                <div class="nf-links">
+                    <a href="#">文档</a>
+                    <a href="#">API</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">博客</a>
+                    <a href="#">联系</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">404 页面 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用 404 页面（404 Page）设计风格。背景浅灰蓝 #F4F8FC。页面居中显示大号等宽数字 404（clamp 6-10rem，天蓝 #73B9E6，3s 浮动动画）。下方标题 + 描述 + 搜索框 + 两个操作按钮（返回首页 / 查看帮助）。底部常用链接横排。整体有意义的错误状态，不空白、不冷漠，给予用户行动指引。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

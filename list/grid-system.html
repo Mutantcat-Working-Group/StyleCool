@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网格系统 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   网格系统（Grid System）— 演示样式
+   ============================================================ */
+:root {
+    --gs-bg: #15324C; --gs-bg-2: #1B4E7A; --gs-surface: #0F2438;
+    --gs-ink: #FFFFFF; --gs-ink-2: rgba(255,255,255,0.7); --gs-ink-3: rgba(255,255,255,0.45);
+    --gs-accent: #73B9E6; --gs-accent-2: #4A90C8;
+    --gs-border: rgba(255,255,255,0.15); --gs-gap: 16px;
+}
+body { background: var(--gs-bg) !important; color: var(--gs-ink); }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.gs-header { position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
+.gs-header-inner { position: relative; margin: 16px clamp(20px,4vw,32px) 0; padding: 12px 24px; background: rgba(15,36,56,0.8); backdrop-filter: blur(20px); border: 1px solid var(--gs-border); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.gs-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.gs-logo-icon { width: 36px; height: 36px; background: var(--gs-accent); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.gs-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 5px; }
+.gs-logo-text { display: inline-flex; flex-direction: column; line-height: 1.2; }
+.gs-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--gs-ink); }
+.gs-logo-text em { font-style: normal; font-size: 0.75rem; color: var(--gs-ink-3); margin-top: 2px; }
+.gs-header-actions { display: inline-flex; align-items: center; gap: 8px; }
+.gs-header-actions a { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.875rem; font-weight: 500; color: var(--gs-ink-2); border: 1px solid var(--gs-border); border-radius: 6px; text-decoration: none; transition: all 0.2s ease; }
+.gs-header-actions a:hover { color: var(--gs-ink); border-color: var(--gs-accent); background: rgba(115,185,230,0.1); }
+.gs-hero { position: relative; min-height: 620px; margin-top: 0; padding: calc(92px + 80px) 24px 80px; background: transparent; display: flex; align-items: center; justify-content: center; }
+.gs-hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+.gs-hero-inner { position: relative; z-index: 1; max-width: 960px; width: 100%; display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gs-gap); }
+.gs-hero-card { grid-column: 1 / span 7; padding: 48px; background: var(--gs-surface); border: 1px solid var(--gs-border); border-radius: 8px; }
+.gs-hero-card h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; color: var(--gs-ink); }
+.gs-hero-card h1 .accent { color: var(--gs-accent); }
+.gs-hero-card p { font-size: 1.0625rem; line-height: 1.7; color: var(--gs-ink-2); margin: 0; }
+.gs-hero-side { grid-column: 9 / span 4; display: flex; flex-direction: column; gap: var(--gs-gap); }
+.gs-hero-stat { padding: 24px; background: var(--gs-surface); border: 1px solid var(--gs-border); border-radius: 8px; }
+.gs-hero-stat strong { font-size: 1.75rem; font-weight: 700; color: var(--gs-accent); display: block; }
+.gs-hero-stat span { font-size: 0.8125rem; color: var(--gs-ink-3); }
+.gs-components { position: relative; width: 100%; margin: 0; padding: 80px 0 96px; background: transparent; }
+.gs-components-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.gs-components-header { text-align: left; margin-bottom: 48px; }
+.gs-components-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--gs-ink); margin: 0 0 8px; }
+.gs-components-header p { color: var(--gs-ink-3); margin: 0; }
+.gs-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gs-gap); }
+.gs-component { padding: 24px; background: var(--gs-surface); border: 1px solid var(--gs-border); border-radius: 8px; transition: border-color 0.2s ease; }
+.gs-component:hover { border-color: var(--gs-accent); }
+.gs-component h3 { font-size: 0.875rem; font-weight: 700; color: var(--gs-ink); margin: 0 0 4px; }
+.gs-component > p { font-size: 0.75rem; color: var(--gs-ink-3); margin: 0 0 16px; }
+.gs-slot { margin-top: 14px; }
+.gs-btn { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: var(--gs-ink); border: 1px solid var(--gs-border); border-radius: 4px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; background: transparent; }
+.gs-btn:hover { border-color: var(--gs-accent); color: var(--gs-accent); }
+.gs-btn-primary { background: var(--gs-accent); border-color: var(--gs-accent); color: var(--gs-bg); }
+.gs-btn-primary:hover { background: var(--gs-accent-2); border-color: var(--gs-accent-2); color: var(--gs-bg); }
+.gs-input { width: 100%; padding: 8px 12px; font-size: 0.8125rem; color: var(--gs-ink); background: var(--gs-surface); border: 1px solid var(--gs-border); border-radius: 4px; outline: none; transition: all 0.2s ease; font-family: inherit; box-sizing: border-box; }
+.gs-input:focus { border-color: var(--gs-accent); box-shadow: 0 0 0 3px rgba(115,185,230,0.15); }
+.gs-mini-card { padding: 12px; background: var(--gs-bg); border: 1px solid var(--gs-border); border-radius: 4px; }
+.gs-mini-card strong { font-size: 0.8125rem; color: var(--gs-ink); display: block; font-weight: 600; }
+.gs-mini-card p { font-size: 0.75rem; color: var(--gs-ink-3); margin: 4px 0 0; }
+.gs-tag { display: inline-flex; align-items: center; padding: 3px 10px; font-size: 0.6875rem; font-weight: 600; color: var(--gs-ink-2); border: 1px solid var(--gs-border); border-radius: 999px; margin-right: 6px; margin-bottom: 6px; }
+.gs-tag-accent { color: var(--gs-accent); border-color: var(--gs-accent); background: rgba(115,185,230,0.1); }
+.gs-nav { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--gs-border); border-radius: 4px; }
+.gs-nav-item { padding: 6px 14px; font-size: 0.8125rem; color: var(--gs-ink-2); border-radius: 2px; cursor: pointer; transition: all 0.2s ease; }
+.gs-nav-item.active { background: var(--gs-accent); color: var(--gs-bg); font-weight: 600; }
+.gs-alert { padding: 10px 14px; background: rgba(115,185,230,0.08); border: 1px solid rgba(115,185,230,0.25); border-left: 3px solid var(--gs-accent); border-radius: 4px; color: var(--gs-ink-2); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--gs-surface); border: 1px solid var(--gs-border); border-radius: 8px; color: var(--gs-ink-2); font-size: 0.875rem; font-weight: 500; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { border-color: var(--gs-accent); color: var(--gs-ink); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--gs-surface); border: 1px solid var(--gs-border); border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); z-index: 1001; color: var(--gs-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 600; color: var(--gs-accent); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--gs-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-close:hover { color: var(--gs-ink); }
+.prompt-modal-content { font-size: 0.875rem; line-height: 1.7; color: var(--gs-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,"SF Mono","JetBrains Mono",monospace; background: var(--gs-bg); padding: 14px; border-radius: 4px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--gs-accent); color: var(--gs-bg); border: 0; border-radius: 4px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: var(--gs-accent-2); }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--gs-surface) !important; border: none !important; border-top: 1px solid var(--gs-border) !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: var(--gs-ink-3); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.875rem; color: var(--gs-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.75rem; color: var(--gs-ink-3); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 6px 14px; margin: 0 4px; font-size: 0.75rem; color: var(--gs-ink-3); border: 1px solid var(--gs-border); border-radius: 999px; text-decoration: none; transition: all 0.2s ease; }
+.friend-links a:hover { color: var(--gs-accent); border-color: var(--gs-accent); }
+@media (max-width: 768px) {
+    .gs-hero-inner { grid-template-columns: 1fr; }
+    .gs-hero-card { grid-column: 1; }
+    .gs-hero-side { grid-column: 1; display: grid; grid-template-columns: repeat(3,1fr); }
+    .gs-header-inner { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 18px; }
+    .gs-header-actions { justify-content: center; }
+    .gs-logo-text em { display: none; }
+    .gs-hero { min-height: 520px; padding: calc(92px + 48px) 16px 48px; }
+    .gs-hero-card { padding: 32px 24px; }
+    .prompt-floater { bottom: 16px; left: 16px; }
+    .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); }
+}
+@media (max-width: 960px) { .gs-grid { grid-template-columns: repeat(6,1fr); } }
+@media (max-width: 600px) { .gs-grid { grid-template-columns: 1fr; } .gs-hero-side { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="gs-header">
+        <div class="gs-header-inner">
+            <a class="gs-logo" href="../example.php" aria-label="StyleCool">
+                <span class="gs-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="gs-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>网格系统示例</em>
+                </span>
+            </a>
+            <div class="gs-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="gs-hero" aria-label="网格系统英雄区">
+            <div class="gs-hero-inner">
+                <div class="gs-hero-card">
+                    <h1><span class="accent">网格系统</span></h1>
+                    <p>12 列 CSS Grid 骨架 + 1px 发丝线边框 + 16px 统一间距<br>所有元素严格对齐网格，结构清晰严谨，无一处例外</p>
+                </div>
+                <div class="gs-hero-side">
+                    <div class="gs-hero-stat"><strong>12</strong><span>列网格</span></div>
+                    <div class="gs-hero-stat"><strong>16px</strong><span>统一间距</span></div>
+                    <div class="gs-hero-stat"><strong>1px</strong><span>发丝线</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gs-components" aria-label="组件展示">
+            <div class="gs-components-inner">
+                <div class="gs-components-header">
+                    <h2>模块化组件</h2>
+                    <p>所有组件严格对齐 12 列网格系统</p>
+                </div>
+
+                <div class="gs-grid">
+                    <div class="gs-component" style="grid-column: 1 / span 4;">
+                        <h3>网格按钮</h3>
+                        <p>1px 边框 + 悬停变色</p>
+                        <div class="gs-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="gs-btn">默认</button>
+                            <button class="gs-btn gs-btn-primary">主要</button>
+                        </div>
+                    </div>
+
+                    <div class="gs-component" style="grid-column: 5 / span 4;">
+                        <h3>网格输入框</h3>
+                        <p>聚焦时蓝色描边 + 光环</p>
+                        <div class="gs-slot">
+                            <input type="text" class="gs-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="gs-component" style="grid-column: 9 / span 4;">
+                        <h3>嵌套网格卡</h3>
+                        <p>次级卡片，深底浅边</p>
+                        <div class="gs-slot">
+                            <div class="gs-mini-card">
+                                <strong>嵌套网格卡</strong>
+                                <p>次级卡片 · 深底浅边</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gs-component" style="grid-column: 1 / span 3;">
+                        <h3>网格标签</h3>
+                        <p>发丝线边框 + 胶囊</p>
+                        <div class="gs-slot">
+                            <span class="gs-tag">前端</span>
+                            <span class="gs-tag gs-tag-accent">设计</span>
+                            <span class="gs-tag">网格</span>
+                        </div>
+                    </div>
+
+                    <div class="gs-component" style="grid-column: 4 / span 6;">
+                        <h3>网格导航</h3>
+                        <p>蓝色实心选中</p>
+                        <div class="gs-slot">
+                            <nav class="gs-nav">
+                                <span class="gs-nav-item active">首页</span>
+                                <span class="gs-nav-item">作品</span>
+                                <span class="gs-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="gs-component" style="grid-column: 10 / span 3;">
+                        <h3>网格提示</h3>
+                        <p>左侧色条 + 浅蓝底</p>
+                        <div class="gs-slot">
+                            <div class="gs-alert">⚠ 操作不可撤销</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">网格系统 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用网格系统（Grid System）设计风格。背景深海军蓝 #15324C。所有内容使用 12 列 CSS Grid（grid-template-columns: repeat(12, 1fr)），gap 统一 16px。卡片 1px 发丝线边框 rgba(255,255,255,0.15)，圆角 8px，背景 #0F2438。主色天蓝 #73B9E6 用于强调、选中、聚焦。文字白色 #FFFFFF / 次要 rgba(255,255,255,0.7)。Hero 区使用非对称布局（7:3 分栏），右侧展示 3 个统计数字。底部组件区 6 张卡片按不对称 span 排列（4+4+4 / 3+6+3）。所有元素严格对齐网格，无一处例外。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

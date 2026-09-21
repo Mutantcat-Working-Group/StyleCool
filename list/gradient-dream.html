@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变梦幻 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   渐变梦幻（Gradient Dream）— 演示样式
+   ============================================================ */
+:root {
+    --gd-1: #FFAFBD; --gd-2: #A18CD1; --gd-3: #FBC2EB; --gd-4: #FFD1E8;
+    --gd-ink: #2D1B4E; --gd-ink-2: #5C4290; --gd-ink-3: #8B74B8;
+    --gd-surface: rgba(255,255,255,0.5); --gd-surface-2: rgba(255,255,255,0.7);
+    --gd-border: rgba(255,255,255,0.5); --gd-shadow: 0 8px 32px rgba(161,140,209,0.2);
+}
+body { background: linear-gradient(135deg, var(--gd-1) 0%, var(--gd-2) 50%, var(--gd-3) 100%) !important; background-size: 400% 400%; animation: gd-bg 20s ease-in-out infinite; background-attachment: fixed; color: var(--gd-ink); }
+@keyframes gd-bg { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.gd-header { position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
+.gd-header-inner { position: relative; margin: 16px clamp(20px,4vw,32px) 0; padding: 14px 28px; background: var(--gd-surface); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--gd-border); border-radius: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: var(--gd-shadow); }
+.gd-header-inner::before { content: ""; position: absolute; top: 0; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent); pointer-events: none; }
+.gd-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.gd-logo-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.95); border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; box-shadow: 0 4px 16px rgba(161,140,209,0.3); }
+.gd-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 10px; }
+.gd-logo-text { display: inline-flex; flex-direction: column; line-height: 1.2; }
+.gd-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--gd-ink); }
+.gd-logo-text em { font-style: normal; font-size: 0.75rem; color: var(--gd-ink-3); margin-top: 2px; }
+.gd-header-actions a { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.875rem; font-weight: 500; color: var(--gd-ink-2); background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.5); border-radius: 999px; text-decoration: none; transition: all 0.3s ease; }
+.gd-header-actions a:hover { background: rgba(255,255,255,0.8); color: var(--gd-ink); }
+.gd-hero { position: relative; min-height: 620px; margin-top: 0; padding: calc(92px + 80px) 24px 80px; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.gd-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; pointer-events: none; }
+.gd-orb-1 { width: 350px; height: 350px; background: radial-gradient(circle, #FFD1E8, transparent 70%); top: -80px; right: -80px; animation: gd-float 16s ease-in-out infinite; }
+.gd-orb-2 { width: 280px; height: 280px; background: radial-gradient(circle, #A18CD1, transparent 70%); bottom: -60px; left: -60px; animation: gd-float 20s ease-in-out infinite; animation-delay: -5s; }
+.gd-orb-3 { width: 200px; height: 200px; background: radial-gradient(circle, #FBC2EB, transparent 70%); top: 40%; left: 60%; animation: gd-float 18s ease-in-out infinite; animation-delay: -10s; }
+@keyframes gd-float { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-40px) scale(1.08); } 66% { transform: translate(-25px,35px) scale(0.94); } }
+.gd-hero-card { position: relative; z-index: 1; max-width: 720px; padding: 56px 48px; background: var(--gd-surface); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: 24px; border: 1px solid var(--gd-border); box-shadow: var(--gd-shadow); text-align: center; }
+.gd-hero-card::before { content: ""; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent); }
+.gd-hero-card h1 { font-size: clamp(2rem,5vw,3.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; background: linear-gradient(135deg, var(--gd-ink), var(--gd-ink-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.gd-hero-card p { font-size: 1.0625rem; line-height: 1.7; color: var(--gd-ink-2); margin: 0; }
+.gd-components { position: relative; width: 100%; margin: 0; padding: 80px 0 96px; background: transparent; }
+.gd-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.gd-components-header { text-align: center; margin-bottom: 48px; }
+.gd-components-header h2 { font-size: 2rem; font-weight: 800; color: var(--gd-ink); margin: 0 0 12px; }
+.gd-components-header p { color: var(--gd-ink-2); max-width: 560px; margin: 0 auto; }
+.gd-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.gd-component { position: relative; overflow: hidden; padding: 24px; background: var(--gd-surface); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: 20px; border: 1px solid var(--gd-border); box-shadow: var(--gd-shadow); transition: transform 0.5s ease, box-shadow 0.5s ease; }
+.gd-component::before { content: ""; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent); pointer-events: none; }
+.gd-component:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(161,140,209,0.3); }
+.gd-component h3 { font-size: 0.9375rem; font-weight: 700; color: var(--gd-ink); margin: 0 0 4px; }
+.gd-component > p { font-size: 0.8125rem; color: var(--gd-ink-3); margin: 0 0 16px; }
+.gd-slot { margin-top: 14px; }
+.gd-btn { display: inline-flex; align-items: center; padding: 10px 20px; font-size: 0.875rem; font-weight: 600; color: var(--gd-ink); background: var(--gd-surface-2); backdrop-filter: blur(20px); border: 1px solid var(--gd-border); border-radius: 999px; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.gd-btn:hover { background: rgba(255,255,255,0.9); transform: scale(1.05); }
+.gd-btn-primary { background: linear-gradient(135deg, var(--gd-2), var(--gd-1)); color: #fff; border-color: transparent; }
+.gd-btn-primary:hover { background: linear-gradient(135deg, #B49CDC, #FFAFBD); }
+.gd-input { width: 100%; padding: 10px 14px; font-size: 0.875rem; color: var(--gd-ink); background: rgba(255,255,255,0.5); backdrop-filter: blur(20px); border: 1px solid var(--gd-border); border-radius: 12px; outline: none; transition: all 0.3s ease; font-family: inherit; box-sizing: border-box; }
+.gd-input:focus { background: rgba(255,255,255,0.7); border-color: rgba(161,140,209,0.5); box-shadow: 0 0 0 4px rgba(161,140,209,0.12); }
+.gd-mini-card { padding: 14px; background: rgba(255,255,255,0.5); backdrop-filter: blur(20px); border: 1px solid var(--gd-border); border-radius: 12px; }
+.gd-mini-card strong { font-size: 0.875rem; color: var(--gd-ink); display: block; font-weight: 600; }
+.gd-mini-card p { font-size: 0.75rem; color: var(--gd-ink-3); margin: 4px 0 0; }
+.gd-tag { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; color: var(--gd-ink-2); background: rgba(255,255,255,0.5); backdrop-filter: blur(20px); border: 1px solid var(--gd-border); border-radius: 999px; margin-right: 6px; margin-bottom: 6px; }
+.gd-tag-accent { color: #fff; background: rgba(161,140,209,0.6); border-color: transparent; }
+.gd-nav { display: flex; gap: 4px; padding: 4px; background: rgba(255,255,255,0.5); backdrop-filter: blur(20px); border: 1px solid var(--gd-border); border-radius: 999px; }
+.gd-nav-item { padding: 8px 16px; font-size: 0.875rem; color: var(--gd-ink-3); border-radius: 999px; cursor: pointer; transition: all 0.3s ease; }
+.gd-nav-item.active { background: rgba(255,255,255,0.9); color: var(--gd-ink); font-weight: 600; box-shadow: 0 2px 8px rgba(161,140,209,0.15); }
+.gd-alert { padding: 12px 16px; background: rgba(255,200,220,0.5); backdrop-filter: blur(20px); border: 1px solid rgba(255,150,180,0.5); border-radius: 12px; color: #8B1A4A; font-size: 0.875rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--gd-surface-2); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--gd-border); border-radius: 999px; color: var(--gd-ink); font-size: 0.875rem; font-weight: 600; cursor: pointer; box-shadow: var(--gd-shadow); z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; font-family: inherit; }
+.prompt-floater:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: rgba(45,27,78,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 1001; color: #fff; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 600; color: #FBC2EB; }
+.prompt-modal-close { background: transparent; border: 0; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.875rem; line-height: 1.7; color: rgba(255,255,255,0.9); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,monospace; background: rgba(255,255,255,0.06); padding: 14px; border-radius: 12px; }
+.prompt-modal-copy { padding: 10px 16px; background: linear-gradient(135deg, var(--gd-2), var(--gd-1)); color: #fff; border: 0; border-radius: 12px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.prompt-modal-copy:hover { transform: scale(1.05); }
+.prompt-modal-copy.done { background: linear-gradient(135deg, #6BCB77, #38BDF8); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: var(--gd-ink-2); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.875rem; color: var(--gd-ink-3); margin: 0; }
+.friend-links { margin: 0; font-size: 0.75rem; color: var(--gd-ink-3); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 6px 14px; margin: 0 4px; font-size: 0.75rem; color: var(--gd-ink-2); background: var(--gd-surface); backdrop-filter: blur(20px); border: 1px solid var(--gd-border); border-radius: 999px; text-decoration: none; transition: all 0.3s ease; }
+.friend-links a:hover { background: rgba(255,255,255,0.8); }
+@media (max-width: 960px) { .gd-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .gd-header-inner { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 18px; } .gd-header-actions { justify-content: center; } .gd-logo-text em { display: none; } .gd-hero { min-height: 520px; padding: calc(92px + 48px) 16px 48px; } .gd-hero-card { padding: 32px 24px; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .gd-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="gd-header">
+        <div class="gd-header-inner">
+            <a class="gd-logo" href="../example.php" aria-label="StyleCool">
+                <span class="gd-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="gd-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>渐变梦幻示例</em>
+                </span>
+            </a>
+            <div class="gd-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="gd-hero" aria-label="渐变梦幻英雄区">
+            <div class="gd-orb gd-orb-1" aria-hidden="true"></div>
+            <div class="gd-orb gd-orb-2" aria-hidden="true"></div>
+            <div class="gd-orb gd-orb-3" aria-hidden="true"></div>
+
+            <div class="gd-hero-card">
+                <h1>渐变梦幻</h1>
+                <p>粉紫渐变 + 玻璃卡 + 柔和大色斑 + 圆角处处<br>梦幻柔和的女性向设计，轻盈、通透、富有情绪</p>
+            </div>
+        </section>
+
+        <section class="gd-components" aria-label="组件展示">
+            <div class="gd-components-inner">
+                <div class="gd-components-header">
+                    <h2>模块化组件</h2>
+                    <p>粉紫渐变 + 玻璃质感，渐变梦幻语言贯穿每一个组件</p>
+                </div>
+
+                <div class="gd-grid">
+                    <div class="gd-component">
+                        <h3>梦幻按钮</h3>
+                        <p>玻璃底 + 渐变主按钮</p>
+                        <div class="gd-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="gd-btn">默认</button>
+                            <button class="gd-btn gd-btn-primary">主要</button>
+                        </div>
+                    </div>
+
+                    <div class="gd-component">
+                        <h3>梦幻输入框</h3>
+                        <p>聚焦时背景加深 + 紫色光环</p>
+                        <div class="gd-slot">
+                            <input type="text" class="gd-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="gd-component">
+                        <h3>嵌套玻璃</h3>
+                        <p>次级玻璃层，层次分明</p>
+                        <div class="gd-slot">
+                            <div class="gd-mini-card">
+                                <strong>嵌套玻璃</strong>
+                                <p>次级玻璃层 · 层次分明</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gd-component">
+                        <h3>梦幻标签</h3>
+                        <p>胶囊形 + 玻璃背景</p>
+                        <div class="gd-slot">
+                            <span class="gd-tag">前端</span>
+                            <span class="gd-tag gd-tag-accent">梦幻</span>
+                        </div>
+                    </div>
+
+                    <div class="gd-component">
+                        <h3>梦幻导航</h3>
+                        <p>胶囊菜单 + 选中态</p>
+                        <div class="gd-slot">
+                            <nav class="gd-nav">
+                                <span class="gd-nav-item active">首页</span>
+                                <span class="gd-nav-item">作品</span>
+                                <span class="gd-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="gd-component">
+                        <h3>梦幻警告</h3>
+                        <p>粉色玻璃 + 柔和边框</p>
+                        <div class="gd-slot">
+                            <div class="gd-alert">⚠ 操作不可撤销，请确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">渐变梦幻 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用渐变梦幻（Gradient Dream）设计风格。背景粉紫渐变 linear-gradient(135deg, #FFAFBD 0%, #A18CD1 50%, #FBC2EB 100%)，20s 缓动漂移。柔和漂浮大色斑（粉 #FFD1E8 / 紫 #A18CD1 / 粉 #FBC2EB）以 16-20s 周期缓慢漂移。卡片使用 rgba(255,255,255,0.5) + backdrop-filter: blur(20px) saturate(180%)，1px 白色半透明边框，圆角 20-24px，柔和紫色投影。文字深紫 #2D1B4E。按钮玻璃胶囊 + 渐变主按钮。整体梦幻、柔和、女性向。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

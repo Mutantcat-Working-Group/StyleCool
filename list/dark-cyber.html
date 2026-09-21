@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暗色科技 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   暗色科技（Dark Cyber）— 演示样式
+   ============================================================ */
+:root {
+    --cyber-1: #0E2E4A; --cyber-2: #0F2438; --cyber-3: #15324C;
+    --cyber-4: #1B4E7A; --cyber-neon: #38BDF8; --cyber-neon-2: #73B9E6;
+    --cyber-gold: #F2B53C; --cyber-ink: #DCEBF8; --cyber-ink-2: #8BA4BC;
+    --cyber-border: rgba(115,185,230,0.25); --cyber-glow: 0 0 12px rgba(56,189,248,0.15);
+}
+body { background: var(--cyber-2) !important; color: var(--cyber-ink); }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.cyber-header { position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
+.cyber-header-inner { position: relative; margin: 16px clamp(20px,4vw,32px) 0; padding: 14px 28px; background: rgba(15,36,56,0.7); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: 0 0 20px rgba(56,189,248,0.08); }
+.cyber-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.cyber-logo-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.95); border: 1px solid rgba(56,189,248,0.4); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; box-shadow: 0 0 8px rgba(56,189,248,0.2); }
+.cyber-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 7px; }
+.cyber-logo-text { display: inline-flex; flex-direction: column; line-height: 1.2; }
+.cyber-logo-text strong { font-size: 1rem; font-weight: 700; color: var(--cyber-ink); }
+.cyber-logo-text em { font-style: normal; font-size: 0.75rem; color: var(--cyber-ink-2); margin-top: 2px; }
+.cyber-header-actions { display: inline-flex; align-items: center; gap: 8px; }
+.cyber-header-actions a { display: inline-flex; align-items: center; padding: 8px 16px; font-size: 0.875rem; font-weight: 500; color: var(--cyber-ink); background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25); border-radius: 999px; text-decoration: none; transition: all 0.2s ease; }
+.cyber-header-actions a:hover { color: #fff; background: rgba(56,189,248,0.2); border-color: var(--cyber-neon); box-shadow: 0 0 12px rgba(56,189,248,0.2); }
+.cyber-hero { position: relative; min-height: 620px; margin-top: 0; padding: calc(92px + 80px) 24px 80px; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.cyber-hero::before { content: \"\"; position: absolute; inset: 0; background-image: linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; animation: grid-pulse 4s ease-in-out infinite; }
+@keyframes grid-pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+.cyber-hero-card { position: relative; z-index: 1; max-width: 720px; padding: 56px 48px; background: rgba(21,50,76,0.6); backdrop-filter: blur(20px); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; box-shadow: 0 0 32px rgba(56,189,248,0.1); text-align: center; }
+.cyber-hero-card h1 { font-size: clamp(2rem,5vw,3.5rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; color: #fff; font-family: ui-monospace,\"SF Mono\",\"JetBrains Mono\",monospace; }
+.cyber-hero-card h1 .accent { color: var(--cyber-neon); text-shadow: 0 0 20px rgba(56,189,248,0.5); }
+.cyber-hero-card p { font-size: 1.0625rem; line-height: 1.7; color: var(--cyber-ink-2); margin: 0; }
+.cyber-components { position: relative; width: 100%; margin: 0; padding: 80px 0 96px; background: transparent; overflow: hidden; }
+.cyber-components::before { content: \"\"; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(1200px,calc(100% - 48px)); height: 1px; background: linear-gradient(90deg, transparent, var(--cyber-border), transparent); }
+.cyber-components-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.cyber-components-header { text-align: center; margin-bottom: 56px; }
+.cyber-components-header h2 { font-size: 1.75rem; font-weight: 700; color: var(--cyber-ink); margin: 0 0 12px; font-family: ui-monospace,\"SF Mono\",\"JetBrains Mono\",monospace; }
+.cyber-components-header p { color: var(--cyber-ink-2); max-width: 560px; margin: 0 auto; }
+.cyber-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.cyber-component { position: relative; padding: 24px; background: rgba(21,50,76,0.5); backdrop-filter: blur(20px); border: 1px solid var(--cyber-border); border-radius: 8px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.cyber-component:hover { border-color: var(--cyber-neon); box-shadow: 0 0 16px rgba(56,189,248,0.12); }
+.cyber-component h3 { font-size: 0.9375rem; font-weight: 700; color: var(--cyber-ink); margin: 0 0 4px; font-family: ui-monospace,\"SF Mono\",\"JetBrains Mono\",monospace; }
+.cyber-component > p { font-size: 0.8125rem; color: var(--cyber-ink-2); margin: 0 0 16px; }
+.cyber-slot { margin-top: 14px; }
+.cyber-btn { display: inline-flex; align-items: center; padding: 9px 18px; font-size: 0.875rem; font-weight: 600; color: var(--cyber-ink); background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.cyber-btn:hover { background: rgba(56,189,248,0.18); border-color: var(--cyber-neon); box-shadow: 0 0 12px rgba(56,189,248,0.15); }
+.cyber-btn-primary { background: var(--cyber-neon); border-color: var(--cyber-neon); color: var(--cyber-2); font-weight: 700; box-shadow: 0 0 16px rgba(56,189,248,0.3); }
+.cyber-btn-primary:hover { background: #5CCCFC; box-shadow: 0 0 24px rgba(56,189,248,0.4); }
+.cyber-input { width: 100%; padding: 10px 14px; font-size: 0.875rem; color: var(--cyber-ink); background: rgba(15,36,56,0.6); border: 1px solid var(--cyber-border); border-radius: 6px; outline: none; transition: all 0.2s ease; font-family: ui-monospace,\"SF Mono\",\"JetBrains Mono\",monospace; box-sizing: border-box; }
+.cyber-input:focus { border-color: var(--cyber-neon); box-shadow: 0 0 0 3px rgba(56,189,248,0.12); }
+.cyber-mini-card { padding: 14px; background: rgba(15,36,56,0.5); border: 1px solid rgba(56,189,248,0.2); border-radius: 6px; }
+.cyber-mini-card strong { font-size: 0.875rem; color: var(--cyber-ink); display: block; font-weight: 600; }
+.cyber-mini-card p { font-size: 0.8125rem; color: var(--cyber-ink-2); margin: 4px 0 0; }
+.cyber-tag { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; color: var(--cyber-ink); background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25); border-radius: 999px; margin-right: 6px; margin-bottom: 6px; }
+.cyber-tag-gold { color: var(--cyber-gold); border-color: rgba(242,181,60,0.4); background: rgba(242,181,60,0.08); }
+.cyber-nav { display: flex; gap: 2px; padding: 4px; background: rgba(15,36,56,0.5); border: 1px solid rgba(56,189,248,0.2); border-radius: 6px; }
+.cyber-nav-item { padding: 8px 16px; font-size: 0.875rem; color: var(--cyber-ink-2); border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
+.cyber-nav-item.active { background: rgba(56,189,248,0.2); color: var(--cyber-neon); font-weight: 600; }
+.cyber-alert { padding: 12px 16px; background: rgba(242,181,60,0.08); border: 1px solid rgba(242,181,60,0.3); border-left: 3px solid var(--cyber-gold); border-radius: 4px; color: var(--cyber-gold); font-size: 0.875rem; font-weight: 500; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: rgba(21,50,76,0.8); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid rgba(56,189,248,0.3); border-radius: 999px; color: var(--cyber-ink); font-size: 0.875rem; font-weight: 600; cursor: pointer; box-shadow: 0 0 16px rgba(56,189,248,0.1); z-index: 1000; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; font-family: inherit; }
+.prompt-floater:hover { border-color: var(--cyber-neon); color: #fff; box-shadow: 0 0 24px rgba(56,189,248,0.2); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--cyber-3); border: 1px solid rgba(56,189,248,0.4); border-radius: 12px; box-shadow: 0 0 40px rgba(56,189,248,0.15); z-index: 1001; color: #fff; display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.875rem; font-weight: 600; color: var(--cyber-neon); font-family: ui-monospace,\"SF Mono\",\"JetBrains Mono\",monospace; }
+.prompt-modal-close { background: transparent; border: 0; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-close:hover { color: #fff; }
+.prompt-modal-content { font-size: 0.875rem; line-height: 1.7; color: rgba(255,255,255,0.9); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: ui-monospace,\"SF Mono\",\"JetBrains Mono\",monospace; background: rgba(0,0,0,0.2); padding: 14px; border-radius: 8px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--cyber-neon); color: var(--cyber-2); border: 0; border-radius: 6px; font-size: 0.875rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: #5CCCFC; }
+.prompt-modal-copy.done { background: #6BCB77; }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: transparent !important; border: none !important; border-top: 1px solid rgba(56,189,248,0.15) !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: var(--cyber-ink-2); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.875rem; color: var(--cyber-ink-2); margin: 0; }
+.friend-links { margin: 0; font-size: 0.75rem; color: var(--cyber-ink-2); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 6px 14px; margin: 0 4px; font-size: 0.75rem; color: var(--cyber-ink-2); background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.2); border-radius: 999px; text-decoration: none; transition: all 0.2s ease; }
+.friend-links a:hover { color: var(--cyber-neon); border-color: var(--cyber-neon); box-shadow: 0 0 8px rgba(56,189,248,0.15); }
+@media (max-width: 960px) { .cyber-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .cyber-header-inner { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 18px; } .cyber-header-actions { justify-content: center; } .cyber-logo-text em { display: none; } .cyber-hero { min-height: 520px; padding: calc(92px + 48px) 16px 48px; } .cyber-hero-card { padding: 32px 24px; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+@media (max-width: 600px) { .cyber-grid { grid-template-columns: 1fr; } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="cyber-header">
+        <div class="cyber-header-inner">
+            <a class="cyber-logo" href="../example.php" aria-label="StyleCool">
+                <span class="cyber-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="cyber-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>暗色科技示例</em>
+                </span>
+            </a>
+            <div class="cyber-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="cyber-hero" aria-label="暗色科技英雄区">
+            <div class="cyber-hero-card">
+                <h1><span class="accent">暗色科技</span></h1>
+                <p>深海军蓝底色 + 霓虹青蓝强调 + 网格扫描线 + 发光边框<br>冷静精准的暗色UI，仿佛置身终端控制台</p>
+            </div>
+        </section>
+
+        <section class="cyber-components" aria-label="组件展示">
+            <div class="cyber-components-inner">
+                <div class="cyber-components-header">
+                    <h2>模块化组件</h2>
+                    <p>暗色科技语言贯穿每一个组件</p>
+                </div>
+
+                <div class="cyber-grid">
+                    <div class="cyber-component">
+                        <h3>霓虹按钮</h3>
+                        <p>暗色底 + 霓虹边框 + 悬停发光</p>
+                        <div class="cyber-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="cyber-btn">默认</button>
+                            <button class="cyber-btn cyber-btn-primary">主要</button>
+                        </div>
+                    </div>
+
+                    <div class="cyber-component">
+                        <h3>终端输入框</h3>
+                        <p>聚焦时霓虹边框 + 发光光环</p>
+                        <div class="cyber-slot">
+                            <input type="text" class="cyber-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <div class="cyber-component">
+                        <h3>嵌套暗卡</h3>
+                        <p>次级卡片，深底暗边</p>
+                        <div class="cyber-slot">
+                            <div class="cyber-mini-card">
+                                <strong>嵌套暗卡</strong>
+                                <p>次级卡片 · 深底暗边</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-component">
+                        <h3>霓虹标签</h3>
+                        <p>胶囊形 + 霓虹描边</p>
+                        <div class="cyber-slot">
+                            <span class="cyber-tag">前端</span>
+                            <span class="cyber-tag">设计</span>
+                            <span class="cyber-tag cyber-tag-gold">暗色科技</span>
+                        </div>
+                    </div>
+
+                    <div class="cyber-component">
+                        <h3>终端导航</h3>
+                        <p>终端风格 + 霓虹选中态</p>
+                        <div class="cyber-slot">
+                            <nav class="cyber-nav">
+                                <span class="cyber-nav-item active">首页</span>
+                                <span class="cyber-nav-item">作品</span>
+                                <span class="cyber-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="cyber-component">
+                        <h3>霓虹警告</h3>
+                        <p>金色高亮 + 发光边框</p>
+                        <div class="cyber-slot">
+                            <div class="cyber-alert">⚠ 操作不可撤销，请确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">暗色科技 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用暗色科技（Dark Cyber）设计风格。背景深海军蓝 #0F2438 / #0E2E4A，叠加网格扫描线（40px 间距，霓虹青半透明 rgba(56,189,248,0.03)）。卡片使用 rgba(21,50,76,0.5) + backdrop-filter: blur(20px)，1px 霓虹青边框 rgba(56,189,248,0.25)，发光投影 0 0 12px rgba(56,189,248,0.15)。主色霓虹青 #38BDF8 + 金色高亮 #F2B53C。字体使用等宽 ui-monospace，标题大号粗体。按钮悬停时霓虹发光（box-shadow 0 0 12px）。所有元素保持暗色基调 + 霓虹描边 + 微小发光。整体冷峻、专业、终端感。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() { modal.classList.toggle('visible'); });
+    close.addEventListener('click', function() { modal.classList.remove('visible'); });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) { modal.classList.remove('visible'); }
+    });
+
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '已复制';
+            copy.classList.add('done');
+            setTimeout(function() { copy.textContent = '复制'; copy.classList.remove('done'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); onSuccess(); } catch (e) { console.error('Copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

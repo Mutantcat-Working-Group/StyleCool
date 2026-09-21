@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极简白 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+    /* ============================================================
+       极简白（Minimal White）— 演示样式
+       ------------------------------------------------------------
+       设计语言：
+       1. 纯白底 #FFFFFF + 大量留白
+       2. 文字克制：仅深色 #15324C + 浅灰 #8395A6
+       3. 单一重音色：天蓝 #73B9E6（仅用于强调）
+       4. 边框 1px 浅灰 #EAF2F8（轻到几乎不察觉）
+       5. 动画极简：仅下划线 / 描边等微动效
+       ============================================================ */
+
+    :root {
+        --mw-ink:    #15324C;
+        --mw-ink-2:  #51677C;
+        --mw-ink-3:  #8395A6;
+        --mw-line:   #EAF2F8;
+        --mw-line-2: #DCE6EE;
+        --mw-accent: #73B9E6;
+        --mw-accent-2: #4A90C8;
+        --mw-bg:     #FFFFFF;
+        --mw-bg-2:   #FAFCFE;
+    }
+
+    /* —— 覆盖全局 header —— */
+    header {
+        background: transparent !important;
+        border-bottom: none !important;
+        padding: 0 !important;
+    }
+    header::after { display: none !important; }
+
+    /* —— 极简白顶部导航（浮动玻璃面板：极简+轻玻璃） —— */
+    .mw-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        margin: 0;
+        border-radius: 0;
+        overflow: visible;
+        box-shadow: none;
+        isolation: isolate;
+    }
+    .mw-header-inner {
+        position: relative;
+        z-index: 1;
+        margin: 16px clamp(20px, 4vw, 32px) 0;
+        padding: 14px 28px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border: 1px solid var(--mw-line);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        box-shadow: 0 1px 3px rgba(21, 50, 92, 0.04);
+    }
+    .mw-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: inherit;
+    }
+    .mw-logo-icon {
+        position: relative;
+        width: 38px; height: 38px;
+        background: #fff;
+        border: 1px solid var(--mw-line);
+        border-radius: 9px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex: none;
+    }
+    .mw-logo-icon img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 8px;
+    }
+    .mw-logo-text {
+        display: inline-flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+    .mw-logo-text strong {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--mw-ink);
+        letter-spacing: -0.005em;
+    }
+    .mw-logo-text em {
+        font-style: normal;
+        font-size: 0.75rem;
+        color: var(--mw-ink-3);
+        font-weight: 400;
+        margin-top: 2px;
+    }
+    .mw-header-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .mw-header-actions a {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--mw-ink-2);
+        background: transparent;
+        border: 1px solid var(--mw-line);
+        border-radius: 999px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    .mw-header-actions a:hover {
+        color: var(--mw-accent-2);
+        border-color: var(--mw-accent);
+        background: var(--mw-bg-2);
+    }
+
+    /* —— 主体：顶部动画区（极简白英雄：轻动画+大量留白） —— */
+    .mw-hero {
+        position: relative;
+        min-height: 620px;
+        margin-top: 0;
+        padding: calc(92px + 80px) 24px 80px;
+        background: transparent;  /* 背景由 body 统一提供 */
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* 极简的细节装饰：无 orbs，仅一根细线 + 一个淡背景圆 */
+    .mw-hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: 600px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, var(--mw-accent) 0%, transparent 70%);
+        opacity: 0.06;
+        pointer-events: none;
+    }
+    .mw-hero-card {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        padding: 48px 56px;
+        text-align: center;
+        color: var(--mw-ink);
+    }
+    .mw-hero-card h1 {
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin: 0 0 24px;
+        color: var(--mw-ink);
+        position: relative;
+        display: inline-block;
+    }
+    .mw-hero-card h1::after {
+        /* 蓝色短下划线，重音装饰 */
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 48px;
+        height: 2px;
+        background: var(--mw-accent);
+        border-radius: 2px;
+        animation: mw-underline 3s ease-in-out infinite;
+    }
+    @keyframes mw-underline {
+        0%, 100% { width: 48px; opacity: 0.7; }
+        50% { width: 80px; opacity: 1; }
+    }
+    .mw-hero-card p {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: var(--mw-ink-2);
+        margin: 24px 0 0;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* —— 组件展示区 —— */
+    .mw-components {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 80px 0 96px;
+        background: transparent;  /* 背景由 body 统一提供 */
+        overflow: hidden;
+    }
+    /* 顶部一根细线作为分隔 */
+    .mw-components::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(1200px, calc(100% - 48px));
+        height: 1px;
+        background: var(--mw-line);
+    }
+    .mw-components-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+    .mw-components-header {
+        text-align: center;
+        margin-bottom: 56px;
+    }
+    .mw-components-header h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--mw-ink);
+        margin: 0 0 12px;
+    }
+    .mw-components-header p {
+        color: var(--mw-ink-2);
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+    .mw-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    @media (max-width: 960px) {
+        .mw-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+        .mw-grid { grid-template-columns: 1fr; }
+    }
+    .mw-component {
+        position: relative;
+        padding: 28px;
+        background: #fff;
+        border: 1px solid var(--mw-line);
+        border-radius: 12px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .mw-component:hover {
+        border-color: var(--mw-accent);
+        box-shadow: 0 4px 16px rgba(115, 185, 230, 0.08);
+    }
+    .mw-component h3 {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        color: var(--mw-ink);
+        margin: 0 0 4px;
+        letter-spacing: 0.01em;
+    }
+    .mw-component > p {
+        font-size: 0.8125rem;
+        color: var(--mw-ink-3);
+        margin: 0 0 16px;
+    }
+    .mw-slot {
+        margin-top: 14px;
+    }
+
+    /* —— 极简按钮 —— */
+    .mw-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--mw-ink);
+        background: transparent;
+        border: 1px solid var(--mw-line-2);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+    .mw-btn:hover {
+        border-color: var(--mw-ink);
+        color: var(--mw-ink);
+    }
+    .mw-btn-primary {
+        background: var(--mw-accent);
+        border-color: var(--mw-accent);
+        color: #fff;
+    }
+    .mw-btn-primary:hover {
+        background: var(--mw-accent-2);
+        border-color: var(--mw-accent-2);
+    }
+
+    /* —— 极简输入框 —— */
+    .mw-input {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 0.875rem;
+        color: var(--mw-ink);
+        background: #fff;
+        border: 1px solid var(--mw-line-2);
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+    .mw-input:focus {
+        border-color: var(--mw-accent);
+        box-shadow: 0 0 0 3px rgba(115, 185, 230, 0.15);
+    }
+
+    /* —— 极简嵌套卡 —— */
+    .mw-mini-card {
+        padding: 14px;
+        background: var(--mw-bg-2);
+        border: 1px solid var(--mw-line);
+        border-radius: 8px;
+    }
+    .mw-mini-card strong {
+        font-size: 0.875rem;
+        color: var(--mw-ink);
+        display: block;
+        font-weight: 600;
+    }
+    .mw-mini-card p {
+        font-size: 0.8125rem;
+        color: var(--mw-ink-2);
+        margin: 4px 0 0;
+    }
+
+    /* —— 极简标签 —— */
+    .mw-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--mw-ink-2);
+        background: var(--mw-bg-2);
+        border: 1px solid var(--mw-line);
+        border-radius: 999px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+    }
+    .mw-tag-accent {
+        color: var(--mw-accent-2);
+        border-color: var(--mw-accent);
+        background: rgba(115, 185, 230, 0.08);
+    }
+
+    /* —— 极简导航（底部下划线指示器） —— */
+    .mw-nav {
+        display: flex;
+        gap: 4px;
+        position: relative;
+    }
+    .mw-nav-item {
+        padding: 8px 14px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--mw-ink-2);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        position: relative;
+    }
+    .mw-nav-item:hover { color: var(--mw-ink); }
+    .mw-nav-item.active {
+        color: var(--mw-accent-2);
+        font-weight: 600;
+    }
+    .mw-nav-item.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background: var(--mw-accent);
+        border-radius: 2px;
+    }
+
+    /* —— 极简警告 —— */
+    .mw-alert {
+        padding: 12px 16px;
+        background: rgba(115, 185, 230, 0.08);
+        border-left: 3px solid var(--mw-accent);
+        border-radius: 4px;
+        color: var(--mw-ink-2);
+        font-size: 0.875rem;
+    }
+
+    /* —— 悬浮按钮（左下角） —— */
+    .prompt-floater {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        padding: 10px 18px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border: 1px solid var(--mw-line);
+        border-radius: 999px;
+        color: var(--mw-ink);
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(21, 50, 92, 0.08);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+    .prompt-floater:hover {
+        border-color: var(--mw-accent);
+        color: var(--mw-accent-2);
+    }
+    .prompt-floater-icon {
+        display: none;
+    }
+
+    /* —— 提示词弹层 —— */
+    .prompt-modal {
+        position: fixed;
+        bottom: 88px;
+        left: 24px;
+        width: min(440px, calc(100vw - 48px));
+        max-height: 70vh;
+        padding: 20px;
+        background: var(--mw-ink);
+        border: 1px solid var(--mw-ink);
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(21, 50, 92, 0.2);
+        z-index: 1001;
+        color: #fff;
+        display: none;
+        flex-direction: column;
+    }
+    .prompt-modal.visible { display: flex; }
+    .prompt-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .prompt-modal-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--mw-accent);
+    }
+    .prompt-modal-close {
+        background: transparent;
+        border: 0;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        font-size: 1.2rem;
+        line-height: 1;
+        padding: 0;
+    }
+    .prompt-modal-close:hover { color: #fff; }
+    .prompt-modal-content {
+        font-size: 0.875rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.92);
+        overflow-y: auto;
+        flex: 1;
+        margin-bottom: 12px;
+        white-space: pre-wrap;
+        font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 14px;
+        border-radius: 8px;
+    }
+    .prompt-modal-copy {
+        padding: 10px 16px;
+        background: var(--mw-accent);
+        color: #fff;
+        border: 0;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+    .prompt-modal-copy:hover {
+        background: var(--mw-accent-2);
+    }
+    .prompt-modal-copy.done {
+        background: #6BCB77;
+    }
+
+    /* —— 覆盖 style.css 的 main 留白 —— */
+    /* 演示界面：无 padding，body 承载白色底色，整页风格统一 */
+    body {
+        background: var(--mw-bg);
+        background-attachment: fixed;
+    }
+    main {
+        padding: 0;
+        background: transparent;
+    }
+
+    /* —— 极简白底部 —— */
+    footer, body > footer {
+        background: transparent !important;  /* 背景由 body 统一提供 */
+        border: none !important;
+        border-top: 1px solid var(--mw-line) !important;
+        padding: 32px 0 !important;
+        margin: 0 !important;
+        text-align: center;
+        color: var(--mw-ink-2);
+    }
+    footer::after { display: none !important; }
+    footer > .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    footer p {
+        font-size: 0.875rem;
+        color: var(--mw-ink-3);
+        margin: 0;
+    }
+    .friend-links {
+        margin: 0;
+        font-size: 0.75rem;
+        color: var(--mw-ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .friend-links span { margin-right: 8px; }
+    .friend-links a {
+        display: inline-block;
+        padding: 6px 14px;
+        margin: 0 4px;
+        font-size: 0.75rem;
+        color: var(--mw-ink-2);
+        background: transparent;
+        border: 1px solid var(--mw-line);
+        border-radius: 999px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    .friend-links a:hover {
+        color: var(--mw-accent-2);
+        border-color: var(--mw-accent);
+    }
+
+    /* —— 响应式 —— */
+    @media (max-width: 768px) {
+        .mw-header-inner {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            padding: 12px 18px;
+        }
+        .mw-header-actions { justify-content: center; }
+        .mw-logo-text em { display: none; }
+        .mw-hero { min-height: 520px; padding: calc(92px + 48px) 16px 48px; }
+        .mw-hero-card { padding: 32px 24px; }
+        .prompt-floater { bottom: 16px; left: 16px; }
+        .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); }
+    }
+
+    .name-en, .desc-en { display: none; }
+    </style>
+</head>
+<body>
+    <header class="mw-header">
+        <div class="mw-header-inner">
+            <a class="mw-logo" href="../example.php" aria-label="StyleCool">
+                <span class="mw-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="mw-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>极简白示例</em>
+                </span>
+            </a>
+            <div class="mw-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回示例</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 顶部：极简白英雄区（轻动画+大量留白） -->
+        <section class="mw-hero" aria-label="极简白英雄区">
+            <div class="mw-hero-card">
+                <h1>极简白</h1>
+                <p>克制的白色 + 大量留白 + 单一蓝色重音 + 极轻描边<br>干净、清晰、阅读优先 — 让设计退后一步，让内容说话</p>
+            </div>
+        </section>
+
+        <!-- 底部：模块化组件展示 -->
+        <section class="mw-components" aria-label="组件展示">
+            <div class="mw-components-inner">
+                <div class="mw-components-header">
+                    <h2>模块化组件</h2>
+                    <p>所有元素都遵循同一原则：克制、清晰、留白</p>
+                </div>
+
+                <div class="mw-grid">
+                    <!-- 极简按钮 -->
+                    <div class="mw-component">
+                        <h3>极简按钮</h3>
+                        <p>无填充 + 1px 边框 + 悬停加深</p>
+                        <div class="mw-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="mw-btn">默认</button>
+                            <button class="mw-btn mw-btn-primary">主要</button>
+                        </div>
+                    </div>
+
+                    <!-- 极简输入框 -->
+                    <div class="mw-component">
+                        <h3>极简输入框</h3>
+                        <p>聚焦时蓝色描边 + 浅蓝光环</p>
+                        <div class="mw-slot">
+                            <input type="text" class="mw-input" placeholder="输入内容...">
+                        </div>
+                    </div>
+
+                    <!-- 嵌套卡 -->
+                    <div class="mw-component">
+                        <h3>嵌套卡</h3>
+                        <p>次级卡片，浅底浅边</p>
+                        <div class="mw-slot">
+                            <div class="mw-mini-card">
+                                <strong>嵌套卡</strong>
+                                <p>次级卡片 · 浅底浅边</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 极简标签 -->
+                    <div class="mw-component">
+                        <h3>极简标签</h3>
+                        <p>圆角胶囊 + 浅灰底</p>
+                        <div class="mw-slot">
+                            <span class="mw-tag">前端</span>
+                            <span class="mw-tag">设计</span>
+                            <span class="mw-tag mw-tag-accent">极简</span>
+                        </div>
+                    </div>
+
+                    <!-- 极简导航 -->
+                    <div class="mw-component">
+                        <h3>极简导航</h3>
+                        <p>底部下划线指示器</p>
+                        <div class="mw-slot">
+                            <nav class="mw-nav">
+                                <span class="mw-nav-item active">首页</span>
+                                <span class="mw-nav-item">作品</span>
+                                <span class="mw-nav-item">关于</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- 极简警告 -->
+                    <div class="mw-component">
+                        <h3>极简警告</h3>
+                        <p>左侧色条 + 浅蓝底</p>
+                        <div class="mw-slot">
+                            <div class="mw-alert">⚠ 操作不可撤销，请确认</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 左下角悬浮按钮 -->
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">
+        复制提示词
+    </button>
+
+    <!-- 提示词弹层 -->
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">极简白 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    // ── 完整设计提示词（嵌入页面，方便一键复制） ──
+    var PROMPT_TEXT = "采用极简白（Minimal White）设计风格。背景纯白 #FFFFFF，大量留白（区块间距 64-96px）。卡片背景 #FFFFFF，1px 边框 #EAF2F8，圆角 10px，无阴影。字体使用系统无衬线（-apple-system / Inter），标题字重 700，正文 16px / 行高 1.7，颜色极少：主色 #15324C 文字 + #8395A6 次要 + 单一重音 #73B9E6（仅用于强调、聚焦、选中态）。按钮无填充 + 1px 边框 #DCE6EE，hover 加深至 #15324C；主要按钮填充 #73B9E6 + 白字。输入框聚焦时蓝色 1px 边框 + 3px rgba(115,185,230,0.15) 光环。导航选中态用单色 2px 底部蓝色下划线。整页只用 1 个主色 + 1 个重音色，所有元素极度克制、留白充足、阅读优先。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    // ── 悬浮按钮：展开 / 关闭弹层 ──
+    var btn    = document.getElementById('prompt-floater');
+    var modal  = document.getElementById('prompt-modal');
+    var close  = document.getElementById('prompt-close');
+    var copy   = document.getElementById('prompt-copy');
+
+    btn.addEventListener('click', function() {
+        modal.classList.toggle('visible');
+    });
+    close.addEventListener('click', function() {
+        modal.classList.remove('visible');
+    });
+    document.addEventListener('click', function(e) {
+        if (!modal.contains(e.target) && !btn.contains(e.target)) {
+            modal.classList.remove('visible');
+        }
+    });
+
+    // ── 复制到剪贴板（兼容旧浏览器） ──
+    copy.addEventListener('click', function() {
+        function onSuccess() {
+            copy.textContent = '✓ 已复制';
+            copy.classList.add('done');
+            setTimeout(function() {
+                copy.textContent = '复制';
+                copy.classList.remove('done');
+            }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function() {
+                fallback();
+            });
+        } else {
+            fallback();
+        }
+        function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = PROMPT_TEXT;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); onSuccess(); }
+            catch (e) { console.error('Minimal white copy failed:', e); }
+            document.body.removeChild(ta);
+        }
+    });
+    </script>
+</body>
+</html>

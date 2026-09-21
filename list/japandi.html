@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极简日式 — StyleCool 示例</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https:../assets/style.css?v=20260610">
+    <link rel="icon" type="image/png" href="https:../assets/logo.png">
+    <link rel="apple-touch-icon" href="https:../assets/logo.png">
+    <style>
+/* ============================================================
+   极简日式（Japandi）— 演示样式
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&display=swap');
+:root {
+    --jd-bg: #F7F3EE; --jd-surface: #FFFFFF;
+    --jd-ink: #2C2C2C; --jd-ink-2: #6B6B6B; --jd-ink-3: #A8A8A8;
+    --jd-warm: #C4956A; --jd-warm-2: #A67B52;
+    --jd-green: #5A7A5A; --jd-line: rgba(0,0,0,0.06); --jd-line-2: rgba(0,0,0,0.12);
+}
+body { background: var(--jd-bg) !important; color: var(--jd-ink); font-family: 'Noto Serif JP', 'Georgia', serif; }
+header { background: transparent !important; border-bottom: none !important; padding: 0 !important; }
+header::after { display: none !important; }
+.jd-header { position: sticky; top: 0; z-index: 100; background: rgba(247,243,238,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--jd-line); }
+.jd-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; }
+.jd-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.jd-logo-icon { width: 34px; height: 34px; background: var(--jd-warm); border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.jd-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.jd-logo-text strong { font-size: 0.9375rem; font-weight: 600; color: var(--jd-ink); }
+.jd-logo-text em { display: none; }
+.jd-header-actions a { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 0.8125rem; color: var(--jd-ink-2); text-decoration: none; transition: all 0.15s ease; }
+.jd-header-actions a:hover { color: var(--jd-warm); }
+.jd-hero { position: relative; min-height: 560px; display: flex; align-items: center; justify-content: center; padding: 80px 24px; text-align: center; }
+.jd-hero-inner { max-width: 640px; }
+.jd-hero-inner h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 300; letter-spacing: 0.08em; line-height: 1.4; margin: 0 0 20px; color: var(--jd-ink); }
+.jd-hero-inner h1 .accent { color: var(--jd-warm); font-weight: 400; }
+.jd-hero-inner p { font-size: 0.9375rem; line-height: 2; color: var(--jd-ink-2); margin: 0; }
+.jd-components { position: relative; width: 100%; margin: 0; padding: 64px 0 96px; background: transparent; }
+.jd-components-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.jd-components-header { text-align: center; margin-bottom: 48px; }
+.jd-components-header h2 { font-size: 1.25rem; font-weight: 300; letter-spacing: 0.12em; color: var(--jd-ink); margin: 0 0 8px; text-transform: uppercase; }
+.jd-components-header p { font-size: 0.8125rem; color: var(--jd-ink-3); margin: 0; }
+.jd-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.jd-component { padding: 24px; background: var(--jd-surface); border: 1px solid var(--jd-line); transition: border-color 0.3s ease; }
+.jd-component:hover { border-color: var(--jd-warm); }
+.jd-component h3 { font-size: 0.875rem; font-weight: 600; color: var(--jd-ink); margin: 0 0 4px; }
+.jd-component > p { font-size: 0.75rem; color: var(--jd-ink-3); margin: 0 0 14px; }
+.jd-slot { margin-top: 14px; }
+.jd-btn { display: inline-flex; align-items: center; padding: 10px 24px; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.06em; color: var(--jd-ink-2); background: transparent; border: 1px solid var(--jd-line-2); cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.jd-btn:hover { border-color: var(--jd-warm); color: var(--jd-warm); }
+.jd-btn-primary { background: var(--jd-warm); border-color: var(--jd-warm); color: #fff; }
+.jd-btn-primary:hover { background: var(--jd-warm-2); }
+.jd-input { width: 100%; padding: 10px 14px; font-size: 0.8125rem; color: var(--jd-ink); background: transparent; border: 0; border-bottom: 1px solid var(--jd-line-2); outline: none; transition: all 0.3s ease; font-family: inherit; box-sizing: border-box; }
+.jd-input:focus { border-bottom-color: var(--jd-warm); }
+.jd-mini-card { padding: 16px; background: var(--jd-bg); }
+.jd-mini-card strong { font-size: 0.8125rem; color: var(--jd-ink); display: block; font-weight: 600; }
+.jd-mini-card p { font-size: 0.75rem; color: var(--jd-ink-3); margin: 4px 0 0; }
+.jd-tag { display: inline-flex; align-items: center; padding: 3px 10px; font-size: 0.625rem; font-weight: 500; color: var(--jd-ink-3); border: 1px solid var(--jd-line); margin-right: 6px; margin-bottom: 6px; letter-spacing: 0.05em; }
+.jd-tag-warm { color: var(--jd-warm); border-color: var(--jd-warm); }
+.jd-nav { display: flex; gap: 0; }
+.jd-nav-item { padding: 8px 18px; font-size: 0.8125rem; color: var(--jd-ink-3); border-bottom: 1px solid transparent; cursor: pointer; transition: all 0.3s ease; }
+.jd-nav-item.active { color: var(--jd-ink); border-bottom-color: var(--jd-warm); }
+.jd-alert { padding: 14px 18px; background: var(--jd-bg); border-left: 2px solid var(--jd-warm); color: var(--jd-ink-2); font-size: 0.8125rem; }
+.prompt-floater { position: fixed; bottom: 24px; left: 24px; padding: 10px 18px; background: var(--jd-ink); color: #fff; font-size: 0.75rem; font-weight: 400; cursor: pointer; z-index: 1000; letter-spacing: 0.05em; transition: all 0.3s ease; font-family: inherit; }
+.prompt-floater:hover { background: var(--jd-warm); }
+.prompt-modal { position: fixed; bottom: 88px; left: 24px; width: min(440px,calc(100vw - 48px)); max-height: 70vh; padding: 20px; background: var(--jd-surface); border: 1px solid var(--jd-line); z-index: 1001; color: var(--jd-ink); display: none; flex-direction: column; }
+.prompt-modal.visible { display: flex; }
+.prompt-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-modal-title { font-size: 0.8125rem; font-weight: 600; color: var(--jd-warm); }
+.prompt-modal-close { background: transparent; border: 0; color: var(--jd-ink-3); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: 0; }
+.prompt-modal-content { font-size: 0.8125rem; line-height: 1.8; color: var(--jd-ink-2); overflow-y: auto; flex: 1; margin-bottom: 12px; white-space: pre-wrap; font-family: 'Noto Serif JP', serif; background: var(--jd-bg); padding: 14px; }
+.prompt-modal-copy { padding: 10px 16px; background: var(--jd-warm); color: #fff; border: 0; font-size: 0.8125rem; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.prompt-modal-copy:hover { background: var(--jd-warm-2); }
+.prompt-modal-copy.done { background: var(--jd-green); }
+main { padding: 0; background: transparent; }
+footer,body>footer { background: var(--jd-ink) !important; border: none !important; padding: 32px 0 !important; margin: 0 !important; text-align: center; color: rgba(255,255,255,0.5); }
+footer::after { display: none !important; }
+footer>.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0; }
+.friend-links { margin: 0; font-size: 0.65rem; color: rgba(255,255,255,0.35); }
+.friend-links span { margin-right: 8px; }
+.friend-links a { display: inline-block; padding: 4px 10px; margin: 0 4px; font-size: 0.65rem; color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; }
+.friend-links a:hover { color: var(--jd-warm); }
+@media (max-width: 960px) { .jd-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .jd-header-inner { height: auto; padding: 10px 18px; flex-direction: column; } .jd-hero { min-height: 440px; padding: 60px 16px; } .jd-grid { grid-template-columns: 1fr; } .prompt-floater { bottom: 16px; left: 16px; } .prompt-modal { left: 16px; bottom: 76px; width: calc(100vw - 32px); } }
+.name-en,.desc-en { display: none; }
+    </style>
+</head>
+<body>
+<header class="jd-header">
+        <div class="jd-header-inner">
+            <a class="jd-logo" href="../example.php" aria-label="StyleCool">
+                <span class="jd-logo-icon">
+                    <img src="https:../assets/logo.png" alt="FunctionCool">
+                </span>
+                <span class="jd-logo-text">
+                    <strong>StyleCool</strong>
+                    <em>极简日式示例</em>
+                </span>
+            </a>
+            <div class="jd-header-actions">
+                <a href="../example.php" aria-label="返回示例列表">← 返回</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="jd-hero" aria-label="极简日式英雄区">
+            <div class="jd-hero-inner">
+                <h1>Japandi <span class="accent">Style</span></h1>
+                <p>日式侘寂 + 北欧极简 — 温暖米白基底 + 陶土色点缀<br>少即是多，每一件物品都有它的位置</p>
+            </div>
+        </section>
+
+        <section class="jd-components" aria-label="组件展示">
+            <div class="jd-components-inner">
+                <div class="jd-components-header">
+                    <h2>Elements</h2>
+                    <p>温暖米白 + 陶土点缀，Japandi 语言贯穿每一个组件</p>
+                </div>
+
+                <div class="jd-grid">
+                    <div class="jd-component">
+                        <h3>Japandi 按钮</h3>
+                        <p>线框/陶土实心</p>
+                        <div class="jd-slot" style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="jd-btn">线框</button>
+                            <button class="jd-btn jd-btn-primary">陶土</button>
+                        </div>
+                    </div>
+
+                    <div class="jd-component">
+                        <h3>底线输入框</h3>
+                        <p>聚焦暖色底线</p>
+                        <div class="jd-slot">
+                            <input type="text" class="jd-input" placeholder="入力...">
+                        </div>
+                    </div>
+
+                    <div class="jd-component">
+                        <h3>嵌套卡片</h3>
+                        <p>米白底 + 宁静</p>
+                        <div class="jd-slot">
+                            <div class="jd-mini-card">
+                                <strong>嵌套卡片</strong>
+                                <p>米白底 · 宁静</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="jd-component">
+                        <h3>Japandi 标签</h3>
+                        <p>线框 + 陶土色</p>
+                        <div class="jd-slot">
+                            <span class="jd-tag">简约</span>
+                            <span class="jd-tag jd-tag-warm">侘寂</span>
+                        </div>
+                    </div>
+
+                    <div class="jd-component">
+                        <h3>Japandi 导航</h3>
+                        <p>暖色底部线</p>
+                        <div class="jd-slot">
+                            <nav class="jd-nav">
+                                <span class="jd-nav-item active">Home</span>
+                                <span class="jd-nav-item">Work</span>
+                                <span class="jd-nav-item">About</span>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="jd-component">
+                        <h3>Japandi 提示</h3>
+                        <p>左侧暖色条</p>
+                        <div class="jd-slot">
+                            <div class="jd-alert">⚠ 静心确认，从容操作</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025-2026 函数库 | Powered by Mutantcat</p>
+            <div class="friend-links">
+                <span>友情链接：</span>
+                <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
+                <a href="https://www.fcnesyouxi.top/" target="_blank" rel="noopener">FC/NES游戏</a>
+                <a href="https://www.jqshengtian.top/" target="_blank" rel="noopener">学习资料</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="prompt-floater" id="prompt-floater" aria-label="复制设计提示词">复制提示词</button>
+    <div class="prompt-modal" id="prompt-modal" role="dialog" aria-label="设计提示词">
+        <div class="prompt-modal-header">
+            <span class="prompt-modal-title">极简日式 — 完整提示词</span>
+            <button class="prompt-modal-close" id="prompt-close" aria-label="关闭">×</button>
+        </div>
+        <div class="prompt-modal-content" id="prompt-content"></div>
+        <button class="prompt-modal-copy" id="prompt-copy">复制</button>
+    </div>
+
+    <script>
+    var PROMPT_TEXT = "采用极简日式（Japandi）设计风格。背景米白 #F7F3EE。主色陶土 #C4956A + 深灰 #2C2C2C。字体衬线 Noto Serif JP。标题字重 300 + 宽字距 0.08em。卡片白底 + 1px 浅灰边框，hover 暖色边框。按钮线框或陶土实心。输入框仅底线，聚焦暖色。导航底部暖色线。整体少即是多，温暖宁静。";
+    document.getElementById('prompt-content').textContent = PROMPT_TEXT;
+
+    var btn=document.getElementById('prompt-floater'),modal=document.getElementById('prompt-modal'),close=document.getElementById('prompt-close'),copy=document.getElementById('prompt-copy');
+    btn.addEventListener('click',function(){modal.classList.toggle('visible')});
+    close.addEventListener('click',function(){modal.classList.remove('visible')});
+    document.addEventListener('click',function(e){if(!modal.contains(e.target)&&!btn.contains(e.target))modal.classList.remove('visible')});
+    copy.addEventListener('click',function(){function onSuccess(){copy.textContent='已复制';copy.classList.add('done');setTimeout(function(){copy.textContent='复制';copy.classList.remove('done')},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PROMPT_TEXT).then(onSuccess).catch(function(){fallback()});else fallback();function fallback(){var ta=document.createElement('textarea');ta.value=PROMPT_TEXT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');onSuccess()}catch(e){console.error('Copy failed:',e)}document.body.removeChild(ta)}});
+    </script>
+</body>
+</html>
