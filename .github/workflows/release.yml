@@ -1,0 +1,161 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      APP_NAME: stylecool
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check VERSION matches the tag
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          FILE_VERSION="$(tr -d '[:space:]' < VERSION)"
+          if [ "${TAG_VERSION}" != "${FILE_VERSION}" ]; then
+            echo "::error::VERSION (${FILE_VERSION}) does not match tag (${TAG_VERSION})"
+            exit 1
+          fi
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Lint PHP sources
+        run: |
+          ERROR=0
+          while IFS= read -r -d '' f; do
+            if ! php -l "$f" > /dev/null; then
+              ERROR=1
+            fi
+          done < <(find . -name '*.php' -print0)
+          exit ${ERROR}
+
+      - name: Validate style JSON data
+        run: |
+          for f in web.json desktop.json miniapp.json mobile.json list/*.json; do
+            [ -f "$f" ] || continue
+            python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'))" "$f"
+          done
+
+  package:
+    needs: verify
+    runs-on: ubuntu-latest
+    env:
+      APP_NAME: stylecool
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        run: echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Package release archive
+        shell: bash
+        run: |
+          VERSION="${{ steps.version.outputs.value }}"
+          STAGE="staging/${APP_NAME}-${VERSION}"
+          mkdir -p dist "${STAGE}"
+          git archive --format=tar HEAD | tar -x -C "${STAGE}"
+          tar -czf "dist/${APP_NAME}-${VERSION}.tar.gz" -C staging "${APP_NAME}-${VERSION}"
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-assets
+          path: dist/*.tar.gz
+
+  docker:
+    needs: verify
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/mutantcat-working-group/stylecool
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        run: echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: |
+            VERSION=${{ steps.version.outputs.value }}
+          tags: |
+            ${{ env.IMAGE }}:${{ github.ref_name }}
+            ${{ env.IMAGE }}:latest
+
+  publish:
+    needs:
+      - package
+      - docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Generate checksums
+        run: |
+          cd release-assets
+          ASSET_COUNT="$(find . -type f | wc -l | tr -d ' ')"
+          if [ "${ASSET_COUNT}" -lt 1 ]; then
+            echo "::error::no release assets downloaded, refusing to checksum an empty set"
+            exit 1
+          fi
+          find . -type f -print0 | sort -z | xargs -0 -r sha256sum > ../checksums.txt
+          find . -type f -print0 | sort -z | xargs -0 -r md5sum > ../checksums-md5.txt
+          find . -type f -print0 | sort -z | xargs -0 -r sha1sum > ../checksums-sha1.txt
+          for SUM in ../checksums.txt checksums-md5.txt checksums-sha1.txt; do
+            if [ "$(wc -l < "${SUM}" | tr -d ' ')" -ne "${ASSET_COUNT}" ]; then
+              echo "::error::${SUM} line count does not match the asset count"
+              exit 1
+            fi
+          done
+
+      - name: Create or update release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            gh release upload "${TAG}" release-assets/* \
+              checksums.txt checksums-md5.txt checksums-sha1.txt \
+              --repo "${GITHUB_REPOSITORY}" --clobber
+          else
+            gh release create "${TAG}" release-assets/* \
+              checksums.txt checksums-md5.txt checksums-sha1.txt \
+              --repo "${GITHUB_REPOSITORY}" --title "${TAG}" --generate-notes
+          fi
