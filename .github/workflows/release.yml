@@ -54,6 +54,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_NAME: stylecool
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -71,11 +73,18 @@ jobs:
           git archive --format=tar HEAD | tar -x -C "${STAGE}"
           tar -czf "dist/${APP_NAME}-${VERSION}.tar.gz" -C staging "${APP_NAME}-${VERSION}"
 
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-assets
-          path: dist/*.tar.gz
+      - name: Publish archive to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            gh release upload "${TAG}" dist/*.tar.gz \
+              --repo "${GITHUB_REPOSITORY}" --clobber
+          else
+            gh release create "${TAG}" dist/*.tar.gz \
+              --repo "${GITHUB_REPOSITORY}" --title "${TAG}" --generate-notes
+          fi
 
   docker:
     needs: verify
@@ -120,42 +129,42 @@ jobs:
       - package
       - docker
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: release-assets
-          merge-multiple: true
+      - name: Download release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          mkdir -p release-assets
+          gh release download "${TAG}" --repo "${GITHUB_REPOSITORY}" \
+            --dir release-assets --pattern '*.tar.gz' --clobber
+          ASSET_COUNT="$(find release-assets -type f | wc -l | tr -d ' ')"
+          if [ "${ASSET_COUNT}" -lt 1 ]; then
+            echo "::error::no release assets found, refusing to checksum an empty set"
+            exit 1
+          fi
 
       - name: Generate checksums
         run: |
           cd release-assets
-          ASSET_COUNT="$(find . -type f | wc -l | tr -d ' ')"
-          if [ "${ASSET_COUNT}" -lt 1 ]; then
-            echo "::error::no release assets downloaded, refusing to checksum an empty set"
-            exit 1
-          fi
           find . -type f -print0 | sort -z | xargs -0 -r sha256sum > ../checksums.txt
           find . -type f -print0 | sort -z | xargs -0 -r md5sum > ../checksums-md5.txt
           find . -type f -print0 | sort -z | xargs -0 -r sha1sum > ../checksums-sha1.txt
-          for SUM in ../checksums.txt checksums-md5.txt checksums-sha1.txt; do
+          ASSET_COUNT="$(find . -type f | wc -l | tr -d ' ')"
+          for SUM in ../checksums.txt ../checksums-md5.txt ../checksums-sha1.txt; do
             if [ "$(wc -l < "${SUM}" | tr -d ' ')" -ne "${ASSET_COUNT}" ]; then
               echo "::error::${SUM} line count does not match the asset count"
               exit 1
             fi
           done
 
-      - name: Create or update release
+      - name: Upload checksums to the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG="${GITHUB_REF_NAME}"
-          if gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
-            gh release upload "${TAG}" release-assets/* \
-              checksums.txt checksums-md5.txt checksums-sha1.txt \
-              --repo "${GITHUB_REPOSITORY}" --clobber
-          else
-            gh release create "${TAG}" release-assets/* \
-              checksums.txt checksums-md5.txt checksums-sha1.txt \
-              --repo "${GITHUB_REPOSITORY}" --title "${TAG}" --generate-notes
-          fi
+          gh release upload "${TAG}" \
+            checksums.txt checksums-md5.txt checksums-sha1.txt \
+            --repo "${GITHUB_REPOSITORY}" --clobber
