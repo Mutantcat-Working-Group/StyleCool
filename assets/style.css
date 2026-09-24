@@ -1371,6 +1371,9 @@ footer {
     margin-top: var(--s-20);
 }
 footer p { font-size: var(--fs-sm); }
+.footer-publisher { margin-top: var(--s-2); font-size: var(--fs-xs); }
+.footer-publisher a { color: var(--ink-3); text-decoration: none; }
+.footer-publisher a:hover { color: var(--sky-900); text-decoration: underline; }
 .friend-links {
     margin-top: var(--s-3);
     font-size: var(--fs-xs);

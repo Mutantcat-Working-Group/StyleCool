@@ -1,7 +1,9 @@
 <?php
-// ============================================================
 // StyleCool — 设计样式可集成接口
 // 独立部署于 stylecool.mutantcat.org（文件夹自包含，无外部依赖）
+// ============================================================
+// 由异猫工作群（mutantcat.org）发行
+// GitHub: https://github.com/Mutantcat-Working-Group
 // ============================================================
 // URL： / 或 /skillapi
 //   ?token=mutantcat&q={关键词}&cat={web|desktop|miniapp|mobile|all} → JSON
@@ -207,6 +209,7 @@ if (isset($_GET['token'], $_GET['q'], $_GET['cat'])) {
     <footer>
         <div class="container">
             <p data-i18n="stylecool-footer-text">&copy; 2025-2026 函数库 | Powered by Mutantcat</p>
+            <p class="footer-publisher">由异猫工作群（mutantcat.org）发行 · <a href="https://github.com/Mutantcat-Working-Group" target="_blank" rel="noopener">github.com/Mutantcat-Working-Group</a></p>
             <div class="friend-links">
                 <span data-i18n="friend-links">友情链接：</span>
                 <a href="https://www.mutantcat.org/" target="_blank" rel="noopener">异猫工作群</a>
