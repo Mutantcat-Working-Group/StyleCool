@@ -1,12 +1,5 @@
 set $app "functioncool";
-if ($host = 'stylecool.mutantcat.org')     { set $app "stylecool"; }
-if ($host = 'www.stylecool.mutantcat.org') { set $app "stylecool"; }
-
-if ($host = 'functioncool.xyz')               { return 301 https://functioncool.mutantcat.org$request_uri; }
-if ($host = 'www.functioncool.xyz')           { return 301 https://functioncool.mutantcat.org$request_uri; }
-if ($host = 'www.functioncool.mutantcat.org') { return 301 https://functioncool.mutantcat.org$request_uri; }
-if ($host = 'style.functioncool.xyz')         { return 301 https://stylecool.mutantcat.org$request_uri; }
-if ($host = 'www.stylecool.mutantcat.org')    { return 301 https://stylecool.mutantcat.org$request_uri; }
+if ($host = 'stylecool.mutantcat.org') { set $app "stylecool"; }
 
 if ($app = "functioncool") {
     rewrite ^/sitemap\.xml$ /sitemap.php last;
