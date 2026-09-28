@@ -32,7 +32,7 @@ $CAT_META = [
 ];
 
 // 画廊为独立部署设计，样例与缩略图实际位于 /list/。
-$EXAMPLE_ASSET_BASE = '/list/';
+$EXAMPLE_ASSET_BASE = '/';
 
 $EXAMPLES = [
     // ── 真实示例（已渲染截图）：液态玻璃 ──
