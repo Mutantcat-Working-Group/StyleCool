@@ -12,6 +12,7 @@ if ($app = "stylecool") {
     rewrite ^/stylecool/?(.*)$ https://stylecool.mutantcat.org/$1 permanent;
     rewrite ^/skillapi/?$ /index.php last;
     rewrite ^/example/?$ /example.php last;
+    rewrite ^/list/list/(.*)$ /list/$1 permanent;
 }
 
 if (-f $request_filename) { break; }
